@@ -24,7 +24,6 @@ Penser a une version qui fonctionne sur Windows et Linux
 
 ```mermaid
 mindmap
-
     App Sauvegarde C# dotnet core
         Version du dotnet a définir
         multithread
