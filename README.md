@@ -31,8 +31,8 @@ Multi plateform : Linux et Windows.
 Sensibilité à la casse
 Gestion des classes
 Interface graphique en remote tcp
-Exemple de fonctionnement du projet:
 
+Exemple de fonctionnement du projet:
 ```mermaid
 gitGraph
     commit
