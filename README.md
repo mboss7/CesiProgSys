@@ -6,12 +6,6 @@
 ## Livrable 1 : 
 
 
-
-
-
-
-
-
 # Structures et usages :
 
 Pour détecter modification des fichiers : comparatif des hash (md5 pour rapidité)
