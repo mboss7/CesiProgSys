@@ -22,7 +22,7 @@ Penser a une version qui fonctionne sur Windows et Linux
 
 
 
-``` mermaid
+```mermaid
 mindmap
 
     App Sauvegarde C# dotnet core
