@@ -20,24 +20,19 @@ Penser a une version qui fonctionne sur Windows et Linux
 
 [![](https://mermaid.ink/img/pako:eNpNUctKxEAQ_JVmvC5-QG6yCyq4IAT0kks700ka5uU8VmXZf_G635Efs-PqJs0cBqqqq2rmqHQwpBrl2BuHsfOdB5m7GKHFeqABkyHY3oAJxVMBHRJdKPO8UMocPJj6jyOY6dyz57SwXLWFy5gIzUo6nRP3rLH8LqAMD5hHiKEmOFwwSuCCuZLyIn4OOfMbWy7TWbSgR_SD0C3K8UNdRdyK7Z8F2DCslkhHy0AetvsdaMt6gfZzYogWC_UhOWjgiX39BCn4Kg8VPvItLOyW_JJm-p5TaMyZVpR7ytee2s7gKsijL5R61ARDwjjye6U5ViIXCkHRURapjXKUHLKRzzrO2k6VkRx1qpGroR4lc6c6fxIq1hLaL69VU1KljarRSJUdoxg41fRoM51-AL1ZqN0?type=png)](https://mermaid.live/edit#pako:eNpNUctKxEAQ_JVmvC5-QG6yCyq4IAT0kks700ka5uU8VmXZf_G635Efs-PqJs0cBqqqq2rmqHQwpBrl2BuHsfOdB5m7GKHFeqABkyHY3oAJxVMBHRJdKPO8UMocPJj6jyOY6dyz57SwXLWFy5gIzUo6nRP3rLH8LqAMD5hHiKEmOFwwSuCCuZLyIn4OOfMbWy7TWbSgR_SD0C3K8UNdRdyK7Z8F2DCslkhHy0AetvsdaMt6gfZzYogWC_UhOWjgiX39BCn4Kg8VPvItLOyW_JJm-p5TaMyZVpR7ytee2s7gKsijL5R61ARDwjjye6U5ViIXCkHRURapjXKUHLKRzzrO2k6VkRx1qpGroR4lc6c6fxIq1hLaL69VU1KljarRSJUdoxg41fRoM51-AL1ZqN0)
 
-
-
-``` mermaid
-mindmap
-
-    App Sauvegarde C# dotnet core
-        Version du dotnet a définir
-        multithread
-        Vérification des Hash pour vérifier modifications
-        Possibilité de changer la langue
-        Creation de logs
-        Appli en CMD clic
-        Multi plateform : Linux et Windows. 
-        Sensibilité à la casse 
-        Gestion des classes
-        Interface graphique en remote tcp 
-```
+App Sauvegarde C# dotnet core
+Version du dotnet a définir
+multithread
+Vérification des Hash pour vérifier modifications
+Possibilité de changer la langue
+Creation de logs
+Appli en CMD clic
+Multi plateform : Linux et Windows.
+Sensibilité à la casse
+Gestion des classes
+Interface graphique en remote tcp
 Exemple de fonctionnement du projet:
+
 ```mermaid
 gitGraph
     commit
