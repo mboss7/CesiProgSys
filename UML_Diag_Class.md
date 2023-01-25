@@ -40,3 +40,7 @@ Backup : +string type
     
     
 ```
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/dev
