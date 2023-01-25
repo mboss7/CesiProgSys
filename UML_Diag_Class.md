@@ -23,3 +23,20 @@ Backup : +string type
     Logs : +string File.size
     Logs : +string File.Transfert.time
 ```
+    
+
+# Diagram de class simplifié : 
+ ```mermaid    
+ classDiagram
+     class BckApp
+     BckApp <|-- BckAppInterface_Model
+     BckAppInterface_Model <|-- CLI_View_Model
+     CLI_View_Model <|-- CLI_View
+    
+    
+    
+    
+    
+    
+    
+```
