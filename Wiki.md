@@ -34,7 +34,6 @@ Eviter relations fortes !
 
 
 ```mermaid 
-
 classDiagram 
     class CLI
     CLI <|-- CLI_VM
@@ -44,10 +43,5 @@ classDiagram
     Backup  <|-- Interface Log
     Backup  <|-- Interface Drive
     Interface Log  <|--  Log    
-    Interface Drive <|-- Drive 
-
-
-
-
-
+    Interface Drive <|-- Drive
 ```

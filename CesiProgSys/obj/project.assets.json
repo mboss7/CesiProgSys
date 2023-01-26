@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Tanguy\\.nuget\\packages\\": {}
+    "/home/ludwig/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tanguy\\Downloads\\CesiProgSys\\CesiProgSys\\CesiProgSys.csproj",
+      "projectUniqueName": "/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/CesiProgSys.csproj",
       "projectName": "CesiProgSys",
-      "projectPath": "C:\\Users\\Tanguy\\Downloads\\CesiProgSys\\CesiProgSys\\CesiProgSys.csproj",
-      "packagesPath": "C:\\Users\\Tanguy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tanguy\\Downloads\\CesiProgSys\\CesiProgSys\\obj\\",
+      "projectPath": "/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/CesiProgSys.csproj",
+      "packagesPath": "/home/ludwig/.nuget/packages/",
+      "outputPath": "/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Tanguy\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/ludwig/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/current/sdk/7.0.102/RuntimeIdentifierGraph.json"
       }
     }
   }

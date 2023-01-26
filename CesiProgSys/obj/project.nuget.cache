@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ISwUhligDQ/1iVDJ3YjGr9GYzBj8cnWAieGt4mxrsHpNVmH+jSP5s5pcpBOnfWOUlTAs/Uj0xGx9tlt+vZSswA==",
+  "dgSpecHash": "xoS0iubXxhAF9GfyxQBIFcHSLTaNrNQdLeNknPHhr86JPZ+zfBreYte33XmEBnO3OKV6sAs16JdyfQ1sVH6xXA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Tanguy\\Downloads\\CesiProgSys\\CesiProgSys\\CesiProgSys.csproj",
+  "projectFilePath": "/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/CesiProgSys.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
