@@ -31,12 +31,16 @@ Eviter relations fortes !
 
 ```mermaid 
 
-diagram 
-    CLI
-       CLIVM
-          Backup 
-            Log
-            Drive
+classDiagram 
+    class CLI
+    CLI <|-- CLI_VM
+    CLI_VM <|--PROGRAM
+    PROGRAM <|-- Manager
+    Manager <|-- Backup    
+    Backup  <|-- Interface Log
+    Backup  <|-- Interface Drive
+    Interface Log  <|--  Log    
+    Interface Drive <|-- Drive 
 
 
 
