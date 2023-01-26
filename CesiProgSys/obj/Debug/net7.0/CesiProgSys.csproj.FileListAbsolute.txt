@@ -1,0 +1,15 @@
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\bin\Debug\net7.0\CesiProgSys.exe
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\bin\Debug\net7.0\CesiProgSys.deps.json
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\bin\Debug\net7.0\CesiProgSys.runtimeconfig.json
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\bin\Debug\net7.0\CesiProgSys.dll
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\bin\Debug\net7.0\CesiProgSys.pdb
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.csproj.AssemblyReference.cache
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.AssemblyInfoInputs.cache
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.AssemblyInfo.cs
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.csproj.CoreCompileInputs.cache
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.dll
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\obj\Debug\net7.0\refint\CesiProgSys.dll
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.pdb
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.genruntimeconfig.cache
+C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\obj\Debug\net7.0\ref\CesiProgSys.dll
