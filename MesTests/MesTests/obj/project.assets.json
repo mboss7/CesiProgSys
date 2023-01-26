@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Administrator\\Source\\Repos\\MesTests\\MesTests\\MesTests.csproj",
+      "projectUniqueName": "C:\\Users\\Administrator\\Source\\Repos\\mboss7\\CesiProgSys\\MesTests\\MesTests\\MesTests.csproj",
       "projectName": "MesTests",
-      "projectPath": "C:\\Users\\Administrator\\Source\\Repos\\MesTests\\MesTests\\MesTests.csproj",
+      "projectPath": "C:\\Users\\Administrator\\Source\\Repos\\mboss7\\CesiProgSys\\MesTests\\MesTests\\MesTests.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Administrator\\Source\\Repos\\MesTests\\MesTests\\obj\\",
+      "outputPath": "C:\\Users\\Administrator\\Source\\Repos\\mboss7\\CesiProgSys\\MesTests\\MesTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
