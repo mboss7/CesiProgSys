@@ -1,6 +1,7 @@
 ﻿app.exe
 .idea
 .vs
-CesiProgSys/*
+CesiProgSys/bin
+CesiProgSys/obj
 bin 
 
