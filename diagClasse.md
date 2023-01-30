@@ -2,28 +2,47 @@
 classDiagram
 
 class Program{
-+main()
+    +main()
 }
 
 class IViewCli{
+    
 
+    +startProgram()
+    +menu()
+    +help()
+    +read(): String
+    +showConfig()
 }
 
 class ViewCliFr{
-
+    +startProgram()
+    +menu()
+    +help()
+    +read() : String
+    +showConfig()
 }
 
 class ViewCliEn{
-
+    +startProgram()
+    +menu()
+    +help()
+    +read() : String
+    +showConfig()
 }
 
 class ViewModelCli{
-
+    -inputUser : String
+    -commands: List<Tuple<string, delegate>>
+    
+    
 }
 
-class Manager{
-
+class IManager{
+    
 }
+
+class
 
 class IBackup{
 +startThread()
@@ -60,6 +79,16 @@ class DailyLogs{
 class RealTimeLogs{
 
 }
+
+class Hash{
+    +generate(string uri) : String
+    +compare(string hashSource, string hashDestination) : Bool
+}
+
+class Json{
+    +serialize
+}
+
 
 ```
 
