@@ -5,9 +5,6 @@ class Program{
 +main()
 }
 
-<<<<<<< HEAD
-class a
-=======
 class IViewCli{
 
 }
