@@ -6,8 +6,6 @@ class Program{
 }
 
 class IViewCli{
-    
-
     +startProgram()
     +menu()
     +help()
@@ -34,52 +32,92 @@ class ViewCliEn{
 class ViewModelCli{
     -inputUser : String
     -commands: List<Tuple<string, delegate>>
-    
-    
+    -
+      
+    +redirect()
 }
 
 class IManager{
-    
+    -threadList : List<Thread>
+    +instantiate()
+    +finish() : Bool ?
 }
 
-class
+class BackupManager{
+    -threadList : List<Thread>
+    +instantiate()
+    +finish() : Bool ?
+}
+
+class LogsManager{
+    -threadList : List<Thread>
+    +instantiate()
+    +finish() : Bool ?
+}
 
 class IBackup{
-+startThread()
+    -name : String
+    -SaveSource : String
+    -SaveTarget : String
+    +startThread()
 }
 
 class FullBackup{
-+startThread()
+    +startThread()
 }
 
 class DifferentialBackup{
-+startThread()
+    +startThread()
 }
 
 class IncrementialBackup{
-+startThread()
+    +startThread()
 }
 
 class SevenZip{
-
+    +zip()
+    +unzip()
 }
 
 class Config{
+    -language : Enum
+    -defaultSaveSource : String
+    -defaultSaveTarget : String
+    -recentSaveSource : HashMap<String>
+    -recentSaveTarget : HashMap<String>
+    -retentionTime : Int
+    
+    +writeConfig()
+    +readConfig()
+    +cleanConfig
+}
 
+enum Languages{
+    -FR
+    -EN
+    -...
 }
 
 class ILogs{
-
+    +startThread()
+    +startLog()
+    +logInfo()
+    +logError()
 }
 
 class DailyLogs{
-
+    +startThread()
+    +startLog()
+    +logInfo()
+    +logError()
 }
 
 class RealTimeLogs{
-
+    +startThread()
+    +startLog()
+    +logInfo()
+    +logError()
 }
->>>>>>> 9e630b562fc450dfff83ecca5df2035cb2c221ed
 
 class Hash{
     +generate(string uri) : String
@@ -87,7 +125,8 @@ class Hash{
 }
 
 class Json{
-    +serialize
+    +serialize(object obj) : String
+    +deserialize(String json) : Object
 }
 
 
