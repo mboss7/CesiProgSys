@@ -79,6 +79,7 @@ class DailyLogs{
 class RealTimeLogs{
 
 }
+>>>>>>> 9e630b562fc450dfff83ecca5df2035cb2c221ed
 
 class Hash{
     +generate(string uri) : String
