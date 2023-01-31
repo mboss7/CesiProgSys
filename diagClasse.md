@@ -105,6 +105,29 @@ class Json{
 +serialize(object obj) : String
 +deserialize(String json) : Object
 }
+
+IViewCli <|.. ViewCliFr
+IViewCli <|.. ViewCliEn
+IManager <|.. BackupManager
+IManager <|.. LogsManager
+IBackup <|.. FullBackup
+IBackup <|.. DifferentialBackup
+IBackup <|.. IncrementialBackup
+ILogs <|.. DailyLogs
+ILogs <|.. RealTimeLogs
+Program *-- IManager
+Program *-- IViewCli
+Program *-- ViewModelCli
+BackupManager *-- IBackup
+LogsManager *-- ILogs
+IViewCli <--> ViewModelCli
+IBackup <--> ViewModelCli
+Config <--> ViewModelCli
+Config <-- IBackup
+DailyLogs .. Languages
+RealTimeLogs .. Languages
+Config .. Languages
+
 ```
 
 
