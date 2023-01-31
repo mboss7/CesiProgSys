@@ -6,6 +6,7 @@ private class RealTimeLogs : ILogs
 {
     private RealTimeLogs()
     {
+
     }
 
     void startThread()
