@@ -56,9 +56,6 @@ class FullBackup{
 class DifferentialBackup{
 +startThread()
 }
-class IncrementialBackup{
-+startThread()
-}
 class SevenZip{
 +zip()
 +unzip()
@@ -112,7 +109,6 @@ IManager <|.. BackupManager
 IManager <|.. LogsManager
 IBackup <|.. FullBackup
 IBackup <|.. DifferentialBackup
-IBackup <|.. IncrementialBackup
 ILogs <|.. DailyLogs
 ILogs <|.. RealTimeLogs
 Program *-- IManager
@@ -132,10 +128,8 @@ DailyLogs --> Json
 RealTimeLogs --> Json
 FullBackup --> Hash
 DifferentialBackup --> Hash
-IncrementialBackup --> Hash
 FullBackup --> SevenZip
 DifferentialBackup --> SevenZip
-IncrementialBackup --> SevenZip
 ```
 
 
