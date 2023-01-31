@@ -2,8 +2,10 @@
 
 ```mermaid
 sequenceDiagram
-    Alice->>+John: Hello John, how are you?
-    Alice->>+John: John, can you hear me?
-    John-->>-Alice: Hi Alice, I can hear you!
-    John-->>-Alice: I feel great!
+    LogsManager->>ILogs : initiate thread
+    ILogs->>DailyLogs : initiate thread write update logs 
+    ILogs->>RealTimeLogs : initiate thread write real time logs 
+    LogsManager->>ILogs : finish thread
+    ILogs->>DailyLogs : finish thread write update logs 
+    ILogs->>RealTimeLogs : finish thread write real time logs 
 ```
