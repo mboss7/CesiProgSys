@@ -1,136 +1,119 @@
 ﻿```mermaid
 classDiagram
-
 class Program{
-    +main()
++main()
 }
-
 class IViewCli{
-    +startProgram()
-    +menu()
-    +help()
-    +read(): String
-    +showConfig()
++startProgram()
++menu()
++help()
++read(): String
++showConfig()
 }
-
 class ViewCliFr{
-    +startProgram()
-    +menu()
-    +help()
-    +read() : String
-    +showConfig()
++startProgram()
++menu()
++help()
++read() : String
++showConfig()
 }
-
 class ViewCliEn{
-    +startProgram()
-    +menu()
-    +help()
-    +read() : String
-    +showConfig()
++startProgram()
++menu()
++help()
++read() : String
++showConfig()
 }
-
 class ViewModelCli{
-    -inputUser : String
-    -commands: List<Tuple<string, delegate>>
-    -
-      
-    +redirect()
+-inputUser : String
+-commands: List<Tuple<string, delegate>>
++redirect()
 }
-
 class IManager{
-    -threadList : List<Thread>
-    +instantiate()
-    +finish() : Bool ?
+-threadList : List<Thread>
++instantiate()
++finish() : Bool ?
 }
-
 class BackupManager{
-    -threadList : List<Thread>
-    +instantiate()
-    +finish() : Bool ?
+-threadList : List<Thread>
++instantiate()
++finish() : Bool ?
 }
-
 class LogsManager{
-    -threadList : List<Thread>
-    +instantiate()
-    +finish() : Bool ?
+-threadList : List<Thread>
++instantiate()
++finish() : Bool ?
 }
-
 class IBackup{
-    -name : String
-    -SaveSource : String
-    -SaveTarget : String
-    +startThread()
+-name : String
+-SaveSource : String
+-SaveTarget : String
++startThread()
 }
-
 class FullBackup{
-    +startThread()
++startThread()
 }
-
 class DifferentialBackup{
-    +startThread()
++startThread()
 }
-
 class IncrementialBackup{
-    +startThread()
++startThread()
 }
-
 class SevenZip{
-    +zip()
-    +unzip()
++zip()
++unzip()
 }
-
 class Config{
-    -language : Enum
-    -defaultSaveSource : String
-    -defaultSaveTarget : String
-    -recentSaveSource : HashMap<String>
-    -recentSaveTarget : HashMap<String>
-    -retentionTime : Int
-    
-    +writeConfig()
-    +readConfig()
-    +cleanConfig
+-language : Enum
+-defaultSaveSource : String
+-defaultSaveTarget : String
+-recentSaveSource : HashMap<String>
+-recentSaveTarget : HashMap<String>
+-retentionTime : Int
++writeConfig()
++readConfig()
++cleanConfig
 }
-
-enum Languages{
-    -FR
-    -EN
-    -...
+class Languages{
+<<enumeration>>
+-FR : 0
+-EN : 1
 }
-
 class ILogs{
-    +startThread()
-    +startLog()
-    +logInfo()
-    +logError()
++startThread()
++startLog()
++logInfo()
++logError()
 }
-
 class DailyLogs{
-    +startThread()
-    +startLog()
-    +logInfo()
-    +logError()
++startThread()
++startLog()
++logInfo()
++logError()
 }
-
 class RealTimeLogs{
-    +startThread()
-    +startLog()
-    +logInfo()
-    +logError()
++startThread()
++startLog()
++logInfo()
++logError()
 }
-
 class Hash{
-    +generate(string uri) : String
-    +compare(string hashSource, string hashDestination) : Bool
++generate(string uri) : String
++compare(string hashSource, string hashDestination) : Bool
 }
-
 class Json{
-    +serialize(object obj) : String
-    +deserialize(String json) : Object
++serialize(object obj) : String
++deserialize(String json) : Object
 }
-
-
 ```
+
+
+
+
+
+
+
+
 
 Class manager
 -> class backup abstraite (plusieurs threads, géré par manager) -> nom, répertoire source et cible
