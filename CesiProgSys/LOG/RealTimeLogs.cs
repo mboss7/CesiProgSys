@@ -6,7 +6,7 @@ namespace CesiprogSys.LOG
     public class RealTimeLogs : ILogs
     {
 
-        public static void startThread()
+        public static void  startThread()
         {
 
         }

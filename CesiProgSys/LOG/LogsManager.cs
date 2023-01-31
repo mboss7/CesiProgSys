@@ -24,8 +24,7 @@ namespace CesiprogSys.LOG
 
 		public void finish()
 		{
-			Thread.Sleep(100); 
+		
 		}
-
 	}
 }
