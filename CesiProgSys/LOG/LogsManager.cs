@@ -7,7 +7,7 @@ namespace CesiprogSys.LOG
 private class LogsManager
 {
 
-	private string ThreadList;
+	private string threadList;
 
 	private LogsManager()
 	{
