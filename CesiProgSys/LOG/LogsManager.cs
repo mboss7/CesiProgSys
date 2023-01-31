@@ -14,12 +14,12 @@ namespace CesiprogSys.LOG
 
 		}
 
-		void instantiate()
+		public void instantiate()
 		{
 
 		}
 
-		void finish()
+		public void finish()
 		{
 
 		}
