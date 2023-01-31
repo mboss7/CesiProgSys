@@ -5,18 +5,14 @@ namespace CesiprogSys.LOG
 
     public class RealTimeLogs : ILogs
     {
-        public RealTimeLogs()
-        {
 
-        }
-
-        public void startThread()
+        public static void startThread()
         {
 
         }
         public void startLog()
         {
-
+            
         }
         public void logInfo()
         {

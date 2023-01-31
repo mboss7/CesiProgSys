@@ -9,19 +9,22 @@ namespace CesiprogSys.LOG
 
 		public string threadList;
 
-		public LogsManager()
-		{
-
-		}
-
 		public void instantiate()
 		{
+			// create thread for RealTimeLogs Object
+            Thread realTimeLogsThreadStart = new Thread(new ThreadStart(RealTimeLogs.startThread));
 
+            realTimeLogsThreadStart.Start();
+
+            //create thread for DailyLogs Object
+            Thread dailyLogsThreadStart = new Thread(new ThreadStart(DailyLogs.startThread));
+
+			dailyLogsThreadStart.Start();
 		}
 
 		public void finish()
 		{
-
+			Thread.Sleep(100); 
 		}
 
 	}
