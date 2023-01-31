@@ -127,12 +127,16 @@ Config <-- IBackup
 DailyLogs .. Languages
 RealTimeLogs .. Languages
 Config .. Languages
-
+Config  --> Json
+DailyLogs --> Json
+RealTimeLogs --> Json
+FullBackup --> Hash
+DifferentialBackup --> Hash
+IncrementialBackup --> Hash
+FullBackup --> SevenZip
+DifferentialBackup --> SevenZip
+IncrementialBackup --> SevenZip
 ```
-
-
-
-
 
 
 
