@@ -1,9 +1,3 @@
-﻿
-using RealTimeLogs;
-using DailyLogs;
-using ILogs;
-using LogsManager;
+﻿Console.WriteLine("Hello, World!");
 
-
-
-Console.WriteLine("Hello, World!");
+Console.ReadLine();

@@ -57,8 +57,8 @@ class DifferentialBackup{
 +startThread()
 }
 class SevenZip{
-+zip()
-+unzip()
++zip$()
++unzip$()
 }
 class Config{
 -language : Enum
@@ -95,12 +95,12 @@ class RealTimeLogs{
 +logError()
 }
 class Hash{
-+generate(string uri) : String
-+compare(string hashSource, string hashDestination) : Bool
++generate(string uri)$ : String
++compare(string hashSource, string hashDestination)$ : Bool
 }
 class Json{
-+serialize(object obj) : String
-+deserialize(String json) : Object
++serialize(object obj)$ : String
++deserialize(String json)$ : Object
 }
 
 IViewCli <|.. ViewCliFr
