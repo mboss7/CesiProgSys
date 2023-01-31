@@ -1,10 +1,13 @@
-﻿Console.WriteLine("Hello, World!");
+﻿namespace Programm
+{
+    public class Program
+    {
+        public static void Main()
+        {
+            Console.WriteLine("Hello World!");
+            Console.Read();
+        }
+    }
+}
 
-//using RealTimeLogs;
-//using DailyLogs;
-//using ILogs;
-//using LogsManager;
 
-
-
-Console.WriteLine("Hello, World!");

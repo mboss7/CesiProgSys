@@ -2,26 +2,27 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace CesiprogSys.LOG  
-
-private class LogsManager
+namespace CesiprogSys.LOG
 {
-
-	private string threadList;
-
-	private LogsManager()
+	public class LogsManager // : IManager
 	{
 
+		public string threadList;
+
+		public LogsManager()
+		{
+
+		}
+
+		void instantiate()
+		{
+
+		}
+
+		void finish()
+		{
+
+		}
+
 	}
-
-	void instantiate()
-	{
-
-	}
-
-	void finish()
-	{
-
-	}
-
 }

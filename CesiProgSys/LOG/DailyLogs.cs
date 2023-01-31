@@ -1,28 +1,29 @@
 using System;
 
 namespace CesiprogSys.LOG
-
-private class DailyLogs : ILogs
 {
-    private DailyLogs()
+    public class DailyLogs : ILogs
     {
+        public DailyLogs()
+        {
 
-    }
+        }
 
-    void startThread()
-    {
+        public void startThread()
+        {
 
-    }
-    void startLog()
-    {
+        }
+        public void startLog()
+        {
 
-    }
-    void logInfo()
-    {
+        }
+        public void logInfo()
+        {
 
-    }
-    void logError()
-    {
+        }
+        public void logError()
+        {
 
+        }
     }
 }

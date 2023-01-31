@@ -1,11 +1,13 @@
 using System;
 
 namespace CesiprogSys.LOG
-
-interface ILogs : LogsManager
 {
-    void startThread();
-    void startLog();
-    void logInfo();
-    void logError();
+
+    public interface ILogs
+    {
+        public void startThread();
+        public void startLog();
+        public void logInfo();
+        public void logError();
+    }
 }

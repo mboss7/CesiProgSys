@@ -1,28 +1,30 @@
 using System;
 
 namespace CesiprogSys.LOG
-
-private class RealTimeLogs : ILogs 
 {
-    private RealTimeLogs()
+
+    public class RealTimeLogs : ILogs
     {
+        public RealTimeLogs()
+        {
 
-    }
+        }
 
-    void startThread()
-    {
+        public void startThread()
+        {
 
-    }
-    void startLog()
-    {
+        }
+        public void startLog()
+        {
 
-    }
-    void logInfo()
-    {
+        }
+        public void logInfo()
+        {
 
-    }
-    void logError()
-    {
+        }
+        public void logError()
+        {
 
+        }
     }
 }
