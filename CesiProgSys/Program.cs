@@ -1,4 +1,5 @@
-﻿
+﻿Console.WriteLine("Hello, World!");
+
 //using RealTimeLogs;
 //using DailyLogs;
 //using ILogs;
