@@ -27,3 +27,6 @@ namespace CesiprogSys.LOG
         }
 	}
 }
+
+
+// voir gestion des événements avec OBSERVER !! 
