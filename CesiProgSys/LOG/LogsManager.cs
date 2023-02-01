@@ -9,22 +9,17 @@ namespace CesiprogSys.LOG
 
 		public string threadList;
 
-		public void instantiate()
+		public void instantiate(string instance)
 		{
 			// create thread for RealTimeLogs Object
-            Thread realTimeLogsThreadStart = new Thread(new ThreadStart(RealTimeLogs.startThread));
+            Thread realTimeLogsThreadStart = new Thread(new ThreadStart(instance.startThread));
 
-            realTimeLogsThreadStart.Start();
-
-            //create thread for DailyLogs Object
-            Thread dailyLogsThreadStart = new Thread(new ThreadStart(DailyLogs.startThread));
-
-			dailyLogsThreadStart.Start();
+            instance.Start();
 		}
 
 		public void finish()
 		{
-		
-		}
+            Thread.Sleep(0);
+        }
 	}
 }

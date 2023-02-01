@@ -9,7 +9,8 @@ namespace CesiprogSys.LOG
       
         public static void startThread()
         {
-
+            instanciate daylyLogsThread = new instanciate();
+            daylyLogsThread.start();
         }
         public void startLog()
         {
