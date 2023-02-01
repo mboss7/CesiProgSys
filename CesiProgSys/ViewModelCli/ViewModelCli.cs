@@ -1,12 +1,15 @@
-namespace CesiProgSys.ViewModelCli;
-
-public class ViewModelCli
+namespace CesiProgSys.ViewModelCli
 {
-    public string inputUser { get; set; }
-    public List<Tuple<string, Delegate>> commands { get; set; }
-
-    public void redirect()
+    public class ViewModelCli
     {
-        // Code pour la méthode redirect()
-    }
+        public string inputUser { get; set; }
+        public List<Tuple<string, Delegate>> commands { get; set; }
+
+        public void redirect()
+        {
+            // Code pour la méthode redirect()
+        }
+    }  
 }
+
+

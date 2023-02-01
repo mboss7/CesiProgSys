@@ -1,25 +1,17 @@
-namespace CesiProgSys.ViewCli;
-
-public interface IViewCli
+namespace CesiProgSys.ViewCli
 {
-    public void startProgram()
+    public interface IViewCli
     {
-        // Code pour la méthode 
-    }
-    public void menu()
-    {
-        // Code pour la méthode 
-    }
-    public void help()
-    {
-        // Code pour la méthode 
-    }
-    public string read()
-    {
-        // Code pour la méthode 
-    }
-    public void showConfig()
-    {
-        // Code pour la méthode 
-    }
+        public void startProgram();
+
+        public void menu();
+
+        public void help();
+
+        public string read();
+
+        public void showConfig();
+    
+    }  
 }
+
