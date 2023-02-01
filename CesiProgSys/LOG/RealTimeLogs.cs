@@ -12,24 +12,30 @@ namespace CesiProgSys.LOG
     {
         // create list of info object who trigg the thread methode  
         static List<Info> listInfo = new List<Info>();
-        public static bool flag = true;
+        public static bool flagRtl = true;
 
 
         // start new thread when listInfo is not null  
         public static void startThread()
         {
             // print current thread ID 
-            Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
+           Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
          
             // Loop who print text with current Thread Id for testing thread. 
-            while (flag)
+            while (flagRtl)
             {
                 
                 //if (listInfo.Any())
                 if(true)
                 {
-                    Console.Write("RealTimeLogs {0}", Thread.CurrentThread.ManagedThreadId);
-                    Thread.Sleep(1000);
+                    //Pass the filepath and filename to the StreamWriter Constructor
+                    StreamWriter sw = new StreamWriter("C:\\RealTimeLogs.txt");  // change in Json file (when it will be ok). 
+                    //Write a line of text
+                    sw.WriteLine("Real Time Logs File");
+                    //Write a second line of text
+                    sw.WriteLine("RealTimeLogs Run : OK");
+                    //Close the file
+                    sw.Close();
                 }
             }
         }
@@ -37,21 +43,7 @@ namespace CesiProgSys.LOG
         // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
         public void startLog()
         {
-            // if (RealTimeLogs == null)
-            // {
-            //     //Pass the filepath and filename to the StreamWriter Constructor
-            //     StreamWriter sw = new StreamWriter("C:\\RealTimeLogs.txt");  // change in Json file (when it will be ok). 
-            //     //Write a line of text
-            //     sw.WriteLine("Hello World!!");
-            //     //Write a second line of text
-            //     sw.WriteLine("From the StreamWriter class");
-            //     //Close the file
-            //     sw.Close();
-            // }
-            // else 
-            // { 
-            //
-            // }
+      
         }
 
         // write new logs infos 
