@@ -15,13 +15,16 @@ namespace CesiProgSys.ToolsBox
         {
             //string outputFile = @"F:\output;zip";
             //string fileToZip = @"F:\STAGE A4 19-20.xlsx";
-            string outputFile = location;
-            string fileToZip = file;
+            // string outputFile = location;
+            // string fileToZip = file;
             //using (var archive = ZipFile.Open(outputFile, ZipArchiveMode.Create))
             //{
               //  archive.CreateEntryFromFile(fileToZip, Path.GetFileName(fileToZip));
             //}
-            ZipFile.Open();
+            
+            // ZipFile.Open()
+            ZipFile.CreateFromDirectory(location, file);
+            
         }
     }
 }
