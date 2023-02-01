@@ -6,11 +6,19 @@ namespace CesiprogSys.LOG
     public class RealTimeLogs : ILogs
     {
         List<info> listInfo = new List<info>(); 
+        
 
-        public static void  startThread()
+        public void  startThread()
         {
-            instanciate threadRealTimeLogs = new instanciate();
-            threadRealTimeLogs.start();
+            if (listInfo != null)
+            {
+                instanciate threadRealTimeLogs = new instanciate();
+                threadRealTimeLogs.start();
+            }
+            else
+            {
+                finish a = new finish ();
+            }
         }
         public void startLog()
         {

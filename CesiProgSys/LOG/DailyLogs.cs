@@ -7,7 +7,7 @@ namespace CesiprogSys.LOG
     public class DailyLogs : ILogs
     {
       
-        public static void startThread()
+        public void startThread()
         {
             instanciate daylyLogsThread = new instanciate();
             daylyLogsThread.start();
