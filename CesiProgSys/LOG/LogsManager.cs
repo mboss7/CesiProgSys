@@ -17,17 +17,24 @@ namespace CesiProgSys.LOG
 		public void instantiate()
 		{
 			// create thread for RealTimeLogs Object
-            Thread instance = new Thread(RealTimeLogs.startThread);
+            Thread instanceRtl = new Thread(RealTimeLogs.startThread);
             Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
-            instance.Start();
-            //Console.Write("Le premier QUI CONTINUE {0}\n", Thread.CurrentThread.ManagedThreadId);
-			threadList.Add(instance);
+            instanceRtl.Start();
+            threadList.Add(instanceRtl);
+            
+            // create thread for DailyLogs Object
+            Thread instanceDl = new Thread(DailyLogs.startThread);
+            Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
+            instanceDl.Start();
+            threadList.Add(instanceDl);
 		}
 
 		// methode for end current thread
 		public void finish()
 		{
-			RealTimeLogs.flag = false;
+			RealTimeLogs.flagRtl = false;
+			
+			DailyLogs.flagDl = false;
 		}
 	}
 }
