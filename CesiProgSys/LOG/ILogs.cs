@@ -2,7 +2,7 @@ using System;
 
 namespace CesiprogSys.LOG
 {
-
+    //interface for Logs 
     public interface ILogs
     {
         public void startThread();
