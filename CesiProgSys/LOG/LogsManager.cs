@@ -18,17 +18,17 @@ namespace CesiprogSys.LOG
 		{
 			// create thread for RealTimeLogs Object
             Thread instance = new Thread(RealTimeLogs.startThread);
-			
+            Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
             instance.Start();
-
+            //Console.Write("Le premier QUI CONTINUE {0}\n", Thread.CurrentThread.ManagedThreadId);
 			threadList.Add(instance);
 		}
 
 		// methode for end current thread
 		public void finish()
 		{
-            // Thread.Stop(0);
-        }
+			RealTimeLogs.flag = false;
+		}
 	}
 }
 

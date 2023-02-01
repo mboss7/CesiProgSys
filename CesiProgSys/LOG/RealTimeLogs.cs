@@ -11,22 +11,33 @@ namespace CesiprogSys.LOG
     public class RealTimeLogs : ILogs
     {
         // create list of info object who trigg the thread methode  
-        static List<Info> listInfo = new List<Info>(); 
-        
+        static List<Info> listInfo = new List<Info>();
+        public static bool flag = true;
 
 
         // start new thread when listInfo is not null  
         public static void startThread()
         {
-            Console.Write("ON EST LAAAAAAAAAAAAAAAAA");
-            if (listInfo != null)
-            {
+         //   Console.Write("ON EST LAAAAAAAAAAAAAAAAA\n");
+            Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
+            //if (listInfo != null)
+            //{
                 // instantiate threadRealTimeLogs = new instantiate();
                 // threadRealTimeLogs.start();
-            }
-            else 
-            {
+            //}
+            //else 
+            //{
               
+            //}
+            while (flag)
+            {
+                
+                //if (listInfo.Any())
+                if(true)
+                {
+                    Console.Write("RealTimeLogs {0}", Thread.CurrentThread.ManagedThreadId);
+                    Thread.Sleep(1000);
+                }
             }
         }
 
