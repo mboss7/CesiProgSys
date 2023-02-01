@@ -11,7 +11,7 @@ namespace CesiprogSys.LOG
 		public List<Thread> threadList;
 		// constructor
 		public LogsManager() {
-			threadList = new List<Thread>;
+			threadList = new List<Thread>();
 		}
 		// methode for create new thread 
 		public void instantiate()
@@ -27,7 +27,7 @@ namespace CesiprogSys.LOG
 		// methode for end current thread
 		public void finish()
 		{
-            Thread.Stop(0);
+            // Thread.Stop(0);
         }
 	}
 }
