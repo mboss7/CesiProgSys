@@ -25,7 +25,7 @@ namespace CesiProgSys.LOG
             while (flagRtl)
             {
                 
-                //if (listInfo.Any())
+                // if (listInfo.Any())  // need to be use for trigg loop
                 if(true)
                 {
                     //Pass the filepath and filename to the StreamWriter Constructor
