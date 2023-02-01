@@ -10,11 +10,11 @@ namespace CesiProgSys.ToolsBox
 {
     public class Zipfile
     {
-        public static void Main()
+        public static void Main(string[] location, string[] namefile)
         {
-            string outputFile = "";
-            string fileToZip = "";
-            using (var archive = ZipFile.Open(outputFile, ZipArchiveMode.Create)) 
+            string outputFile = "location";
+            string fileToZip = "namefile";
+            using (var archive = ZipFile.Open(outputFile, ZipArchiveMode.Create))
             {
                 archive.CreateEntryFromFile(fileToZip, Path.GetFileName(fileToZip));
             }
