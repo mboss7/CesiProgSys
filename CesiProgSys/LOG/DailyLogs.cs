@@ -21,7 +21,17 @@ namespace CesiprogSys.LOG
         {
             //create log file
             // write start Log info in Json log file. 
-            
+
+
+            //Pass the filepath and filename to the StreamWriter Constructor
+            StreamWriter sw = new StreamWriter("C:\\RealTimeLogs.txt");  // change in Json file (when it will be ok). 
+                                                                         //Write a line of text
+            sw.WriteLine("Hello World!!");
+            //Write a second line of text
+            sw.WriteLine("From the StreamWriter class");
+            //Close the file
+            sw.Close();
+
         }
         // write new logs infos 
         public void logInfo()

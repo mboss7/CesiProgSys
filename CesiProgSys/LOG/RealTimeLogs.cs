@@ -22,7 +22,7 @@ namespace CesiprogSys.LOG
                 instanciate threadRealTimeLogs = new instanciate();
                 threadRealTimeLogs.start();
             }
-            else
+            else 
             {
               
             }
