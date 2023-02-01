@@ -1,3 +1,4 @@
+using System;
 namespace CesiProgSys.ViewCli
 {
     public interface IViewCli
