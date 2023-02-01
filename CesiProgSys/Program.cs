@@ -1,3 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
+using CesiProgSys.ToolsBox;
 
-Console.WriteLine("Hello, World!");
+namespace CesiProgSys
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Zip z = new Zip();
+            z.compressed(args[0], args[1]);
+        }
+        
+    }
+}
