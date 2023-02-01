@@ -8,22 +8,26 @@ namespace CesiprogSys.LOG
 	public class LogsManager // : IManager
 	{
 		// thread list, for managing Thread
-		public string threadList;
-
-
+		public List<Thread> threadList;
+		// constructor
+		public LogsManager() {
+			threadList = new List<Thread>;
+		}
 		// methode for create new thread 
-		public void instantiate(string instance)
+		public void instantiate()
 		{
 			// create thread for RealTimeLogs Object
-            Thread realTimeLogsThreadStart = new Thread(new ThreadStart(instance.startThread));
-
+            Thread instance = new Thread(RealTimeLogs.startThread);
+			
             instance.Start();
+
+			threadList.Add(instance);
 		}
 
 		// methode for end current thread
 		public void finish()
 		{
-            Thread.Sleep(0);
+            Thread.Stop(0);
         }
 	}
 }

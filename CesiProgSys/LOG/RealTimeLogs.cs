@@ -17,9 +17,10 @@ namespace CesiprogSys.LOG
         // start new thread when listInfo is not null  
         public void  startThread()
         {
+            Console.Write("ON EST LAAAAAAAAAAAAAAAAA");
             if (listInfo != null)
             {
-                instanciate threadRealTimeLogs = new instanciate();
+                instantiate threadRealTimeLogs = new instantiate();
                 threadRealTimeLogs.start();
             }
             else 
