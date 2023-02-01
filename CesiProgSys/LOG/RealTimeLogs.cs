@@ -14,10 +14,20 @@ namespace CesiProgSys.LOG
         static List<Info> listInfo = new List<Info>();
         public static bool flagRtl = true;
 
+       
 
         // start new thread when listInfo is not null  
         public static void startThread()
         {
+            // for directory info TEST A VALIDER !!!
+            string filePath = @"C:\\";
+            string directoryName;
+            
+            // show directory info   TEST A VALIDER !!!
+            directoryName = Path.GetDirectoryName(filePath);
+            Console.WriteLine("GetDirectoryName('{0}') returns '{1}'",
+                filePath, directoryName);
+            
             // print current thread ID 
            Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
          
@@ -28,6 +38,7 @@ namespace CesiProgSys.LOG
                 // if (listInfo.Any())  // need to be use for trigg loop
                 if(true)
                 {
+                   
                     //Pass the filepath and filename to the StreamWriter Constructor
                     StreamWriter sw = new StreamWriter("C:\\RealTimeLogs.txt");  // change in Json file (when it will be ok). 
                     //Write a line of text
