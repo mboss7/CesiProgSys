@@ -10,7 +10,7 @@ namespace CesiProgSys.ToolsBox
 {
     public class Zipfile
     {
-        public static void Main(string[] location, string[] namefile)
+        public static void Main(string location, string namefile)
         {
             string outputFile = "location";
             string fileToZip = "namefile";
