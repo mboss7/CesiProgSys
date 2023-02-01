@@ -28,7 +28,7 @@ namespace CesiprogSys.LOG
             }
         }
 
-        // Create new start log info 
+        // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
         public void startLog()
         {
             if (RealTimeLogs == null)
