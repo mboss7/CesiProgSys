@@ -1,7 +1,10 @@
 ﻿namespace CesiProgSys.Backup
 {
-    public class DifferentialBackup
+    public class DifferentialBackup : IBackup
     {
-        
+        public static void startThread()
+        {
+            
+        }
     }
 }
