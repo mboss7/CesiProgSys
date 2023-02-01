@@ -1,4 +1,4 @@
-﻿using CesiprogSys.LOG;
+﻿using CesiProgSys.LOG;
 
 
 namespace Programm
@@ -7,12 +7,14 @@ namespace Programm
     {
         public static void Main()
         {
-            //Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
+            // run new LogsManager Thread
             LogsManager l = new LogsManager();
             l.instantiate();
+            
+            // sleep 10 sec et finish le Thread LogsManager
             Thread.Sleep(10000);
             l.finish();
-            //Console.Write("La fin du premier thread{0}\n", Thread.CurrentThread.ManagedThreadId);
+           
         }
     }
 }

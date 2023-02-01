@@ -5,7 +5,7 @@ using System.Text.Json.Nodes;
 using System.Threading;
 using Programm.ToolsBox;
 
-namespace CesiprogSys.LOG
+namespace CesiProgSys.LOG
 {
 
     public class RealTimeLogs : ILogs
@@ -18,17 +18,10 @@ namespace CesiprogSys.LOG
         // start new thread when listInfo is not null  
         public static void startThread()
         {
-         //   Console.Write("ON EST LAAAAAAAAAAAAAAAAA\n");
+            // print current thread ID 
             Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
-            //if (listInfo != null)
-            //{
-                // instantiate threadRealTimeLogs = new instantiate();
-                // threadRealTimeLogs.start();
-            //}
-            //else 
-            //{
-              
-            //}
+         
+            // Loop who print text with current Thread Id for testing thread. 
             while (flag)
             {
                 

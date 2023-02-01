@@ -4,7 +4,7 @@
 // using System.Text.Json.Nodes;
 // using System.Threading;
 //
-// namespace CesiprogSys.LOG
+// namespace CesiProgSys.LOG
 // {
 //     public class DailyLogs : ILogs
 //     {

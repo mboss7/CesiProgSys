@@ -1,6 +1,6 @@
 using System;
 
-namespace CesiprogSys.LOG
+namespace CesiProgSys.LOG
 {
     //interface for Logs 
     public interface ILogs

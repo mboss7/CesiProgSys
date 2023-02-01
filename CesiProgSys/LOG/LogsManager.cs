@@ -2,14 +2,14 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace CesiprogSys.LOG
+namespace CesiProgSys.LOG
 {
 	//mother class for Logs 
 	public class LogsManager // : IManager
 	{
 		// thread list, for managing Thread
 		public List<Thread> threadList;
-		// constructor
+		// constructor : for thread list
 		public LogsManager() {
 			threadList = new List<Thread>();
 		}
