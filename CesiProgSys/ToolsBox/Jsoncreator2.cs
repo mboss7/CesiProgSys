@@ -23,7 +23,7 @@ public class JsonLog
 
 class Program
 {
-    static void Main(string[] args)
+    static void Jsonlog(string[] args)
     {
         JsonLog backup = new JsonLog(DateTime.Now, "Sample_log.pdf [pdf]", @"\\server\source\Sample_log.pdf", @"\\server\destination\Sample_log.pdf", 10000, 500);
         string json = JsonConvert.SerializeObject(backup);
