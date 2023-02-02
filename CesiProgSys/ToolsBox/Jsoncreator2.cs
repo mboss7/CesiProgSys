@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-public class BackupInfo
+public class JsonLog
 {
     public DateTime Timestamp { get; set; }
     public string BackupName { get; set; }
@@ -10,7 +10,7 @@ public class BackupInfo
     public long FileSize { get; set; }
     public long TransferTime { get; set; }
 
-    public BackupInfo(DateTime timestamp, string backupName, string sourceFileAddress, string destinationFileAddress, long fileSize, long transferTime)
+    public JsonLog(DateTime timestamp, string backupName, string sourceFileAddress, string destinationFileAddress, long fileSize, long transferTime)
     {
         Timestamp = timestamp;
         BackupName = backupName;
@@ -25,7 +25,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        BackupInfo backup = new BackupInfo(DateTime.Now, "Sample_log.pdf [pdf]", @"\\server\source\Sample_log.pdf", @"\\server\destination\Sample_log.pdf", 10000, 500);
+        JsonLog backup = new JsonLog(DateTime.Now, "Sample_log.pdf [pdf]", @"\\server\source\Sample_log.pdf", @"\\server\destination\Sample_log.pdf", 10000, 500);
         string json = JsonConvert.SerializeObject(backup);
         Console.WriteLine(json);
     }
