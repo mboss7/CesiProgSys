@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json.Nodes;
 using System.Threading;
 using CesiProgSys.ToolsBox;
+using Newtonsoft.Json;
 
 namespace CesiProgSys.LOG
 {
@@ -41,6 +42,13 @@ namespace CesiProgSys.LOG
                     sw.WriteLine(today);
                     //Write a second line of text
                     sw.WriteLine("RealTimeLogs Run : OK");
+                    
+                    
+                    // create JSON (need to add variable name to replace infos in JSON !) 
+                    JsonLog backup = new JsonLog(DateTime.Now, "Sample_log.txt [txt]", @".\\RealTimeLogs.txt", @".\\Sample_log.txt", 10000, 500);
+                    string json = JsonConvert.SerializeObject(backup);
+                    sw.WriteLine(json);
+                    
                     //Close the file
                     sw.Close();
                 }
@@ -50,7 +58,7 @@ namespace CesiProgSys.LOG
         // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
         public void startLog()
         {
-      
+           
         }
 
         // write new logs infos 
