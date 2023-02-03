@@ -27,6 +27,8 @@ namespace CesiProgSys.LOG
             Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
             instanceDl.Start();
             threadList.Add(instanceDl);
+            
+            Thread.Sleep(10);
 		}
 
 		// methode for end current thread

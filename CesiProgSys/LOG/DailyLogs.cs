@@ -40,13 +40,13 @@
 
 
              //Pass the filepath and filename to the StreamWriter Constructor
-             StreamWriter sw = new StreamWriter(@".\\DailyLogs.txt");  // change in Json file (when it will be ok). 
+            // StreamWriter sw = new StreamWriter(@".\\DailyLogs.txt");  // change in Json file (when it will be ok). 
                                                                           //Write a line of text
-             sw.WriteLine("Hello World!!");
+            // sw.WriteLine("Hello World!!");
              //Write a second line of text
-             sw.WriteLine("From the StreamWriter class");
+           //  sw.WriteLine("From the StreamWriter class");
              //Close the file
-             sw.Close();
+           //  sw.Close();
 
          }
          // write new logs infos 
