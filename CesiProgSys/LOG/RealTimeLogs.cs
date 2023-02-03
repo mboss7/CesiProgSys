@@ -35,7 +35,7 @@ namespace CesiProgSys.LOG
                     // value Date time
                     DateTime today = DateTime.Now;
                     //Pass the filepath and filename to the StreamWriter Constructor
-                    StreamWriter sw = new StreamWriter(@".\\RealTimeLogs.txt");  // change in Json file (when it will be ok). 
+                    StreamWriter sw = new StreamWriter(@".\\LOGS\RealTimeLogs.json");  // change in Json file (when it will be ok). 
                     //Write a line of text
                     sw.WriteLine("Real Time Logs File");
                     // write date and time in Logs file
@@ -45,7 +45,7 @@ namespace CesiProgSys.LOG
                     
                     
                     // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog(DateTime.Now, "Sample_log.txt [txt]", @".\\RealTimeLogs.txt", @".\\Sample_log.txt", 10000, 500);
+                    JsonLog backup = new JsonLog(DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\RealTimeLogs.txt", @".\\Sample_log.txt", 10000, 500);
                     string json = JsonConvert.SerializeObject(backup);
                     sw.WriteLine(json);
                     
