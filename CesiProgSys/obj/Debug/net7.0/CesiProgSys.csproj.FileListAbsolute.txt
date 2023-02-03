@@ -1,0 +1,15 @@
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/bin/Debug/net7.0/CesiProgSys
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/bin/Debug/net7.0/CesiProgSys.deps.json
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/bin/Debug/net7.0/CesiProgSys.runtimeconfig.json
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/bin/Debug/net7.0/CesiProgSys.dll
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/bin/Debug/net7.0/CesiProgSys.pdb
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/obj/Debug/net7.0/CesiProgSys.csproj.AssemblyReference.cache
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/obj/Debug/net7.0/CesiProgSys.GeneratedMSBuildEditorConfig.editorconfig
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/obj/Debug/net7.0/CesiProgSys.AssemblyInfoInputs.cache
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/obj/Debug/net7.0/CesiProgSys.AssemblyInfo.cs
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/obj/Debug/net7.0/CesiProgSys.csproj.CoreCompileInputs.cache
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/obj/Debug/net7.0/CesiProgSys.dll
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/obj/Debug/net7.0/refint/CesiProgSys.dll
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/obj/Debug/net7.0/CesiProgSys.pdb
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/obj/Debug/net7.0/CesiProgSys.genruntimeconfig.cache
+/home/ludwig/RiderProjects/CesiProgSys/CesiProgSys/obj/Debug/net7.0/ref/CesiProgSys.dll
