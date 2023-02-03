@@ -9,7 +9,7 @@ namespace CesiProgSys
         {
             Zip z = new Zip();
             z.compressed(args[0], args[1]);
-            JsonLog test = new JsonLog();
+            // JsonLog test = new JsonLog();
             
         }
         
