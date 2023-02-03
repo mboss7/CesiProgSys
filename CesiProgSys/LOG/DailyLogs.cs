@@ -20,10 +20,14 @@
              {
                 if(true) 
                 {
+                    // value Date time
+                    DateTime today = DateTime.Now;
                      //Pass the filepath and filename to the StreamWriter Constructor
                      StreamWriter sw = new StreamWriter(@".\\DailyLogs.txt");  // change in Json file (when it will be ok). 
                      //Write a line of text
                      sw.WriteLine("Daily Logs File");
+                     // write date and time in Logs file
+                     sw.WriteLine(today);
                      //Write a second line of text
                      sw.WriteLine("DailyLogs Run : OK");
                      //Close the file
