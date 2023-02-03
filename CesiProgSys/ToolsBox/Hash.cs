@@ -6,19 +6,21 @@ namespace FileIntegrityChecker
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Hash(string[] args)
         {
-            // The file path to be checked
-            string filePath = @"C:\path\to\file.txt";
+            // The path to the original file
+            string originalFilePath = @"C:\path\to\original-file.txt";
+            // The path to the saved file
+            string savedFilePath = @"C:\path\to\saved-file.txt";
 
-            // Calculate the hash of the file before saving
-            byte[] originalHash = CalculateHash(filePath);
+            // Calculate the hash of the original file
+            byte[] originalHash = CalculateHash(originalFilePath);
 
             // Save the file
-            // ...
+            File.Copy(originalFilePath, savedFilePath, true);
 
-            // Calculate the hash of the file after saving
-            byte[] savedHash = CalculateHash(filePath);
+            // Calculate the hash of the saved file
+            byte[] savedHash = CalculateHash(savedFilePath);
 
             // Compare the two hashes
             if (CompareHashes(originalHash, savedHash))
