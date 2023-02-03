@@ -4,9 +4,7 @@ using CesiProgSys.LOG;
 
 namespace CesiProgSys
 {
-    class Program
-    {
-        
+   
         
         public class LOGS
         {
@@ -15,13 +13,12 @@ namespace CesiProgSys
                 // run new LogsManager Thread
                 LogsManager l = new LogsManager();
                 l.instantiate();
-            
-                // sleep 10 sec et finish le Thread LogsManager
-                Thread.Sleep(10000);
                 l.finish();
            
             }
         }
+        
+        public class ZipP {
         static void MainC(string[] args)
         {
             Zip z = new Zip();
