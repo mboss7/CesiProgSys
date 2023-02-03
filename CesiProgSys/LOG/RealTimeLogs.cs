@@ -27,7 +27,7 @@ namespace CesiProgSys.LOG
             while (flagRtl)
             {
                 
-                // if (listInfo.Any())  // need to be use for trigg loop
+                // if (listInfo.Any(true))  // need to be use for trigg loop
                 if(true)
                 {
                    
