@@ -1,3 +1,16 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System;
+using CesiProgSys.ViewCli;
 
-Console.WriteLine("Hello, World!");
+namespace CesiProgSys.Program;
+
+public class Program
+{
+    
+    static void Main(string[] args)
+    {
+        IViewCli option1 = new ViewCliFr();
+        //IViewCli option2 = new Option2();
+        option1.menu();
+        
+    }
+}

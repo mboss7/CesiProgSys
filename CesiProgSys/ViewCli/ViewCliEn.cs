@@ -1,7 +1,7 @@
-using System;
+/*using System;
 namespace CesiProgSys.ViewCli
 {
-    public class ViewCliEn
+    public class ViewCliEn : IViewCli
     {
         public void startProgram()
         {
@@ -9,7 +9,7 @@ namespace CesiProgSys.ViewCli
         }
         public void menu()
         {
-            // Code pour la méthode 
+            Console.WriteLine("You selected option 1");
         }
         public void help()
         {
@@ -24,5 +24,5 @@ namespace CesiProgSys.ViewCli
             // Code pour la méthode 
         }
     }
-}
+}*/
 
