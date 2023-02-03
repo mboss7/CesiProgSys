@@ -1,10 +1,8 @@
 ﻿using System.Runtime.InteropServices.JavaScript;
 
-namespace Programm.ToolsBox;
-
 public class Info
 {
-    private JSType.Date DateStart { get; set; }
+    private DateTime Date { get; set; }
     private int TimeLaps { get; set; }
     private string Name { get; set; }
     private string FileSource { get; set; }
