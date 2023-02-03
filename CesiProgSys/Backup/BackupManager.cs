@@ -2,16 +2,14 @@
 {
     public class BackupManager
     {
-        BackupManager(){}
-        
-        
+
         private List<Thread> threadList { get; set; }
 
-        // public BackupManager()
-        // {
-        //     threadList = new List<Thread>();
-        // }
-        //
+        public BackupManager()
+        {
+            threadList = new List<Thread>();
+        }
+        
         public void instantiate(string name)
         {
             Thread temp = new Thread(FullBackup.startThread);
