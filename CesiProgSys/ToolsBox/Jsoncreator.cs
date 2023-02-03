@@ -8,9 +8,9 @@
 
  namespace CesiProgSys.ToolsBox
  {
-     public class Jsoncreator
+     public class JsonCreator
      {
-         static void Jsoncreator(string[] args)
+         static void JsonBckCreator(string[] args)
          {
              // Lire le fichier texte
              string text = File.ReadAllText("input.txt");
