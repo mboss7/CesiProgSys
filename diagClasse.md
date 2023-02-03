@@ -136,11 +136,11 @@ class info{
     -DateStart : Date
     -Timelaps : Nanoseconde
     -Name : String
-    -FileSource : String 
-    -FileDest : String
+    -DirSource : String 
+    -DirDest : String
     -CurrentSource : String
     -CurrentDest : String
-    -State : String (end, active, error)
+    -State : String (checkingAuth, end, active, error)
     -TotalFilesToCopy : int
     -TotalFilesSize : int
     -NbFilesLeftToDo : int

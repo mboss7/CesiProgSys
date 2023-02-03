@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.ComponentModel.Design;
+using System.Data;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using CesiProgSys.Tools;
@@ -32,12 +33,31 @@ namespace CesiProgSys.Backup
             DateTime d2 = DateTime.Now;
             
             Console.WriteLine("Verifications des fichiers effectué en {0} secondes", (d2-d));
-            
+
             fb.startBackup(directory, "C:/Users/Tanguy/Documents/Workshop3");
         }
 
+        public void InitBackup(string name, string source, string target,)
+        {
+            inf.date = DateTime.Now;
+            inf.name = !string.IsNullOrEmpty(name) ? name : inf.date.Date.ToString();
+            inf.dirsource = source;
+            inf.dirtarget = target;
+            
+
+        }
+        
         public void startBackup(string source, string target)
         {
+
+            // inf.state = "active";
+            // inf.date = DateTime.Now;
+            // inf.filesource = source;
+            // inf.filedest = target;
+            // inf.totalFilesToCopy = authorizedFiles.Count;
+            // inf.nbFilesLeftToDo = authorizedFiles.Count;
+            //hmmm bof ça va se retrouver dans la récurs et ça va foutre la merde.
+            
             DirectoryInfo sourceDirectory = new DirectoryInfo(source);
             DirectoryInfo targetDirectory = new DirectoryInfo(target);
 
@@ -81,7 +101,7 @@ namespace CesiProgSys.Backup
         public void checkAutorizations(string directory)
         {
             WindowsIdentity wi = WindowsIdentity.GetCurrent();
-            IEnumerable<string> directories = Directory.EnumerateDirectories(directory); //ta oublié d'intégré le tout premier dossier imbécile
+            IEnumerable<string> directories = Directory.EnumerateDirectories(directory); //ta oublié d'intégrer le tout premier dossier imbécile
             
             
             
