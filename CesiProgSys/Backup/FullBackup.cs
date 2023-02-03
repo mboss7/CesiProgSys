@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using CesiProgSys.Tools;
 
 namespace CesiProgSys.Backup
 {
@@ -10,6 +11,8 @@ namespace CesiProgSys.Backup
         private List<string> unauthorizedDirectories;
         private List<string> authorizedFiles;
         private List<string> unauthorizedFiles;
+
+        private Info inf;
         
         public static void startThread()
         {
@@ -17,7 +20,7 @@ namespace CesiProgSys.Backup
             
             DateTime d = DateTime.Now;
 
-            string directory = "C:/Users/Tanguy/Downloads";
+            string directory = "C:/Users/Tanguy/Documents/Workshop2";
             
             FullBackup fb = new FullBackup();
             fb.checkAutorizations(directory);
@@ -30,31 +33,39 @@ namespace CesiProgSys.Backup
             
             Console.WriteLine("Verifications des fichiers effectué en {0} secondes", (d2-d));
             
-            // fb.startBackup(directory, "C:/Users/Tanguy/Documents/Workshop3");
+            fb.startBackup(directory, "C:/Users/Tanguy/Documents/Workshop3");
         }
 
-        public void startBackup(string directory, string destination)
+        public void startBackup(string source, string target)
         {
-            // if (!Directory.Exists(destination))
-            // {
-            //     Directory.CreateDirectory(destination); 
-            // }
-            //
-            // foreach (string file in authorizedFiles)
-            // {
-            //     string temp = file.Substring(directory.Length);
-            //     string[] temp2 = temp.Split("/");
-            //     Console.WriteLine(temp);
-            //     Console.WriteLine(temp2);
-            //     for (int i = 0; i < temp2.Length - 1; i++)
-            //     {
-            //         Directory.CreateDirectory(temp2[i]);
-            //     }
-            //     if(!File.Exists(destination+temp))
-            //         File.Copy(file, destination+temp);
-            // }
+            DirectoryInfo sourceDirectory = new DirectoryInfo(source);
+            DirectoryInfo targetDirectory = new DirectoryInfo(target);
+
+            if (!sourceDirectory.Exists)
+            {
+                throw new DirectoryNotFoundException("Source directory doesn't exist");
+            }
+
+            if (targetDirectory.Exists)
+            {
+                throw new IOException("target directory already exist");
+            }
             
+            targetDirectory.Create();
+
+            foreach (FileInfo file in sourceDirectory.GetFiles())
+            {
+                
+                string targetFile = Path.Combine(target, file.Name);
+                file.CopyTo(targetFile, true);
+                
+            }
             
+            foreach(DirectoryInfo subDirectory in sourceDirectory.GetDirectories())
+            {
+                string targetSubDirectory = Path.Combine(target, subDirectory.Name);
+                startBackup(subDirectory.FullName, targetSubDirectory);
+            }
         }
         
         public FullBackup()
@@ -63,28 +74,16 @@ namespace CesiProgSys.Backup
             unauthorizedDirectories = new List<string>();
             authorizedFiles = new List<string>();
             unauthorizedFiles = new List<string>();
+
+            inf = new Info();
         }
         
         public void checkAutorizations(string directory)
         {
-            // try
-            // {
-            //     IEnumerable<string> directories = Directory.EnumerateDirectories(directory);
-            //     authorizedDirectories.Add(directory);
-            //     IEnumerable<string> files = Directory.EnumerateFiles(directory);
-            //     authorizedFiles.AddRange(files);
-            //     foreach (string d in directories)
-            //     {
-            //         checkAutorizations(d);
-            //     }
-            // }
-            // catch (UnauthorizedAccessException e)
-            // {
-            //     unauthorizedDirectories.Add(directory);
-            // }
-
             WindowsIdentity wi = WindowsIdentity.GetCurrent();
             IEnumerable<string> directories = Directory.EnumerateDirectories(directory); //ta oublié d'intégré le tout premier dossier imbécile
+            
+            
             
             foreach (string currentDirectory in directories)
             {

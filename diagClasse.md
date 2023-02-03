@@ -69,7 +69,7 @@ class Config{
 -retentionTime : Int
 +writeConfig()
 +readConfig()
-+cleanConfig
++cleanConfig()
 }
 class Languages{
 <<enumeration>>
