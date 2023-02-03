@@ -1,4 +1,4 @@
-﻿
+
 using CesiProgSys.ToolsBox;
 
 namespace CesiProgSys
