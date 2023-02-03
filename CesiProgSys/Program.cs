@@ -1,11 +1,25 @@
 
 using CesiProgSys.ToolsBox;
+using CesiProgSys.LOG;
 
 namespace CesiProgSys
 {
-    class Program
-    {
-        static void Main(string[] args)
+   
+        
+        public class LOGS
+        {
+            public static void Main()
+            {
+                // run new LogsManager Thread
+                LogsManager l = new LogsManager();
+                l.instantiate();
+                l.finish();
+           
+            }
+        }
+        
+        public class ZipP {
+        static void MainC(string[] args)
         {
             Zip z = new Zip();
             z.compressed(args[0], args[1]);
@@ -15,3 +29,7 @@ namespace CesiProgSys
         
     }
 }
+
+
+
+  
