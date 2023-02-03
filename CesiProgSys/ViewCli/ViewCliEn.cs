@@ -15,10 +15,7 @@ namespace CesiProgSys.ViewCli
         {
             // Code pour la méthode 
         }
-        public string read()
-        {
-            // Code pour la méthode 
-        }
+        
         public void showConfig()
         {
             // Code pour la méthode 

@@ -8,9 +8,7 @@ namespace CesiProgSys.ViewCli
         public void menu();
 
         //public void help();
-
-        //public string read();
-
+        
         //public void showConfig();
     
     }  

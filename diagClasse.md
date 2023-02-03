@@ -7,21 +7,18 @@ class IViewCli{
 +startProgram()
 +menu()
 +help()
-+read(): String
 +showConfig()
 }
 class ViewCliFr{
 +startProgram()
 +menu()
 +help()
-+read() : String
 +showConfig()
 }
 class ViewCliEn{
 +startProgram()
 +menu()
 +help()
-+read() : String
 +showConfig()
 }
 class ViewModelCli{

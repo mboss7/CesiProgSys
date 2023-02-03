@@ -13,7 +13,7 @@ namespace CesiProgSys.ViewCli
         {
             
             OptionDelegate[] options = new OptionDelegate[] {
-                new OptionDelegate(ViewCliFr.menu),
+                new OptionDelegate(option1.menu),
                 //new OptionDelegate(option2.Execute)
             };
 
@@ -46,10 +46,7 @@ namespace CesiProgSys.ViewCli
         {
             // Code pour la méthode 
         }
-        public string read()
-        {
-            // Code pour la méthode 
-        }
+        
         public void showConfig()
         {
             // Code pour la méthode 
