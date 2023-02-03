@@ -21,7 +21,7 @@
                 if(true) 
                 {
                      //Pass the filepath and filename to the StreamWriter Constructor
-                     StreamWriter sw = new StreamWriter("C:\\DailyLogs.txt");  // change in Json file (when it will be ok). 
+                     StreamWriter sw = new StreamWriter(@".\\DailyLogs.txt");  // change in Json file (when it will be ok). 
                      //Write a line of text
                      sw.WriteLine("Daily Logs File");
                      //Write a second line of text
@@ -40,7 +40,7 @@
 
 
              //Pass the filepath and filename to the StreamWriter Constructor
-             StreamWriter sw = new StreamWriter("C:\\DailyLogs.txt");  // change in Json file (when it will be ok). 
+             StreamWriter sw = new StreamWriter(@".\\DailyLogs.txt");  // change in Json file (when it will be ok). 
                                                                           //Write a line of text
              sw.WriteLine("Hello World!!");
              //Write a second line of text

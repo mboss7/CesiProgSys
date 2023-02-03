@@ -19,15 +19,7 @@ namespace CesiProgSys.LOG
         // start new thread when listInfo is not null  
         public static void startThread()
         {
-            // for directory info TEST A VALIDER !!!
-            string filePath = @"C:\\";
-            string directoryName;
-            
-            // show directory info   TEST A VALIDER !!!
-            directoryName = Path.GetDirectoryName(filePath);
-            Console.WriteLine("GetDirectoryName('{0}') returns '{1}'",
-                filePath, directoryName);
-            
+        
             // print current thread ID 
            Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
          
@@ -40,7 +32,7 @@ namespace CesiProgSys.LOG
                 {
                    
                     //Pass the filepath and filename to the StreamWriter Constructor
-                    StreamWriter sw = new StreamWriter("C:\\RealTimeLogs.txt");  // change in Json file (when it will be ok). 
+                    StreamWriter sw = new StreamWriter(@".\\RealTimeLogs.txt");  // change in Json file (when it will be ok). 
                     //Write a line of text
                     sw.WriteLine("Real Time Logs File");
                     //Write a second line of text
