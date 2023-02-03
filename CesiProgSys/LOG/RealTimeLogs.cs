@@ -23,8 +23,17 @@ namespace CesiProgSys.LOG
         
             // print current thread ID 
            Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
+
+           RealTimeLogs rtl = new RealTimeLogs();
+           rtl.startLog();
            
-           
+           rtl.startLog();
+
+        }
+
+        // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
+        public void startLog()
+        {
             // Loop who print text with current Thread Id for testing thread. 
             while (flagRtl)
             {
@@ -45,28 +54,32 @@ namespace CesiProgSys.LOG
                     
                     
                     // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog(DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\RealTimeLogs.txt", @".\\Sample_log.txt", 10000, 500);
+                    JsonLog backup = new JsonLog(DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\RealTimeLogs.json", @".\\Sample_log.txt", 10000, 500);
                     string json = JsonConvert.SerializeObject(backup);
                     sw.WriteLine(json);
                     
                     //Close the file
                     sw.Close();
+                    
+                  
                 }
             }
         }
 
-        // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
-        public void startLog()
+      
+        // write new log errors 
+        public void startLog(string json)
         {
-           
+            // add text in existing file without suppr precendent text
+            using StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
+            file.WriteLineAsync(json);
         }
 
-        // write new logs infos 
         public void logInfo()
         {
-
+            throw new NotImplementedException();
         }
-        // write new log errors 
+
         public void logError()
         {
 

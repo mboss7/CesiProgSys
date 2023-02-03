@@ -45,7 +45,7 @@
          }
 
          // Create new start log info 
-         public void startLog()
+         public void startLog(string json)
          {
              //create log file
             // write start Log info in Json log file. 
