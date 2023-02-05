@@ -19,6 +19,10 @@ namespace CesiProgSys.ViewCli
         public void changeConfig();
         
         public void help();
+        
+        public void fullBackup();
+        
+        public void diffBackup();
 
         
 
