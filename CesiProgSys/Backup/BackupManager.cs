@@ -16,7 +16,6 @@
             temp.Name = name;
             
             threadList.Add(temp);
-            Console.Write("BackupManager, Backgound : {0} Thread Pool  : {1} Thread ID : {2} \n", Thread.CurrentThread.IsBackground, Thread.CurrentThread.Name, Thread.CurrentThread.ManagedThreadId);
             threadList[0].Start();
         }
 

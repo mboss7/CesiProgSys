@@ -8,63 +8,47 @@ namespace CesiProgSys.Backup
 {
     public class FullBackup : IBackup
     {
-        private List<string> authorizedDirectories;
+        
+        //TODO penser à mettre en place des mutex, pour pouvoir controler le déroulement du thread
+        private List<DirectoryInfo> authorizedDirectories;
         private List<string> unauthorizedDirectories;
-        private List<string> authorizedFiles;
+        
+        private List<FileInfo> authorizedFiles;
         private List<string> unauthorizedFiles;
 
         private Info inf;
-        
+
+        // private List<Tuple<DirectoryInfo, List<FileInfo>>> authorizedDirAndFiles;
+
         public static void startThread()
         {
-            Console.Write("FullBackup, Backgound : {0} Thread Pool  : {1} Thread ID : {2} \n", Thread.CurrentThread.IsBackground, Thread.CurrentThread.IsThreadPoolThread, Thread.CurrentThread.ManagedThreadId);
-            
-            DateTime d = DateTime.Now;
+            string directory = "C:/Program Files (x86)/Steam";
+            string target = "C:/";
 
-            string directory = "C:/Users/Tanguy/Documents/Workshop2";
-            
             FullBackup fb = new FullBackup();
+            fb.InitBackup("", directory, target);
             fb.checkAutorizations(directory);
-            Console.WriteLine("VOICI TOUS LES DOSSIERS");
-
-            Console.WriteLine(fb.authorizedDirectories.Count);
-            Console.WriteLine(fb.authorizedFiles.Count);
-
-            DateTime d2 = DateTime.Now;
             
-            Console.WriteLine("Verifications des fichiers effectué en {0} secondes", (d2-d));
-
-            fb.startBackup(directory, "C:/Users/Tanguy/Documents/Workshop3");
+            // fb.startBackup(directory, target);
         }
 
-        public void InitBackup(string name, string source, string target,)
+        public void InitBackup(string name, string source, string target)
         {
             inf.date = DateTime.Now;
             inf.name = !string.IsNullOrEmpty(name) ? name : inf.date.Date.ToString();
             inf.dirsource = source;
             inf.dirtarget = target;
-            
-
+            inf.progression = 0;
+            inf.state = State.INACTIVE;
         }
         
-        public void startBackup(string source, string target)
+        //TODO ne pas oublier de mettre à jour l'objet Info ...
+        
+        public void startBackup(string target)
         {
-
-            // inf.state = "active";
-            // inf.date = DateTime.Now;
-            // inf.filesource = source;
-            // inf.filedest = target;
-            // inf.totalFilesToCopy = authorizedFiles.Count;
-            // inf.nbFilesLeftToDo = authorizedFiles.Count;
-            //hmmm bof ça va se retrouver dans la récurs et ça va foutre la merde.
+            inf.state = State.ACTIVE;
             
-            DirectoryInfo sourceDirectory = new DirectoryInfo(source);
             DirectoryInfo targetDirectory = new DirectoryInfo(target);
-
-            if (!sourceDirectory.Exists)
-            {
-                throw new DirectoryNotFoundException("Source directory doesn't exist");
-            }
 
             if (targetDirectory.Exists)
             {
@@ -73,65 +57,82 @@ namespace CesiProgSys.Backup
             
             targetDirectory.Create();
 
-            foreach (FileInfo file in sourceDirectory.GetFiles())
-            {
-                
-                string targetFile = Path.Combine(target, file.Name);
-                file.CopyTo(targetFile, true);
-                
-            }
-            
-            foreach(DirectoryInfo subDirectory in sourceDirectory.GetDirectories())
-            {
-                string targetSubDirectory = Path.Combine(target, subDirectory.Name);
-                startBackup(subDirectory.FullName, targetSubDirectory);
-            }
+            // foreach (Tuple<DirectoryInfo, List<FileInfo>> t in authorizedDirAndFiles)
+            // {
+            //     
+            // }
+
+            // foreach (FileInfo file in sourceDirectory.GetFiles())
+            // {
+            //     inf.currentSource = Path.Combine(source, file.Name);
+            //     string targetFile = Path.Combine(target, file.Name);
+            //     inf.currentDest = targetFile;
+            //     file.CopyTo(targetFile, true);
+            //     
+            // }
+            //
+            // foreach(DirectoryInfo subDirectory in sourceDirectory.GetDirectories())
+            // {
+            //     string targetSubDirectory = Path.Combine(target, subDirectory.Name);
+            //     startBackup(subDirectory.FullName, targetSubDirectory);
+            // }
         }
         
         public FullBackup()
         {
-            authorizedDirectories = new List<string>();
+            authorizedDirectories = new List<DirectoryInfo>();
             unauthorizedDirectories = new List<string>();
-            authorizedFiles = new List<string>();
+            authorizedFiles = new List<FileInfo>();
             unauthorizedFiles = new List<string>();
-
+            
             inf = new Info();
         }
         
+        
+        //TODO Modifier la fonction pour que les fichiers/Dossiers soit ajouter dans des tuples avant d'êtres mis dans la liste
+        //TODO ainsi, il y aura juste à parcourir cette liste pour copier les dossiers, plus besoin de les recheck dans la startbackup fonction
+        //TODO réfléchit bien à la façon de faire ça parce que sinon tu vas rester blocké
         public void checkAutorizations(string directory)
         {
-            WindowsIdentity wi = WindowsIdentity.GetCurrent();
-            IEnumerable<string> directories = Directory.EnumerateDirectories(directory); //ta oublié d'intégrer le tout premier dossier imbécile
-            
-            
-            
+            inf.state = State.CHECKINGAUTH;
+
+            IEnumerable<string> directories = Directory.EnumerateDirectories(directory);
+
             foreach (string currentDirectory in directories)
             {
                 DirectoryInfo dirInfo = new DirectoryInfo(currentDirectory);
-                AuthorizationRuleCollection acl = dirInfo.GetAccessControl().GetAccessRules(true, true, typeof(SecurityIdentifier));
-                
-                for (int i = 0; i < acl.Count; i++)
+                if (!checkTypes(dirInfo.Attributes))
                 {
-                    FileSystemAccessRule rule = (FileSystemAccessRule)acl[i];
-            
-                    if (wi.User.Equals(rule.IdentityReference) || wi.Groups.Equals(rule.IdentityReference))
+                    try
                     {
+                        AuthorizationRuleCollection acl = dirInfo.GetAccessControl().GetAccessRules(true, true, typeof(SecurityIdentifier));
+                        FileSystemAccessRule rule = (FileSystemAccessRule)acl[0];
+                        
                         if (AccessControlType.Deny.Equals(rule.AccessControlType))
                         {
-                            if (contains(FileSystemRights.FullControl, rule))
+                            unauthorizedDirectories.Add(currentDirectory);
+                        }
+                        else if (AccessControlType.Allow.Equals(rule.AccessControlType))
+                        {
+                            if (checkRights(rule))
+                            {
+                                authorizedDirectories.Add(dirInfo);
+                                checkAutorizations(currentDirectory);
+                            }
+                            else
                             {
                                 unauthorizedDirectories.Add(currentDirectory);
                             }
                         }
-                        else if (AccessControlType.Allow.Equals(rule.AccessControlType))
-                        {
-                            if (contains(FileSystemRights.FullControl, (FileSystemAccessRule)acl[i]))
-                            {
-                                authorizedDirectories.Add(currentDirectory);
-                                checkAutorizations(currentDirectory); 
-                            }
-                        }
                     }
+                    catch (UnauthorizedAccessException)
+                    {
+                        unauthorizedDirectories.Add(currentDirectory);
+                    }
+                }
+                else
+                {
+                    unauthorizedDirectories.Add(currentDirectory);
                 }
             }
             
@@ -139,37 +140,66 @@ namespace CesiProgSys.Backup
             foreach (string currentFile in files)
             {
                 FileInfo fileInfo = new FileInfo(currentFile);
-                AuthorizationRuleCollection acl = fileInfo.GetAccessControl().GetAccessRules(true, true, typeof(SecurityIdentifier));
-            
-                for (int i = 0; i < acl.Count; i++)
+
+                if (!checkTypes(fileInfo.Attributes))
                 {
-                    FileSystemAccessRule rule = (FileSystemAccessRule)acl[i];
-            
-                    if (wi.User.Equals(rule.IdentityReference) || wi.Groups.Equals(rule.IdentityReference))
+                    try
                     {
+                        AuthorizationRuleCollection acl = fileInfo.GetAccessControl()
+                            .GetAccessRules(true, true, typeof(SecurityIdentifier));
+                        FileSystemAccessRule rule = (FileSystemAccessRule)acl[0];
+
                         if (AccessControlType.Deny.Equals(rule.AccessControlType))
                         {
-                            if (contains(FileSystemRights.FullControl, rule))
+                            unauthorizedFiles.Add(currentFile);
+                        }
+                        else if (AccessControlType.Allow.Equals(rule.AccessControlType))
+                        {
+                            if (checkRights(rule))
+                            {
+                                authorizedFiles.Add(fileInfo); 
+                            }
+                            else
                             {
                                 unauthorizedFiles.Add(currentFile);
                             }
                         }
-                        else if (AccessControlType.Allow.Equals(rule.AccessControlType))
-                        {
-                            if (contains(FileSystemRights.FullControl, (FileSystemAccessRule)acl[i]))
-                            {
-                                authorizedFiles.Add(currentFile);
-                            }
-                        }
                     }
+                    catch (UnauthorizedAccessException)
+                    {
+                        unauthorizedFiles.Add(currentFile);
+                    }
+                }
+                else
+                {
+                    unauthorizedFiles.Add(currentFile);
                 }
             }
         }
 
-        public bool contains(FileSystemRights right, FileSystemAccessRule rule)
+        public bool checkRights(FileSystemAccessRule rule)
         {
-            return (((int)right & (int)rule.FileSystemRights) == (int)right);
-            
+            bool toReturn = (rule.FileSystemRights & (FileSystemRights.FullControl | FileSystemRights.Modify | FileSystemRights.Read | FileSystemRights.ReadAndExecute)) != 0;
+            if (toReturn)
+                return toReturn;
+
+            int[] array = new int[32];
+            int number = (int)rule.FileSystemRights;
+            for (int i = 0; i < 32; i++)
+            {
+                array[i] = number % 2;
+                number /= 2;
+            }
+
+            if (array[31] == 1 || array[28] == 1)
+                return true;
+
+            return false;
+        }
+
+        public bool checkTypes(FileAttributes toCheck)
+        {
+            return (toCheck & (FileAttributes.System | FileAttributes.Offline | FileAttributes.Temporary)) != 0;
         }
 
     }
