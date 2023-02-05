@@ -88,7 +88,7 @@ namespace CesiProgSys.ViewCli
 
         public void startBackup()
         {
-            Console.WriteLine("1. Sur de vouloir lancer une sauvegarde");
+            Console.WriteLine("1. Validation du lancement d'une sauvegarde");
             Console.WriteLine("2. Retour");
             Console.WriteLine("3. Quitter");
             
@@ -121,7 +121,7 @@ namespace CesiProgSys.ViewCli
 
         public void showConfig()
         {
-            Console.WriteLine("1. Sur de vouloir afficher les configurations");
+            Console.WriteLine("1. Validation de l'affichage des configurations");
             Console.WriteLine("2. Retour");
             Console.WriteLine("3. Quitter");
             

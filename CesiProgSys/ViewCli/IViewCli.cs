@@ -6,8 +6,7 @@ namespace CesiProgSys.ViewCli
     public interface IViewCli
     {
         //public void startProgram();
-
-        //public void inputUser();
+        
         public void menu();
         
         public void configBackup();
