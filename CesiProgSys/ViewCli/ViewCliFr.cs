@@ -4,54 +4,85 @@ namespace CesiProgSys.ViewCli
 {
     public class ViewCliFr : IViewCli
     {
-        delegate void OptionDelegate();
-        /*public void startProgram()
-        {
-            // Code pour la méthode 
-        }*/
         public void menu()
         {
-            
-            OptionDelegate[] options = new OptionDelegate[] {
-                new OptionDelegate(option1.menu),
-                //new OptionDelegate(option2.Execute)
-            };
-
             while (true)
             {
-                Console.WriteLine("1. Option 1");
-                //Console.WriteLine("2. Option 2");
-                Console.WriteLine("3. Quit");
+                Console.WriteLine("1. Configurer une sauvegarde");
+                Console.WriteLine("2. Lancer une sauvegarde");
+                Console.WriteLine("3. Afficher les configurations");
+                Console.WriteLine("4. Changer les configurations");
+                Console.WriteLine("5. Aide");
+                Console.WriteLine("6. Quitter");
 
-                Console.Write("Enter your choice: ");
+                Console.Write("Entrer votre choix : ");
                 int choice = Convert.ToInt32(Console.ReadLine());
 
-                if (choice == 3)
+                if (choice > 0 && choice <= 5)
                 {
-                    Console.WriteLine("Exiting the program...");
-                    return;
+                    switch (choice)
+                    {
+                        case 1 :
+                            configBackup();
+                            break;
+                        case 2 :
+                            startBackup();
+                            break;
+                        case 3 :
+                            showConfig();
+                            break;
+                        case 4 :
+                            changeConfig();
+                            break;
+                        case 5 :
+                            help();
+                            break;
+                    }
                 }
-
-                if (choice > 0 && choice <= options.Length)
+                if (choice == 6)
                 {
-                    options[choice - 1]();
+                    Console.WriteLine("Sortie du programme...");
+                    return;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid choice. Try again.");
+                    Console.WriteLine("Choix invalide. Essayez à nouveau.");
                 }
             }
         }
-        /*public void help()
-        {
-            // Code pour la méthode 
-        }
         
+        public void configBackup()
+        {
+            //code
+            Console.WriteLine("1. Configurer une sauvegarde");
+        }
+
+        public void startBackup()
+        {
+            //code
+            Console.WriteLine("2. Lancer une sauvegarde");
+        }
+
         public void showConfig()
         {
-            // Code pour la méthode 
+            //code
+            Console.WriteLine("3. Afficher les configurations");
         }
-    }  */
+
+        public void changeConfig()
+        {
+            //code
+            Console.WriteLine("4. Changer les configurations");
+        }
+
+        public void help()
+        {
+            //code
+            Console.WriteLine("5. Aide");
+        }
     }
 }
+
+
+
 
