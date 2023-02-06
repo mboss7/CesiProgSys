@@ -1,17 +1,21 @@
 ﻿using System.Runtime.InteropServices.JavaScript;
 
+namespace CesiProgSys.ToolsBox;
 public class Info
 {
-    private string LogType { get; set; }
-    private DateTime Date { get; set; }
-    private int TimeLaps { get; set; }
-    private string Name { get; set; }
-    private string FileSource { get; set; }
-    private string FileDest { get; set; }
-    private string CurrentSource { get; set; }
-    private string CurrentDest { get; set; }
-    private int TotalFilesToCopy { get; set; }
-    private int TotalFilesSize { get; set; }
-    private int NbFilesLeftToDo { get; set; }
+    public string LogType { get; set; }
     
+    public DateTime Date { get; set; }
+    public DateTime TimeLaps { get; set; }
+    
+    public string Name { get; set; }
+    public string DirSource { get; set; }
+    public string DirTarget { get; set; }
+    public string CurrentSource { get; set; }
+    public string CurrentDest { get; set; }
+    public int TotalFilesToCopy { get; set; }
+    public int TotalFilesSize { get; set; }
+    public int NbFilesLeftToDo { get; set; }
+    public State state { get; set; }
+    public float progression { get; set; }
 }

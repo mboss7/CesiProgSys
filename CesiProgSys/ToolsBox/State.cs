@@ -1,4 +1,4 @@
-﻿namespace CesiProgSys.Tools;
+﻿namespace CesiProgSys.ToolsBox;
 
 public enum State
 {
