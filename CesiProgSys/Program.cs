@@ -1,39 +1,59 @@
-using CesiProgSys.Backup;
+using System;
 
-using CesiProgSys.LOG;
+using CesiProgSys.ViewCli;
 
-namespace CesiProgSys
+namespace CesiProgSys.Program;
+
+public class Program
 {
-   
+    
+    static void Main(string[] args)
+    {
+        Console.WriteLine("\n -----Welcome to the application !----- \n");
         
-        class Program
+        Console.ReadKey();
+        
+        Console.WriteLine("Choose your language:");
+        Console.WriteLine("1. for English");
+        Console.WriteLine("2. for French");
+        
+        Console.Write("Enter your choice : ");
+        int language = Convert.ToInt32(Console.ReadLine());
+
+        if (language == 1)
         {
-            static void Main(string[] args)
-            {
-                // run new LogsManager Thread
-                DateTime date = DateTime.Now;
-                BackupManager b = new BackupManager();
-                b.instantiate("truc");
-                b.instantiate("machin");
-               LogsManager l = new LogsManager();
-               l.startLogManager();
-               //
-               //  static void MainC(string[] args)
-               //  {
-               //      Zip z = new Zip();
-               //      z.compressed(args[0], args[1]);
-               // }
-                
-                // Console.ReadLine();
-                Thread.Sleep(500);
-                l.finish();
-                DateTime date2 = DateTime.Now;
-                Console.WriteLine(date2 - date);
-            }
+            IViewCli objEn = new ViewCliEn();
+            objEn.menu();
+            objEn.configBackup();
+            objEn.fullBackup();
+            objEn.diffBackup();
+            objEn.startBackup();
+            objEn.startBackupValid();
+            objEn.showConfig();
+            objEn.showConfigValid();
+            objEn.changeConfig();
+            objEn.help();
         }
+        else if (language == 2)
+        {
+            IViewCli objFr = new ViewCliFr();
+            objFr.menu();
+            objFr.configBackup();
+            objFr.fullBackup();
+            objFr.diffBackup();
+            objFr.startBackup();
+            objFr.startBackupValid();
+            objFr.showConfig();
+            objFr.showConfigValid();
+            objFr.changeConfig();
+            objFr.help();
+        }
+        else
+        {
+            Console.WriteLine("Invalid language selection");
+        }
+
+        
+        
     }
-
-
-
-
-  
+}
