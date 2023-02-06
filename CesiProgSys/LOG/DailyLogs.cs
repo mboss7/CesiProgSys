@@ -48,18 +48,18 @@ using Newtonsoft.Json;
             }
         }
 
-        public async void logInfo(string toPrint)
+        public void logInfo(string toPrint)
         {
             
-                    using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
-                    await file.WriteLineAsync(toPrint);
+                    StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
+                    file.WriteLineAsync(toPrint);
         }
 
 
-        public async void logError(string toPrint)
+        public void logError(string toPrint)
         {
-                    using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
-                    await file.WriteLineAsync(toPrint);
+                    StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
+                    file.WriteLineAsync(toPrint);
         }
      }
 }

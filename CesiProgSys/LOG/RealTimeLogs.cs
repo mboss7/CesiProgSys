@@ -32,7 +32,7 @@ namespace CesiProgSys.LOG
             listInfo = new List<Info>();
         }
 
-        public async void startLog()
+        public void startLog()
         {
             DirectoryInfo target = new DirectoryInfo("./LOGS/");
             if(!target.Exists)
