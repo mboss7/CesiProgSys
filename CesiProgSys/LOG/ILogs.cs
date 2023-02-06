@@ -9,4 +9,5 @@ namespace CesiProgSys.LOG
         public Task logInfo();
         public Task logError();
     }
+    
 }

@@ -5,8 +5,17 @@ using System.Threading;
 namespace CesiProgSys.LOG
 {
 	//mother class for Logs 
-	public class LogsManager // : IManager
+	public class LogsManager //: IManager
 	{
+
+		public void startLogManager()
+		{
+			// run new LogsManager Thread
+			LogsManager l = new LogsManager();
+			l.instantiate();
+			l.finish();
+		}
+		
 		// thread list, for managing Thread
 		public List<Thread> threadList;
 		// constructor : for thread list
@@ -18,13 +27,13 @@ namespace CesiProgSys.LOG
 		{
 			// create thread for RealTimeLogs Object
             Thread instanceRtl = new Thread(RealTimeLogs.startThread);
-            Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
+            //  Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
             instanceRtl.Start();
             threadList.Add(instanceRtl);
             
             // create thread for DailyLogs Object
             Thread instanceDl = new Thread(DailyLogs.startThread);
-            Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
+            //  Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
             instanceDl.Start();
             threadList.Add(instanceDl);
             

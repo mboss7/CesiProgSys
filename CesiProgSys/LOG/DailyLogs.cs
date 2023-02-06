@@ -1,75 +1,66 @@
- using System;
- using System;
- using System.IO;
- using System.Text.Json.Nodes;
- using System.Threading;
- using Newtonsoft.Json;
+using System;
+using System;
+using System.IO;
+using System.Text.Json.Nodes;
+using System.Threading;
+using CesiProgSys.ToolsBox;
+using Newtonsoft.Json;
 
  namespace CesiProgSys.LOG
  {
      public class DailyLogs : ILogs
      {
-         public static bool flagDl = true;
-       // start new thread
-         public static void startThread()
-         {
-             // print current thread ID 
-             Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
-         
-             // Loop who write DailyLogs file. 
-             while (flagDl)
-             {
-                if(true) 
-                {
-                    // value Date time
-                    DateTime today = DateTime.Now;
-                     //Pass the filepath and filename to the StreamWriter Constructor
-                     StreamWriter sw = new StreamWriter(@".\\LOGS\DailyLogs.json");  // change in Json file (when it will be ok). 
-                     //Write a line of text
-                     sw.WriteLine("Daily Logs File");
-                     // write date and time in Logs file
-                     sw.WriteLine(today);
-                     //Write a second line of text
-                     sw.WriteLine("DailyLogs Run : OK");
-                     
-                     // create JSON (need to add variable name to replace infos in JSON !) 
-                     JsonLog backup = new JsonLog("DAILY LOGS START ",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\DailyLogs.txt", @".\\Sample_log.txt", 10000, 500);
-                     string json = JsonConvert.SerializeObject(backup);
-                     sw.WriteLine(json);
-                    
-                     //Close the file
-                     sw.Close();
-                    
-                }
-             }
-         }
-
-         // Create new start log info 
-         public void startLog()
-         {
-             //create log file
-            // write start Log info in Json log file. 
+        // create list of info object who trigg the thread methode  
+        static List<Info> listInfo = new List<Info>();
+        public static bool flagDl = true;
 
 
-             //Pass the filepath and filename to the StreamWriter Constructor
-            // StreamWriter sw = new StreamWriter(@".\\DailyLogs.txt");  // change in Json file (when it will be ok). 
-                                                                          //Write a line of text
-            // sw.WriteLine("Hello World!!");
-             //Write a second line of text
-           //  sw.WriteLine("From the StreamWriter class");
-             //Close the file
-           //  sw.Close();
 
-         }
-         // write new logs infos 
-         public async Task logInfo()
-         {
-             // write log info in Json Log file
-         }
-         // write new logs errors 
-         public async Task logError()
-         {
-             // write log error in Json Log file
-         }
+        // start new thread when listInfo is not null  
+        public static void startThread()
+        {
+
+            // print current thread ID 
+            //  Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
+
+            DailyLogs dl = new DailyLogs();
+            dl.startLog();
+        }
+
+        // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
+        public async void  startLog()
+        {
+            // Loop who print text with current Thread Id for testing thread. 
+            while (flagDl)
+            {
+
+                DailyLogs li = new DailyLogs();
+                li.logInfo();
+
+                DailyLogs le = new DailyLogs();
+                le.logError();
+
+            }
+        }
+
+        public async Task logInfo()
+        {
+            
+                    using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
+                   // create JSON (need to add variable name to replace infos in JSON !) 
+                    JsonLog backup = new JsonLog("--- LOG INFO ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\DailyLogs.json", @".\\Daily_log.txt", 10000, 500);
+                    string json = JsonConvert.SerializeObject(backup);
+                    await file.WriteLineAsync(json);
+        }
+
+        public async Task logError()
+        {
+                    using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
+                    // create JSON (need to add variable name to replace infos in JSON !) 
+                    JsonLog backup = new JsonLog("--- LOG ERROR ---",DateTime.Now, "Daily_log.txt [txt]", @".\\LOGS\DailyLogs.json", @".\\Daily_log.txt", 10000, 500);
+                    string json = JsonConvert.SerializeObject(backup);
+                    await file.WriteLineAsync(json);
+                  
+        }
      }
- }
+}
