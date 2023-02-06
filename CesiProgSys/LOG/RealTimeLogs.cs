@@ -6,6 +6,7 @@ using System.Threading;
 using CesiProgSys.ToolsBox;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace CesiProgSys.LOG
 {
@@ -31,11 +32,6 @@ namespace CesiProgSys.LOG
                 RealTimeLogs rtl = new RealTimeLogs();
                 rtl.startLog();
 
-                // RealTimeLogs li = new RealTimeLogs();
-                // li.logInfo();
-                //
-                // RealTimeLogs le = new RealTimeLogs();
-                // le.logError();
             
         }
 
@@ -45,27 +41,41 @@ namespace CesiProgSys.LOG
         }
 
         // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
+
+        public void ContentList()
+        {
+            Console.WriteLine("Parcourir la liste avec la boucle for-each:");
+            foreach(Info item in listInfo) {
+                Console.WriteLine(item);
+            }
+        }
+        
         public async void  startLog()
         {
             // Loop who print text with current Thread Id for testing thread. 
             while (flagRtl)
             {
-
-                // if (listInfo.Any(true))  // need to be use for trigg loop
-                if (true)
+                switch ()
                 {
-                    await using StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
-                    // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog("--- LOGS START ---",DateTime.Now, "Sample_log.json [json]", @".\\LOGS\RealTimeLogs.json", @".\\Sample_log.json", 10000, 500);
-                    string json = JsonConvert.SerializeObject(backup);
-                    await file.WriteLineAsync(json);
-                    //Close the file
-                    file.Close();
-                }
-                else
-                {
+                    case  :
+                       
+                        break;
+                 
 
+                    case :
+                       
+                        break;
+
+                    default:
+                        Console.WriteLine("ERROR");
+                        break;
                 }
+                
+                // RealTimeLogs li = new RealTimeLogs();
+                // li.logInfo();
+                //
+                // RealTimeLogs le = new RealTimeLogs();
+                // le.logError();
 
             }
         }
