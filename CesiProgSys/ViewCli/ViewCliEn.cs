@@ -6,6 +6,7 @@ namespace CesiProgSys.ViewCli
     {
         public void menu()
         {
+            Console.Clear();
             Console.WriteLine("1. Configure a backup");
             Console.WriteLine("2. Start a backup");
             Console.WriteLine("3. Show configurations");
@@ -51,6 +52,7 @@ namespace CesiProgSys.ViewCli
         
         public void configBackup()
         {
+            Console.Clear();
             Console.WriteLine("1. Full backup");
             Console.WriteLine("2. Differential backup");
             Console.WriteLine("3. Return");
@@ -88,6 +90,7 @@ namespace CesiProgSys.ViewCli
 
         public void startBackup()
         {
+            Console.Clear();
             Console.WriteLine("1. Validation of the start of a backup");
             Console.WriteLine("2. Return");
             Console.WriteLine("3. Exit");
@@ -121,6 +124,7 @@ namespace CesiProgSys.ViewCli
 
         public void showConfig()
         {
+            Console.Clear();
             Console.WriteLine("1. Validation of the display of configurations");
             Console.WriteLine("2. Return");
             Console.WriteLine("3. Exit");
@@ -155,35 +159,43 @@ namespace CesiProgSys.ViewCli
         public void changeConfig()
         {
             //code
+            Console.Clear();
             Console.WriteLine("Change configurations");
         }
 
         public void help()
         {
             //code
+            Console.Clear();
             Console.WriteLine("5. Help");
         }
 
         public void fullBackup()
         {
             //code
+            Console.Clear();
             Console.WriteLine("Show full backup");
         }
 
         public void diffBackup()
         {
             //code
+            Console.Clear();
             Console.WriteLine("Show diff backup");
         }
 
         public void startBackupValid()
         {
             //code
+            Console.Clear();
+            Console.WriteLine("Definitely start the backup");
         }
 
         public void showConfigValid()
         {
             //code
+            Console.Clear();
+            Console.WriteLine("Definitely starts the configuration display");
         }
     }
 }

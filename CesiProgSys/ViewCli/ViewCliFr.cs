@@ -6,6 +6,7 @@ namespace CesiProgSys.ViewCli
     {
         public void menu()
         {
+            Console.Clear();
             Console.WriteLine("1. Configurer une sauvegarde");
             Console.WriteLine("2. Lancer une sauvegarde");
             Console.WriteLine("3. Afficher les configurations");
@@ -51,6 +52,7 @@ namespace CesiProgSys.ViewCli
         
         public void configBackup()
         {
+            Console.Clear();
             Console.WriteLine("1. Sauvegarde complète");
             Console.WriteLine("2. Sauvegarde différentielle");
             Console.WriteLine("3. Retour");
@@ -88,6 +90,7 @@ namespace CesiProgSys.ViewCli
 
         public void startBackup()
         {
+            Console.Clear();
             Console.WriteLine("1. Validation du lancement d'une sauvegarde");
             Console.WriteLine("2. Retour");
             Console.WriteLine("3. Quitter");
@@ -121,6 +124,7 @@ namespace CesiProgSys.ViewCli
 
         public void showConfig()
         {
+            Console.Clear();
             Console.WriteLine("1. Validation de l'affichage des configurations");
             Console.WriteLine("2. Retour");
             Console.WriteLine("3. Quitter");
@@ -155,35 +159,43 @@ namespace CesiProgSys.ViewCli
         public void changeConfig()
         {
             //code
+            Console.Clear();
             Console.WriteLine("Change les configurations");
         }
 
         public void help()
         {
             //code
+            Console.Clear();
             Console.WriteLine("5. Aide");
         }
 
         public void fullBackup()
         {
             //code
+            Console.Clear();
             Console.WriteLine("Affiche full backup");
         }
 
         public void diffBackup()
         {
             //code
+            Console.Clear();
             Console.WriteLine("Affiche diff backup");
         }
 
         public void startBackupValid()
         {
             //code
+            Console.Clear();
+            Console.WriteLine("Lance définitivement la backup");
         }
 
         public void showConfigValid()
         {
             //code
+            Console.Clear();
+            Console.WriteLine("Lance définitivement l'affichage des configurations");
         }
     }
 }
