@@ -1,11 +1,5 @@
-using System;  
-using System.Collections.Generic; 
-using System.Linq; 
-using System.Text; 
-using System.Threading;
 using CesiProgSys.Backup;
 
-using CesiProgSys.ToolsBox;
 using CesiProgSys.LOG;
 
 namespace CesiProgSys
@@ -17,6 +11,10 @@ namespace CesiProgSys
             static void Main(string[] args)
             {
                 // run new LogsManager Thread
+                DateTime date = DateTime.Now;
+                BackupManager b = new BackupManager();
+                b.instantiate("truc");
+                b.instantiate("machin");
                LogsManager l = new LogsManager();
                l.startLogManager();
                //
@@ -25,11 +23,12 @@ namespace CesiProgSys
                //      Zip z = new Zip();
                //      z.compressed(args[0], args[1]);
                // }
-                BackupManager b = new BackupManager();
-                b.instantiate("truc");
+                
                 // Console.ReadLine();
-                Thread.Sleep(10000);
+                Thread.Sleep(500);
                 l.finish();
+                DateTime date2 = DateTime.Now;
+                Console.WriteLine(date2 - date);
             }
         }
     }

@@ -1,14 +1,10 @@
-using System;
-using System;
-using System.IO;
-using System.Text.Json.Nodes;
-using System.Threading;
+
 using CesiProgSys.ToolsBox;
-using Newtonsoft.Json;
 
  namespace CesiProgSys.LOG
  {
-     public class DailyLogs : ILogs
+     public class DailyLogs 
+         // : ILogs
      {
         // create list of info object who trigg the thread methode  
         public static List<Info> listInfo;
@@ -38,28 +34,28 @@ using Newtonsoft.Json;
 
                     if (inf.LogType)
                     {
-                        logInfo(json);
+                        // logInfo(json);
                     }
                     else
                     {
-                        logError(json);
+                        // logError(json);
                     }
                 }
             }
         }
 
-        public void logInfo(string toPrint)
-        {
-            
-                    StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
-                    file.WriteLineAsync(toPrint);
-        }
-
-
-        public void logError(string toPrint)
-        {
-                    StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
-                    file.WriteLineAsync(toPrint);
-        }
+        // public void logInfo(string toPrint)
+        // {
+        //     
+        //             StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
+        //             file.WriteLineAsync(toPrint);
+        // }
+        //
+        //
+        // public void logError(string toPrint)
+        // {
+        //             StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
+        //             file.WriteLineAsync(toPrint);
+        // }
      }
 }

@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-
+﻿
 namespace CesiProgSys.ToolsBox;
 public class Info
 {

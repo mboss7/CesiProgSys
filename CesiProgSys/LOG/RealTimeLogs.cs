@@ -1,12 +1,5 @@
-using System;
-using System;
-using System.IO;
-using System.Text.Json.Nodes;
-using System.Threading;
 using CesiProgSys.ToolsBox;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+
 
 namespace CesiProgSys.LOG
 {
@@ -16,8 +9,9 @@ namespace CesiProgSys.LOG
         public static List<Info> listInfo;
 
         public static bool flagRtl = true;
-       
-        // start new thread when listInfo is not null  
+
+        public static Mutex mut = new Mutex();
+            // start new thread when listInfo is not null  
         public static void startThread()
         {
 
@@ -32,52 +26,54 @@ namespace CesiProgSys.LOG
             listInfo = new List<Info>();
         }
 
-        public void startLog()
+        public async void startLog()
         {
             DirectoryInfo target = new DirectoryInfo("./LOGS/");
             if(!target.Exists)
                 target.Create();
             while (flagRtl)
             {
+                List<string> jsonInfo = new List<string>();
+                List<string> jsonError = new List<string>();
+                mut.WaitOne();
                 foreach (Info inf in listInfo)
                 {
-                    string json = JsonLog.stringToJson(inf);
-                    // Console.WriteLine(json);
-
                     if (inf.LogType)
-                    {
-                        logInfo(json);
-                    }
+                        jsonInfo.Add(JsonLog.stringToJson(inf));
                     else
-                    {
-                        logError(json);
-                    }
-
-                    if (inf.state == State.SUCCESS)
-                    {
-                        inf.state = State.END;
-                        DailyLogs.listInfo.Add(inf);
-                    }
-
+                        jsonError.Add(JsonLog.stringToJson(inf));
                 }
+                mut.ReleaseMutex();
+
+                await logInfo(jsonInfo);
+                await logError(jsonError);
+                
             }
         }
 
 
-        public void logInfo(string toPrint)
+        public async Task logInfo(List<string> toPrint)
         {
-             StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
-             file.WriteLineAsync(toPrint);
-
+            if (File.Exists("./LOGS/RealTimeLogsInfo.json"))
+                File.Delete("./LOGS/RealTimeLogsInfo.json");
+            using StreamWriter file = new(@".\\LOGS\RealTimeLogsInfo.json", append: true);
+            foreach (string s in toPrint)
+            {
+                await file.WriteLineAsync(s);
+            }
         }
 
 
-
-        public void logError(string toPrint)
+        public async Task logError(List<string> toPrint)
         {
-            StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
-            file.WriteLine(toPrint);
-
+            if (File.Exists("./LOGS/RealTimeLogsError.json"))
+                File.Delete("./LOGS/RealTimeLogsError.json");
+            using StreamWriter file = new(@".\\LOGS\RealTimeLogsError.json", append: true);
+            foreach (string s in toPrint)
+            {
+                await file.WriteLineAsync(s);
+            }
         }
+        
     }
 }

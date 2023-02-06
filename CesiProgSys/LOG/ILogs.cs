@@ -1,4 +1,3 @@
-using System;
 
 namespace CesiProgSys.LOG
 {
@@ -6,8 +5,8 @@ namespace CesiProgSys.LOG
     public interface ILogs
     {
         public void startLog();
-        public void logInfo(string toPrint);
-        public void logError(string toPrint);
+        public Task logInfo(List<string> toPrint);
+        public Task logError(List<string> toPrint);
     }
     
 }
