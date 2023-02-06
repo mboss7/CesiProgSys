@@ -3,6 +3,7 @@ using CesiProgSys.LOG;
 using Microsoft.VisualBasic.CompilerServices;
 using Newtonsoft.Json;
 
+// Tool convert string to Json
 public class JsonLog
 {
 
