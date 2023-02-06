@@ -50,6 +50,13 @@ namespace CesiProgSys.LOG
                     {
                         await logError(json);
                     }
+
+                    if (inf.state == State.SUCCESS)
+                    {
+                        inf.state = State.END;
+                        DailyLogs.listInfo.Add(inf);
+                    }
+
                 }
             }
         }

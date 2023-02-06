@@ -6,5 +6,6 @@ public enum State
     ACTIVE,
     CHECKINGAUTH,
     END,
-    ERROR
+    ERROR,
+    SUCCESS
 }

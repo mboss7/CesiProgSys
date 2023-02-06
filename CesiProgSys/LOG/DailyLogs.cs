@@ -11,10 +11,13 @@ using Newtonsoft.Json;
      public class DailyLogs : ILogs
      {
         // create list of info object who trigg the thread methode  
-        static List<Info> listInfo = new List<Info>();
+        public static List<Info> listInfo;
         public static bool flagDl = true;
 
-
+        public DailyLogs()
+        {
+            listInfo = new List<Info>();
+        }
 
         // start new thread when listInfo is not null  
         public static void startThread()
