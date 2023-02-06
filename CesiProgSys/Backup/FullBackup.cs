@@ -1,5 +1,6 @@
 ﻿using System.Security.AccessControl;
 using System.Security.Principal;
+using CesiProgSys.LOG;
 using CesiProgSys.ToolsBox;
 
 namespace CesiProgSys.Backup
@@ -32,6 +33,8 @@ namespace CesiProgSys.Backup
             inf.DirTarget = target;
             inf.progression = 0;
             inf.state = State.INACTIVE;
+            
+            RealTimeLogs.
         }
         public void startBackup(string source, string target)
         {

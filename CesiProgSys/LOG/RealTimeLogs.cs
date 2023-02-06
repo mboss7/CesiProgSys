@@ -12,8 +12,8 @@ namespace CesiProgSys.LOG
 
     public class RealTimeLogs : ILogs
     {
-      
-            
+        static List<Info> listInfo; 
+
         public static void ListInfo()
         {
             // Créer une liste 
@@ -45,12 +45,17 @@ namespace CesiProgSys.LOG
                 RealTimeLogs rtl = new RealTimeLogs();
                 rtl.startLog();
 
-                RealTimeLogs li = new RealTimeLogs();
-                li.logInfo();
-
-                RealTimeLogs le = new RealTimeLogs();
-                le.logError();
+                // RealTimeLogs li = new RealTimeLogs();
+                // li.logInfo();
+                //
+                // RealTimeLogs le = new RealTimeLogs();
+                // le.logError();
             
+        }
+
+        public RealTimeLogs()
+        {
+            listInfo = new List<Info>();
         }
 
         // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
@@ -60,6 +65,21 @@ namespace CesiProgSys.LOG
             while (flagRtl)
             {
 
+                // if (listInfo.Any(true))  // need to be use for trigg loop
+                if (true)
+                {
+                    await using StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
+                    // create JSON (need to add variable name to replace infos in JSON !) 
+                    JsonLog backup = new JsonLog("--- LOGS START ---",DateTime.Now, "Sample_log.json [json]", @".\\LOGS\RealTimeLogs.json", @".\\Sample_log.json", 10000, 500);
+                    string json = JsonConvert.SerializeObject(backup);
+                    await file.WriteLineAsync(json);
+                    //Close the file
+                    file.Close();
+                }
+                else
+                {
+
+                }
 
             }
         }
