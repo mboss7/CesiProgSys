@@ -35,17 +35,17 @@ namespace FileIntegrityChecker
             Console.ReadKey();
         }
 
-        // Calculates the hash of a file using SHA256
+        // Calculates the hash of a file using MD5
         static byte[] CalculateHash(string filePath)
         {
-            // Create an instance of SHA256
-            using (var sha256 = SHA256.Create())
+            // Create an instance of MD5
+            using (var md5 = MD5.Create())
             {
                 // Open the file
                 using (var stream = File.OpenRead(filePath))
                 {
                     // Compute the hash of the file contents
-                    return sha256.ComputeHash(stream);
+                    return md5.ComputeHash(stream);
                 }
             }
         }
