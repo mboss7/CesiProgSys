@@ -45,7 +45,7 @@
          }
 
          // Create new start log info 
-         public void startLog(string json)
+         public void startLog()
          {
              //create log file
             // write start Log info in Json log file. 
@@ -62,7 +62,7 @@
 
          }
          // write new logs infos 
-         public void logInfo()
+         public async Task logInfo()
          {
              // write log info in Json Log file
          }

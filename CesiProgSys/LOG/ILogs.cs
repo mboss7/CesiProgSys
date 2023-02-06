@@ -5,8 +5,8 @@ namespace CesiProgSys.LOG
     //interface for Logs 
     public interface ILogs
     {
-        public void startLog(string json);
-        public void logInfo();
+        public void startLog();
+        public Task logInfo();
         public void logError();
     }
 }
