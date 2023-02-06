@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.Design;
-using System.Data;
-using System.Security.AccessControl;
+﻿using System.Security.AccessControl;
 using System.Security.Principal;
 using CesiProgSys.Tools;
 
@@ -10,28 +8,22 @@ namespace CesiProgSys.Backup
     {
         
         //TODO penser à mettre en place des mutex, pour pouvoir controler le déroulement du thread
-        private List<DirectoryInfo> authorizedDirectories;
         private List<string> unauthorizedDirectories;
         
-        private List<FileInfo> authorizedFiles;
         private List<string> unauthorizedFiles;
 
         private Info inf;
 
-        // private List<Tuple<DirectoryInfo, List<FileInfo>>> authorizedDirAndFiles;
+        private List<Tuple<string, List<FileInfo>>> authorizedDirAndFiles;
 
-        public static void startThread()
+        public FullBackup()
         {
-            string directory = "C:/Program Files (x86)/Steam";
-            string target = "C:/";
-
-            FullBackup fb = new FullBackup();
-            fb.InitBackup("", directory, target);
-            fb.checkAutorizations(directory);
+            unauthorizedDirectories = new List<string>();
+            unauthorizedFiles = new List<string>();
+            authorizedDirAndFiles = new List<Tuple<string, List<FileInfo>>>();
             
-            // fb.startBackup(directory, target);
+            inf = new Info();
         }
-
         public void InitBackup(string name, string source, string target)
         {
             inf.date = DateTime.Now;
@@ -41,62 +33,40 @@ namespace CesiProgSys.Backup
             inf.progression = 0;
             inf.state = State.INACTIVE;
         }
-        
-        //TODO ne pas oublier de mettre à jour l'objet Info ...
-        
-        public void startBackup(string target)
+        public void startBackup(string source, string target)
         {
             inf.state = State.ACTIVE;
             
             DirectoryInfo targetDirectory = new DirectoryInfo(target);
 
-            if (targetDirectory.Exists)
+            if (!targetDirectory.Exists)
             {
-                throw new IOException("target directory already exist");
+                targetDirectory.Create();
             }
-            
-            targetDirectory.Create();
+            Console.WriteLine("Debut sauvegarde");
+            for (int i = authorizedDirAndFiles.Count-1; i >= 0; i--)
+            {
+                string dir = authorizedDirAndFiles[i].Item1.Substring(source.Length-1);
+                DirectoryInfo subDirectory = targetDirectory.CreateSubdirectory(dir);
+                Console.WriteLine(subDirectory);
 
-            // foreach (Tuple<DirectoryInfo, List<FileInfo>> t in authorizedDirAndFiles)
-            // {
-            //     
-            // }
-
-            // foreach (FileInfo file in sourceDirectory.GetFiles())
-            // {
-            //     inf.currentSource = Path.Combine(source, file.Name);
-            //     string targetFile = Path.Combine(target, file.Name);
-            //     inf.currentDest = targetFile;
-            //     file.CopyTo(targetFile, true);
-            //     
-            // }
-            //
-            // foreach(DirectoryInfo subDirectory in sourceDirectory.GetDirectories())
-            // {
-            //     string targetSubDirectory = Path.Combine(target, subDirectory.Name);
-            //     startBackup(subDirectory.FullName, targetSubDirectory);
-            // }
+                foreach (FileInfo sourceFile in authorizedDirAndFiles[i].Item2)
+                {
+                    Console.WriteLine(sourceFile);
+                    sourceFile.CopyTo(Path.Combine(subDirectory.FullName, sourceFile.Name), true);
+                }
+            }
         }
         
-        public FullBackup()
-        {
-            authorizedDirectories = new List<DirectoryInfo>();
-            unauthorizedDirectories = new List<string>();
-            authorizedFiles = new List<FileInfo>();
-            unauthorizedFiles = new List<string>();
-            
-            inf = new Info();
-        }
-        
-        
-        //TODO Modifier la fonction pour que les fichiers/Dossiers soit ajouter dans des tuples avant d'êtres mis dans la liste
-        //TODO ainsi, il y aura juste à parcourir cette liste pour copier les dossiers, plus besoin de les recheck dans la startbackup fonction
-        //TODO réfléchit bien à la façon de faire ça parce que sinon tu vas rester blocké
         public void checkAutorizations(string directory)
         {
             inf.state = State.CHECKINGAUTH;
 
             IEnumerable<string> directories = Directory.EnumerateDirectories(directory);
+
+            List<FileInfo> f = new List<FileInfo>();
+            
+            Tuple<string, List<FileInfo>> tuple = new Tuple<string, List<FileInfo>>(directory, f);
 
             foreach (string currentDirectory in directories)
             {
@@ -116,7 +86,6 @@ namespace CesiProgSys.Backup
                         {
                             if (checkRights(rule))
                             {
-                                authorizedDirectories.Add(dirInfo);
                                 checkAutorizations(currentDirectory);
                             }
                             else
@@ -157,7 +126,7 @@ namespace CesiProgSys.Backup
                         {
                             if (checkRights(rule))
                             {
-                                authorizedFiles.Add(fileInfo); 
+                                f.Add(fileInfo);
                             }
                             else
                             {
@@ -175,8 +144,8 @@ namespace CesiProgSys.Backup
                     unauthorizedFiles.Add(currentFile);
                 }
             }
+            authorizedDirAndFiles.Add(tuple);
         }
-
         public bool checkRights(FileSystemAccessRule rule)
         {
             bool toReturn = (rule.FileSystemRights & (FileSystemRights.FullControl | FileSystemRights.Modify | FileSystemRights.Read | FileSystemRights.ReadAndExecute)) != 0;
@@ -196,11 +165,21 @@ namespace CesiProgSys.Backup
 
             return false;
         }
-
         public bool checkTypes(FileAttributes toCheck)
         {
             return (toCheck & (FileAttributes.System | FileAttributes.Offline | FileAttributes.Temporary)) != 0;
         }
 
+        public static void startThread()
+        {
+            string directory = "C:/Users/Tanguy/Documents/Workshop2";
+            string target = "C:/Users/Tanguy/Documents/Workshop3";
+
+            FullBackup fb = new FullBackup();
+            fb.InitBackup("", directory, target);
+            fb.checkAutorizations(directory);
+            
+            fb.startBackup(directory, target);
+        }
     }
 }
