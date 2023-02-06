@@ -17,18 +17,18 @@ namespace CesiProgSys
             static void Main(string[] args)
             {
                 // run new LogsManager Thread
-               //  LogsManager l = new LogsManager();
-               //  l.instantiate();
-               //  l.finish();
+               LogsManager l = new LogsManager();
+               l.instantiate();
+               l.finish();
                //
                //  static void MainC(string[] args)
                //  {
                //      Zip z = new Zip();
                //      z.compressed(args[0], args[1]);
                // }
-               // BackupManager b = new BackupManager();
-               // b.instantiate("truc");
-               // Console.ReadLine();
+               BackupManager b = new BackupManager();
+               b.instantiate("truc");
+               Console.ReadLine();
 
             }
         }

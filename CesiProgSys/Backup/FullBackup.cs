@@ -27,8 +27,8 @@ namespace CesiProgSys.Backup
         }
         public void InitBackup(string name, string source, string target)
         {
-            inf.Date = DateTime.Now;
-            inf.Name = !string.IsNullOrEmpty(name) ? name : inf.Date.Date.ToString();
+            string date = dateToString(DateTime.Now);
+            inf.Name = !string.IsNullOrEmpty(name) ? name : date;
             inf.DirSource = source;
             inf.DirTarget = target;
             inf.progression = 0;
@@ -46,16 +46,13 @@ namespace CesiProgSys.Backup
             {
                 targetDirectory.Create();
             }
-            Console.WriteLine("Debut sauvegarde");
             for (int i = authorizedDirAndFiles.Count-1; i >= 0; i--)
             {
-                string dir = authorizedDirAndFiles[i].Item1.Substring(source.Length-1);
+                string dir = authorizedDirAndFiles[i].Item1.Substring(source.Length);
+                dir = !string.IsNullOrEmpty(dir) ? dir : inf.Name;
                 DirectoryInfo subDirectory = targetDirectory.CreateSubdirectory(dir);
-                Console.WriteLine(subDirectory);
-
                 foreach (FileInfo sourceFile in authorizedDirAndFiles[i].Item2)
                 {
-                    Console.WriteLine(sourceFile);
                     sourceFile.CopyTo(Path.Combine(subDirectory.FullName, sourceFile.Name), true);
                 }
             }
@@ -183,6 +180,13 @@ namespace CesiProgSys.Backup
             fb.checkAutorizations(directory);
             
             fb.startBackup(directory, target);
+        }
+
+        string dateToString(DateTime date)
+        {
+            string toReturn = date.ToString();
+
+            toReturn.Replace("");
         }
     }
 }
