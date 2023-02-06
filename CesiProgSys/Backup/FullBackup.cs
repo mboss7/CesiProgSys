@@ -34,7 +34,7 @@ namespace CesiProgSys.Backup
             inf.progression = 0;
             inf.state = State.INACTIVE;
             
-            RealTimeLogs.
+            RealTimeLogs.listInfo.Add(inf);
         }
         public void startBackup(string source, string target)
         {
