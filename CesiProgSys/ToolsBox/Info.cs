@@ -3,7 +3,7 @@
 namespace CesiProgSys.ToolsBox;
 public class Info
 {
-    public string LogType { get; set; }
+    public bool LogType { get; set; }
     
     public DateTime Date { get; set; }
     public DateTime TimeLaps { get; set; }

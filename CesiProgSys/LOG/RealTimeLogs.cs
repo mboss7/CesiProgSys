@@ -48,12 +48,24 @@ namespace CesiProgSys.LOG
         {
             // Loop who print text with current Thread Id for testing thread. 
             while (flagRtl)
-            { 
-                RealTimeLogs li = new RealTimeLogs();
-                li.logInfo();
+            {
+                foreach (Info inf in listInfo)
+                {
+                    string json = JsonLog.stringToJson(inf);
+                    Console.WriteLine(json);
+                    if (inf.LogType == true)
+                    {
+                        await logInfo();
+                    }
+                    else
+                    {
+                        await logError();
+                    }
+                }
+                
+                
                         
               
-                RealTimeLogs le = new RealTimeLogs();
                 le.logError();
                        
             }
