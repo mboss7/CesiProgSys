@@ -53,46 +53,31 @@ namespace CesiProgSys.LOG
                 {
                     string json = JsonLog.stringToJson(inf);
                     Console.WriteLine(json);
-                    if (inf.LogType == true)
+                    
+                    if (inf.LogType)
                     {
-                        await logInfo();
+                        await logInfo(json);
                     }
                     else
                     {
-                        await logError();
+                        await logError(json);
                     }
                 }
-                
-                
-                        
-              
-                le.logError();
-                       
             }
-            
         }
 
-        public async Task logInfo()
+        public async Task logInfo(string toPrint)
         {
-            
-                    using StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
-                   // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog("--- LOG INFO ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\RealTimeLogs.json", @".\\Sample_log.txt", 10000, 500);
-                    string json = JsonConvert.SerializeObject(backup);
-                    await file.WriteLineAsync(json);
+            using StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
+            await file.WriteLineAsync(toPrint);
 
-                
-            
         }
 
 
-        public async Task logError()
+        public async Task logError(string toPrint)
         {
                     using StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
-                    // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog("--- LOG ERROR ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\RealTimeLogs.json", @".\\Sample_log.txt", 10000, 500);
-                    string json = JsonConvert.SerializeObject(backup);
-                    await file.WriteLineAsync(json);
+                    await file.WriteLineAsync(toPrint);
                   
             }
         }
