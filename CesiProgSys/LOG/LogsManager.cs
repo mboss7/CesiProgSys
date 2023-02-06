@@ -5,8 +5,17 @@ using System.Threading;
 namespace CesiProgSys.LOG
 {
 	//mother class for Logs 
-	public class LogsManager // : IManager
+	public class LogsManager //: IManager
 	{
+
+		public void startLogManager()
+		{
+			// run new LogsManager Thread
+			LogsManager l = new LogsManager();
+			l.instantiate();
+			l.finish();
+		}
+		
 		// thread list, for managing Thread
 		public List<Thread> threadList;
 		// constructor : for thread list

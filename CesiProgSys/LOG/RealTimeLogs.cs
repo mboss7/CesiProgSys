@@ -29,10 +29,6 @@ namespace CesiProgSys.LOG
             {
                 Console.WriteLine(item);
             }
-
-            Console.WriteLine("Parcourir la liste avec la boucle for:");
-
-
         }
 
 
