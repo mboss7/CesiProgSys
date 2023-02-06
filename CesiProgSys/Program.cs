@@ -10,6 +10,7 @@ public class Program
     static void Main(string[] args)
     {
         Console.WriteLine("\n -----Welcome to the application !----- \n");
+        
         Console.ReadKey();
         
         Console.WriteLine("Choose your language:");
