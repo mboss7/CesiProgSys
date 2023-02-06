@@ -31,7 +31,7 @@ using Newtonsoft.Json;
                 foreach (Info inf in listInfo)
                 {
                     string json = JsonLog.stringToJson(inf);
-                    Console.WriteLine(json);
+                    //Console.WriteLine(json);
 
                     if (inf.LogType)
                     {

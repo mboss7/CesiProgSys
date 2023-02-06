@@ -27,8 +27,9 @@ namespace CesiProgSys
                // }
                 BackupManager b = new BackupManager();
                 b.instantiate("truc");
-                Console.ReadLine();
-
+                // Console.ReadLine();
+                Thread.Sleep(10000);
+                l.finish();
             }
         }
     }
