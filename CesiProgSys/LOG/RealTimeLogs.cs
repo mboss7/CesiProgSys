@@ -16,20 +16,6 @@ namespace CesiProgSys.LOG
 
         public static void ListInfo()
         {
-            // Créer une liste 
-            List<string> listInfo = new List<string>();
-            // Ajouter des éléments à la liste 
-            listInfo.Add("Java");
-            listInfo.Add("Python");
-            listInfo.Add("C#");
-            listInfo.Add("PHP");
-            listInfo.Add("C++");
-            listInfo.Add("SQL");
-            Console.WriteLine("Parcourir la liste avec la boucle for-each:");
-            foreach (string item in listInfo)
-            {
-                Console.WriteLine(item);
-            }
         }
 
 
