@@ -7,7 +7,7 @@ namespace CesiProgSys.Backup
 {
     public class FullBackup : IBackup
     {
-        
+        private static int a = 0;
         //TODO penser à mettre en place des mutex, pour pouvoir controler le déroulement du thread
         private List<string> unauthorizedDirectories;
         
@@ -27,19 +27,23 @@ namespace CesiProgSys.Backup
         }
         public void InitBackup(string name, string source, string target)
         {
-           // string date = dateToString(DateTime.Now);
-          //  inf.Name = !string.IsNullOrEmpty(name) ? name : date;
+            string date = dateToString(DateTime.Now);
+            inf.Name = !string.IsNullOrEmpty(name) ? name : date;
             inf.DirSource = source;
             inf.DirTarget = target;
             inf.progression = 0;
             inf.state = State.INACTIVE;
-            
+
+            RealTimeLogs.mut.WaitOne();
             RealTimeLogs.listInfo.Add(inf);
+            RealTimeLogs.mut.ReleaseMutex();
         }
         public void startBackup(string source, string target)
         {
+            RealTimeLogs.mut.WaitOne();
             inf.state = State.ACTIVE;
-            
+            RealTimeLogs.mut.ReleaseMutex();
+
             DirectoryInfo targetDirectory = new DirectoryInfo(target);
 
             if (!targetDirectory.Exists)
@@ -48,8 +52,8 @@ namespace CesiProgSys.Backup
             }
             for (int i = authorizedDirAndFiles.Count-1; i >= 0; i--)
             {
-                string dir = authorizedDirAndFiles[i].Item1.Substring(source.Length);
-                dir = !string.IsNullOrEmpty(dir) ? dir : "abc";
+                string dir = authorizedDirAndFiles[i].Item1.Substring(source.Length-1);
+                dir = !string.IsNullOrEmpty(dir) ? dir : inf.Name;
                 DirectoryInfo subDirectory = targetDirectory.CreateSubdirectory(dir);
                 foreach (FileInfo sourceFile in authorizedDirAndFiles[i].Item2)
                 {
@@ -60,7 +64,9 @@ namespace CesiProgSys.Backup
         
         public void checkAutorizations(string directory)
         {
+            RealTimeLogs.mut.WaitOne();
             inf.state = State.CHECKINGAUTH;
+            RealTimeLogs.mut.ReleaseMutex();
 
             IEnumerable<string> directories = Directory.EnumerateDirectories(directory);
 
@@ -169,24 +175,40 @@ namespace CesiProgSys.Backup
         {
             return (toCheck & (FileAttributes.System | FileAttributes.Offline | FileAttributes.Temporary)) != 0;
         }
+        string dateToString(DateTime date)
+        {
+            string toReturn = date.ToString();
+            
+            toReturn = toReturn.Replace("/", "-");
+            toReturn = toReturn.Replace(" ", "-");
+            toReturn = toReturn.Replace(":", "-");
+
+            return toReturn;
+        }
 
         public static void startThread()
         {
-            string directory = "C:/Users/Tanguy/Documents/Workshop2";
-            string target = "C:/Users/Tanguy/Documents/Workshop3";
 
             FullBackup fb = new FullBackup();
-            fb.InitBackup("", directory, target);
-            fb.checkAutorizations(directory);
-            
-            fb.startBackup(directory, target);
+
+            if (a == 0)
+            {
+                a++;
+                fb.InitBackup("premiere backup", "C:/Users/Tanguy/Documents/Workshop2", "C:/Users/Tanguy/Documents/Workshop3");
+                fb.checkAutorizations("C:/Users/Tanguy/Documents/Workshop2");
+
+                fb.startBackup("C:/Users/Tanguy/Documents/Workshop2", "C:/Users/Tanguy/Documents/Workshop3");
+            }
+            else
+            {
+                fb.InitBackup("premiere backup", "C:/Users/Tanguy/Documents/Workshop1", "C:/Users/Tanguy/Documents/Workshop4");
+                fb.checkAutorizations("C:/Users/Tanguy/Documents/Workshop1");
+
+                fb.startBackup("C:/Users/Tanguy/Documents/Workshop1", "C:/Users/Tanguy/Documents/Workshop4");
+            }
+            RealTimeLogs.mut.WaitOne();
+            fb.inf.state = State.SUCCESS;
+            RealTimeLogs.mut.ReleaseMutex();
         }
-
-        //string dateToString(DateTime date)
-        //{
-        //    string toReturn = date.ToString();
-
-        //    toReturn.Replace("");
-        //}
     }
 }

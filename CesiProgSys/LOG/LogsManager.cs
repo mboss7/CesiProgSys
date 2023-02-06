@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading;
+﻿
 
 namespace CesiProgSys.LOG
 {
@@ -13,7 +11,7 @@ namespace CesiProgSys.LOG
 			// run new LogsManager Thread
 			LogsManager l = new LogsManager();
 			l.instantiate();
-			l.finish();
+			// l.finish();
 		}
 		
 		// thread list, for managing Thread

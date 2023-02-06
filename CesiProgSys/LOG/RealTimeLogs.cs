@@ -1,38 +1,24 @@
-using System;
-using System;
-using System.IO;
-using System.Text.Json.Nodes;
-using System.Threading;
 using CesiProgSys.ToolsBox;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+
 
 namespace CesiProgSys.LOG
 {
 
     public class RealTimeLogs : ILogs
     {
-        public static List<Info> listInfo; 
-
-        public static void ListInfo()
-        {
-        }
-
+        public static List<Info> listInfo;
 
         public static bool flagRtl = true;
-        
-       // start new thread when listInfo is not null  
+
+        public static Mutex mut = new Mutex();
+            // start new thread when listInfo is not null  
         public static void startThread()
         {
-              
-            // print current thread ID 
-            //   Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
-           
-                RealTimeLogs rtl = new RealTimeLogs();
-                rtl.startLog();
 
-            
+            RealTimeLogs rtl = new RealTimeLogs();
+            rtl.startLog();
+
+
         }
 
         public RealTimeLogs()
@@ -40,62 +26,54 @@ namespace CesiProgSys.LOG
             listInfo = new List<Info>();
         }
 
-        // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
-
-       
-        
-        public async void  startLog()
+        public async void startLog()
         {
-            // Loop who print text with current Thread Id for testing thread. 
+            DirectoryInfo target = new DirectoryInfo("./LOGS/");
+            if(!target.Exists)
+                target.Create();
             while (flagRtl)
             {
+                List<string> jsonInfo = new List<string>();
+                List<string> jsonError = new List<string>();
+                mut.WaitOne();
                 foreach (Info inf in listInfo)
                 {
-                    string json = JsonLog.stringToJson(inf);
-                    Console.WriteLine(json);
-                    if (inf.LogType == true)
-                    {
-                        await logInfo();
-                    }
+                    if (inf.LogType)
+                        jsonInfo.Add(JsonLog.stringToJson(inf));
                     else
-                    {
-                        await logError();
-                    }
+                        jsonError.Add(JsonLog.stringToJson(inf));
                 }
+                mut.ReleaseMutex();
+
+                await logInfo(jsonInfo);
+                await logError(jsonError);
                 
-                
-                        
-              
-                le.logError();
-                       
-            }
-            
-        }
-
-        public async Task logInfo()
-        {
-            
-                    using StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
-                   // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog("--- LOG INFO ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\RealTimeLogs.json", @".\\Sample_log.txt", 10000, 500);
-                    string json = JsonConvert.SerializeObject(backup);
-                    await file.WriteLineAsync(json);
-
-                
-            
-        }
-
-
-        public async Task logError()
-        {
-                    using StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
-                    // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog("--- LOG ERROR ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\RealTimeLogs.json", @".\\Sample_log.txt", 10000, 500);
-                    string json = JsonConvert.SerializeObject(backup);
-                    await file.WriteLineAsync(json);
-                  
             }
         }
 
-   
+
+        public async Task logInfo(List<string> toPrint)
+        {
+            if (File.Exists("./LOGS/RealTimeLogsInfo.json"))
+                File.Delete("./LOGS/RealTimeLogsInfo.json");
+            using StreamWriter file = new(@".\\LOGS\RealTimeLogsInfo.json", append: true);
+            foreach (string s in toPrint)
+            {
+                await file.WriteLineAsync(s);
+            }
+        }
+
+
+        public async Task logError(List<string> toPrint)
+        {
+            if (File.Exists("./LOGS/RealTimeLogsError.json"))
+                File.Delete("./LOGS/RealTimeLogsError.json");
+            using StreamWriter file = new(@".\\LOGS\RealTimeLogsError.json", append: true);
+            foreach (string s in toPrint)
+            {
+                await file.WriteLineAsync(s);
+            }
+        }
+        
+    }
 }

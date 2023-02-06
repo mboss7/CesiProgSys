@@ -16,7 +16,7 @@
             temp.Name = name;
             
             threadList.Add(temp);
-            threadList[0].Start();
+            temp.Start();
         }
 
         private void finish()
