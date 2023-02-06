@@ -25,10 +25,11 @@ namespace CesiProgSys
                //      Zip z = new Zip();
                //      z.compressed(args[0], args[1]);
                // }
-            //   BackupManager b = new BackupManager();
-           //    b.instantiate("truc");
-           //    Console.ReadLine();
-
+                BackupManager b = new BackupManager();
+                b.instantiate("truc");
+                // Console.ReadLine();
+                Thread.Sleep(10000);
+                l.finish();
             }
         }
     }

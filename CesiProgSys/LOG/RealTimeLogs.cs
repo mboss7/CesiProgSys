@@ -34,13 +34,15 @@ namespace CesiProgSys.LOG
 
         public async void startLog()
         {
-        
+            DirectoryInfo target = new DirectoryInfo("./LOGS/");
+            if(!target.Exists)
+                target.Create();
             while (flagRtl)
             {
                 foreach (Info inf in listInfo)
                 {
                     string json = JsonLog.stringToJson(inf);
-                    Console.WriteLine(json);
+                    // Console.WriteLine(json);
 
                     if (inf.LogType)
                     {
