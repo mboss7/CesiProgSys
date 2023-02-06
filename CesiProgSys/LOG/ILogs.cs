@@ -7,6 +7,6 @@ namespace CesiProgSys.LOG
     {
         public void startLog();
         public Task logInfo();
-        public void logError();
+        public Task logError();
     }
 }

@@ -33,7 +33,7 @@
                      sw.WriteLine("DailyLogs Run : OK");
                      
                      // create JSON (need to add variable name to replace infos in JSON !) 
-                     JsonLog backup = new JsonLog(DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\DailyLogs.txt", @".\\Sample_log.txt", 10000, 500);
+                     JsonLog backup = new JsonLog("DAILY LOGS START ",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\DailyLogs.txt", @".\\Sample_log.txt", 10000, 500);
                      string json = JsonConvert.SerializeObject(backup);
                      sw.WriteLine(json);
                     
@@ -67,7 +67,7 @@
              // write log info in Json Log file
          }
          // write new logs errors 
-         public void logError()
+         public async Task logError()
          {
              // write log error in Json Log file
          }
