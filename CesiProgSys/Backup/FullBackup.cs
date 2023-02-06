@@ -27,8 +27,8 @@ namespace CesiProgSys.Backup
         }
         public void InitBackup(string name, string source, string target)
         {
-            string date = dateToString(DateTime.Now);
-            inf.Name = !string.IsNullOrEmpty(name) ? name : date;
+           // string date = dateToString(DateTime.Now);
+          //  inf.Name = !string.IsNullOrEmpty(name) ? name : date;
             inf.DirSource = source;
             inf.DirTarget = target;
             inf.progression = 0;
@@ -49,7 +49,7 @@ namespace CesiProgSys.Backup
             for (int i = authorizedDirAndFiles.Count-1; i >= 0; i--)
             {
                 string dir = authorizedDirAndFiles[i].Item1.Substring(source.Length);
-                dir = !string.IsNullOrEmpty(dir) ? dir : inf.Name;
+                dir = !string.IsNullOrEmpty(dir) ? dir : "abc";
                 DirectoryInfo subDirectory = targetDirectory.CreateSubdirectory(dir);
                 foreach (FileInfo sourceFile in authorizedDirAndFiles[i].Item2)
                 {
@@ -182,11 +182,11 @@ namespace CesiProgSys.Backup
             fb.startBackup(directory, target);
         }
 
-        string dateToString(DateTime date)
-        {
-            string toReturn = date.ToString();
+        //string dateToString(DateTime date)
+        //{
+        //    string toReturn = date.ToString();
 
-            toReturn.Replace("");
-        }
+        //    toReturn.Replace("");
+        //}
     }
 }

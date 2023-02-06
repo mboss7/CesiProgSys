@@ -13,7 +13,7 @@ namespace CesiProgSys.LOG
 
     public class RealTimeLogs : ILogs
     {
-        static List<Info> listInfo; 
+        public static List<Info> listInfo; 
 
         public static void ListInfo()
         {
