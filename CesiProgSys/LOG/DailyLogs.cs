@@ -50,9 +50,6 @@ using Newtonsoft.Json;
             
                     using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
                     await file.WriteLineAsync(toPrint);
-
-                
-            
         }
 
 
@@ -60,7 +57,6 @@ using Newtonsoft.Json;
         {
                     using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
                     await file.WriteLineAsync(toPrint);
-                  
         }
      }
 }
