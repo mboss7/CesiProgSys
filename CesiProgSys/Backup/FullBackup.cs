@@ -27,8 +27,8 @@ namespace CesiProgSys.Backup
         }
         public void InitBackup(string name, string source, string target)
         {
-           // string date = dateToString(DateTime.Now);
-          //  inf.Name = !string.IsNullOrEmpty(name) ? name : date;
+            string date = dateToString(DateTime.Now);
+            inf.Name = !string.IsNullOrEmpty(name) ? name : date;
             inf.DirSource = source;
             inf.DirTarget = target;
             inf.progression = 0;
@@ -48,8 +48,8 @@ namespace CesiProgSys.Backup
             }
             for (int i = authorizedDirAndFiles.Count-1; i >= 0; i--)
             {
-                string dir = authorizedDirAndFiles[i].Item1.Substring(source.Length);
-                dir = !string.IsNullOrEmpty(dir) ? dir : "abc";
+                string dir = authorizedDirAndFiles[i].Item1.Substring(source.Length-1);
+                dir = !string.IsNullOrEmpty(dir) ? dir : inf.Name;
                 DirectoryInfo subDirectory = targetDirectory.CreateSubdirectory(dir);
                 foreach (FileInfo sourceFile in authorizedDirAndFiles[i].Item2)
                 {
@@ -169,6 +169,16 @@ namespace CesiProgSys.Backup
         {
             return (toCheck & (FileAttributes.System | FileAttributes.Offline | FileAttributes.Temporary)) != 0;
         }
+        string dateToString(DateTime date)
+        {
+            string toReturn = date.ToString();
+            
+            toReturn = toReturn.Replace("/", "-");
+            toReturn = toReturn.Replace(" ", "-");
+            toReturn = toReturn.Replace(":", "-");
+
+            return toReturn;
+        }
 
         public static void startThread()
         {
@@ -176,17 +186,10 @@ namespace CesiProgSys.Backup
             string target = "C:/Users/Tanguy/Documents/Workshop3";
 
             FullBackup fb = new FullBackup();
-            fb.InitBackup("", directory, target);
+            fb.InitBackup("premiere backup", directory, target);
             fb.checkAutorizations(directory);
             
             fb.startBackup(directory, target);
         }
-
-        //string dateToString(DateTime date)
-        //{
-        //    string toReturn = date.ToString();
-
-        //    toReturn.Replace("");
-        //}
     }
 }
