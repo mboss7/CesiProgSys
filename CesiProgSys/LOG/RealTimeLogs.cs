@@ -12,11 +12,11 @@ namespace CesiProgSys.LOG
 
     public class RealTimeLogs : ILogs
     {
+        static List<Info> listInfo; 
 
         public static void ListInfo()
         {
             // Créer une liste 
-            List<string> listInfo = new List<string>();
             // Ajouter des éléments à la liste 
             listInfo.Add("Java");
             listInfo.Add("Python");
@@ -44,12 +44,17 @@ namespace CesiProgSys.LOG
                 RealTimeLogs rtl = new RealTimeLogs();
                 rtl.startLog();
 
-                RealTimeLogs li = new RealTimeLogs();
-                li.logInfo();
-
-                RealTimeLogs le = new RealTimeLogs();
-                le.logError();
+                // RealTimeLogs li = new RealTimeLogs();
+                // li.logInfo();
+                //
+                // RealTimeLogs le = new RealTimeLogs();
+                // le.logError();
             
+        }
+
+        public RealTimeLogs()
+        {
+            listInfo = new List<Info>();
         }
 
         // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
