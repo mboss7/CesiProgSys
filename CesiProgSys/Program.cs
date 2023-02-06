@@ -18,8 +18,7 @@ namespace CesiProgSys
             {
                 // run new LogsManager Thread
                LogsManager l = new LogsManager();
-               l.instantiate();
-               l.finish();
+               l.startLogManager();
                //
                //  static void MainC(string[] args)
                //  {
