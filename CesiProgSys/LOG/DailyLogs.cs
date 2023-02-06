@@ -35,31 +35,35 @@ using Newtonsoft.Json;
             {
 
                 DailyLogs li = new DailyLogs();
-                li.logInfo();
+                // li.logInfo();
 
                 DailyLogs le = new DailyLogs();
-                le.logError();
+                // le.logError();
 
             }
         }
 
-        public async Task logInfo()
+        public async Task logInfo(string toPrint)
         {
             
                     using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
                    // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog("--- LOG INFO ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\DailyLogs.json", @".\\Daily_log.txt", 10000, 500);
-                    string json = JsonConvert.SerializeObject(backup);
-                    await file.WriteLineAsync(json);
+                    // JsonLog backup = new JsonLog("--- LOG INFO ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\DailyLogs.json", @".\\Daily_log.txt", 10000, 500);
+                    // string json = JsonConvert.SerializeObject(backup);
+                    // await file.WriteLineAsync(json);
+
+                
+            
         }
 
-        public async Task logError()
+
+        public async Task logError(string toPrint)
         {
                     using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
                     // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog("--- LOG ERROR ---",DateTime.Now, "Daily_log.txt [txt]", @".\\LOGS\DailyLogs.json", @".\\Daily_log.txt", 10000, 500);
-                    string json = JsonConvert.SerializeObject(backup);
-                    await file.WriteLineAsync(json);
+                    // JsonLog backup = new JsonLog("--- LOG ERROR ---",DateTime.Now, "Daily_log.txt [txt]", @".\\LOGS\DailyLogs.json", @".\\Daily_log.txt", 10000, 500);
+                    // string json = JsonConvert.SerializeObject(backup);
+                    // await file.WriteLineAsync(json);
                   
         }
      }
