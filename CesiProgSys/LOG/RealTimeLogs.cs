@@ -48,15 +48,15 @@ namespace CesiProgSys.LOG
         {
             // Loop who print text with current Thread Id for testing thread. 
             while (flagRtl)
-                {
-                        RealTimeLogs li = new RealTimeLogs();
-                        li.logInfo();
+            { 
+                RealTimeLogs li = new RealTimeLogs();
+                li.logInfo();
                         
               
-                        RealTimeLogs le = new RealTimeLogs();
-                        le.logError();
+                RealTimeLogs le = new RealTimeLogs();
+                le.logError();
                        
-                }
+            }
             
         }
 

@@ -25,13 +25,6 @@ using Newtonsoft.Json;
 
             DailyLogs dl = new DailyLogs();
             dl.startLog();
-            
-            DailyLogs li = new DailyLogs();
-            li.logInfo();
-
-            DailyLogs le = new DailyLogs();
-            le.logError();
-
         }
 
         // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
@@ -41,21 +34,11 @@ using Newtonsoft.Json;
             while (flagDl)
             {
 
-                // if (listInfo.Any(true))  // need to be use for trigg loop
-                if (true)
-                {
-                    await using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
-                    // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog("--- LOGS START ---",DateTime.Now, "Daily_log.json [json]", @".\\LOGS\DailyLogs.json", @".\\Daily_log.json", 10000, 500);
-                    string json = JsonConvert.SerializeObject(backup);
-                    await file.WriteLineAsync(json);
-                    //Close the file
-                    file.Close();
-                }
-                else
-                {
+                DailyLogs li = new DailyLogs();
+                li.logInfo();
 
-                }
+                DailyLogs le = new DailyLogs();
+                le.logError();
 
             }
         }
@@ -68,11 +51,7 @@ using Newtonsoft.Json;
                     JsonLog backup = new JsonLog("--- LOG INFO ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\DailyLogs.json", @".\\Daily_log.txt", 10000, 500);
                     string json = JsonConvert.SerializeObject(backup);
                     await file.WriteLineAsync(json);
-
-                
-            
         }
-
 
         public async Task logError()
         {
