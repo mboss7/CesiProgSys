@@ -6,7 +6,6 @@ using System.Threading;
 using CesiProgSys.ToolsBox;
 using Newtonsoft.Json;
 
-
  namespace CesiProgSys.LOG
  {
      public class DailyLogs : ILogs
@@ -66,8 +65,7 @@ using Newtonsoft.Json;
             
                     using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
                    // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog("--- LOG INFO ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\DailyLogs.json",
-                        @".\\Daily_log.txt", 10000, 500);
+                    JsonLog backup = new JsonLog("--- LOG INFO ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\DailyLogs.json", @".\\Daily_log.txt", 10000, 500);
                     string json = JsonConvert.SerializeObject(backup);
                     await file.WriteLineAsync(json);
 
@@ -80,11 +78,10 @@ using Newtonsoft.Json;
         {
                     using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
                     // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog("--- LOG ERROR ---",DateTime.Now, "Daily_log.txt [txt]", @".\\LOGS\DailyLogs.json",
-                        @".\\Daily_log.txt", 10000, 500);
+                    JsonLog backup = new JsonLog("--- LOG ERROR ---",DateTime.Now, "Daily_log.txt [txt]", @".\\LOGS\DailyLogs.json", @".\\Daily_log.txt", 10000, 500);
                     string json = JsonConvert.SerializeObject(backup);
                     await file.WriteLineAsync(json);
                   
-            }
         }
+     }
 }
