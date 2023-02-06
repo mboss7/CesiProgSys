@@ -38,17 +38,17 @@ using Newtonsoft.Json;
 
                     if (inf.LogType)
                     {
-                        await logInfo(json);
+                        logInfo(json);
                     }
                     else
                     {
-                        await logError(json);
+                        logError(json);
                     }
                 }
             }
         }
 
-        public async Task logInfo(string toPrint)
+        public async void logInfo(string toPrint)
         {
             
                     using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
@@ -56,7 +56,7 @@ using Newtonsoft.Json;
         }
 
 
-        public async Task logError(string toPrint)
+        public async void logError(string toPrint)
         {
                     using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
                     await file.WriteLineAsync(toPrint);

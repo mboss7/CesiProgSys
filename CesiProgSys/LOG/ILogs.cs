@@ -6,8 +6,8 @@ namespace CesiProgSys.LOG
     public interface ILogs
     {
         public void startLog();
-        public Task logInfo(string toPrint);
-        public Task logError(string toPrint);
+        public void logInfo(string toPrint);
+        public void logError(string toPrint);
     }
     
 }

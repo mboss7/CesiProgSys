@@ -46,11 +46,11 @@ namespace CesiProgSys.LOG
 
                     if (inf.LogType)
                     {
-                        await logInfo(json);
+                        logInfo(json);
                     }
                     else
                     {
-                        await logError(json);
+                        logError(json);
                     }
 
                     if (inf.state == State.SUCCESS)
@@ -64,19 +64,19 @@ namespace CesiProgSys.LOG
         }
 
 
-        public async Task logInfo(string toPrint)
+        public void logInfo(string toPrint)
         {
-            using StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
-            await file.WriteLineAsync(toPrint);
+             StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
+             file.WriteLineAsync(toPrint);
 
         }
 
 
 
-        public async Task logError(string toPrint)
+        public void logError(string toPrint)
         {
-            using StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
-            await file.WriteLineAsync(toPrint);
+            StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
+            file.WriteLine(toPrint);
 
         }
     }
