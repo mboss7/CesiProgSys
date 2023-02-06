@@ -22,7 +22,7 @@ namespace CesiProgSys.LOG
         {
 
             // print current thread ID 
-            Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
+            //   Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
 
             RealTimeLogs rtl = new RealTimeLogs();
             rtl.startLog();

@@ -2,6 +2,7 @@
 
 public class Info
 {
+    private string LogType { get; set; }
     private DateTime Date { get; set; }
     private int TimeLaps { get; set; }
     private string Name { get; set; }

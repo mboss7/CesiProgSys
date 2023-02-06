@@ -22,7 +22,7 @@ using Newtonsoft.Json;
         {
 
             // print current thread ID 
-            Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
+            //  Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
 
             DailyLogs dl = new DailyLogs();
             dl.startLog();
