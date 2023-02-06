@@ -42,42 +42,22 @@ namespace CesiProgSys.LOG
 
         // Create new start log info  // Morever when need to call a Json methode to factor data in JSON. 
 
-        public void ContentList()
-        {
-            Console.WriteLine("Parcourir la liste avec la boucle for-each:");
-            foreach(Info item in listInfo) {
-                Console.WriteLine(item);
-            }
-        }
+       
         
         public async void  startLog()
         {
             // Loop who print text with current Thread Id for testing thread. 
             while (flagRtl)
-            {
-                switch ()
                 {
-                    case  :
+                        RealTimeLogs li = new RealTimeLogs();
+                        li.logInfo();
+                        
+              
+                        RealTimeLogs le = new RealTimeLogs();
+                        le.logError();
                        
-                        break;
-                 
-
-                    case :
-                       
-                        break;
-
-                    default:
-                        Console.WriteLine("ERROR");
-                        break;
                 }
-                
-                // RealTimeLogs li = new RealTimeLogs();
-                // li.logInfo();
-                //
-                // RealTimeLogs le = new RealTimeLogs();
-                // le.logError();
-
-            }
+            
         }
 
         public async Task logInfo()
