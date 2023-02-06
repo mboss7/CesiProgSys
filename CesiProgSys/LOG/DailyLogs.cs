@@ -64,10 +64,10 @@ using Newtonsoft.Json;
         public async Task logInfo()
         {
             
-                    using StreamWriter file = new(@".\\LOGS\RealTimeLogs.json", append: true);
+                    using StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
                    // create JSON (need to add variable name to replace infos in JSON !) 
-                    JsonLog backup = new JsonLog("--- LOG INFO ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\RealTimeLogs.json",
-                        @".\\Sample_log.txt", 10000, 500);
+                    JsonLog backup = new JsonLog("--- LOG INFO ---",DateTime.Now, "Sample_log.txt [txt]", @".\\LOGS\DailyLogs.json",
+                        @".\\Daily_log.txt", 10000, 500);
                     string json = JsonConvert.SerializeObject(backup);
                     await file.WriteLineAsync(json);
 
