@@ -291,12 +291,12 @@ namespace CesiProgSys.ViewCli
             //code
             Console.Clear();
             Console.WriteLine("Lancement définitif de la sauvegarde");
+            Environment.Exit(0);
         }
 
         public void showConfigValid()
         {
             //code
-         
             Console.Clear();
             Console.WriteLine("Lancement définitif de l'affichage des configurations");
             Config.writeConfig(@".\\CONF\conf.json");
