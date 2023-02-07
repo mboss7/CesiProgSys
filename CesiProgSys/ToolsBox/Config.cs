@@ -69,6 +69,7 @@ namespace CesiProgSys.ToolsBox
         public void creatConfList()
         {
             
+            
             language = Language.English;
             defaultSaveSource = @"\\BACKUP\test";
             defaultSaveTarget = @"\\BACKUP\bck";
