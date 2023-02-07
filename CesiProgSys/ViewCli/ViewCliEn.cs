@@ -255,7 +255,53 @@ namespace CesiProgSys.ViewCli
         {
             //code
             Console.Clear();
-            Console.WriteLine("5. Help");
+            Console.WriteLine("Help : \n");
+            Console.WriteLine(" .----------------.\n"+ 
+                              "| .--------------. |\n"+
+                "| |    ______    | |\n"+
+                "| |   / _ __ `.  | |\n"+
+                "| |  |_/____) |  | |\n"+
+                "| |    /  ___.'  | |\n"+
+                "| |    |_|       | |\n"+
+                "| |    (_)       | |\n"+
+                "| |              | |\n"+
+                "| '--------------' |\n"+
+                "'----------------' \n");
+            Console.WriteLine("To set up a full backup: Type 1. Then 1.");
+            Console.WriteLine("To set up a differential backup: Type 1. Then 2.");
+            Console.WriteLine("To start a backup: Type 2. Then press 1.");
+            Console.WriteLine("To display the settings: Type 3. Then 1.");
+            Console.WriteLine("To change the language: Type 4. Then 1. Then ....");
+            Console.WriteLine("To change the default backup source: Type 4. Then 2. Then 1.");
+            Console.WriteLine("To clean up the default backup source: Type 4. Then 2. Then 2.");
+            Console.WriteLine("To change the default backup target: Type 4. Then 3. Then 1.");
+            Console.WriteLine("To clean up the default backup target: Type 4. Then 3. Then 2.");
+            Console.WriteLine("To clean up the recent source of backups: Type 4. Then 4. Then 1.");
+            Console.WriteLine("To clean up the recent target of the backups: Type 4. Then 5. Then 1.");
+            Console.WriteLine("To change the retention time: Type 4. Then 6. Then 1.");
+            Console.WriteLine("To fully clean up the settings: Type 4. Then 7. Then 1. \n");
+            
+            Console.WriteLine("1. Return");
+            Console.WriteLine("2. Exit");
+            
+            Console.Write("Enter your choice : ");
+            int choiceBackup = Convert.ToInt32(Console.ReadLine());
+                
+            if (choiceBackup == 1)
+            {
+                menu();
+                return;
+            }
+            if (choiceBackup == 2)
+            {
+                Console.WriteLine("Exiting the program...");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice. Try again.");
+                help();
+            }
         }
 
         public void fullBackup()

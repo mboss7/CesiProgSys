@@ -28,8 +28,14 @@ namespace CesiProgSys.ViewModel
         
         public void instantiateFullBackup()
         {
+            mutex.WaitOne(); 
+            Tuple<Thread, string[]> temp = new Tuple<Thread, string[]>(bManager.instantiate(false), new[] { name, sourceDir, targetDir });
+            ouahMonCerveauEstPartiLoin.Add(temp);
+            Thread.Sleep(50);
+            marre.Find(tuple => tuple.Item1 == temp.Item1).Item2.blockMutex();
+            mutex.ReleaseMutex();
             
-            ouahMonCerveauEstPartiLoin.Add(new Tuple<Thread, string[]>(bManager.instantiate(false), new[]{name, sourceDir, targetDir}));
+            
             name = null;
             sourceDir = null;
             targetDir = null;
@@ -44,9 +50,13 @@ namespace CesiProgSys.ViewModel
         
         public void instantiateDiffBackup()
         {
-            mutex.WaitOne();
-            ouahMonCerveauEstPartiLoin.Add(new Tuple<Thread, string[]>(bManager.instantiate(true), new[]{name, sourceDir, targetDir}));
+            mutex.WaitOne(); 
+            Tuple<Thread, string[]> temp = new Tuple<Thread, string[]>(bManager.instantiate(true), new[] { name, sourceDir, targetDir });
+            ouahMonCerveauEstPartiLoin.Add(temp);
+            Thread.Sleep(50);
+            marre.Find(tuple => tuple.Item1 == temp.Item1).Item2.blockMutex();
             mutex.ReleaseMutex();
+
             name = null;
             sourceDir = null;
             targetDir = null;
