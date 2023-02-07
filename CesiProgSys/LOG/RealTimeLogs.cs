@@ -6,12 +6,17 @@ namespace CesiProgSys.LOG
 
     public class RealTimeLogs : ILogs
     {
+        //create List for log informations
         public static List<Info> listInfo;
-
+        
+        // condition for loop while 
         public static bool flagRtl = true;
 
+        
+        //Mutex for manage 
         public static Mutex mut = new Mutex();
-            // start new thread when listInfo is not null  
+        
+        // start new thread when listInfo is not null  
         public static void startThread()
         {
 
