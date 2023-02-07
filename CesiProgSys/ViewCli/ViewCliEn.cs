@@ -271,7 +271,7 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("To set up a differential backup: Type 1. Then 2.");
             Console.WriteLine("To start a backup: Type 2. Then press 1.");
             Console.WriteLine("To display the settings: Type 3. Then 1.");
-            Console.WriteLine("To change the language: Type 4. Then 1. Then ....");
+            Console.WriteLine("To change the language: Type 4. Then 1.");
             Console.WriteLine("To change the default backup source: Type 4. Then 2. Then 1.");
             Console.WriteLine("To clean up the default backup source: Type 4. Then 2. Then 2.");
             Console.WriteLine("To change the default backup target: Type 4. Then 3. Then 1.");

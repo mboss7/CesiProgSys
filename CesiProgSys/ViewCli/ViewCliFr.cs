@@ -239,7 +239,7 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("Pour configurer une sauvegarde différentielle : Taper 1. Puis 2.");
             Console.WriteLine("Pour lancer une sauvegarde : Taper 2. Puis 1.");
             Console.WriteLine("Pour afficher les configurations : Taper 3. Puis 1.");
-            Console.WriteLine("Pour changer la langue : Taper 4. Puis 1. Puis ....");
+            Console.WriteLine("Pour changer la langue : Taper 4. Puis 1.");
             Console.WriteLine("Pour modifier la source des sauvegardes par défaut : Taper 4. Puis 2. Puis 1.");
             Console.WriteLine("Pour nettoyer la source des sauvegardes par défaut : Taper 4. Puis 2. Puis 2.");
             Console.WriteLine("Pour modifier la cible des sauvegardes par défaut : Taper 4. Puis 3. Puis 1.");
