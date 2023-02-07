@@ -181,10 +181,8 @@ namespace CesiProgSys.Backup
                 }
             }
             authorizedDirAndFiles.Add(tuple);
-            RealTimeLogs.mut.WaitOne();
-            inf.TotalFilesToCopy = authorizedDirAndFiles.Count;
+            inf.TotalFilesToCopy += f.Count;
             inf.NbFilesLeftToDo = inf.TotalFilesToCopy;
-            RealTimeLogs.mut.ReleaseMutex();
         }
         public bool checkRights(FileSystemAccessRule rule)
         {

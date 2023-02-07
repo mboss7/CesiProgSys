@@ -26,6 +26,8 @@ using CesiProgSys.ToolsBox;
         {
             while (flagDl)
             {
+                Thread.Sleep(500);
+
                 List<string> jsonInfo = new List<string>();
                 List<string> jsonError = new List<string>();
                 
