@@ -221,7 +221,18 @@ namespace CesiProgSys.ViewCli
         {
             //code
             Console.Clear();
-            Console.WriteLine("5. Aide");
+            Console.WriteLine("Aide : \n");
+            Console.WriteLine("Pour configurer une sauvegarde complète : Taper 1. Puis 1. \n");
+            Console.WriteLine("Pour configurer une sauvegarde différentielle : taper 1. Puis 2. \n");
+            Console.WriteLine("Pour lancer une sauvegarde : taper 2. Puis 1. \n");
+            Console.WriteLine("Pour afficher les configurations : taper 3. Puis 1. \n");
+            Console.WriteLine("Pour changer la langue : taper 4. Puis 1. Puis .... \n");
+            Console.WriteLine("Pour modifier la source des sauvegardes par défaut : taper 4. Puis 2. Puis 1. \n");
+            Console.WriteLine("Aide : \n");
+            Console.WriteLine("Aide : \n");
+            Console.WriteLine("Aide : \n");
+            Console.WriteLine("Aide : \n");
+            Console.WriteLine("Aide : \n");
         }
 
         public void fullBackup()
