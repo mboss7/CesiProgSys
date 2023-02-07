@@ -1,4 +1,5 @@
-﻿using System.Security.AccessControl;
+﻿using System.Diagnostics;
+using System.Security.AccessControl;
 using System.Security.Principal;
 using CesiProgSys.LOG;
 using CesiProgSys.ToolsBox;
@@ -11,11 +12,23 @@ namespace CesiProgSys.Backup
         // private List<string> unauthorizedDirectories;
         // private List<string> unauthorizedFiles;
 
+        public Mutex mutex = new Mutex();
+
+        public void blockMutex()
+        {
+            mutex.WaitOne();
+        }
+
+        public void releaseMutex()
+        {
+            mutex.ReleaseMutex();
+        }
+        
+        public void setFlagAuth(){}
+        public void setFlagStart(){}
+        
         private Info inf;
         private List<Tuple<string, List<FileInfo>>> authorizedDirAndFiles;
-
-        public bool flagAuth = true;
-        public bool flagStart = true;
         
         public FullBackup()
         {
@@ -207,15 +220,6 @@ namespace CesiProgSys.Backup
             return toReturn;
         }
 
-        public void setFlagAuth()
-        {
-            flagAuth = false;
-        }
-        public void setFlagStart()
-        {
-            flagStart = false;
-        }
-
         public static void startThread()
         {
 
@@ -227,11 +231,11 @@ namespace CesiProgSys.Backup
             
             fb.InitBackup(array[0], array[1], array[2]);
 
-            while (fb.flagAuth) {}
+            fb.blockMutex();
+            fb.releaseMutex();
             
             fb.checkAutorizations(array[1]);
-
-            while (fb.flagStart) {}
+            
 
             RealTimeLogs.mut.WaitOne();
             fb.inf.Date = DateTime.Now;

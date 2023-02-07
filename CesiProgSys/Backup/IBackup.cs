@@ -4,5 +4,9 @@
     {
         void setFlagAuth();
         void setFlagStart();
+
+        public void blockMutex();
+
+        public void releaseMutex();
     }
 }

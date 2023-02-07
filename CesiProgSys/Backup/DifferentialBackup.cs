@@ -17,6 +17,18 @@ namespace CesiProgSys.Backup
         public bool flagAuth = true;
         public bool flagStart = true;
         
+        public Mutex mutex = new Mutex();
+
+        public void blockMutex()
+        {
+            mutex.WaitOne();
+        }
+
+        public void releaseMutex()
+        {
+            mutex.ReleaseMutex();
+        }
+        
         public DifferentialBackup()
         {
             // unauthorizedDirectories = new List<string>();

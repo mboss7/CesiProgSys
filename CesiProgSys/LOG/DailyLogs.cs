@@ -26,34 +26,50 @@ using CesiProgSys.ToolsBox;
         {
             while (flagDl)
             {
+                List<string> jsonInfo = new List<string>();
+                List<string> jsonError = new List<string>();
+                
+                RealTimeLogs.mut.WaitOne();
                 foreach (Info inf in listInfo)
                 {
-                    string json = JsonLog.stringToJson(inf);
-                    //Console.WriteLine(json);
-
                     if (inf.LogType)
                     {
-                        logInfo(json);
+                        jsonInfo.Add(JsonLog.stringToJson(inf));
                     }
                     else
                     {
-                        logError(json);
+                        jsonError.Add(JsonLog.stringToJson(inf));
                     }
                 }
+                RealTimeLogs.mut.ReleaseMutex();
+                
+                if(jsonInfo.Any())
+                    await logInfo(jsonInfo);
+                if(jsonError.Any())
+                    await logError(jsonError);
             }
         }
 
-        public void logInfo(string toPrint)
+        public async Task logInfo(List<string> toPrint)
         {
-             
-                    StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
-                    file.WriteLineAsync(toPrint);
+            if (File.Exists("./LOGS/DailyLogsInfo.json"))
+                File.Delete("./LOGS/DailyLogsInfo.json");
+            using StreamWriter file = new(@".\\LOGS\DailyLogsInfo.json", append: true);
+            foreach (string s in toPrint)
+            {
+                await file.WriteLineAsync(s);
+            }
         }
         
-        public void logError(string toPrint)
+        public async Task logError(List<string> toPrint)
         {
-                    StreamWriter file = new(@".\\LOGS\DailyLogs.json", append: true);
-                    file.WriteLineAsync(toPrint);
+            if (File.Exists("./LOGS/DailyLogsError.json"))
+                File.Delete("./LOGS/DailyLogsError.json");
+            using StreamWriter file = new(@".\\LOGS\DailyLogsError.json", append: true);
+            foreach (string s in toPrint)
+            {
+                await file.WriteLineAsync(s);
+            }
         }
      }
 }

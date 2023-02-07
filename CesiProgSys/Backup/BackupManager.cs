@@ -36,8 +36,7 @@
 
         public void start(IBackup b)
         {
-            b.setFlagAuth();
-            b.setFlagStart();
+            b.releaseMutex();
         }
         private void finish(Thread t)
         {
