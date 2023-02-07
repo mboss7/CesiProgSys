@@ -23,7 +23,7 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("1. Configure a backup");
             Console.WriteLine("2. Start a backup");
             Console.WriteLine("3. Show configurations");
-            Console.WriteLine("4. Change les configurations");
+            Console.WriteLine("4. Change configurations");
             Console.WriteLine("5. Help");
             Console.WriteLine("6. Exit");
 
