@@ -1,10 +1,8 @@
-﻿namespace CesiProgSys.ToolsBox;
-
-using System;
-using System.Collections.Generic;
+﻿using System;
 using Newtonsoft.Json;
 
-namespace ConfigExample
+namespace CesiProgSys.ToolsBox
+
 {
     public class Config
     {
