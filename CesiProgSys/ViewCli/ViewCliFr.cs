@@ -228,11 +228,13 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("Pour afficher les configurations : taper 3. Puis 1. \n");
             Console.WriteLine("Pour changer la langue : taper 4. Puis 1. Puis .... \n");
             Console.WriteLine("Pour modifier la source des sauvegardes par défaut : taper 4. Puis 2. Puis 1. \n");
-            Console.WriteLine("Aide : \n");
-            Console.WriteLine("Aide : \n");
-            Console.WriteLine("Aide : \n");
-            Console.WriteLine("Aide : \n");
-            Console.WriteLine("Aide : \n");
+            Console.WriteLine("Pour nettoyer la source des sauvegardes par défaut : taper 4. Puis 2. Puis 2. \n");
+            Console.WriteLine("Pour modifier la cible des sauvegardes par défaut : taper 4. Puis 3. Puis 1. \n");
+            Console.WriteLine("Pour nettoyer la cible des sauvegardes par défaut : taper 4. Puis 3. Puis 2. \n");
+            Console.WriteLine("Pour nettoyer la source récente des sauvegardes : taper 4. Puis 4. Puis 1. \n");
+            Console.WriteLine("Pour nettoyer la cible récente des sauvegardes : taper 4. Puis 5. Puis 1. \n");
+            Console.WriteLine("Pour modifier le temps de conservation : taper 4. Puis 6. Puis 1. \n");
+            Console.WriteLine("Pour nettoyer entièrement les configurations : taper 4. Puis 7. Puis 1. \n");
         }
 
         public void fullBackup()
