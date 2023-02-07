@@ -22,7 +22,7 @@ using CesiProgSys.ToolsBox;
             dl.startLog();
         }
 
-        
+        //Start log management        
         public async void  startLog()
         {
             while (flagDl)

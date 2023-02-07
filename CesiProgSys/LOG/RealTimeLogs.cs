@@ -25,12 +25,12 @@ namespace CesiProgSys.LOG
 
 
         }
-
+        // builder for RealTimeLogs
         public RealTimeLogs()
         {
             listInfo = new List<Info>();
         }
-
+        // Start Log for log generate
         public async void startLog()
         {
             DirectoryInfo target = new DirectoryInfo("./LOGS/");
@@ -59,7 +59,7 @@ namespace CesiProgSys.LOG
             }
         }
 
-
+        // Log type info 
         public async Task logInfo(List<string> toPrint)
         {
             if (File.Exists("./LOGS/RealTimeLogsInfo.json"))
@@ -71,7 +71,7 @@ namespace CesiProgSys.LOG
             }
         }
 
-
+        // Log type error 
         public async Task logError(List<string> toPrint)
         {
             if (File.Exists("./LOGS/RealTimeLogsError.json"))
