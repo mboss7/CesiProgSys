@@ -33,6 +33,7 @@ namespace CesiProgSys.LOG
                 target.Create();
             while (flagRtl)
             {
+                Thread.Sleep(500);
                 List<string> jsonInfo = new List<string>();
                 List<string> jsonError = new List<string>();
                 mut.WaitOne();
@@ -44,9 +45,11 @@ namespace CesiProgSys.LOG
                         jsonError.Add(JsonLog.stringToJson(inf));
                 }
                 mut.ReleaseMutex();
-
-                await logInfo(jsonInfo);
-                await logError(jsonError);
+                
+                if(jsonInfo.Any())
+                    await logInfo(jsonInfo);
+                if(jsonError.Any())
+                    await logError(jsonError);
                 
             }
         }

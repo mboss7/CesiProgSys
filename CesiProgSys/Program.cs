@@ -1,5 +1,5 @@
-using System;
-
+using CesiProgSys.Backup;
+using CesiProgSys.LOG;
 using CesiProgSys.ViewCli;
 
 namespace CesiProgSys.Program;
@@ -9,6 +9,10 @@ public class Program
     
     static void Main(string[] args)
     {
+        BackupManager.Instance();
+        LogsManager l = new LogsManager();
+        l.startLogManager();
+
         Console.WriteLine("\n -----Welcome to the application !----- \n");
         
         Console.ReadKey();
@@ -18,42 +22,25 @@ public class Program
         Console.WriteLine("2. for French");
         
         Console.Write("Enter your choice : ");
-        int language = Convert.ToInt32(Console.ReadLine());
-
-        if (language == 1)
+        int language;
+        try
         {
-            IViewCli objEn = new ViewCliEn();
-            objEn.menu();
-            objEn.configBackup();
-            objEn.fullBackup();
-            objEn.diffBackup();
-            objEn.startBackup();
-            objEn.startBackupValid();
-            objEn.showConfig();
-            objEn.showConfigValid();
-            objEn.changeConfig();
-            objEn.help();
+            language = Convert.ToInt32(Console.ReadLine());
         }
-        else if (language == 2)
+        catch (FormatException)
+        {
+            language = 1;
+        }
+
+        if (language == 2)
         {
             IViewCli objFr = new ViewCliFr();
             objFr.menu();
-            objFr.configBackup();
-            objFr.fullBackup();
-            objFr.diffBackup();
-            objFr.startBackup();
-            objFr.startBackupValid();
-            objFr.showConfig();
-            objFr.showConfigValid();
-            objFr.changeConfig();
-            objFr.help();
         }
         else
         {
-            Console.WriteLine("Invalid language selection");
+            IViewCli objEn = new ViewCliEn();
+            objEn.menu();
         }
-
-        
-        
     }
 }

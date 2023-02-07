@@ -1,9 +1,22 @@
-using System;
+using System.ComponentModel;
+using CesiProgSys.ViewModel;
 
 namespace CesiProgSys.ViewCli
 {
     public class ViewCliEn : IViewCli
     {
+        private ViewModelCli vmCLI;
+
+        public ViewCliEn()
+        {
+            vmCLI = new ViewModelCli();
+        }
+
+        public void showResult(object sender, PropertyChangedEventArgs e)
+        {
+            Console.WriteLine("Show RESULT ????");
+        }
+        
         public void menu()
         {
             Console.Clear();
@@ -15,7 +28,13 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("6. Exit");
 
             Console.Write("Enter your choice : ");
-            int choice = Convert.ToInt32(Console.ReadLine());
+            int choice = 0;
+            try
+            {
+                choice = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (FormatException){}
+            
 
             if (choice > 0 && choice <= 5)
             {
@@ -113,8 +132,13 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("4. Exit");
         
             Console.Write("Enter your choice : ");
-            int choiceBackup = Convert.ToInt32(Console.ReadLine());
-            
+            int choiceBackup = 0;
+            try
+            {
+                choiceBackup = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (FormatException) {}
+
             if (choiceBackup > 0 && choiceBackup <= 3)
             {
                 switch (choiceBackup)
@@ -150,8 +174,13 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("3. Exit");
             
             Console.Write("Enter your choice : ");
-            int choiceBackup = Convert.ToInt32(Console.ReadLine());
-                
+
+            int choiceBackup = 0;
+            try
+            {
+                choiceBackup = Convert.ToInt32(Console.ReadLine());
+            }catch(FormatException){}
+
             if (choiceBackup > 0 && choiceBackup <= 2)
             {
                 switch (choiceBackup)
@@ -184,8 +213,13 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("3. Exit");
             
             Console.Write("Enter your choice : ");
-            int choiceBackup = Convert.ToInt32(Console.ReadLine());
-                
+
+            int choiceBackup = 0;
+            try
+            {
+                choiceBackup = Convert.ToInt32(Console.ReadLine());
+            }catch(FormatException){}
+
             if (choiceBackup > 0 && choiceBackup <= 2)
             {
                 switch (choiceBackup)
@@ -226,23 +260,76 @@ namespace CesiProgSys.ViewCli
 
         public void fullBackup()
         {
-            //code
             Console.Clear();
-            Console.WriteLine("Show full backup");
+            Console.WriteLine("Choose a name for your fullbackup :");
+            vmCLI.name = Console.ReadLine();
+            while (string.IsNullOrEmpty(vmCLI.sourceDir))
+            {
+                Console.WriteLine("Choose a source directory :");
+                vmCLI.sourceDir = Console.ReadLine();
+            }
+
+            while (string.IsNullOrEmpty(vmCLI.targetDir))
+            {
+                Console.WriteLine("Choose a target directory :");
+                vmCLI.targetDir = Console.ReadLine();            
+            }
+
+            vmCLI.instantiateFullBackup();
+            menu();
         }
 
         public void diffBackup()
         {
-            //code
             Console.Clear();
-            Console.WriteLine("Show diff backup");
+            Console.WriteLine("Choose a name for your differential backup :");
+            vmCLI.name = Console.ReadLine();
+            while (string.IsNullOrEmpty(vmCLI.sourceDir))
+            {
+                Console.WriteLine("Choose a source directory :");
+                vmCLI.sourceDir = Console.ReadLine();
+            }
+
+            while (string.IsNullOrEmpty(vmCLI.targetDir))
+            {
+                Console.WriteLine("Choose a target directory :");
+                vmCLI.targetDir = Console.ReadLine();            
+            }
+
+            vmCLI.instantiateDiffBackup();
+            menu();
         }
 
         public void startBackupValid()
         {
-            //code
             Console.Clear();
-            Console.WriteLine("Definitely start the backup");
+            List<string> listNames = vmCLI.getThreadsNames();
+            for (int i = 0; i < listNames.Count; i++)
+            {
+                Console.WriteLine("{0} {1}", i+1, listNames[i]);
+            }
+
+            int input = 0;
+            try
+            {
+                input = Convert.ToInt32(Console.ReadLine()) - 1;
+            }
+            catch (FormatException)
+            {
+                input = -1;
+            }
+
+            if (input <= -1 || input >= listNames.Count)
+            {
+                Console.WriteLine("Wrong input");
+                menu();
+            }
+            else
+            {
+                vmCLI.startBackup(listNames[input]);
+            }
+            menu();
+
         }
 
         public void showConfigValid()

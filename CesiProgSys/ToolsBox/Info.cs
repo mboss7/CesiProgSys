@@ -5,7 +5,7 @@ public class Info
     public bool LogType { get; set; }
     
     public DateTime Date { get; set; }
-    public DateTime TimeLaps { get; set; }
+    public TimeSpan TimeLaps { get; set; }
     
     public string Name { get; set; }
     public string DirSource { get; set; }

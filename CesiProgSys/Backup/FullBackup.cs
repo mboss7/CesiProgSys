@@ -2,28 +2,30 @@
 using System.Security.Principal;
 using CesiProgSys.LOG;
 using CesiProgSys.ToolsBox;
+using CesiProgSys.ViewModel;
 
 namespace CesiProgSys.Backup
 {
     public class FullBackup : IBackup
     {
-        private static int a = 0;
-        //TODO penser à mettre en place des mutex, pour pouvoir controler le déroulement du thread
-        private List<string> unauthorizedDirectories;
-        
-        private List<string> unauthorizedFiles;
+        // private List<string> unauthorizedDirectories;
+        // private List<string> unauthorizedFiles;
 
         private Info inf;
-
         private List<Tuple<string, List<FileInfo>>> authorizedDirAndFiles;
 
+        public bool flagAuth = true;
+        public bool flagStart = true;
+        
         public FullBackup()
         {
-            unauthorizedDirectories = new List<string>();
-            unauthorizedFiles = new List<string>();
+            // unauthorizedDirectories = new List<string>();
+            // unauthorizedFiles = new List<string>();
             authorizedDirAndFiles = new List<Tuple<string, List<FileInfo>>>();
             
             inf = new Info();
+            
+            ViewModelCli.marre.Add(new Tuple<Thread, IBackup>(Thread.CurrentThread, this));
         }
         public void InitBackup(string name, string source, string target)
         {
@@ -33,6 +35,9 @@ namespace CesiProgSys.Backup
             inf.DirTarget = target;
             inf.progression = 0;
             inf.state = State.INACTIVE;
+            inf.LogType = true;
+            
+            Thread.CurrentThread.Name = inf.Name;
 
             RealTimeLogs.mut.WaitOne();
             RealTimeLogs.listInfo.Add(inf);
@@ -53,11 +58,23 @@ namespace CesiProgSys.Backup
             for (int i = authorizedDirAndFiles.Count-1; i >= 0; i--)
             {
                 string dir = authorizedDirAndFiles[i].Item1.Substring(source.Length-1);
-                dir = !string.IsNullOrEmpty(dir) ? dir : inf.Name;
+                // dir = !string.IsNullOrEmpty(dir) ? dir : inf.Name;
                 DirectoryInfo subDirectory = targetDirectory.CreateSubdirectory(dir);
                 foreach (FileInfo sourceFile in authorizedDirAndFiles[i].Item2)
                 {
-                    sourceFile.CopyTo(Path.Combine(subDirectory.FullName, sourceFile.Name), true);
+                    string s = Path.Combine(subDirectory.FullName, sourceFile.Name);
+                    RealTimeLogs.mut.WaitOne();
+                    inf.CurrentSource = sourceFile.Name;
+                    inf.CurrentDest = s;
+                    inf.TimeLaps = DateTime.Now - inf.Date;
+                    RealTimeLogs.mut.ReleaseMutex();
+                    
+                    sourceFile.CopyTo(s, true);
+                    File.SetAttributes(sourceFile.FullName, File.GetAttributes(sourceFile.FullName) & ~FileAttributes.Archive);
+                    
+                    RealTimeLogs.mut.WaitOne();
+                    inf.NbFilesLeftToDo--;
+                    RealTimeLogs.mut.ReleaseMutex();
                 }
             }
         }
@@ -86,7 +103,7 @@ namespace CesiProgSys.Backup
                         
                         if (AccessControlType.Deny.Equals(rule.AccessControlType))
                         {
-                            unauthorizedDirectories.Add(currentDirectory);
+                            // unauthorizedDirectories.Add(currentDirectory);
                         }
                         else if (AccessControlType.Allow.Equals(rule.AccessControlType))
                         {
@@ -96,18 +113,18 @@ namespace CesiProgSys.Backup
                             }
                             else
                             {
-                                unauthorizedDirectories.Add(currentDirectory);
+                                // unauthorizedDirectories.Add(currentDirectory);
                             }
                         }
                     }
                     catch (UnauthorizedAccessException)
                     {
-                        unauthorizedDirectories.Add(currentDirectory);
+                        // unauthorizedDirectories.Add(currentDirectory);
                     }
                 }
                 else
                 {
-                    unauthorizedDirectories.Add(currentDirectory);
+                    // unauthorizedDirectories.Add(currentDirectory);
                 }
             }
             
@@ -126,7 +143,7 @@ namespace CesiProgSys.Backup
 
                         if (AccessControlType.Deny.Equals(rule.AccessControlType))
                         {
-                            unauthorizedFiles.Add(currentFile);
+                            // unauthorizedFiles.Add(currentFile);
                         }
                         else if (AccessControlType.Allow.Equals(rule.AccessControlType))
                         {
@@ -136,21 +153,25 @@ namespace CesiProgSys.Backup
                             }
                             else
                             {
-                                unauthorizedFiles.Add(currentFile);
+                                // unauthorizedFiles.Add(currentFile);
                             }
                         }
                     }
                     catch (UnauthorizedAccessException)
                     {
-                        unauthorizedFiles.Add(currentFile);
+                        // unauthorizedFiles.Add(currentFile);
                     }
                 }
                 else
                 {
-                    unauthorizedFiles.Add(currentFile);
+                    // unauthorizedFiles.Add(currentFile);
                 }
             }
             authorizedDirAndFiles.Add(tuple);
+            RealTimeLogs.mut.WaitOne();
+            inf.TotalFilesToCopy = authorizedDirAndFiles.Count;
+            inf.NbFilesLeftToDo = inf.TotalFilesToCopy;
+            RealTimeLogs.mut.ReleaseMutex();
         }
         public bool checkRights(FileSystemAccessRule rule)
         {
@@ -186,29 +207,39 @@ namespace CesiProgSys.Backup
             return toReturn;
         }
 
+        public void setFlagAuth()
+        {
+            flagAuth = false;
+        }
+        public void setFlagStart()
+        {
+            flagStart = false;
+        }
+
         public static void startThread()
         {
 
             FullBackup fb = new FullBackup();
+            string[] array = ViewModelCli.ouahMonCerveauEstPartiLoin.Find(tuple => tuple.Item1 == Thread.CurrentThread).Item2;
 
-            if (a == 0)
-            {
-                a++;
-                fb.InitBackup("premiere backup", "C:/Users/Tanguy/Documents/Workshop2", "C:/Users/Tanguy/Documents/Workshop3");
-                fb.checkAutorizations("C:/Users/Tanguy/Documents/Workshop2");
+            fb.InitBackup(array[0], array[1], array[2]);
 
-                fb.startBackup("C:/Users/Tanguy/Documents/Workshop2", "C:/Users/Tanguy/Documents/Workshop3");
-            }
-            else
-            {
-                fb.InitBackup("premiere backup", "C:/Users/Tanguy/Documents/Workshop1", "C:/Users/Tanguy/Documents/Workshop4");
-                fb.checkAutorizations("C:/Users/Tanguy/Documents/Workshop1");
+            while (fb.flagAuth) {}
+            
+            fb.checkAutorizations(array[1]);
 
-                fb.startBackup("C:/Users/Tanguy/Documents/Workshop1", "C:/Users/Tanguy/Documents/Workshop4");
-            }
+            while (fb.flagStart) {}
+
+            RealTimeLogs.mut.WaitOne();
+            fb.inf.Date = DateTime.Now;
+            RealTimeLogs.mut.ReleaseMutex();
+            
+            fb.startBackup(array[1], array[2]);
+
             RealTimeLogs.mut.WaitOne();
             fb.inf.state = State.SUCCESS;
             RealTimeLogs.mut.ReleaseMutex();
+            ViewModelCli.marre.Remove(ViewModelCli.marre.Find(tuple => tuple.Item1 == Thread.CurrentThread));
         }
     }
 }
