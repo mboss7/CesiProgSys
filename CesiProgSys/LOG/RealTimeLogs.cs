@@ -44,6 +44,12 @@ namespace CesiProgSys.LOG
                 mut.WaitOne();
                 foreach (Info inf in listInfo)
                 {
+                    if (inf.state == State.SUCCESS)
+                    {
+                        inf.state = State.END;
+                        DailyLogs.listInfo.Add(inf);
+                    }
+                    
                     if (inf.LogType)
                         jsonInfo.Add(JsonLog.stringToJson(inf));
                     else
