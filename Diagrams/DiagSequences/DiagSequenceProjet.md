@@ -71,11 +71,6 @@ Model -->>ViewModel: Send reply
 View -->>User: Send reply
 View -->>User: Show Main Menu
 ```
-
-
-
-
-
 Exit the CLI
 ```mermaid
 sequenceDiagram
