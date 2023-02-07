@@ -10,6 +10,8 @@ namespace CesiProgSys.ViewModel
 
         public static List<Tuple<Thread, string[]>> ouahMonCerveauEstPartiLoin;
         public static List<Tuple<Thread, IBackup>> marre;
+        public static Mutex mutex = new Mutex();
+        
         
         public ViewModelCli()
         {
@@ -26,6 +28,7 @@ namespace CesiProgSys.ViewModel
         
         public void instantiateFullBackup()
         {
+            
             ouahMonCerveauEstPartiLoin.Add(new Tuple<Thread, string[]>(bManager.instantiate(false), new[]{name, sourceDir, targetDir}));
             name = null;
             sourceDir = null;
@@ -41,7 +44,9 @@ namespace CesiProgSys.ViewModel
         
         public void instantiateDiffBackup()
         {
+            mutex.WaitOne();
             ouahMonCerveauEstPartiLoin.Add(new Tuple<Thread, string[]>(bManager.instantiate(true), new[]{name, sourceDir, targetDir}));
+            mutex.ReleaseMutex();
             name = null;
             sourceDir = null;
             targetDir = null;

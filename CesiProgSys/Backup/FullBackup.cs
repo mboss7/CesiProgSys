@@ -220,8 +220,11 @@ namespace CesiProgSys.Backup
         {
 
             FullBackup fb = new FullBackup();
+            
+            ViewModelCli.mutex.WaitOne();
             string[] array = ViewModelCli.ouahMonCerveauEstPartiLoin.Find(tuple => tuple.Item1 == Thread.CurrentThread).Item2;
-
+            ViewModelCli.mutex.ReleaseMutex();
+            
             fb.InitBackup(array[0], array[1], array[2]);
 
             while (fb.flagAuth) {}
