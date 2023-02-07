@@ -1,23 +1,19 @@
 ﻿# CesiProgSys
 
 
-# Attendu du projet 
+# Project Expectations 
 
-## Livrable 1 : 
+## Delivrable 1 : 
 
+# Structures and Uses:
 
-# Structures et usages :
+To detect file modifications: hash comparison (md5 for speed)
 
-Pour détecter modification des fichiers : comparatif des hash (md5 pour rapidité)
+Creation of a console application followed by the implementation of a remote interface via tcp.
 
+Demonstrate progress.
 
-Création application console 
-Puis mise en place d'une interface déporté en vias tcp. 
-
-Montrer etat d'avancement. 
-
-
-Penser a une version qui fonctionne sur Windows et Linux
+Think about a version that works on Windows and Linux.
 
 ![image](https://user-images.githubusercontent.com/102410364/214019216-da5dd7c5-df74-4353-9773-92c86f4ed934.png)
 
@@ -25,39 +21,20 @@ Penser a une version qui fonctionne sur Windows et Linux
 
 [![](https://mermaid.ink/img/pako:eNpNUctKxEAQ_JVmvC5-QG6yCyq4IAT0kks700ka5uU8VmXZf_G635Efs-PqJs0cBqqqq2rmqHQwpBrl2BuHsfOdB5m7GKHFeqABkyHY3oAJxVMBHRJdKPO8UMocPJj6jyOY6dyz57SwXLWFy5gIzUo6nRP3rLH8LqAMD5hHiKEmOFwwSuCCuZLyIn4OOfMbWy7TWbSgR_SD0C3K8UNdRdyK7Z8F2DCslkhHy0AetvsdaMt6gfZzYogWC_UhOWjgiX39BCn4Kg8VPvItLOyW_JJm-p5TaMyZVpR7ytee2s7gKsijL5R61ARDwjjye6U5ViIXCkHRURapjXKUHLKRzzrO2k6VkRx1qpGroR4lc6c6fxIq1hLaL69VU1KljarRSJUdoxg41fRoM51-AL1ZqN0?type=png)](https://mermaid.live/edit#pako:eNpNUctKxEAQ_JVmvC5-QG6yCyq4IAT0kks700ka5uU8VmXZf_G635Efs-PqJs0cBqqqq2rmqHQwpBrl2BuHsfOdB5m7GKHFeqABkyHY3oAJxVMBHRJdKPO8UMocPJj6jyOY6dyz57SwXLWFy5gIzUo6nRP3rLH8LqAMD5hHiKEmOFwwSuCCuZLyIn4OOfMbWy7TWbSgR_SD0C3K8UNdRdyK7Z8F2DCslkhHy0AetvsdaMt6gfZzYogWC_UhOWjgiX39BCn4Kg8VPvItLOyW_JJm-p5TaMyZVpR7ytee2s7gKsijL5R61ARDwjjye6U5ViIXCkHRURapjXKUHLKRzzrO2k6VkRx1qpGroR4lc6c6fxIq1hLaL69VU1KljarRSJUdoxg41fRoM51-AL1ZqN0)
 
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
 
-App Sauvegarde C# dotnet core
-Version du dotnet a définir
-multithread
-Vérification des Hash pour vérifier modifications
-Possibilité de changer la langue
-Creation de logs
-Appli en CMD clic
-Multi plateform : Linux et Windows.
-Sensibilité à la casse
-Gestion des classes
-Interface graphique en remote tcp
+C# .NET Core Backup App
+.NET version to be defined
+Multithreaded
+Hash verification to check modifications
+Ability to change language
+Log creation
+Command line application 
+Multi-platform: Linux and Windows
+Case sensitivity
+Class management
+Remote TCP graphical interface
 
-Exemple de fonctionnement du projet:
+Example of how the project works:
 ```mermaid
 gitGraph
     commit
@@ -99,105 +76,103 @@ gitGraph
     merge dev tag:"v1.1.1"
 ```
 
-## Sujet avec contraintes :
+## Subject with constraints :
 
 ```
 Version 1.0
 
-Description du livrable 0 : Environnement de travail
-Votre équipe doit installer un environnement de travail respectant les contraintes imposées par ProSoft.
+Deliverable 0 description: Work environment
+Your team must plan a work environment that meets the constraints imposed by ProSoft.
 
-Le bon usage de l'environnement de travail et des contraintes imposées par la direction seront évalués tout au long du projet.
+The proper use of the work environment and the constraints imposed by management will be evaluated throughout the project.
 
-Une vigilance particulière sera portée sur :
+Particular attention will be paid to:
 
-la gestion de GIT (versioning)
+GIT management (versioning)
 
-les diagrammes UML à rendre 24 heures avant chaque livrable (Jalon)
+UML diagrams to be delivered 24 hours before each deliverable (Milestone)
 
-La qualité du code (absence de redondance dans les lignes de code)
+Code quality (absence of redundancy in code lines)
 
- 
+Deliverable 1 description: EasySave version 1.0
+The specifications for the first version of the software are as follows:
 
-Description du livrable 1 : EasySave version 1.0
-Le cahier des charges de la première version du logiciel est le suivant :
+The software is a Console application using .Net Core.
 
-Le logiciel est une application Console utilisant .Net Core.
+The software must allow up to 5 backup jobs to be created
 
-Le logiciel doit permettre de créer jusqu'à 5 travaux de sauvegarde
+A backup job is defined by
 
-Un travail de sauvegarde est défini par
+An appellation
 
-Une appellation
+A source directory
 
-Un répertoire source
+A target directory
 
-Un répertoire cible
+A type (full, differential)
 
-Un type (complet, différentiel)
+The software must be usable by English and French-speaking users at a minimum
 
-Le logiciel doit être utilisable à minima par des utilisateurs anglophones et Francophones
+The user can request the execution of one of the backup jobs or the sequential execution of all the jobs.
 
-L'utilisateur peut demander l'exécution d'un des travaux de sauvegarde ou l'exécution séquentielle de l'ensemble des travaux.
+The directories (sources and targets) can be on:
 
-Les répertoires (sources et cibles) pourront être sur :
+Local drives
 
-Des disques locaux
+External drives
 
-Des disques Externes
+Network drives
 
-Des Lecteurs réseaux
+All elements in the source directory are subject to backup
 
-Tous les éléments du répertoire source sont concernés par la sauvegarde
+Daily Log file:
 
-Fichier Log journalier :
+The software must write in real-time to a daily log file the history of the backup jobs' actions. The minimum information expected is:
 
-Le logiciel doit écrire en temps réel dans un fichier log journalier l'historique des actions des travaux de sauvegarde. Les informations minimales attendues sont :
+Timestamp
 
-Horodatage
+Backup job name
 
-Appellation du travail de sauvegarde
+Complete source file address (UNC format)
 
-Adresse complète du fichier Source (format UNC)
+Complete destination file address (UNC format)
 
-Adresse complète du fichier de destination (format UNC)
+File size
 
-Taille du fichier
+File transfer time in ms (negative if error)
 
-Temps de transfert du fichier en ms (négatif si erreur)
+Example content: Sample_log.pdf [pdf]
 
-Exemple de contenu: Sample_log.pdf [pdf]
+The software must record in real-time, in a single file, the status of the backup jobs. The information to be recorded for each backup job is:
 
-Le logiciel doit enregistrer en temps réel, dans un fichier unique, l'état d'avancement des travaux de sauvegarde. Les informations à enregistrer pour chaque travail de sauvegarde sont :
+Backup job name
 
-Appellation du travail de sauvegarde
+Timestamp
 
-Horodatage
+Backup job status (e.g., Active, Non-active...)
 
-Etat du travail de Sauvegarde (ex : Actif, Non Actif...)
+If the job is active:
 
-Si le travail est actif :
+Total number of eligible files
 
-Le nombre total de fichiers éligibles
+Size of files to transfer
 
-La taille des fichiers à transférer
+Progress
 
-La progression
+Number of remaining files
 
-Nombre de fichiers restants
+Size of remaining files
 
-Taille des fichiers restants
+Complete source file address being backed up
 
-Adresse complète du fichier Source en cours de sauvegarde
+Complete destination file address
 
-Adresse complète du fichier de destination
+Example content: Sample_state.pdf [pdf]
 
-exemple de contenu : Sample_state.pdf [pdf]
+The locations of the two files (daily log and status) must be studied to work on the clients' servers. Therefore, locations of the type "c:\temp" must be avoided.
 
-Les emplacements des deux fichiers (log journalier et état) devront être étudiés pour fonctionner sur les serveurs des clients. De ce fait, les emplacements du type « c:\temp\ » sont à proscrire.
+The files (daily log and status) and any configuration files will be in JSON format. To allow quick reading via Notepad, it is necessary to put line breaks between JSON elements. Pagination would be a plus.
 
-Les fichiers (log journalier et état) et les éventuels fichiers de configuration seront au format JSON. Pour permettre une lecture rapide via Notepad, il est nécessaire de mettre des retours à la ligne entre les éléments JSON. Une pagination serait un plus.
-
-Remarque importante : si le logiciel donne satisfaction, la direction vous demandera de développer une version 2.0 utilisant une interface graphique WPF (basée sur l'architecture MVVM)
-
+Important note: if the software is satisfactory, management will ask you to develop a version 2.0 using a WPF graphical interface (based on the MVVM architecture).
  ```
+

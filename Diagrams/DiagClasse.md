@@ -1,4 +1,4 @@
-﻿```mermaid
+﻿ ```mermaid
 classDiagram
 class Program{
 +main()
@@ -7,21 +7,18 @@ class IViewCli{
 +startProgram()
 +menu()
 +help()
-+read(): String
 +showConfig()
 }
 class ViewCliFr{
 +startProgram()
 +menu()
 +help()
-+read() : String
 +showConfig()
 }
 class ViewCliEn{
 +startProgram()
 +menu()
 +help()
-+read() : String
 +showConfig()
 }
 class ViewModelCli{
@@ -69,7 +66,7 @@ class Config{
 -retentionTime : Int
 +writeConfig()
 +readConfig()
-+cleanConfig
++cleanConfig()
 }
 class Languages{
 <<enumeration>>
@@ -130,11 +127,27 @@ FullBackup --> Hash
 DifferentialBackup --> Hash
 FullBackup --> SevenZip
 DifferentialBackup --> SevenZip
+
+
+class info{
+    -DateStart : Date
+    -Timelaps : Nanoseconde
+    -Name : String
+    -DirSource : String 
+    -DirDest : String
+    -CurrentSource : String
+    -CurrentDest : String
+    -State : String (checkingAuth, end, active, error)
+    -TotalFilesToCopy : int
+    -TotalFilesSize : int
+    -NbFilesLeftToDo : int
+    -Progression : int (%)
+}
 ```
-
-
-
-
+//TODO update le diag classe pour inclure le fait que la ckasse realtimelogs doit recupérer les infos depuis les classes de backup, puis une fois la backup fini transmettre les infos à la classe dailylogs
+//TODO Le backup manager doit aussi recup des infos depuis le viewmodelCli, pour savoir cb de threads il doit créer notamment
+//TODO ou peux etre pas ;.. je sais pas
+//Todo IBackup ne doit pas communiquer avec Config ? enfin je pense
 
 Class manager
 -> class backup abstraite (plusieurs threads, géré par manager) -> nom, répertoire source et cible
