@@ -62,11 +62,12 @@ Change configuration
 ```mermaid
 sequenceDiagram
 Actor User
-View -->>User: Show delete Menu
-User ->>View: Enter the name of the Backup to delete
+View -->>User: Choose the setting to modified
+User ->>View: Show Settings
 View ->>ViewModel: Send Variable values
 ViewModel -->>View: Send reply 
-ViewModel ->>Model: Delete the selected Backup
+ViewModel ->>Model: Change the setting with the chosen setting
+Model->>Model: Write in the setting file
 Model -->>ViewModel: Send reply
 View -->>User: Send reply
 View -->>User: Show Main Menu
