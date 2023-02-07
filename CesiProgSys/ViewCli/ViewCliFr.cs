@@ -301,6 +301,7 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("Lancement définitif de l'affichage des configurations");
             Config.writeConfig(@".\\CONF\conf.json");
             Config.readConfig(@".\\CONF\conf.json");
+            menu();
 
         }
     }

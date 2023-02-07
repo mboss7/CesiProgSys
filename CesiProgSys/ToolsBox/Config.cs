@@ -60,10 +60,10 @@ namespace CesiProgSys.ToolsBox
 
         public class InfoConf
         {
+           
             public  string defaultSaveSource { get; set; }
-
-            public DateTime Date { get; set; }
-            public TimeSpan TimeLaps { get; set; }
+            public string defaultSaveTarget { get; set; }
+            
         }
 
         public void creatConfList()
