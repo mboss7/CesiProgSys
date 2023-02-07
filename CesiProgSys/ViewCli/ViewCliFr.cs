@@ -107,12 +107,12 @@ namespace CesiProgSys.ViewCli
         public void configBackup()
         {
             Console.Clear();
-            Console.WriteLine("1. Sauvegarde complète");
-            Console.WriteLine("2. Sauvegarde différentielle");
-            Console.WriteLine("3. Retour");
-            Console.WriteLine("4. Quitter");
+            Console.WriteLine("1. Full backup");
+            Console.WriteLine("2. Differential backup");
+            Console.WriteLine("3. Return");
+            Console.WriteLine("4. Exit");
         
-            Console.Write("Entrer votre choix : ");
+            Console.Write("Enter your choice : ");
             int choiceBackup = Convert.ToInt32(Console.ReadLine());
             
             if (choiceBackup > 0 && choiceBackup <= 3)
@@ -132,12 +132,12 @@ namespace CesiProgSys.ViewCli
             }
             if (choiceBackup == 4)
             {
-                Console.WriteLine("Sortie du programme...");
+                Console.WriteLine("Exiting the program...");
                 Environment.Exit(0);
             }
             else
             {
-                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                Console.WriteLine("Invalid choice. Try again.");
                 configBackup();
             }
         }
@@ -145,11 +145,11 @@ namespace CesiProgSys.ViewCli
         public void startBackup()
         {
             Console.Clear();
-            Console.WriteLine("1. Validation du lancement d'une sauvegarde");
-            Console.WriteLine("2. Retour");
-            Console.WriteLine("3. Quitter");
+            Console.WriteLine("1. Validation of the start of a backup");
+            Console.WriteLine("2. Return");
+            Console.WriteLine("3. Exit");
             
-            Console.Write("Entrer votre choix : ");
+            Console.Write("Enter your choice : ");
             int choiceBackup = Convert.ToInt32(Console.ReadLine());
                 
             if (choiceBackup > 0 && choiceBackup <= 2)
@@ -166,12 +166,12 @@ namespace CesiProgSys.ViewCli
             }
             if (choiceBackup == 3)
             {
-                Console.WriteLine("Sortie du programme...");
+                Console.WriteLine("Exiting the program...");
                 Environment.Exit(0);
             }
             else
             {
-                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                Console.WriteLine("Invalid choice. Try again.");
                 startBackup();
             }
         }
@@ -179,11 +179,11 @@ namespace CesiProgSys.ViewCli
         public void showConfig()
         {
             Console.Clear();
-            Console.WriteLine("1. Validation de l'affichage des configurations");
-            Console.WriteLine("2. Retour");
-            Console.WriteLine("3. Quitter");
+            Console.WriteLine("1. Validation of the display of configurations");
+            Console.WriteLine("2. Return");
+            Console.WriteLine("3. Exit");
             
-            Console.Write("Entrer votre choix : ");
+            Console.Write("Enter your choice : ");
             int choiceBackup = Convert.ToInt32(Console.ReadLine());
                 
             if (choiceBackup > 0 && choiceBackup <= 2)
@@ -200,12 +200,12 @@ namespace CesiProgSys.ViewCli
             }
             if (choiceBackup == 3)
             {
-                Console.WriteLine("Sortie du programme...");
+                Console.WriteLine("Exiting the program...");
                 Environment.Exit(0);
             }
             else
             {
-                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                Console.WriteLine("Invalid choice. Try again.");
                 showConfig();
             }
         }
@@ -214,42 +214,42 @@ namespace CesiProgSys.ViewCli
         {
             //code
             Console.Clear();
-            Console.WriteLine("Change les configurations");
+            Console.WriteLine("Change configurations");
         }
 
         public void help()
         {
             //code
             Console.Clear();
-            Console.WriteLine("5. Aide");
+            Console.WriteLine("5. Help");
         }
 
         public void fullBackup()
         {
             //code
             Console.Clear();
-            Console.WriteLine("Affiche full backup");
+            Console.WriteLine("Show full backup");
         }
 
         public void diffBackup()
         {
             //code
             Console.Clear();
-            Console.WriteLine("Affiche diff backup");
+            Console.WriteLine("Show diff backup");
         }
 
         public void startBackupValid()
         {
             //code
             Console.Clear();
-            Console.WriteLine("Lance définitivement la backup");
+            Console.WriteLine("Definitely start the backup");
         }
 
         public void showConfigValid()
         {
             //code
             Console.Clear();
-            Console.WriteLine("Lance définitivement l'affichage des configurations");
+            Console.WriteLine("Definitely starts the configuration display");
         }
     }
 }
