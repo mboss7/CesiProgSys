@@ -1,11 +1,18 @@
 using System;
 using CesiProgSys.ToolsBox;
+using CesiProgSys.ViewModel;
 
 
 namespace CesiProgSys.ViewCli
 {
     public class ViewCliFr : IViewCli
     {
+        private ViewModelCli vmCLI;
+
+        public ViewCliFr()
+        {
+            vmCLI = new ViewModelCli();
+        }
         public void menu()
         {
             Console.Clear();
@@ -17,7 +24,14 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("6. Quitter");
 
             Console.Write("Entrer votre choix : ");
-            int choice = Convert.ToInt32(Console.ReadLine());
+            int choice = 0;
+            try
+            {
+                choice = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+            }
 
             if (choice > 0 && choice <= 5)
             {
@@ -115,8 +129,12 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("4. Quitter");
         
             Console.Write("Entrer votre choix : ");
-            int choiceBackup = Convert.ToInt32(Console.ReadLine());
-            
+            int choiceBackup = 0;
+            try
+            {
+                choiceBackup = Convert.ToInt32(Console.ReadLine());
+            }catch(FormatException){}
+
             if (choiceBackup > 0 && choiceBackup <= 3)
             {
                 switch (choiceBackup)
@@ -152,8 +170,12 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("3. Quitter");
             
             Console.Write("Entrer votre choix : ");
-            int choiceBackup = Convert.ToInt32(Console.ReadLine());
-                
+            int choiceBackup = 0;
+            try
+            {
+                choiceBackup = Convert.ToInt32(Console.ReadLine());
+            }catch(FormatException){}
+
             if (choiceBackup > 0 && choiceBackup <= 2)
             {
                 switch (choiceBackup)
@@ -186,8 +208,12 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("3. Quitter");
             
             Console.Write("Entrer votre choix : ");
-            int choiceBackup = Convert.ToInt32(Console.ReadLine());
-                
+            int choiceBackup = 0;
+            try
+            {
+                choiceBackup = Convert.ToInt32(Console.ReadLine());
+            }catch(FormatException){}
+
             if (choiceBackup > 0 && choiceBackup <= 2)
             {
                 switch (choiceBackup)
@@ -276,21 +302,73 @@ namespace CesiProgSys.ViewCli
         {
             //code
             Console.Clear();
-            Console.WriteLine("Affichage de la sauvegarde complète");
-        }
+            Console.WriteLine("Choisissez un nom pour la sauvegarde complète :");
+            vmCLI.name = Console.ReadLine();
+            while (string.IsNullOrEmpty(vmCLI.sourceDir))
+            {
+                Console.WriteLine("Choisissez une source :");
+                vmCLI.sourceDir = Console.ReadLine();
+            }
+
+            while (string.IsNullOrEmpty(vmCLI.targetDir))
+            {
+                Console.WriteLine("Choisissez une cible :");
+                vmCLI.targetDir = Console.ReadLine();            
+            }
+
+            vmCLI.instantiateFullBackup();
+            menu();        }
 
         public void diffBackup()
         {
-            //code
             Console.Clear();
-            Console.WriteLine("Affichage de la sauvegarde différentielle");
+            Console.WriteLine("Choisissez un nom pour la sauvegarde différentiel :");
+            vmCLI.name = Console.ReadLine();
+            while (string.IsNullOrEmpty(vmCLI.sourceDir))
+            {
+                Console.WriteLine("Choisissez une source :");
+                vmCLI.sourceDir = Console.ReadLine();
+            }
+
+            while (string.IsNullOrEmpty(vmCLI.targetDir))
+            {
+                Console.WriteLine("Choisissez une cible :");
+                vmCLI.targetDir = Console.ReadLine();            
+            }
+
+            vmCLI.instantiateDiffBackup();
+            menu();
         }
 
         public void startBackupValid()
         {
-            //code
             Console.Clear();
-            Console.WriteLine("Lancement définitif de la sauvegarde");
+            List<string> listNames = vmCLI.getThreadsNames();
+            for (int i = 0; i < listNames.Count; i++)
+            {
+                Console.WriteLine("{0} {1}", i+1, listNames[i]);
+            }
+
+            int input = 0;
+            try
+            {
+                input = Convert.ToInt32(Console.ReadLine()) - 1;
+            }
+            catch (FormatException)
+            {
+                input = -1;
+            }
+
+            if (input <= -1 || input >= listNames.Count)
+            {
+                Console.WriteLine("Mauvais input");
+                menu();
+            }
+            else
+            {
+                vmCLI.startBackup(listNames[input]);
+            }
+            menu();
         }
 
         public void showConfigValid()
@@ -299,8 +377,8 @@ namespace CesiProgSys.ViewCli
          
             Console.Clear();
             Console.WriteLine("Lancement définitif de l'affichage des configurations");
-            Config.writeConfig(@".\\CONF\conf.json");
-            Config.readConfig(@".\\CONF\conf.json");
+            // Config.writeConfig(@".\\CONF\conf.json");
+            // Config.readConfig(@".\\CONF\conf.json");
             menu();
 
         }

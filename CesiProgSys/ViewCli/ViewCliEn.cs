@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using CesiProgSys.ToolsBox;
 using CesiProgSys.ViewModel;
 
 namespace CesiProgSys.ViewCli
@@ -383,6 +384,9 @@ namespace CesiProgSys.ViewCli
             //code
             Console.Clear();
             Console.WriteLine("Definitely starts the configuration display");
+            // Config.writeConfig(@".\\CONF\conf.json");
+            // Config.readConfig(@".\\CONF\conf.json");
+            menu();
         }
     }
 }
