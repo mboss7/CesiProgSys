@@ -222,6 +222,17 @@ namespace CesiProgSys.ViewCli
             //code
             Console.Clear();
             Console.WriteLine("Aide : \n");
+            Console.WriteLine(" .----------------.\n"+ 
+                              "| .--------------. |\n"+
+                "| |    ______    | |\n"+
+                "| |   / _ __ `.  | |\n"+
+                "| |  |_/____) |  | |\n"+
+                "| |    /  ___.'  | |\n"+
+                "| |    |_|       | |\n"+
+                "| |    (_)       | |\n"+
+                "| |              | |\n"+
+                "| '--------------' |\n"+
+                "'----------------' \n");
             Console.WriteLine("Pour configurer une sauvegarde complète : Taper 1. Puis 1.");
             Console.WriteLine("Pour configurer une sauvegarde différentielle : Taper 1. Puis 2.");
             Console.WriteLine("Pour lancer une sauvegarde : Taper 2. Puis 1.");
@@ -255,7 +266,7 @@ namespace CesiProgSys.ViewCli
             else
             {
                 Console.WriteLine("Choix invalide. Essayez à nouveau.");
-                showConfig();
+                help();
             }
         }
 
