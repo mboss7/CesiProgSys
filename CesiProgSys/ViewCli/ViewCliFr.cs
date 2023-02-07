@@ -1,4 +1,6 @@
 using System;
+using CesiProgSys.ToolsBox;
+
 
 namespace CesiProgSys.ViewCli
 {
@@ -294,8 +296,12 @@ namespace CesiProgSys.ViewCli
         public void showConfigValid()
         {
             //code
+         
             Console.Clear();
             Console.WriteLine("Lancement définitif de l'affichage des configurations");
+            Config.writeConfig(@".\\CONF\conf.json");
+            Config.readConfig(@".\\CONF\conf.json");
+
         }
     }
 }
