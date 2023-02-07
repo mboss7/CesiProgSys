@@ -1,15 +1,18 @@
 ﻿
 using Newtonsoft.Json;
 
-// Tool convert string to Json
-public class JsonLog
+namespace CesiProgSys.ToolsBox
 {
-
-    public static string stringToJson(object obj)
+// Tool convert string to Json
+    public class JsonLog
     {
-        //JsonLog backup = new JsonLog("LogType", DateTime.Now, "Sample_log.pdf [pdf]", @"\\server\source\Sample_log.pdf", @"\\server\destination\Sample_log.pdf", 10000, 500);
-        string json = JsonConvert.SerializeObject(obj);
-        // Console.WriteLine(json);
-        return json;
+
+        public static string stringToJson(object obj)
+        {
+            //JsonLog backup = new JsonLog("LogType", DateTime.Now, "Sample_log.pdf [pdf]", @"\\server\source\Sample_log.pdf", @"\\server\destination\Sample_log.pdf", 10000, 500);
+            string json = JsonConvert.SerializeObject(obj);
+            // Console.WriteLine(json);
+            return json;
+        }
     }
 }

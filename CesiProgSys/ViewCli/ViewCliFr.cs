@@ -228,28 +228,28 @@ namespace CesiProgSys.ViewCli
         {
             //code
             Console.Clear();
-            Console.WriteLine("Affiche full backup");
+            Console.WriteLine("Affichage de la sauvegarde complète");
         }
 
         public void diffBackup()
         {
             //code
             Console.Clear();
-            Console.WriteLine("Affiche diff backup");
+            Console.WriteLine("Affichage de la sauvegarde différentielle");
         }
 
         public void startBackupValid()
         {
             //code
             Console.Clear();
-            Console.WriteLine("Lance définitivement la backup");
+            Console.WriteLine("Lancement définitif de la sauvegarde");
         }
 
         public void showConfigValid()
         {
             //code
             Console.Clear();
-            Console.WriteLine("Lance définitivement l'affichage des configurations");
+            Console.WriteLine("Lancement définitif de l'affichage des configurations");
         }
     }
 }

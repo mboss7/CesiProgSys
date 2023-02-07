@@ -6,12 +6,17 @@ namespace CesiProgSys.LOG
 
     public class RealTimeLogs : ILogs
     {
+        //create List for log informations
         public static List<Info> listInfo;
-
+        
+        // condition for loop while 
         public static bool flagRtl = true;
 
+        
+        //Mutex for manage 
         public static Mutex mut = new Mutex();
-            // start new thread when listInfo is not null  
+        
+        // start new thread when listInfo is not null  
         public static void startThread()
         {
 
@@ -20,12 +25,12 @@ namespace CesiProgSys.LOG
 
 
         }
-
+        // builder for RealTimeLogs
         public RealTimeLogs()
         {
             listInfo = new List<Info>();
         }
-
+        // Start Log for log generate
         public async void startLog()
         {
             DirectoryInfo target = new DirectoryInfo("./LOGS/");
@@ -60,7 +65,7 @@ namespace CesiProgSys.LOG
             }
         }
 
-
+        // Log type info 
         public async Task logInfo(List<string> toPrint)
         {
             if (File.Exists("./LOGS/RealTimeLogsInfo.json"))
@@ -72,7 +77,7 @@ namespace CesiProgSys.LOG
             }
         }
 
-
+        // Log type error 
         public async Task logError(List<string> toPrint)
         {
             if (File.Exists("./LOGS/RealTimeLogsError.json"))
