@@ -2,15 +2,15 @@
 ```mermaid
 sequenceDiagram
 Actor User
-User->>View: Select parameter
 View -->>User: Show Menu
+User->>View: Select parameter
 ```
 Create a Backup
 ```mermaid
 sequenceDiagram
 Actor User
 View -->>User: Show Backup creation Menu
-User ->>View: Enter selected Menu (Number)
+User ->>View: Enter selected Menu
 View ->>ViewModel: Send Variable values
 ViewModel -->>View: Send reply 
 ViewModel ->>Model: Write changes
@@ -21,8 +21,8 @@ Editing a Backup
 ```mermaid
 sequenceDiagram
 Actor User
-View -->>User: Enter Variable Values
 User ->>View: Show Backup editing Menu
+View -->>User: Enter Variable Values
 View ->>ViewModel: Send Variable values
 ViewModel -->>View: Send reply 
 ViewModel ->>Model: Write changes
@@ -35,6 +35,7 @@ Deleting a Backup
 ```mermaid
 sequenceDiagram
 Actor User
+
 View -->>User: Show delete Menu
 User ->>View: Enter the name of the Backup to delete
 View ->>ViewModel: Send Variable values
@@ -48,6 +49,7 @@ Launch a Backup
 ```mermaid
 sequenceDiagram
 Actor User
+
 View -->>User: Show Backup list to launch
 User ->>View: Select the number of Backup to Backup
 View ->>ViewModel: Send Variable values
@@ -62,6 +64,7 @@ Change configuration
 ```mermaid
 sequenceDiagram
 Actor User
+
 View -->>User: Choose the setting to modified
 User ->>View: Show Settings
 View ->>ViewModel: Send Variable values
@@ -76,6 +79,6 @@ Exit the CLI
 ```mermaid
 sequenceDiagram
 Actor User
-User -->>ViewModel: Exit
+User ->>ViewModel: Exit
 ```
 
