@@ -223,18 +223,40 @@ namespace CesiProgSys.ViewCli
             Console.Clear();
             Console.WriteLine("Aide : \n");
             Console.WriteLine("Pour configurer une sauvegarde complète : Taper 1. Puis 1. \n");
-            Console.WriteLine("Pour configurer une sauvegarde différentielle : taper 1. Puis 2. \n");
-            Console.WriteLine("Pour lancer une sauvegarde : taper 2. Puis 1. \n");
-            Console.WriteLine("Pour afficher les configurations : taper 3. Puis 1. \n");
-            Console.WriteLine("Pour changer la langue : taper 4. Puis 1. Puis .... \n");
-            Console.WriteLine("Pour modifier la source des sauvegardes par défaut : taper 4. Puis 2. Puis 1. \n");
-            Console.WriteLine("Pour nettoyer la source des sauvegardes par défaut : taper 4. Puis 2. Puis 2. \n");
-            Console.WriteLine("Pour modifier la cible des sauvegardes par défaut : taper 4. Puis 3. Puis 1. \n");
-            Console.WriteLine("Pour nettoyer la cible des sauvegardes par défaut : taper 4. Puis 3. Puis 2. \n");
-            Console.WriteLine("Pour nettoyer la source récente des sauvegardes : taper 4. Puis 4. Puis 1. \n");
-            Console.WriteLine("Pour nettoyer la cible récente des sauvegardes : taper 4. Puis 5. Puis 1. \n");
-            Console.WriteLine("Pour modifier le temps de conservation : taper 4. Puis 6. Puis 1. \n");
-            Console.WriteLine("Pour nettoyer entièrement les configurations : taper 4. Puis 7. Puis 1. \n");
+            Console.WriteLine("Pour configurer une sauvegarde différentielle : taper 1. Puis 2.");
+            Console.WriteLine("Pour lancer une sauvegarde : taper 2. Puis 1.");
+            Console.WriteLine("Pour afficher les configurations : taper 3. Puis 1.");
+            Console.WriteLine("Pour changer la langue : taper 4. Puis 1. Puis ....");
+            Console.WriteLine("Pour modifier la source des sauvegardes par défaut : taper 4. Puis 2. Puis 1.");
+            Console.WriteLine("Pour nettoyer la source des sauvegardes par défaut : taper 4. Puis 2. Puis 2.");
+            Console.WriteLine("Pour modifier la cible des sauvegardes par défaut : taper 4. Puis 3. Puis 1.");
+            Console.WriteLine("Pour nettoyer la cible des sauvegardes par défaut : taper 4. Puis 3. Puis 2.");
+            Console.WriteLine("Pour nettoyer la source récente des sauvegardes : taper 4. Puis 4. Puis 1.");
+            Console.WriteLine("Pour nettoyer la cible récente des sauvegardes : taper 4. Puis 5. Puis 1.");
+            Console.WriteLine("Pour modifier le temps de conservation : taper 4. Puis 6. Puis 1.");
+            Console.WriteLine("Pour nettoyer entièrement les configurations : taper 4. Puis 7. Puis 1.");
+            
+            Console.WriteLine("1. Retour");
+            Console.WriteLine("2. Quitter");
+            
+            Console.Write("Entrer votre choix : ");
+            int choiceBackup = Convert.ToInt32(Console.ReadLine());
+                
+            if (choiceBackup == 1)
+            {
+                menu();
+                return;
+            }
+            if (choiceBackup == 2)
+            {
+                Console.WriteLine("Sortie du programme...");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                showConfig();
+            }
         }
 
         public void fullBackup()
