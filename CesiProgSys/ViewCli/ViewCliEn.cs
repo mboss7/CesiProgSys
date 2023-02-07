@@ -249,6 +249,7 @@ namespace CesiProgSys.ViewCli
             //code
             Console.Clear();
             Console.WriteLine("Change configurations");
+            Environment.Exit(0);
         }
 
         public void help()
