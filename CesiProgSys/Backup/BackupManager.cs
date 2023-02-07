@@ -1,27 +1,47 @@
 ﻿namespace CesiProgSys.Backup
 {
-    public class BackupManager
+    public sealed class BackupManager
     {
-
-        private List<Thread> threadList { get; set; }
-
-        public BackupManager()
+        private BackupManager()
         {
-            threadList = new List<Thread>();
+        }
+
+        private static BackupManager instance;
+
+        public static BackupManager Instance()
+        {
+            if (instance == null)
+            { 
+                instance = new BackupManager(); 
+            }
+            return instance;
         }
         
-        public void instantiate(string name)
+        public Thread instantiate(bool typeBackup)
         {
-            Thread temp = new Thread(FullBackup.startThread);
-            temp.Name = name;
-            
-            threadList.Add(temp);
+            Thread temp;
+            if (typeBackup)
+            {
+                temp = new Thread(DifferentialBackup.startThread);
+            }
+            else
+            {
+                temp = new Thread(FullBackup.startThread);
+            }
+
             temp.Start();
+
+            return temp;
         }
 
-        private void finish()
+        public void start(IBackup b)
         {
-            
+            b.setFlagAuth();
+            b.setFlagStart();
+        }
+        private void finish(Thread t)
+        {
+            t.Interrupt();
         }
     }
 }
