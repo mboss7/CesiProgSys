@@ -22,7 +22,7 @@ namespace CesiProgSys.Backup
             // unauthorizedDirectories = new List<string>();
             // unauthorizedFiles = new List<string>();
             authorizedDirAndFiles = new List<Tuple<string, List<FileInfo>>>();
-            
+
             inf = new Info();
             
             ViewModelCli.marre.Add(new Tuple<Thread, IBackup>(Thread.CurrentThread, this));
