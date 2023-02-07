@@ -27,6 +27,7 @@ namespace CesiProgSys.LOG
         }
         // builder for RealTimeLogs
         public RealTimeLogs()
+        
         {
             listInfo = new List<Info>();
         }
