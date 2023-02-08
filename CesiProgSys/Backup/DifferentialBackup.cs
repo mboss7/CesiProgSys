@@ -14,9 +14,6 @@ namespace CesiProgSys.Backup
         private Info inf;
         private List<Tuple<string, List<FileInfo>>> authorizedDirAndFiles;
 
-        public bool flagAuth = true;
-        public bool flagStart = true;
-        
         public Mutex mutex = new Mutex();
 
         public void blockMutex()
@@ -225,27 +222,22 @@ namespace CesiProgSys.Backup
 
             return toReturn;
         }
-
-        public void setFlagAuth()
-        {
-            flagAuth = false;
-        }
-        public void setFlagStart()
-        {
-            flagStart = false;
-        }
         public static void startThread()
         {
             DifferentialBackup db = new DifferentialBackup();
+
+            ViewModelCli.mutex.WaitOne();
             string[] array= ViewModelCli.ouahMonCerveauEstPartiLoin.Find(tuple => tuple.Item1 == Thread.CurrentThread).Item2;
+            ViewModelCli.mutex.ReleaseMutex();
             
             db.InitBackup(array[0], array[1], array[2]);
-            while (db.flagAuth) {}
             
+            db.blockMutex();
+            db.releaseMutex();
+            
+            ViewModelCli.marre.Remove(ViewModelCli.marre.Find(tuple => tuple.Item1 == Thread.CurrentThread));
             db.checkAutorizations(array[1]);
-
-            while (db.flagStart) {}
-
+            
             RealTimeLogs.mut.WaitOne();
             db.inf.Date = DateTime.Now;
             RealTimeLogs.mut.ReleaseMutex();
@@ -255,7 +247,6 @@ namespace CesiProgSys.Backup
             RealTimeLogs.mut.WaitOne();
             db.inf.state = State.SUCCESS;
             RealTimeLogs.mut.ReleaseMutex();
-            ViewModelCli.marre.Remove(ViewModelCli.marre.Find(tuple => tuple.Item1 == Thread.CurrentThread));
         }
     }
 }

@@ -23,10 +23,7 @@ namespace CesiProgSys.Backup
         {
             mutex.ReleaseMutex();
         }
-        
-        public void setFlagAuth(){}
-        public void setFlagStart(){}
-        
+
         private Info inf;
         private List<Tuple<string, List<FileInfo>>> authorizedDirAndFiles;
         
@@ -237,9 +234,9 @@ namespace CesiProgSys.Backup
             fb.blockMutex();
             fb.releaseMutex();
             
+            ViewModelCli.marre.Remove(ViewModelCli.marre.Find(tuple => tuple.Item1 == Thread.CurrentThread));
             fb.checkAutorizations(array[1]);
             
-
             RealTimeLogs.mut.WaitOne();
             fb.inf.Date = DateTime.Now;
             RealTimeLogs.mut.ReleaseMutex();
@@ -249,7 +246,6 @@ namespace CesiProgSys.Backup
             RealTimeLogs.mut.WaitOne();
             fb.inf.state = State.SUCCESS;
             RealTimeLogs.mut.ReleaseMutex();
-            ViewModelCli.marre.Remove(ViewModelCli.marre.Find(tuple => tuple.Item1 == Thread.CurrentThread));
         }
     }
 }

@@ -36,6 +36,7 @@ namespace CesiProgSys.LOG
                 target.Create();
             while (flagRtl)
             {
+                Thread.Sleep(500);
                 List<string> Info = new List<string>();
                 List<string> Error = new List<string>();
                 mut.WaitOne();

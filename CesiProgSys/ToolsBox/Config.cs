@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json;
 
 namespace CesiProgSys.ToolsBox
@@ -6,13 +5,6 @@ namespace CesiProgSys.ToolsBox
 {
     public class Config
     {
-        // Enumeration for the supported languages
-        public enum Language
-        {
-            French,
-            English,
-        }
-
         // Properties for the configuration data
         public Language language { get; set; }
         public string defaultSaveSource { get; set; }
