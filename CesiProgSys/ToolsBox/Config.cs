@@ -21,6 +21,8 @@ namespace CesiProgSys.ToolsBox
         public Dictionary<string, string> recentSaveTarget { get; set; }
         public int retentionTime { get; set; }
 
+        public static string TypeLogs = "xml"; // true json false xml
+
         // Method to write the configuration data to a JSON file
         public static void writeConfig(string filePath)
         {

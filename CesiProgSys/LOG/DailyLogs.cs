@@ -1,17 +1,27 @@
 
+using System.Runtime.InteropServices.JavaScript;
 using CesiProgSys.ToolsBox;
 
  namespace CesiProgSys.LOG
  {
-     public class DailyLogs //: ILogs
+     public class DailyLogs : Logs
      {
-        // create list of info object who trigg the thread methode  
-        public static List<Info> listInfo;
-        public static bool flagDl = true;
+         // condition for loop while 
+         public static bool flagDl = true;
 
-        public DailyLogs()
+         public static List<Info> listInfo;
+
+         private string pathInfo;
+         private string pathError;
+
+         public DailyLogs()
         {
             listInfo = new List<Info>();
+            DateTime date = DateTime.Today;
+            string d = date.Year + "-" + date.Month + "-" + date.Day + "-" + date.Hour + "-" + date.Minute;
+            
+            pathInfo = "./LOGS/DailyLogsInfo-" + d + ".";
+            pathError = "./LOGS/DailyLogsError-" + d + ".";
         }
 
         // start new thread when listInfo is not null  
@@ -22,55 +32,45 @@ using CesiProgSys.ToolsBox;
         }
 
         //Start log management        
-        public async void  startLog()
+        public async override void startLog()
         {
             while (flagDl)
             {
-                Thread.Sleep(500);
-
-                List<string> jsonInfo = new List<string>();
-                List<string> jsonError = new List<string>();
+                List<string> Info = new List<string>();
+                List<string> Error = new List<string>();
                 
                 RealTimeLogs.mut.WaitOne();
                 foreach (Info inf in listInfo)
                 {
-                    if (inf.LogType)
+                    if (Config.TypeLogs.Equals("json"))
                     {
-                        jsonInfo.Add(JsonLog.stringToJson(inf));
+                        if (inf.LogType)
+                        {
+                            Info.Add(JsonLog.stringToJson(inf));
+                        }
+                        else
+                        {
+                            Error.Add(JsonLog.stringToJson(inf));
+                        }
                     }
                     else
                     {
-                        jsonError.Add(JsonLog.stringToJson(inf));
+                        if (inf.LogType)
+                        {
+                            Info.Add(Xml.serialize(inf));
+                        }
+                        else
+                        {
+                            Error.Add(Xml.serialize(inf));
+                        }
                     }
                 }
                 RealTimeLogs.mut.ReleaseMutex();
                 
-                if(jsonInfo.Any())
-                    await logInfo(jsonInfo);
-                if(jsonError.Any())
-                    await logError(jsonError);
-            }
-        }
-
-        public async Task logInfo(List<string> toPrint)
-        {
-            if (File.Exists("./LOGS/DailyLogsInfo.json"))
-                File.Delete("./LOGS/DailyLogsInfo.json");
-            using StreamWriter file = new(@".\\LOGS\DailyLogsInfo.json", append: true);
-            foreach (string s in toPrint)
-            {
-                await file.WriteLineAsync(s);
-            }
-        }
-        
-        public async Task logError(List<string> toPrint)
-        {
-            if (File.Exists("./LOGS/DailyLogsError.json"))
-                File.Delete("./LOGS/DailyLogsError.json");
-            using StreamWriter file = new(@".\\LOGS\DailyLogsError.json", append: true);
-            foreach (string s in toPrint)
-            {
-                await file.WriteLineAsync(s);
+                if(Info.Any())
+                    await log(Info,pathInfo + Config.TypeLogs);
+                if(Error.Any())
+                    await log(Error,pathError + Config.TypeLogs);
             }
         }
      }
