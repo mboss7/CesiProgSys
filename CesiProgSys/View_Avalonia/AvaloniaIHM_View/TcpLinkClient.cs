@@ -11,64 +11,32 @@ namespace AvaloniaIHM_View
     // Tcp client 
     internal class TcpLinkClient
     {
-        public string serveur;
-        public int port;
+        string ipAddress;
+        int port;
         
 
 
         // Constructor 
         public TcpLinkClient()
         {
-         serveur = "127.0.0.1";
+         ipAddress = "127.0.0.1";
          port = 0;
         }
 
 
-
-        public void tcpClientLink()
+        public async void TcpClientLink(string ipAddress, int port)
         {
-            try
-            {
-                // on se connecte au service
-                using (TcpClient tcpClient = new TcpClient(serveur, port))
-                {
-                    using (NetworkStream networkStream = tcpClient.GetStream())
-                    {
-                        using (StreamReader reader = new StreamReader(networkStream))
-                        {
-                            using (StreamWriter writer = new StreamWriter(networkStream))
-                            {
-                                // flux de sortie non bufferisé
-                                writer.AutoFlush = true;
-                                // boucle demande - réponse
-                                while (true)
-                                {
-                                    string demande;
-                                    string réponse;
-                                    // la demande vient du clavier
-                                    Console.Write("Demande (bye pour arrêter) : ");
-                                    demande = Console.ReadLine();
-                                    // fini ?
-                                    if (demande.Trim().ToLower() == "bye")
-                                        break;
-                                    // on envoie la demande au serveur
-                                    writer.WriteLine(demande);
-                                    // on lit la réponse du serveur
-                                    réponse = reader.ReadLine();
-                                    // on traite la réponse
-                                   
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                // erreur
+            Console.WriteLine(ipAddress, port);
+            using TcpClient client = new();
+            await client.ConnectAsync(ipAddress, port);
+            await using NetworkStream stream = client.GetStream();
 
-            }
-        }
+            var buffer = new byte[1_024];
+            int received = await stream.ReadAsync(buffer);
+
+            var message = Encoding.UTF8.GetString(buffer, 0, received);
+            Console.WriteLine($"Message received: \"{message}\"");
+         }
     }
 }    
 
