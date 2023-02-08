@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using System;
+using System.Collections.Generic;
 
 namespace AvaloniaIHM_View
 {
@@ -13,10 +14,11 @@ namespace AvaloniaIHM_View
         static void Main()
         {
 
+          
             // run TCP CLIENT : 
             TcpLinkClient tcpLinstenok = new TcpLinkClient();
 
-            tcpLinstenok.TcpClientLink("127.0.0.1", 8080);
+            tcpLinstenok.TcpClientLinkSocket("127.0.0.1", 8080);
 
             Console.WriteLine("It's Works ! ");
             Console.ReadLine();

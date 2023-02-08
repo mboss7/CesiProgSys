@@ -58,6 +58,30 @@ namespace CesiProgSys.ViewModel.TcpIp
             {
                 listener.Stop();
             }
+            
+            
+            // TcpListener Socket : https://learn.microsoft.com/fr-fr/dotnet/fundamentals/networking/sockets/tcp-classes
+            
+            //var listener = new TcpListener(IPAddress.Loopback, 5000);
+            var ep = new IPEndPoint(IPAddress.Loopback, 5000);
+            //using var socket = new Socket(ep.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            //var listener = new TcpListener(IPAddress.Loopback, 5000);
+            listener.Start(10);
+            
+            var endPoint = new IPEndPoint(IPAddress.Loopback, 5000);
+            using var socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            socket.Bind(endPoint);
+            try
+            {
+                socket.Listen(10);
+            }
+            catch (SocketException)
+            {
+                socket.Dispose();
+            }
+            
+            
+            
         }
     }
 }
