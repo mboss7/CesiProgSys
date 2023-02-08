@@ -15,15 +15,15 @@ namespace CesiProgSys.ViewModel.TcpIp
     internal class TcpLink
     {
         int port;
-        private static object client;
-        object info;
+       // private static object client;
+       
 
         //string Client;
 
         public TcpLink() 
         {
             port = 0;
-            client = "127.0.0.1";
+            //client = "127.0.0.1";
             //Client= "127.0.0.1";
         }
 
@@ -67,7 +67,7 @@ namespace CesiProgSys.ViewModel.TcpIp
         public static void Service(Object infos)
         {
          // on récupère le client qu'il faut servir
-        // Client client = infos as Client;
+         Client client = infos as Client;
         // exploitation liaison TcpClient
             try
             {
