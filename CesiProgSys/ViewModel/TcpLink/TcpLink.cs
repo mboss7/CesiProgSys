@@ -12,105 +12,37 @@ using System.Reflection.PortableExecutable;
 namespace CesiProgSys.ViewModel.TcpIp
 {
     // TCP SRV in TCP Listener 
-    internal class TcpLink
+    public class TcpLink
     {
         int port;
+        long ipAddress;
        // private static object client;
-       
+
 
         //string Client;
 
-        public TcpLink() 
+        public TcpLink(int port, long ipAddress) 
         {
             port = 0;
-            //client = "127.0.0.1";
-            //Client= "127.0.0.1";
+            ipAddress = "127.0.0.1";
         }
 
 
-        public void TcpListenerLink()
-        {        
-
-
-        // on crée le service d'écoute
-        TcpListener ecoute = null;
-            try {
-                // on crée le service - il écoutera sur toutes les interfaces réseau de la machine
-                ecoute = new TcpListener(IPAddress.Any, port);
-        // on le lance
-        ecoute.Start();
-                // boucle de service
-                TcpClient tcpClient = null;
-                // boucle infinie - sera arrêtée par Ctrl-C
-                while (true) {
-                    // attente d'un client
-                    tcpClient = ecoute.AcceptTcpClient();
-                    // le service est assuré par une autre tâche
-                    ThreadPool.QueueUserWorkItem(Service, tcpClient);
-                    // client suivant
-                }
-                } 
-            catch (Exception ex)
-            {
-         // on signale l'erreur
-    
-            }
-            finally
-            {
-           // fin du service
-             ecoute.Stop();
-            }
-        }
-
-         // -------------------------------------------------------
-            // assure le service à un client
-        public static void Service(Object infos)
+        public async void TcpListenerLink()
         {
-         // on récupère le client qu'il faut servir
-         Client client = infos as Client;
-        // exploitation liaison TcpClient
-            try
-            {
-                using (TcpClient tcpClient = client.CanalTcp)
-                {
-                    using (NetworkStream networkStream = tcpClient.GetStream())
-                    {
-                        using (StreamReader reader = new StreamReader(networkStream))
-                        {
-                            using (StreamWriter writer = new StreamWriter(networkStream))
-                            {
-                                // flux de sortie non bufferisé
-                                writer.AutoFlush = true;
-                                // boucle lecture demande/écriture réponse
-                                bool fini = false;
-                                while (!fini) // Correct problem ???  
-                                {
-                                    string demande;
-                                    string reponse;
-                                // attente demande client - opération bloquante
-                                demande = reader.ReadLine();
-                                // préparation réponse
-                                reponse = "";
-                                // envoi réponse au client
-                                writer.WriteLine(reponse);
-                                // demande suivante
-                                }
-                            }
-                        }
-                    }
-                }
-        
-            }
-            catch (Exception e)
-             {
-            // erreur
-   
-             }
-             finally
-            {
-            // fin client
-    
-            }
+
+            var ipEndPoint = new IPEndPoint(ipAddress, 13);
+
+            using TcpClient client = new();
+            await client.ConnectAsync(ipEndPoint);
+            await using NetworkStream stream = client.GetStream();
+
+            var buffer = new byte[1_024];
+            int received = await stream.ReadAsync(buffer);
+
+            var message = Encoding.UTF8.GetString(buffer, 0, received);
+            Console.WriteLine($"Message received: \"{message}\"");
+            
         }
     }
 }
