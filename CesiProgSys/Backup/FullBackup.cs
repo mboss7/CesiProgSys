@@ -163,6 +163,9 @@ namespace CesiProgSys.Backup
                             if (checkRights(rule))
                             {
                                 f.Add(fileInfo);
+                                RealTimeLogs.mut.WaitOne();
+                                inf.TotalFilesSize += fileInfo.Length/1000;
+                                RealTimeLogs.mut.ReleaseMutex();
                             }
                             else
                             {
@@ -181,8 +184,10 @@ namespace CesiProgSys.Backup
                 }
             }
             authorizedDirAndFiles.Add(tuple);
+            RealTimeLogs.mut.WaitOne();
             inf.TotalFilesToCopy += f.Count;
             inf.NbFilesLeftToDo = inf.TotalFilesToCopy;
+            RealTimeLogs.mut.ReleaseMutex();
         }
         public bool checkRights(FileSystemAccessRule rule)
         {
