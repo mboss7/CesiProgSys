@@ -67,7 +67,7 @@ namespace CesiProgSys.LOG
         }
 
         // Log type info 
-        public async Task logInfo(List<string> toPrint)
+        public async static Task logInfo(List<string> toPrint)
         {
             if (File.Exists("./LOGS/RealTimeLogsInfo.json"))
                 File.Delete("./LOGS/RealTimeLogsInfo.json");
