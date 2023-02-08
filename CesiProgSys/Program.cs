@@ -1,48 +1,69 @@
 using CesiProgSys.Backup;
 using CesiProgSys.LOG;
 using CesiProgSys.ViewCli;
+using CesiProgSys.ViewModel.TcpIp;
 
-namespace CesiProgSys
-{
-
-    public class Program
+    namespace CesiProgSys
     {
 
-        static void Main(string[] args)
+        public class Program
         {
-            BackupManager.Instance();
-            LogsManager l = new LogsManager();
-            l.startLogManager();
 
-            Console.WriteLine("\n -----Welcome to the application !----- \n");
-
-            Console.ReadKey();
-
-            Console.WriteLine("Choose your language:");
-            Console.WriteLine("1. for English");
-            Console.WriteLine("2. for French");
-
-            Console.Write("Enter your choice : ");
-            int language;
-            try
+            static void Main()
             {
-                language = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (FormatException)
-            {
-                language = 1;
-            }
 
-            if (language == 2)
-            {
-                IViewCli objFr = new ViewCliFr();
-                objFr.menu();
-            }
-            else
-            {
-                IViewCli objEn = new ViewCliEn();
-                objEn.menu();
+
+
+
+                TcpLink tcpLinstenok = new TcpLink();
+
+                tcpLinstenok.TcpListenerLink("127.0.0.1", 8080);
+
+                Console.WriteLine("Hello, World!");
+                Console.ReadLine();
+
             }
         }
+    }
+
+    //public class Program
+    //{
+
+    //    static void Main(string[] args)
+    //    {
+    //        BackupManager.Instance();
+    //        LogsManager l = new LogsManager();
+    //        l.startLogManager();
+
+    //        Console.WriteLine("\n -----Welcome to the application !----- \n");
+
+    //        Console.ReadKey();
+
+    //        Console.WriteLine("Choose your language:");
+    //        Console.WriteLine("1. for English");
+    //        Console.WriteLine("2. for French");
+
+    //        Console.Write("Enter your choice : ");
+    //        int language;
+    //        try
+    //        {
+    //            language = Convert.ToInt32(Console.ReadLine());
+    //        }
+    //        catch (FormatException)
+    //        {
+    //            language = 1;
+    //        }
+
+    //        if (language == 2)
+    //        {
+    //            IViewCli objFr = new ViewCliFr();
+    //            objFr.menu();
+    //        }
+    //        else
+    //        {
+    //            IViewCli objEn = new ViewCliEn();
+    //            objEn.menu();
+    //        }
+}
     }
 }
