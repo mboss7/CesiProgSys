@@ -26,6 +26,8 @@ namespace CesiProgSys.ViewCli
         public void startBackupValid();
         
         public void showConfigValid();
+
+        public void chooseLanguage();
     }  
 }
 

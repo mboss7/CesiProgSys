@@ -242,7 +242,63 @@ namespace CesiProgSys.ViewCli
         {
             //code
             Console.Clear();
-            Console.WriteLine("Change les configurations");
+            Console.WriteLine("1. Changer la langue");
+            Console.WriteLine("2. Source par defaut de sauvegarde");
+            Console.WriteLine("3. Cible par defaut de sauvegarde");
+            Console.WriteLine("4. Nettoyer la source récente de suavegarde");
+            Console.WriteLine("5. Nettoyer la cible récente de suavegarde");
+            Console.WriteLine("6. Changer le temps de rétention");
+            Console.WriteLine("7. Réinitiliser les configurations");
+            Console.WriteLine("8. Retour");
+            Console.WriteLine("9. Quitter");
+            
+            Console.Write("Entrer votre choix : ");
+            int choiceConfig = 0;
+            try
+            {
+                choiceConfig = Convert.ToInt32(Console.ReadLine());
+            }catch(FormatException){}
+
+            if (choiceConfig > 0 && choiceConfig <= 8)
+            {
+                switch (choiceConfig)
+                {
+                    case 1 :
+                        chooseLanguage();
+                        return;
+                    case 2 :
+                        menu();
+                        break;
+                    case 3 :
+                        menu();
+                        return;
+                    case 4 :
+                        menu();
+                        break;
+                    case 5 :
+                        menu();
+                        return;
+                    case 6 :
+                        menu();
+                        break;
+                    case 7 :
+                        menu();
+                        return;
+                    case 8 :
+                        menu();
+                        break;
+                }
+            }
+            if (choiceConfig == 9)
+            {
+                Console.WriteLine("Sortie du programme...");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                changeConfig();
+            }
         }
 
         public void help()
@@ -374,13 +430,50 @@ namespace CesiProgSys.ViewCli
         public void showConfigValid()
         {
             //code
-         
             Console.Clear();
             Console.WriteLine("Lancement définitif de l'affichage des configurations");
             // Config.writeConfig(@".\\CONF\conf.json");
             // Config.readConfig(@".\\CONF\conf.json");
             menu();
+        }
+        
+        public void chooseLanguage()
+        {
+            //code
+            Console.Clear();
+            Console.WriteLine("1. Choisir Français");
+            Console.WriteLine("2. Choisir Anglais");
+            Console.WriteLine("3. Retour");
+            Console.WriteLine("4. Quitter");
+            
+            Console.Write("Entrer votre choix : ");
+            int choiceLanguage = Convert.ToInt32(Console.ReadLine());
 
+            if (choiceLanguage > 0 && choiceLanguage <= 3)
+            {
+                switch (choiceLanguage)
+                {
+                    case 1 :
+                        Config.language = Language.French;
+                        return;
+                    case 2 :
+                        Config.language = Language.English;
+                        return;
+                    case 3 :
+                        menu();
+                        return;
+                }
+            }
+            if (choiceLanguage == 4)
+            {
+                Console.WriteLine("Sortie du programme...");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                changeConfig();
+            }
         }
     }
 }
