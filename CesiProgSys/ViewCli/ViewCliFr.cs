@@ -267,7 +267,7 @@ namespace CesiProgSys.ViewCli
                         chooseLanguage();
                         return;
                     case 2 :
-                        menu();
+                        defaultSaveSource();
                         break;
                     case 3 :
                         menu();
@@ -465,6 +465,45 @@ namespace CesiProgSys.ViewCli
                 }
             }
             if (choiceLanguage == 4)
+            {
+                Console.WriteLine("Sortie du programme...");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                changeConfig();
+            }
+        }
+
+        public void defaultSaveSource()
+        {
+            //code
+            Console.Clear();
+            Console.WriteLine("1. Modifier");
+            Console.WriteLine("2. Nettoyer");
+            Console.WriteLine("3. Retour");
+            Console.WriteLine("4. Quitter");
+            
+            Console.Write("Entrer votre choix : ");
+            int choiceActionDSS = Convert.ToInt32(Console.ReadLine());
+
+            if (choiceActionDSS > 0 && choiceActionDSS <= 3)
+            {
+                switch (choiceActionDSS)
+                {
+                    case 1 :
+                        
+                        return;
+                    case 2 :
+                        Config.language = Language.English;
+                        return;
+                    case 3 :
+                        menu();
+                        return;
+                }
+            }
+            if (choiceActionDSS == 4)
             {
                 Console.WriteLine("Sortie du programme...");
                 Environment.Exit(0);

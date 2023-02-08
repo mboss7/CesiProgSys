@@ -268,8 +268,8 @@ namespace CesiProgSys.ViewCli
                     case 1 :
                         chooseLanguage();
                         return;
-                    case 2 :
-                        menu();
+                    case 2 : 
+                        defaultSaveSource();
                         break;
                     case 3 :
                         menu();
@@ -477,6 +477,11 @@ namespace CesiProgSys.ViewCli
                 Console.WriteLine("Invalid choice. Try again.");
                 changeConfig();
             }
+        }
+        
+        public void defaultSaveSource()
+        {
+            //code
         }
     }
 }

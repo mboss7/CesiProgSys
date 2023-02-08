@@ -28,6 +28,8 @@ namespace CesiProgSys.ViewCli
         public void showConfigValid();
 
         public void chooseLanguage();
+        
+        public void defaultSaveSource();
     }  
 }
 
