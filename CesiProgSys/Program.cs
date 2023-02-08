@@ -64,6 +64,3 @@ using CesiProgSys.ViewModel.TcpIp;
     //            IViewCli objEn = new ViewCliEn();
     //            objEn.menu();
     //        }
-}
-    }
-}

@@ -14,36 +14,34 @@ namespace CesiProgSys.ViewModel.TcpIp
     // TCP SRV in TCP Listener 
     public class TcpLink
     {
+        // Attributs
         int port;
-        long ipAddress;
-       // private static object client;
+        string ipAddress;
 
 
-        //string Client;
 
-        public TcpLink(int port, long ipAddress) 
+        // Constructor
+        public TcpLink()
         {
             port = 0;
             ipAddress = "127.0.0.1";
+
         }
 
-
-        public async void TcpListenerLink()
+        // Methodes 
+        public async void TcpListenerLink(string ipAddress, int port)
         {
-
-            var ipEndPoint = new IPEndPoint(ipAddress, 13);
-
-            using TcpClient client = new();
-            await client.ConnectAsync(ipEndPoint);
-            await using NetworkStream stream = client.GetStream();
+            Console.WriteLine(ipAddress, port);
+            using tcpclient client = new();
+            await client.connectasync(ipaddress, port);
+            await using networkstream stream = client.getstream();
 
             var buffer = new byte[1_024];
-            int received = await stream.ReadAsync(buffer);
+            int received = await stream.readasync(buffer);
 
-            var message = Encoding.UTF8.GetString(buffer, 0, received);
-            Console.WriteLine($"Message received: \"{message}\"");
-            
+            var message = encoding.utf8.getstring(buffer, 0, received);
+            console.writeline($"message received: \"{message}\"");
+
         }
     }
 }
-
