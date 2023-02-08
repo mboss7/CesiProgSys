@@ -29,26 +29,15 @@ namespace CesiProgSys.ViewModel.TcpIp
         }
 
         // Methodes 
-        public async void TcpClientLink(string ipAddress, int port)
-        {
-            Console.WriteLine(ipAddress, port);
-            using TcpClient client = new();
-            await client.ConnectAsync(ipAddress, port);
-            await using NetworkStream stream = client.GetStream();
-
-            var buffer = new byte[1_024];
-            int received = await stream.ReadAsync(buffer);
-
-            var message = Encoding.UTF8.GetString(buffer, 0, received);
-            Console.WriteLine($"Message received: \"{message}\"");
-            Console.WriteLine(ipAddress, ":", port);
-        }
-
         public async void TcpListenerLink(string ipAddress, int port)
         {
-            var ipEndPoint = new IPEndPoint(IPAddress.Any, 13);
+            var ipEndPoint = new IPEndPoint(IPAddress.Any, port);
             TcpListener listener = new(ipEndPoint);
 
+            Console.Write("Listen port : " );
+            Console.Write(port);
+            Console.Write("\n ----------------------------- \n");
+            
             try
             {
                 listener.Start();
@@ -60,6 +49,7 @@ namespace CesiProgSys.ViewModel.TcpIp
                 var dateTimeBytes = Encoding.UTF8.GetBytes(message);
                 await stream.WriteAsync(dateTimeBytes);
 
+                
                 Console.WriteLine($"Sent message: \"{message}\"");
                 // Sample output:
                 //     Sent message: "📅 8/22/2022 9:07:17 AM 🕛"
