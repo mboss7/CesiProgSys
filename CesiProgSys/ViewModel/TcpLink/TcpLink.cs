@@ -16,6 +16,7 @@ namespace CesiProgSys.ViewModel.TcpIp
     {
         int port;
         private static object client;
+        object info;
 
         //string Client;
 
