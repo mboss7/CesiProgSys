@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
-using ReactiveUI;
+//using CesiProgSys.ViewModel.TcpIp.TcpLink;
 
 namespace CesiProgSys.ViewModel
 {
-	public class ViewModelAvaloniaUIViewModel : ReactiveObject
+	public class viewmodelavaloniauiviewmodel //: reactiveobject
 	{
+		//TcpListenerLink();
 	}
 }
