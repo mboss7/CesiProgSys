@@ -22,7 +22,7 @@ namespace CesiProgSys.ViewModel.TcpIp
         public TcpLink() 
         {
             port = 0;
-            client = new object();
+            client = "127.0.0.1";
             //Client= "127.0.0.1";
         }
 
