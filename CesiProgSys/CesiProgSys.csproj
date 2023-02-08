@@ -8,11 +8,21 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="View_Avalonia\AvaloniaIHM_View\**" />
+      <EmbeddedResource Remove="View_Avalonia\AvaloniaIHM_View\**" />
+      <None Remove="View_Avalonia\AvaloniaIHM_View\**" />
+    </ItemGroup>
+
+    <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="ViewModelCli\ViewModelCli.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="View_Avalonia\" />
     </ItemGroup>
 
 </Project>
