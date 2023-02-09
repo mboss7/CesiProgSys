@@ -243,8 +243,8 @@ namespace CesiProgSys.ViewCli
             //code
             Console.Clear();
             Console.WriteLine("1. Changer la langue");
-            Console.WriteLine("2. Chnager source par defaut de sauvegarde");
-            Console.WriteLine("3. Changer cible par defaut de sauvegarde");
+            Console.WriteLine("2. Changer la source par defaut de sauvegarde");
+            Console.WriteLine("3. Changer la cible par defaut de sauvegarde");
             Console.WriteLine("4. Nettoyer la source récente de suavegarde");
             Console.WriteLine("5. Nettoyer la cible récente de suavegarde");
             Console.WriteLine("6. Changer le temps de rétention");
