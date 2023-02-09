@@ -18,7 +18,7 @@ namespace AvaloniaIHM_View
             // run TCP CLIENT : 
             TcpLinkClient tcpLinstenok = new TcpLinkClient();
 
-            tcpLinstenok.TcpClientLinkSocket("127.0.0.1", 8080);
+            tcpLinstenok.tcpClient();
 
             Console.WriteLine("It's Works ! ");
             Console.ReadLine();

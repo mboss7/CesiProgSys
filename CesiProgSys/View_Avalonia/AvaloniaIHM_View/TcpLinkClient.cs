@@ -9,77 +9,62 @@ using System.Net;
 
 namespace AvaloniaIHM_View
 {
-    // Tcp client 
-    internal class TcpLinkClient
+
+    class TcpLinkClient
     {
-        public string ipAddress;
-        int port;
-       
-
-        // Constructor 
-        public TcpLinkClient()
+        public void tcpClient()
         {
-         ipAddress = "127.0.0.1";
-         port = 0;
-        }
+            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+            int port = 12345;
+            TcpClient client = new TcpClient();
 
+            client.Connect(ipAddress, port);
+            Console.WriteLine("Connexion établie avec le serveur.");
 
-        public async void TcpClientLink(string ipAddress, int port)
-        {
-            Console.WriteLine(ipAddress, port);
-            using TcpClient client = new();
-            await client.ConnectAsync(ipAddress, port);
-            await using NetworkStream stream = client.GetStream();
+            NetworkStream stream = client.GetStream();
+            byte[] data = Encoding.ASCII.GetBytes("Bonjour serveur");
+            stream.Write(data, 0, data.Length);
 
-            var buffer = new byte[1_024];
-            int received = await stream.ReadAsync(buffer);
+            data = new byte[256];
+            int bytes = stream.Read(data, 0, data.Length);
+            string message = Encoding.ASCII.GetString(data, 0, bytes);
+            Console.WriteLine("Message reçu : " + message);
 
-            var message = Encoding.UTF8.GetString(buffer, 0, received);
-            Console.WriteLine($"Message received: \"{message}\"");
-        }
-
-
-        public async void TcpClientLinkSocket(string ipAddress, int port)
-        {
-            // second part 
-
-            var endPoint = new IPEndPoint(IPAddress.Parse(ipAddress), port);
-           // using var client = new TcpClient(endPoint);                  
-
-            using Socket client1 = new(endPoint.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
-                    
-
-
-
-           // await client.ConnectAsync(ipAddress,port);
-            while (true)
-            {
-                // Send message.
-                var message1 = "Hi friends 👋!<|EOM|>";
-                var messageBytes1 = Encoding.UTF8.GetBytes(message1);
-                _ = await client1.SendAsync(messageBytes1, SocketFlags.None);
-                Console.WriteLine($"Socket client sent message: \"{message1}\"");
-
-                // Receive ack.
-                var buffer1 = new byte[1_024];
-                var received1 = await client1.ReceiveAsync(buffer1, SocketFlags.None);
-                var response1 = Encoding.UTF8.GetString(buffer1, 0, received1);
-                if (response1 == "<|ACK|>")
-                {
-                    Console.WriteLine(
-                        $"Socket client received acknowledgment: \"{response1}\"");
-                    break;
-                }
-                // Sample output:
-                //     Socket client sent message: "Hi friends 👋!<|EOM|>"
-                //     Socket client received acknowledgment: "<|ACK|>"
-            }
-
-           // client.Shutdown(SocketShutdown.Both);
-        
-
-
+            client.Close();
         }
     }
-}    
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

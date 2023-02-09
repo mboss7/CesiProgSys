@@ -11,13 +11,9 @@ using CesiProgSys.ViewModel.TcpIp;
 
             static void Main()
             {
+                TcpLink tcpSRV = new TcpLink();
 
-
-
-
-                TcpLink tcpLinstenok = new TcpLink();
-
-                tcpLinstenok.TcpListenerLinkSocket(8080);
+                tcpSRV.ServerTCP();
 
                 Console.WriteLine("It's Works ! ");
                 Console.ReadLine();
