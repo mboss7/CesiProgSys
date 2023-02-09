@@ -12,39 +12,78 @@ using System.Reflection.PortableExecutable;
 namespace CesiProgSys.ViewModel.TcpIp
 {
 
-    //TCP SERVER LASTONE 
-
-    using System;
-    using System.Net;
-    using System.Net.Sockets;
-    using System.Text;
-
     class TcpLink
     {
+
         public void ServerTCP()
         {
-            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+
             int port = 12345;
-            TcpListener server = new TcpListener(ipAddress, port);
 
-            server.Start();
-            Console.WriteLine("Serveur en écoute sur le port " + port);
-
-            TcpClient client = server.AcceptTcpClient();
-            Console.WriteLine("Un client s'est connecté.");
-
-            NetworkStream stream = client.GetStream();
-            while (true)
+            TcpListener server = null;
+            try
             {
-                byte[] data = new byte[256];
-                int bytes = stream.Read(data, 0, data.Length);
-                string message = Encoding.ASCII.GetString(data, 0, bytes);
-                Console.WriteLine("Message reçu : " + message);
+                // Set the TcpListener on the specified port.
+                server = new TcpListener(IPAddress.Any, port);
 
-                byte[] responseData = Encoding.ASCII.GetBytes("Bonjour client");
-                stream.Write(responseData, 0, responseData.Length);
+                // Start listening for client requests.
+                server.Start();
+
+                // Buffer for reading data.
+                byte[] buffer = new byte[1024];
+
+                // Enter the listening loop.
+                while (true)
+                {
+                    Console.WriteLine("Waiting for a connection... ");
+
+                    // Perform a blocking call to accept requests.
+                    // You could also use server.AcceptSocket() here.
+                    TcpClient client = server.AcceptTcpClient();
+                    Console.WriteLine("Connected!");
+
+                    // Get a stream object for reading and writing.
+                    NetworkStream stream = client.GetStream();
+
+                    int length;
+                    // Read incoming stream into buffer.
+                    try
+                    {
+                        while ((length = stream.Read(buffer, 0, buffer.Length)) != 0)
+                        {
+                            var data = Encoding.ASCII.GetString(buffer, 0, length);
+                            Console.WriteLine("Received: {0}", data);
+
+                            // Send back a response.
+                            byte[] sendBuffer = Encoding.ASCII.GetBytes("ACK");
+                            stream.Write(sendBuffer, 0, sendBuffer.Length);
+                            Console.WriteLine("Sent: ACK");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("An error occurred: " + ex.Message);
+                    }
+                }
             }
+            catch (SocketException e)
+            {
+                Console.WriteLine("SocketException: {0}", e);
+            }
+            finally
+            {
+                // Stop listening for new clients.
+                server.Stop();
+            }
+
+            Console.WriteLine("\nHit enter to continue...");
+            Console.Read();
         }
     }
-
 }
+
+
+
+
+
+
