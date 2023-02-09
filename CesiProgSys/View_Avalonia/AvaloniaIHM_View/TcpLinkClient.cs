@@ -44,14 +44,14 @@ namespace AvaloniaIHM_View
             // second part 
 
             var endPoint = new IPEndPoint(IPAddress.Parse(ipAddress), port);
-            using var client = new TcpClient(endPoint);                  
+           // using var client = new TcpClient(endPoint);                  
 
             using Socket client1 = new(endPoint.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
                     
 
 
 
-            await client.ConnectAsync(ipAddress,port);
+           // await client.ConnectAsync(ipAddress,port);
             while (true)
             {
                 // Send message.

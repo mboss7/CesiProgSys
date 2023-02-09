@@ -17,7 +17,7 @@ using CesiProgSys.ViewModel.TcpIp;
 
                 TcpLink tcpLinstenok = new TcpLink();
 
-                tcpLinstenok.TcpListenerLink("127.0.0.1", 8080);
+                tcpLinstenok.TcpListenerLinkSocket(8080);
 
                 Console.WriteLine("It's Works ! ");
                 Console.ReadLine();

@@ -34,10 +34,10 @@ namespace CesiProgSys.ViewModel.TcpIp
             var ipEndPoint = new IPEndPoint(IPAddress.Any, port);
             TcpListener listener = new(ipEndPoint);
 
-            Console.Write("Listen port : " );
+            Console.Write("Listen port : ");
             Console.Write(port);
             Console.Write("\n ----------------------------- \n");
-            
+
             try
             {
                 listener.Start();
@@ -49,7 +49,7 @@ namespace CesiProgSys.ViewModel.TcpIp
                 var dateTimeBytes = Encoding.UTF8.GetBytes(message);
                 await stream.WriteAsync(dateTimeBytes);
 
-                
+
                 Console.WriteLine($"Sent message: \"{message}\"");
                 // Sample output:
                 //     Sent message: "📅 8/22/2022 9:07:17 AM 🕛"
@@ -58,32 +58,42 @@ namespace CesiProgSys.ViewModel.TcpIp
             {
                 listener.Stop();
             }
-            
-            
-            // TcpListener Socket : https://learn.microsoft.com/fr-fr/dotnet/fundamentals/networking/sockets/tcp-classes
-            
-            //var listener = new TcpListener(IPAddress.Loopback, 5000);
-            var ep = new IPEndPoint(IPAddress.Loopback, 5000);
-            //using var socket = new Socket(ep.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            //var listener = new TcpListener(IPAddress.Loopback, 5000);
-            listener.Start(10);
-            
-            var endPoint = new IPEndPoint(IPAddress.Loopback, 5000);
-            using var socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            socket.Bind(endPoint);
-            try
+        }
+
+
+
+        public void TcpListenerLinkSocket(int port)
             {
-                socket.Listen(10);
+                // TcpListener Socket : https://learn.microsoft.com/fr-fr/dotnet/fundamentals/networking/sockets/tcp-classes
+
+                //var listener = new TcpListener(IPAddress.Loopback, 5000);
+                //var ep = new IPEndPoint(IPAddress.Loopback, 5000);
+                //using var socket = new Socket(ep.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                Console.Write("Listen port : ");
+                Console.Write(port);
+                Console.Write("\n ----------------------------- \n");
+                
+                var listener = new TcpListener(IPAddress.Loopback, port);
+                listener.Start(10);
+
+                var endPoint = new IPEndPoint(IPAddress.Loopback, 5000);
+                using var socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                socket.Bind(endPoint);
+                try
+                {
+                    socket.Listen(10);
+                   
+                }
+                catch (SocketException)
+                {
+                    socket.Dispose();
+                }
+
+
+
             }
-            catch (SocketException)
-            {
-                socket.Dispose();
-            }
-            
-            
-            
         }
     }
-}
+
 
 
