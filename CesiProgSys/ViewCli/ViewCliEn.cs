@@ -11,13 +11,9 @@ namespace CesiProgSys.ViewCli
         public ViewCliEn()
         {
             vmCLI = new ViewModelCli();
+            
         }
 
-        public void showResult(object sender, PropertyChangedEventArgs e)
-        {
-            Console.WriteLine("Show RESULT ????");
-        }
-        
         public void menu()
         {
             Console.Clear();

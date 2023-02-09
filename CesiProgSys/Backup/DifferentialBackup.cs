@@ -51,6 +51,7 @@ namespace CesiProgSys.Backup
 
             RealTimeLogs.mut.WaitOne();
             RealTimeLogs.listInfo.Add(inf);
+            RealTimeLogs.OnWriteLog();
             RealTimeLogs.mut.ReleaseMutex();
         }
 
@@ -58,6 +59,7 @@ namespace CesiProgSys.Backup
         {
             RealTimeLogs.mut.WaitOne();
             inf.state = State.ACTIVE;
+            RealTimeLogs.OnWriteLog();
             RealTimeLogs.mut.ReleaseMutex();
 
             DirectoryInfo targetDirectory = new DirectoryInfo(target);
@@ -78,6 +80,7 @@ namespace CesiProgSys.Backup
                     inf.CurrentSource = sourceFile.Name;
                     inf.CurrentDest = s;
                     inf.TimeLaps = DateTime.Now - inf.Date;
+                    RealTimeLogs.OnWriteLog();
                     RealTimeLogs.mut.ReleaseMutex();
 
                     if ((File.GetAttributes(sourceFile.FullName) & FileAttributes.Archive) != 0)
@@ -89,6 +92,7 @@ namespace CesiProgSys.Backup
 
                     RealTimeLogs.mut.WaitOne();
                     inf.NbFilesLeftToDo--;
+                    RealTimeLogs.OnWriteLog();
                     RealTimeLogs.mut.ReleaseMutex();
                 }
             } 
@@ -98,6 +102,7 @@ namespace CesiProgSys.Backup
         {
             RealTimeLogs.mut.WaitOne();
             inf.state = State.CHECKINGAUTH;
+            RealTimeLogs.OnWriteLog();
             RealTimeLogs.mut.ReleaseMutex();
 
             IEnumerable<string> directories = Directory.EnumerateDirectories(directory);
@@ -165,6 +170,10 @@ namespace CesiProgSys.Backup
                             if (checkRights(rule))
                             {
                                 f.Add(fileInfo);
+                                RealTimeLogs.mut.WaitOne();
+                                inf.TotalFilesSize += fileInfo.Length/1000;
+                                RealTimeLogs.OnWriteLog();
+                                RealTimeLogs.mut.ReleaseMutex();
                             }
                             else
                             {
@@ -184,8 +193,9 @@ namespace CesiProgSys.Backup
             }
             authorizedDirAndFiles.Add(tuple);
             RealTimeLogs.mut.WaitOne();
-            inf.TotalFilesToCopy = authorizedDirAndFiles.Count;
+            inf.TotalFilesToCopy += f.Count;
             inf.NbFilesLeftToDo = inf.TotalFilesToCopy;
+            RealTimeLogs.OnWriteLog();
             RealTimeLogs.mut.ReleaseMutex();
         }
         
@@ -240,12 +250,14 @@ namespace CesiProgSys.Backup
             
             RealTimeLogs.mut.WaitOne();
             db.inf.Date = DateTime.Now;
+            RealTimeLogs.OnWriteLog();
             RealTimeLogs.mut.ReleaseMutex();
             
             db.startBackup(array[1], array[2]);
 
             RealTimeLogs.mut.WaitOne();
             db.inf.state = State.SUCCESS;
+            RealTimeLogs.OnWriteLog();
             RealTimeLogs.mut.ReleaseMutex();
         }
     }

@@ -29,16 +29,7 @@ namespace CesiProgSys.ToolsBox
 
             // Write the JSON string to the specified file
             //System.IO.File.WriteAllText(filePath, json);
-        }
 
-        // Method to read the configuration data from a JSON file
-        public static void readConfig(string filePath)
-        {
-            // Read the contents of the specified file as a string
-            string json = System.IO.File.ReadAllText(filePath);
-            Console.WriteLine(json);
-            // Deserialize the JSON string into a Config object and return it
-           // return JsonConvert.DeserializeObject<Config>(json);
 
         }
 

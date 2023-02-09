@@ -1,23 +1,21 @@
-
-using System.Runtime.InteropServices.JavaScript;
 using CesiProgSys.ToolsBox;
 
  namespace CesiProgSys.LOG
  {
      public class DailyLogs : Logs
      {
-         // condition for loop while 
-         public static bool flagDl = true;
+         public static List<Info>? listInfo;
 
-         public static List<Info> listInfo;
+         private readonly string pathInfo;
+         private readonly string pathError;
 
-         private string pathInfo;
-         private string pathError;
+         public static event EventHandler? writeLog;
 
-         public DailyLogs()
+         private DailyLogs()
         {
             listInfo = new List<Info>();
-            DateTime date = DateTime.Today;
+          
+            DateTime date = DateTime.Now;
             string d = date.Year + "-" + date.Month + "-" + date.Day + "-" + date.Hour + "-" + date.Minute;
             
             pathInfo = "./LOGS/DailyLogsInfo-" + d + ".";
@@ -32,46 +30,44 @@ using CesiProgSys.ToolsBox;
         }
 
         //Start log management        
-        public async override void startLog()
+        protected override void startLog()
         {
-            while (flagDl)
+            writeLog += writeLogs;
+        }
+
+        protected override void writeLogs(object? sender, EventArgs e)
+        {
+            List<string> Info = new List<string>();
+            List<string> Error = new List<string>();
+            RealTimeLogs.mut.WaitOne();
+            foreach (Info inf in listInfo)
             {
-                List<string> Info = new List<string>();
-                List<string> Error = new List<string>();
-                
-                RealTimeLogs.mut.WaitOne();
-                foreach (Info inf in listInfo)
+                if (Config.TypeLogs.Equals("json"))
                 {
-                    if (Config.TypeLogs.Equals("json"))
-                    {
-                        if (inf.LogType)
-                        {
-                            Info.Add(JsonLog.stringToJson(inf));
-                        }
-                        else
-                        {
-                            Error.Add(JsonLog.stringToJson(inf));
-                        }
-                    }
+                    if (inf.LogType)
+                        Info.Add(JsonLog.stringToJson(inf));
                     else
-                    {
-                        if (inf.LogType)
-                        {
-                            Info.Add(Xml.serialize(inf));
-                        }
-                        else
-                        {
-                            Error.Add(Xml.serialize(inf));
-                        }
-                    }
+                        Error.Add(JsonLog.stringToJson(inf));
                 }
-                RealTimeLogs.mut.ReleaseMutex();
-                
-                if(Info.Any())
-                    await log(Info,pathInfo + Config.TypeLogs);
-                if(Error.Any())
-                    await log(Error,pathError + Config.TypeLogs);
+                else
+                {
+                    if (inf.LogType)
+                        Info.Add(Xml.serialize(inf));
+                    else
+                        Error.Add(Xml.serialize(inf));
+                }
             }
+            RealTimeLogs.mut.ReleaseMutex();
+                
+            if(Info.Any())
+                log(Info,pathInfo + Config.TypeLogs);
+            if(Error.Any())
+                log(Error,pathError + Config.TypeLogs);
+        }
+
+        public static void OnWriteLog()
+        {
+            writeLog?.Invoke(null, EventArgs.Empty);
         }
      }
 }
