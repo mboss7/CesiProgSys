@@ -11,7 +11,7 @@ namespace AvaloniaIHM_View
 
     public class Program
     {
-        public static extern int SetStdHandle(int device, IntPtr handle); 
+       // public static extern int SetStdHandle(int device, IntPtr handle); 
 
         static void Main()
         {
@@ -22,6 +22,9 @@ namespace AvaloniaIHM_View
 
            // tcpLinstenok.tcpClient();
 
+           
+           
+           // test sortie standard
           // FileStream fileStream = new FileStream("logfile.txt", FileMode.Create);
           // StreamWriter streamwriter = new StreamWriter(fileStream);
            
