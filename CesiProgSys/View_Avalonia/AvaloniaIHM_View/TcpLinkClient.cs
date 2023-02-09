@@ -26,7 +26,7 @@ namespace AvaloniaIHM_View
                 NetworkStream stream = client.GetStream();
 
                 // Send a request to the server.
-                byte[] buffer = Encoding.ASCII.GetBytes("Hello, server! je suis le client et je te parle");
+                byte[] buffer = Encoding.ASCII.GetBytes("Hello, server! Je me connect !");
                 stream.Write(buffer, 0, buffer.Length);
                 Console.WriteLine("Sent: Hello, server!");
 
