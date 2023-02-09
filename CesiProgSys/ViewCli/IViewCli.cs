@@ -30,6 +30,10 @@ namespace CesiProgSys.ViewCli
         public void chooseLanguage();
         
         public void defaultSaveSource();
+        
+        public void changeDSS();
+        
+        public void cleanDSS();
     }  
 }
 

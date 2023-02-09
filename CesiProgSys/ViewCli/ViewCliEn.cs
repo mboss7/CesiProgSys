@@ -483,6 +483,16 @@ namespace CesiProgSys.ViewCli
         {
             //code
         }
+        
+        public void changeDSS()
+        {
+            //code
+        }
+        
+        public void cleanDSS()
+        {
+            //code
+        }
     }
 }
 

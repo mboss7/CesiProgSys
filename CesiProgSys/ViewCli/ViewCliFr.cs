@@ -493,10 +493,10 @@ namespace CesiProgSys.ViewCli
                 switch (choiceActionDSS)
                 {
                     case 1 :
-                        
+                        changeDSS();
                         return;
                     case 2 :
-                        Config.language = Language.English;
+                        cleanDSS();
                         return;
                     case 3 :
                         menu();
@@ -513,6 +513,22 @@ namespace CesiProgSys.ViewCli
                 Console.WriteLine("Choix invalide. Essayez à nouveau.");
                 changeConfig();
             }
+            
+        }
+        
+        public void changeDSS()
+        {
+            Console.WriteLine("Entrez la nouvelle source de sauvegarde par défaut : ");
+            string newDSS = Console.ReadLine();
+
+            Config.writeConfig("config.json",newDSS);
+            Console.WriteLine("La nouvelle source de sauvegarde par defaut a été enregistrée dans le fichier de configuration.");
+        }
+
+        public void cleanDSS()
+        {
+            Config.writeConfig("config.json", @"\\BACKUP\test");
+            Console.WriteLine("La source de sauvegarde par défaut a été nettoyée avec succès.");
         }
     }
 }
