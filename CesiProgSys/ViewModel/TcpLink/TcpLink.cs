@@ -18,7 +18,7 @@ namespace CesiProgSys.ViewModel.TcpIp
         public void ServerTCP()
         {
 
-            int port = 12345;
+            int port = 8080;
 
             TcpListener server = null;
             try

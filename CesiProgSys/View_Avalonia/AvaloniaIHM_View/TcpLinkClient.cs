@@ -14,23 +14,41 @@ namespace AvaloniaIHM_View
     {
         public void tcpClient()
         {
-            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
-            int port = 12345;
-            TcpClient client = new TcpClient();
+            
+            try
+            {
+                
+                // Connect to the server.
+                TcpClient client = new TcpClient("localhost", 8080);
+                Console.WriteLine("Connected to the server.");
 
-            client.Connect(ipAddress, port);
-            Console.WriteLine("Connexion établie avec le serveur.");
+                // Get a client stream for reading and writing.
+                NetworkStream stream = client.GetStream();
 
-            NetworkStream stream = client.GetStream();
-            byte[] data = Encoding.ASCII.GetBytes("Bonjour serveur");
-            stream.Write(data, 0, data.Length);
+                // Send a request to the server.
+                byte[] buffer = Encoding.ASCII.GetBytes("Hello, server! je suis le client et je te parle");
+                stream.Write(buffer, 0, buffer.Length);
+                Console.WriteLine("Sent: Hello, server!");
 
-            data = new byte[256];
-            int bytes = stream.Read(data, 0, data.Length);
-            string message = Encoding.ASCII.GetString(data, 0, bytes);
-            Console.WriteLine("Message reçu : " + message);
+                while (true)
+                {
+                    
+                    //Read the response from the server.
+                    buffer = new byte[1024];
+                    int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                    var data = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                    Console.WriteLine("Received: {0}", data);
+                }
 
-            client.Close();
+            }
+            catch (Exception ex)
+            {
+             
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+
+            Console.WriteLine("\nHit enter to continue...");
+            Console.Read();
         }
     }
 

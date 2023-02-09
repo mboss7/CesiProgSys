@@ -13,7 +13,7 @@ namespace AvaloniaIHM_View
 
         static void Main()
         {
-
+            Console.WriteLine("It's Works ? ");
           
             // run TCP CLIENT : 
             TcpLinkClient tcpLinstenok = new TcpLinkClient();
