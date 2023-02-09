@@ -493,6 +493,21 @@ namespace CesiProgSys.ViewCli
         {
             //code
         }
+        
+        public void defaultSaveTarget()
+        {
+            //code
+        }
+        
+        public void changeDST()
+        {
+            //code
+        }
+        
+        public void cleanDST()
+        {
+            //code
+        }
     }
 }
 

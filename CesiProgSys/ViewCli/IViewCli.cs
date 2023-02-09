@@ -34,6 +34,12 @@ namespace CesiProgSys.ViewCli
         public void changeDSS();
         
         public void cleanDSS();
+        
+        public void defaultSaveTarget();
+        
+        public void changeDST();
+
+        public void cleanDST();
     }  
 }
 

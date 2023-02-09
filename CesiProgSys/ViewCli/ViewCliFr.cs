@@ -270,7 +270,7 @@ namespace CesiProgSys.ViewCli
                         defaultSaveSource();
                         break;
                     case 3 :
-                        menu();
+                        defaultSaveTarget();
                         return;
                     case 4 :
                         menu();
@@ -518,6 +518,7 @@ namespace CesiProgSys.ViewCli
         
         public void changeDSS()
         {
+            Console.Clear();
             Console.WriteLine("Entrez la nouvelle source de sauvegarde par défaut : ");
             string newDSS = Console.ReadLine();
 
@@ -527,8 +528,65 @@ namespace CesiProgSys.ViewCli
 
         public void cleanDSS()
         {
+            Console.Clear();
             Config.writeConfig("config.json", @"\\BACKUP\test");
             Console.WriteLine("La source de sauvegarde par défaut a été nettoyée avec succès.");
+        }
+
+        public void defaultSaveTarget()
+        {
+            //code
+            Console.Clear();
+            Console.WriteLine("1. Modifier");
+            Console.WriteLine("2. Nettoyer");
+            Console.WriteLine("3. Retour");
+            Console.WriteLine("4. Quitter");
+            
+            Console.Write("Entrer votre choix : ");
+            int choiceActionDSS = Convert.ToInt32(Console.ReadLine());
+
+            if (choiceActionDSS > 0 && choiceActionDSS <= 3)
+            {
+                switch (choiceActionDSS)
+                {
+                    case 1 :
+                        changeDST();
+                        return;
+                    case 2 :
+                        cleanDST();
+                        return;
+                    case 3 :
+                        menu();
+                        return;
+                }
+            }
+            if (choiceActionDSS == 4)
+            {
+                Console.WriteLine("Sortie du programme...");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                changeConfig();
+            }
+        }
+
+        public void changeDST()
+        {
+            Console.Clear();
+            Console.WriteLine("Entrez la nouvelle cible de sauvegarde par défaut : ");
+            string newDST = Console.ReadLine();
+
+            Config.writeConfig("config.json",newDST);
+            Console.WriteLine("La nouvelle cible de sauvegarde par defaut a été enregistrée dans le fichier de configuration.");
+        }
+
+        public void cleanDST()
+        {
+            Console.Clear();
+            Config.writeConfig("config.json", @"\\BACKUP\bck");
+            Console.WriteLine("La cible de sauvegarde par défaut a été nettoyée avec succès.");
         }
     }
 }
