@@ -47,7 +47,7 @@ namespace AvaloniaIHM_View
                     // Get a client stream for reading and writing.
                     NetworkStream stream = client.GetStream();
                     // Send a request to the server. For connection
-                    byte[] buffer = Encoding.ASCII.GetBytes("Hello, server! Je me connect !");
+                    byte[] buffer = Encoding.ASCII.GetBytes("\n Hello, server! Je me connect !");
                     stream.Write(buffer, 0, buffer.Length);
                     
                     
@@ -59,7 +59,7 @@ namespace AvaloniaIHM_View
             
                     // write return in doc
                     //Open the File
-                    StreamWriter sw = new StreamWriter(@".\\Test1.txt", true, Encoding.ASCII);
+                    StreamWriter sw = new StreamWriter(@".\\ClientReception.txt", true, Encoding.ASCII);
                     //Write out the numbers 1 to 10 on the same line.
                     sw.Write("\nReceived: {0}", data);
                     //close the file

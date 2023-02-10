@@ -70,7 +70,7 @@ namespace CesiProgSys.ViewModel.TcpIp
                             
                             // Send a Json to the server :
                 
-                            string text = System.IO.File.ReadAllText(@".\\Test1.txt");
+                            string text = System.IO.File.ReadAllText(@".\\ServerReception.txt");
                 
                             byte[] bufferJson = Encoding.ASCII.GetBytes(text);
                             stream.Write(bufferJson, 0, bufferJson.Length);
