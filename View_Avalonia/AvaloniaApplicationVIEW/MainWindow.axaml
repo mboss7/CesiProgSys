@@ -11,7 +11,8 @@
 			<Rectangle Grid.Column="1"></Rectangle>
 			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
 				<Label FontWeight="Black">EASY SAVE</Label>
-				<Button Width="160" Click="OnClickHandler">My Button</Button>				
+				<Button Width="160" Click="Connection">ConnectToServer</Button>
+				<Button Width="160" Click="Send">SendText</Button>
 			</StackPanel>
 		</Grid>
 	</Grid>
