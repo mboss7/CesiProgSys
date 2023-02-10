@@ -19,14 +19,14 @@ namespace AvaloniaIHM_View
            // run TCP CLIENT : 
             TcpLinkClient tcpClientCo = new TcpLinkClient();
             
+            tcpClientCo.tcpClient("localhost", 12345);
             Tuple<NetworkStream, byte[]> ReturnTcpClient = tcpClientCo.tcpClient("localhost", 12345);
 
 
             string PathFile1 = @".\\Test1.txt";
             
-            tcpClientCo.tcpClientReceived(ReturnTcpClient);
             tcpClientCo.tcpClientSend(ReturnTcpClient, PathFile1);   
-
+            
             Console.WriteLine("It's Works ! ");
             Console.ReadLine();
 
