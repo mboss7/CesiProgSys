@@ -16,18 +16,19 @@ namespace CesiProgSys.ViewModel.TcpIp
     {
         int NbConnection;
         string NbConnectionstring;
+        public int port;
+        private NetworkStream stream; 
 
         public TcpLink()
         {
             NbConnection = 0;
             NbConnectionstring = "";
+            port = 12345;
+            stream = null;
         }
 
-        public void ServerTCP()
+        public NetworkStream ServerTCP()
         {
-
-            int port = 12345;
-
             TcpListener server = null;
             try
             {
@@ -57,6 +58,7 @@ namespace CesiProgSys.ViewModel.TcpIp
                     // Get a stream object for reading and writing.
                     NetworkStream stream = client.GetStream();
 
+                    
                     int length;
                     // Read incoming stream into buffer.
                     try
@@ -79,15 +81,6 @@ namespace CesiProgSys.ViewModel.TcpIp
                           //  stream.Write(sendBuffer, 0, sendBuffer.Length);
                           //  Console.WriteLine("Sent: ACK");
                             
-                            // Send a Json to the server :
-                
-                            string text = System.IO.File.ReadAllText(@".\\ServerReception.txt");
-                
-                            byte[] bufferJson = Encoding.ASCII.GetBytes(text);
-                            stream.Write(bufferJson, 0, bufferJson.Length);
-                            Console.WriteLine("Sent:{0}", bufferJson);
-                            
-                            
                         }
                     }
                     catch (Exception ex)
@@ -108,7 +101,20 @@ namespace CesiProgSys.ViewModel.TcpIp
 
             Console.WriteLine("\nHit enter to continue...");
             Console.Read();
+            return stream; 
         }
+        
+        
+        // Send a Json to the server :
+        public void SendJsonToClient(NetworkStream stream)
+        {
+            string text = System.IO.File.ReadAllText(@".\\ServerReception.txt");
+                        
+            byte[] bufferJson = Encoding.ASCII.GetBytes(text);
+            stream.Write(bufferJson, 0, bufferJson.Length);
+            Console.WriteLine("Sent:{0}", bufferJson);
+        }                
+                                    
     }
 }
 
