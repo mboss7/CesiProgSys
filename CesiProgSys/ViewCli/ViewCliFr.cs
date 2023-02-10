@@ -242,7 +242,63 @@ namespace CesiProgSys.ViewCli
         {
             //code
             Console.Clear();
-            Console.WriteLine("Change les configurations");
+            Console.WriteLine("1. Changer la langue");
+            Console.WriteLine("2. Changer la source par defaut de sauvegarde");
+            Console.WriteLine("3. Changer la cible par defaut de sauvegarde");
+            Console.WriteLine("4. Nettoyer la source récente de sauvegarde");
+            Console.WriteLine("5. Nettoyer la cible récente de sauvegarde");
+            Console.WriteLine("6. Changer le temps de rétention");
+            Console.WriteLine("7. Réinitiliser les configurations");
+            Console.WriteLine("8. Retour");
+            Console.WriteLine("9. Quitter");
+            
+            Console.Write("Entrer votre choix : ");
+            int choiceConfig = 0;
+            try
+            {
+                choiceConfig = Convert.ToInt32(Console.ReadLine());
+            }catch(FormatException){}
+
+            if (choiceConfig > 0 && choiceConfig <= 8)
+            {
+                switch (choiceConfig)
+                {
+                    case 1 :
+                        chooseLanguage();
+                        return;
+                    case 2 :
+                        defaultSaveSource();
+                        break;
+                    case 3 :
+                        defaultSaveTarget();
+                        return;
+                    case 4 :
+                        cleanRecentSaveSource();
+                        break;
+                    case 5 :
+                        cleanRecentSaveTarget();
+                        return;
+                    case 6 :
+                        menu();
+                        break;
+                    case 7 :
+                        menu();
+                        return;
+                    case 8 :
+                        menu();
+                        break;
+                }
+            }
+            if (choiceConfig == 9)
+            {
+                Console.WriteLine("Sortie du programme...");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                changeConfig();
+            }
         }
 
         public void help()
@@ -374,13 +430,173 @@ namespace CesiProgSys.ViewCli
         public void showConfigValid()
         {
             //code
-         
             Console.Clear();
             Console.WriteLine("Lancement définitif de l'affichage des configurations");
             // Config.writeConfig(@".\\CONF\conf.json");
             // Config.readConfig(@".\\CONF\conf.json");
             menu();
+        }
+        
+        public void chooseLanguage()
+        {
+            //code
+            Console.Clear();
+            Console.WriteLine("1. Choisir Français");
+            Console.WriteLine("2. Choisir Anglais");
+            Console.WriteLine("3. Retour");
+            Console.WriteLine("4. Quitter");
+            
+            Console.Write("Entrer votre choix : ");
+            int choiceLanguage = Convert.ToInt32(Console.ReadLine());
 
+            if (choiceLanguage > 0 && choiceLanguage <= 3)
+            {
+                switch (choiceLanguage)
+                {
+                    case 1 :
+                        Config.language = Language.French;
+                        return;
+                    case 2 :
+                        Config.language = Language.English;
+                        return;
+                    case 3 :
+                        menu();
+                        return;
+                }
+            }
+            if (choiceLanguage == 4)
+            {
+                Console.WriteLine("Sortie du programme...");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                changeConfig();
+            }
+        }
+
+        public void defaultSaveSource()
+        {
+            //code
+            Console.Clear();
+            Console.WriteLine("1. Modifier");
+            Console.WriteLine("2. Nettoyer");
+            Console.WriteLine("3. Retour");
+            Console.WriteLine("4. Quitter");
+            
+            Console.Write("Entrer votre choix : ");
+            int choiceActionDSS = Convert.ToInt32(Console.ReadLine());
+
+            if (choiceActionDSS > 0 && choiceActionDSS <= 3)
+            {
+                switch (choiceActionDSS)
+                {
+                    case 1 :
+                        changeDSS();
+                        return;
+                    case 2 :
+                        cleanDSS();
+                        return;
+                    case 3 :
+                        menu();
+                        return;
+                }
+            }
+            if (choiceActionDSS == 4)
+            {
+                Console.WriteLine("Sortie du programme...");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                changeConfig();
+            }
+            
+        }
+        
+        public void changeDSS()
+        {
+            Console.Clear();
+            Console.WriteLine("Entrez la nouvelle source de sauvegarde par défaut : ");
+            string newDSS = Console.ReadLine();
+
+            Config.writeConfig("config.json",newDSS);
+            Console.WriteLine("La nouvelle source de sauvegarde par defaut a été enregistrée dans le fichier de configuration.");
+        }
+
+        public void cleanDSS()
+        {
+            Console.Clear();
+            Config.writeConfig("config.json", @"\\BACKUP\test");
+            Console.WriteLine("La source de sauvegarde par défaut a été nettoyée avec succès.");
+        }
+
+        public void defaultSaveTarget()
+        {
+            //code
+            Console.Clear();
+            Console.WriteLine("1. Modifier");
+            Console.WriteLine("2. Nettoyer");
+            Console.WriteLine("3. Retour");
+            Console.WriteLine("4. Quitter");
+            
+            Console.Write("Entrer votre choix : ");
+            int choiceActionDSS = Convert.ToInt32(Console.ReadLine());
+
+            if (choiceActionDSS > 0 && choiceActionDSS <= 3)
+            {
+                switch (choiceActionDSS)
+                {
+                    case 1 :
+                        changeDST();
+                        return;
+                    case 2 :
+                        cleanDST();
+                        return;
+                    case 3 :
+                        menu();
+                        return;
+                }
+            }
+            if (choiceActionDSS == 4)
+            {
+                Console.WriteLine("Sortie du programme...");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Choix invalide. Essayez à nouveau.");
+                changeConfig();
+            }
+        }
+
+        public void changeDST()
+        {
+            Console.Clear();
+            Console.WriteLine("Entrez la nouvelle cible de sauvegarde par défaut : ");
+            string newDST = Console.ReadLine();
+
+            Config.writeConfig("config.json",newDST);
+            Console.WriteLine("La nouvelle cible de sauvegarde par defaut a été enregistrée dans le fichier de configuration.");
+        }
+
+        public void cleanDST()
+        {
+            Console.Clear();
+            Config.writeConfig("config.json", @"\\BACKUP\bck");
+            Console.WriteLine("La cible de sauvegarde par défaut a été nettoyée avec succès.");
+        }
+
+        public void cleanRecentSaveSource()
+        {
+            //code
+        }
+
+        public void cleanRecentSaveTarget()
+        {
+            //Code
         }
     }
 }

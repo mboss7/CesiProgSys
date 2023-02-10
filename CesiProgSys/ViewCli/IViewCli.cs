@@ -26,6 +26,24 @@ namespace CesiProgSys.ViewCli
         public void startBackupValid();
         
         public void showConfigValid();
+
+        public void chooseLanguage();
+        
+        public void defaultSaveSource();
+        
+        public void changeDSS();
+        
+        public void cleanDSS();
+        
+        public void defaultSaveTarget();
+        
+        public void changeDST();
+
+        public void cleanDST();
+        
+        public void cleanRecentSaveSource();
+
+        public void cleanRecentSaveTarget();
     }  
 }
 
