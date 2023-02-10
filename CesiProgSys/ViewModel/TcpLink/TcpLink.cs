@@ -53,11 +53,27 @@ namespace CesiProgSys.ViewModel.TcpIp
                         {
                             var data = Encoding.ASCII.GetString(buffer, 0, length);
                             Console.WriteLine("Received: {0}", data);
+                            
+                            // write return in doc
+                            //Open the File
+                            StreamWriter sw = new StreamWriter(@".\\Test1.txt", true, Encoding.ASCII);
+                            //Write out the numbers 1 to 10 on the same line.
+                            sw.Write("\nReceived: {0}", data);
+                            //close the file
+                            sw.Close();
 
                             // Send back a response.
                             byte[] sendBuffer = Encoding.ASCII.GetBytes("ACK");
                             stream.Write(sendBuffer, 0, sendBuffer.Length);
                             Console.WriteLine("Sent: ACK");
+                            
+                            // Send a Json to the server :
+                
+                            string text = System.IO.File.ReadAllText(@"Test1.txt");
+                
+                            byte[] bufferJson = Encoding.ASCII.GetBytes(text);
+                            stream.Write(bufferJson, 0, bufferJson.Length);
+                            Console.WriteLine("Sent:{0}", bufferJson);
                             
                             
                         }
