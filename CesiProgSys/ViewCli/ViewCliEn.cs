@@ -272,13 +272,13 @@ namespace CesiProgSys.ViewCli
                         defaultSaveSource();
                         break;
                     case 3 :
-                        menu();
+                        defaultSaveTarget();
                         return;
                     case 4 :
-                        menu();
+                        cleanRecentSaveSource();
                         break;
                     case 5 :
-                        menu();
+                        cleanRecentSaveTarget();
                         return;
                     case 6 :
                         menu();
@@ -507,6 +507,16 @@ namespace CesiProgSys.ViewCli
         public void cleanDST()
         {
             //code
+        }
+        
+        public void cleanRecentSaveSource()
+        {
+            //code
+        }
+        
+        public void cleanRecentSaveTarget()
+        {
+            //Code
         }
     }
 }

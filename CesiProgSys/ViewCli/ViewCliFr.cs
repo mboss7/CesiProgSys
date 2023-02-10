@@ -245,8 +245,8 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("1. Changer la langue");
             Console.WriteLine("2. Changer la source par defaut de sauvegarde");
             Console.WriteLine("3. Changer la cible par defaut de sauvegarde");
-            Console.WriteLine("4. Nettoyer la source récente de suavegarde");
-            Console.WriteLine("5. Nettoyer la cible récente de suavegarde");
+            Console.WriteLine("4. Nettoyer la source récente de sauvegarde");
+            Console.WriteLine("5. Nettoyer la cible récente de sauvegarde");
             Console.WriteLine("6. Changer le temps de rétention");
             Console.WriteLine("7. Réinitiliser les configurations");
             Console.WriteLine("8. Retour");
@@ -273,10 +273,10 @@ namespace CesiProgSys.ViewCli
                         defaultSaveTarget();
                         return;
                     case 4 :
-                        menu();
+                        cleanRecentSaveSource();
                         break;
                     case 5 :
-                        menu();
+                        cleanRecentSaveTarget();
                         return;
                     case 6 :
                         menu();
@@ -587,6 +587,16 @@ namespace CesiProgSys.ViewCli
             Console.Clear();
             Config.writeConfig("config.json", @"\\BACKUP\bck");
             Console.WriteLine("La cible de sauvegarde par défaut a été nettoyée avec succès.");
+        }
+
+        public void cleanRecentSaveSource()
+        {
+            //code
+        }
+
+        public void cleanRecentSaveTarget()
+        {
+            //Code
         }
     }
 }
