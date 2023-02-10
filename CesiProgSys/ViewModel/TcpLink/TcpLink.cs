@@ -58,6 +58,8 @@ namespace CesiProgSys.ViewModel.TcpIp
                             byte[] sendBuffer = Encoding.ASCII.GetBytes("ACK");
                             stream.Write(sendBuffer, 0, sendBuffer.Length);
                             Console.WriteLine("Sent: ACK");
+                            
+                            
                         }
                     }
                     catch (Exception ex)
