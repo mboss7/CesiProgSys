@@ -13,76 +13,88 @@ namespace AvaloniaIHM_View
     class TcpLinkClient
     {
         string SrvHostname;
-        int Port; 
+        int Port;
+        private string FilePath;
+        private NetworkStream stream;
+        public byte[] buffer;
 
         public TcpLinkClient()
         {
             SrvHostname = "localhost";
             Port = 12345;
+            FilePath = @".\\Test1.txt";
+            stream = null;
+            buffer = null;
+            
 
         }
-        public void tcpClient(string SrvHostname, int Port)
+
+        public Tuple<NetworkStream, byte[]>  tcpClient(string SrvHostname, int Port)
         {
             
+
             try
             {
                 while (true)
                 {
+
+                    // Connect to the server.
+                    TcpClient client = new TcpClient(SrvHostname, Port);
+                    Console.WriteLine("Connected to the server.");
+
+                    // Get a client stream for reading and writing.
+                    NetworkStream stream = client.GetStream();
+                 
+
                     
-                 // Connect to the server.
-                TcpClient client = new TcpClient(SrvHostname, Port);
-                Console.WriteLine("Connected to the server.");
-
-                // Get a client stream for reading and writing.
-                NetworkStream stream = client.GetStream();
-
-                // Send a request to the server.
-                byte[] buffer = Encoding.ASCII.GetBytes("Hello, server! Je me connect !");
-                stream.Write(buffer, 0, buffer.Length);
-                Console.WriteLine("Sent: Hello, server!");
-                
-                // Send a Json to the server :
-                
-                string text = System.IO.File.ReadAllText(@"Test1.txt");
-                
-                byte[] bufferJson = Encoding.ASCII.GetBytes(text);
-                stream.Write(bufferJson, 0, bufferJson.Length);
-                
-                //Read the response from the server.
-                buffer = new byte[1024];
-                int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                var data = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                Console.WriteLine("Received: {0}", data);
-                    
-                // write return in doc
-                //Open the File
-                StreamWriter sw = new StreamWriter(@".\\Test1.txt", true, Encoding.ASCII);
-                //Write out the numbers 1 to 10 on the same line.
-                sw.Write("\nReceived: {0}", data);
-                //close the file
-                sw.Close();
-
                 }
 
             }
             catch (Exception ex)
             {
-             
+
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
-
-            Console.WriteLine("\nHit enter to continue...");
-            Console.Read();
+            
+            // Send a request to the server. For connection
+            byte[] buffer = Encoding.ASCII.GetBytes("Hello, server! Je me connect !");
+            stream.Write(buffer, 0, buffer.Length);
+            
+            
+            return new Tuple<NetworkStream, byte[]>(stream, buffer);
         }
 
-        public void tcpClientReceived()
+        
+        
+        public void tcpClientReceived(Tuple<NetworkStream, byte[]> streamAndBuffer )
         {
+
+            NetworkStream stream = streamAndBuffer.Item1;
+            byte[] buffer= streamAndBuffer.Item2;
+            //Read the response from the server.
+            buffer = new byte[1024];
+            int bytesRead = stream.Read(buffer, 0, buffer.Length);
+            var data = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+            Console.WriteLine("Received: {0}", data);
             
+            // write return in doc
+            //Open the File
+            StreamWriter sw = new StreamWriter(@".\\Test1.txt", true, Encoding.ASCII);
+            //Write out the numbers 1 to 10 on the same line.
+            sw.Write("\nReceived: {0}", data);
+            //close the file
+            sw.Close();
         }
 
-        public void tcpClientSend()
+        public void tcpClientSend(Tuple<NetworkStream, byte[]> streamAndBuffer,  string FilePath)
         {
-            
+            NetworkStream stream = streamAndBuffer.Item1;
+            // Send a Json to the server :
+                
+            string text = System.IO.File.ReadAllText(FilePath);
+                
+            byte[] bufferJson = Encoding.ASCII.GetBytes(text);
+            stream.Write(bufferJson, 0, bufferJson.Length);
         }
         
         

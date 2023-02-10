@@ -5,6 +5,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Sockets;
 
 namespace AvaloniaIHM_View
 {
@@ -17,10 +18,14 @@ namespace AvaloniaIHM_View
             Console.WriteLine("It's Works ? ");
            // run TCP CLIENT : 
             TcpLinkClient tcpClientCo = new TcpLinkClient();
-            tcpClientCo.tcpClient("localhost", 12345);
+            
+            Tuple<NetworkStream, byte[]> ReturnTcpClient = tcpClientCo.tcpClient("localhost", 12345);
 
-            tcpClientCo.tcpClientReceived();
-            tcpClientCo.tcpClientSend();   
+
+            string PathFile1 = @".\\Test1.txt";
+            
+            tcpClientCo.tcpClientReceived(ReturnTcpClient);
+            tcpClientCo.tcpClientSend(ReturnTcpClient, PathFile1);   
 
             Console.WriteLine("It's Works ! ");
             Console.ReadLine();
