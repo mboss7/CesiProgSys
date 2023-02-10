@@ -4,23 +4,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AvaloniaApplicationVIEW.MainWindow"
-        Title="AvaloniaApplicationVIEW">
-	
-	
+        Title="AvaloniaApplicationVIEW" DataContext="{Binding MainWindowViewModel}">
 	<Grid RowDefinitions="Auto, *, Auto">
 		<Grid Grid.Row="0" Background="Green" Height="60" ColumnDefinitions="Auto, *, Auto, Auto">
 			<Rectangle Grid.Column="0"></Rectangle>
 			<Rectangle Grid.Column="1"></Rectangle>
 			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
 				<Label FontWeight="Black">EASY SAVE</Label>
+				<Button Width="160" Click="OnClickHandler">My Button</Button>				
 			</StackPanel>
-		</Grid>
-
-		<Grid Grid.Row="1"     Background="#333">
-			<Label>test</Label>
-		</Grid>
-		<Grid Grid.Row="2">
-			<Button Width="160" Command="{Binding OnClickCommand}">My Button</Button>
 		</Grid>
 	</Grid>
 </Window>

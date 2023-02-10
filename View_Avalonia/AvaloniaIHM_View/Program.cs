@@ -15,9 +15,7 @@ namespace AvaloniaIHM_View
     {
       
         static void Main()
-        {
-           
-            
+        {                
             
             
                 // run TCP CLIENT : 
