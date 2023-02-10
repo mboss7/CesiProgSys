@@ -37,6 +37,7 @@ namespace CesiProgSys.ViewModel.TcpIp
 
                 // Start listening for client requests.
                 server.Start();
+                Console.WriteLine("Server START \n____________________________________\n");
 
                 // Buffer for reading data.
                 byte[] buffer = new byte[1024];
@@ -65,6 +66,7 @@ namespace CesiProgSys.ViewModel.TcpIp
                     {
                         while ((length = stream.Read(buffer, 0, buffer.Length)) != 0)
                         {
+                            Console.WriteLine("Data Reception ...");
                             var data = Encoding.ASCII.GetString(buffer, 0, length);
                             Console.WriteLine("Received: {0}", data);
                             

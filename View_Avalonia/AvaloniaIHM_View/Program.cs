@@ -23,7 +23,7 @@ namespace AvaloniaIHM_View
             Tuple<NetworkStream, byte[]> ReturnTcpClient = tcpClientCo.tcpClient("localhost", 12345);
 
 
-            string PathFile1 = @".\\Test1.txt";
+            string PathFile1 = @".\\ClientReception.txt";
             
             tcpClientCo.tcpClientSend(ReturnTcpClient, PathFile1);   
             
