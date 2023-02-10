@@ -18,8 +18,7 @@ namespace AvaloniaIHM_View
         private string FilePath;
         private NetworkStream stream;
         public byte[] buffer;
-        int NbConnection;
-        private string NbConnectionstring;
+        
 
         //constructor
         public TcpLinkClient()
@@ -29,8 +28,7 @@ namespace AvaloniaIHM_View
             FilePath = @".\\Test1.txt";
             stream = null;
             buffer = null;
-            NbConnection = 0;
-            NbConnectionstring = "";
+            
 
 
         }
@@ -47,13 +45,12 @@ namespace AvaloniaIHM_View
                     // Connect to the server.
                     TcpClient client = new TcpClient(SrvHostname, Port);
                     Console.WriteLine("Connected to the server.");
-                    NbConnection = ++NbConnection;
-                    NbConnectionstring = Convert.ToString(NbConnection);
+                   
                     
                     // Get a client stream for reading and writing.
                     NetworkStream stream = client.GetStream();
                     // Send a request to the server. For connection
-                    byte[] buffer = Encoding.ASCII.GetBytes($"\n Hello, server! Connection n°{NbConnectionstring}");
+                    byte[] buffer = Encoding.ASCII.GetBytes($"\n Hello, server!");
                     stream.Write(buffer, 0, buffer.Length);
 
 

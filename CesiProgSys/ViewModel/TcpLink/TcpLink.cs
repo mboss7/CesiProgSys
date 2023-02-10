@@ -14,6 +14,14 @@ namespace CesiProgSys.ViewModel.TcpIp
 
     class TcpLink
     {
+        int NbConnection;
+        string NbConnectionstring;
+
+        public TcpLink()
+        {
+            NbConnection = 0;
+            NbConnectionstring = "";
+        }
 
         public void ServerTCP()
         {
@@ -41,7 +49,10 @@ namespace CesiProgSys.ViewModel.TcpIp
                     // Perform a blocking call to accept requests.
                     // You could also use server.AcceptSocket() here.
                     TcpClient client = server.AcceptTcpClient();
-                    Console.WriteLine("Connected!");
+                    NbConnection = ++NbConnection;
+                    NbConnectionstring = Convert.ToString(NbConnection);
+                    
+                    Console.WriteLine($"Connected! number {NbConnectionstring}");
 
                     // Get a stream object for reading and writing.
                     NetworkStream stream = client.GetStream();
