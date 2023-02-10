@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 
+
 namespace AvaloniaIHM_View
 {
 
@@ -15,11 +16,19 @@ namespace AvaloniaIHM_View
       
         static void Main()
         {
-            Console.WriteLine("It's Works ? ");
-           // run TCP CLIENT : 
+           
+            
+            
+            
+                // run TCP CLIENT : 
             TcpLinkClient tcpClientCo = new TcpLinkClient();
             
             tcpClientCo.tcpClient("localhost", 12345);
+            
+            
+            
+            
+            
             //Tuple<NetworkStream, byte[]> ReturnTcpClient = tcpClientCo.tcpClient("localhost", 12345);
 
 
@@ -27,8 +36,7 @@ namespace AvaloniaIHM_View
             
            // tcpClientCo.tcpClientSend(ReturnTcpClient, PathFile1);   
             
-            Console.WriteLine("It's Works ! ");
-            Console.ReadLine();
+          
 
 
             // Run Avalonia 
