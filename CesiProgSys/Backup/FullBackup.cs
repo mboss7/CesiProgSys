@@ -255,6 +255,8 @@ namespace CesiProgSys.Backup
             fb.inf.state = State.SUCCESS;
             RealTimeLogs.OnWriteLog();
             RealTimeLogs.mut.ReleaseMutex();
+            
+            ViewModelCli.targetAndSource.Add(new []{array[1], array[2]});
         }
     }
 }

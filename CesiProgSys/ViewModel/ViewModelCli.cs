@@ -11,13 +11,15 @@ namespace CesiProgSys.ViewModel
         public static List<Tuple<Thread, string[]>> ouahMonCerveauEstPartiLoin;
         public static List<Tuple<Thread, IBackup>> marre;
         public static Mutex mutex = new Mutex();
-        
+
+        public static List<string[]> targetAndSource;
         
         public ViewModelCli()
         {
             bManager = BackupManager.Instance();
             ouahMonCerveauEstPartiLoin = new List<Tuple<Thread, string[]>>();
             marre = new List<Tuple<Thread, IBackup>>();
+            targetAndSource = new List<string[]>();
         }
 
         private BackupManager bManager;
