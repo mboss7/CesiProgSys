@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using AvaloniaApplicationVIEW;
 
 namespace AvaloniaApplicationVIEW
 {
@@ -10,7 +11,9 @@ namespace AvaloniaApplicationVIEW
         }
         public void OnClickCommand()
         {
-            // do something
+            TcpLinkClient tcpClientCo = new TcpLinkClient();
+
+            tcpClientCo.tcpClient("localhost", 12345);
         }
     }
 }
