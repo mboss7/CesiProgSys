@@ -43,6 +43,8 @@ namespace CesiProgSys.ViewCli
         
         public void cleanRecentSaveSourceTarget();
         
+        public void changeRetentionTime();
+        
         public void resetConfig();
     }  
 }

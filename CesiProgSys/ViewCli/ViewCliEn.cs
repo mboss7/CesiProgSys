@@ -279,7 +279,7 @@ namespace CesiProgSys.ViewCli
                         cleanRecentSaveSourceTarget();
                         break;
                     case 5 :
-                        menu();
+                        changeRetentionTime();
                         return;
                     case 6 :
                         resetConfig();
@@ -513,8 +513,10 @@ namespace CesiProgSys.ViewCli
             menu();
         }
         
-        
-        
+        public void changeRetentionTime()
+        {
+            //Code
+        }
         
         public void resetConfig()
         {

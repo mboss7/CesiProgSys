@@ -276,7 +276,7 @@ namespace CesiProgSys.ViewCli
                         cleanRecentSaveSourceTarget();
                         break;
                     case 5 :
-                        menu();
+                        changeRetentionTime();
                         return;
                     case 6 :
                         resetConfig();
@@ -429,8 +429,8 @@ namespace CesiProgSys.ViewCli
             //code
             Console.Clear();
             Console.WriteLine("Lancement définitif de l'affichage des configurations");
-            // Config.writeConfig(@".\\CONF\conf.json");
-            // Config.readConfig(@".\\CONF\conf.json");
+            Config.writeConfig("config.json", @"\\BACKUP\bck");
+            Config.readConfig("config.json");
             menu();
         }
         
@@ -594,9 +594,16 @@ namespace CesiProgSys.ViewCli
             menu();
         }
 
+        public void changeRetentionTime()
+        {
+            Console.Clear();
+            Console.WriteLine("Entrez la nouvelle valeur du temps de rétention :  ");
+            string newRT = Console.ReadLine();
 
-
-
+            Config.writeConfig("config.json",newRT);
+            Console.WriteLine("La nouvelle valeur du temps de rétention par defaut a été enregistrée dans le fichier de configuration.");
+        }
+        
         public void resetConfig()
         {
             Config.resetConfig();
