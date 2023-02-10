@@ -31,7 +31,8 @@ namespace CesiProgSys.ViewModel.TcpIp
 
                 // Buffer for reading data.
                 byte[] buffer = new byte[1024];
-
+                
+              
                 // Enter the listening loop.
                 while (true)
                 {
@@ -58,18 +59,18 @@ namespace CesiProgSys.ViewModel.TcpIp
                             //Open the File
                             StreamWriter sw = new StreamWriter(@".\\Test1.txt", true, Encoding.ASCII);
                             //Write out the numbers 1 to 10 on the same line.
-                            sw.Write("\nReceived: {0}", data);
+                            sw.Write(data);
                             //close the file
                             sw.Close();
 
                             // Send back a response.
-                            byte[] sendBuffer = Encoding.ASCII.GetBytes("ACK");
-                            stream.Write(sendBuffer, 0, sendBuffer.Length);
-                            Console.WriteLine("Sent: ACK");
+                           // byte[] sendBuffer = Encoding.ASCII.GetBytes("ACK");
+                          //  stream.Write(sendBuffer, 0, sendBuffer.Length);
+                          //  Console.WriteLine("Sent: ACK");
                             
                             // Send a Json to the server :
                 
-                            string text = System.IO.File.ReadAllText(@"Test1.txt");
+                            string text = System.IO.File.ReadAllText(@".\\Test1.txt");
                 
                             byte[] bufferJson = Encoding.ASCII.GetBytes(text);
                             stream.Write(bufferJson, 0, bufferJson.Length);

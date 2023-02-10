@@ -12,7 +12,16 @@ namespace AvaloniaIHM_View
 
     class TcpLinkClient
     {
-        public void tcpClient()
+        public string srvhostname;
+        public int port; 
+
+        public TcpLinkClient()
+        {
+            srvhostname = "localhost";
+            port = 12345;
+
+        }
+        public void tcpClient(string srvhostname, int port)
         {
             
             try
@@ -21,7 +30,7 @@ namespace AvaloniaIHM_View
                 {
                     
                  // Connect to the server.
-                TcpClient client = new TcpClient("localhost", 12345);
+                TcpClient client = new TcpClient(srvhostname, port);
                 Console.WriteLine("Connected to the server.");
 
                 // Get a client stream for reading and writing.

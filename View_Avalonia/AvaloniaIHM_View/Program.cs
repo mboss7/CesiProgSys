@@ -17,7 +17,7 @@ namespace AvaloniaIHM_View
             Console.WriteLine("It's Works ? ");
            // run TCP CLIENT : 
             TcpLinkClient tcpLinstenok = new TcpLinkClient();
-            tcpLinstenok.tcpClient();
+            tcpLinstenok.tcpClient("localhost", 12345);
 
             Console.WriteLine("It's Works ! ");
             Console.ReadLine();
