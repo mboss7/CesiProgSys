@@ -262,7 +262,7 @@ namespace CesiProgSys.ViewCli
                 choiceConfig = Convert.ToInt32(Console.ReadLine());
             }catch(FormatException){}
 
-            if (choiceConfig > 0 && choiceConfig <= 8)
+            if (choiceConfig > 0 && choiceConfig <= 7)
             {
                 switch (choiceConfig)
                 {
@@ -276,23 +276,20 @@ namespace CesiProgSys.ViewCli
                         defaultSaveTarget();
                         return;
                     case 4 :
-                        cleanRecentSaveSource();
+                        cleanRecentSaveSourceTarget();
                         break;
                     case 5 :
-                        cleanRecentSaveTarget();
+                        menu();
                         return;
                     case 6 :
-                        menu();
+                        resetConfig();
                         break;
                     case 7 :
                         menu();
                         return;
-                    case 8 :
-                        menu();
-                        break;
                 }
             }
-            if (choiceConfig == 9)
+            if (choiceConfig == 8)
             {
                 Console.WriteLine("Exiting the program...");
                 Environment.Exit(0);
@@ -510,15 +507,20 @@ namespace CesiProgSys.ViewCli
             //code
         }
         
-        public void cleanRecentSaveSource()
+        public void cleanRecentSaveSourceTarget()
         {
-            //code
+            Config.cleanConfig();
+            menu();
         }
         
-        public void cleanRecentSaveTarget()
+        
+        
+        
+        public void resetConfig()
         {
             //Code
         }
+        
     }
 }
 

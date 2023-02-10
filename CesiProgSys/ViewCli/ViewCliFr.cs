@@ -259,7 +259,7 @@ namespace CesiProgSys.ViewCli
                 choiceConfig = Convert.ToInt32(Console.ReadLine());
             }catch(FormatException){}
 
-            if (choiceConfig > 0 && choiceConfig <= 8)
+            if (choiceConfig > 0 && choiceConfig <= 7)
             {
                 switch (choiceConfig)
                 {
@@ -273,23 +273,20 @@ namespace CesiProgSys.ViewCli
                         defaultSaveTarget();
                         return;
                     case 4 :
-                        cleanRecentSaveSource();
+                        cleanRecentSaveSourceTarget();
                         break;
                     case 5 :
-                        cleanRecentSaveTarget();
+                        menu();
                         return;
                     case 6 :
-                        menu();
+                        resetConfig();
                         break;
                     case 7 :
                         menu();
                         return;
-                    case 8 :
-                        menu();
-                        break;
                 }
             }
-            if (choiceConfig == 9)
+            if (choiceConfig == 8)
             {
                 Console.WriteLine("Sortie du programme...");
                 Environment.Exit(0);
@@ -589,15 +586,26 @@ namespace CesiProgSys.ViewCli
             Console.WriteLine("La cible de sauvegarde par défaut a été nettoyée avec succès.");
         }
 
-        public void cleanRecentSaveSource()
+        public void cleanRecentSaveSourceTarget()
         {
-            //code
+            Config.cleanConfig();
+            Console.Clear();
+            Console.WriteLine("La source et cible récentes des sauvegardes ont été nettoyées. \n ");
+            menu();
         }
 
-        public void cleanRecentSaveTarget()
+
+
+
+        public void resetConfig()
         {
-            //Code
+            Config.resetConfig();
+            Console.Clear();
+            Console.WriteLine("Les configurations ont été réinitialisées. \n ");
+            menu();
         }
+
+        
     }
 }
 

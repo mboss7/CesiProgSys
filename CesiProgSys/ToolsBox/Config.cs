@@ -8,11 +8,11 @@ namespace CesiProgSys.ToolsBox
     {
         // Properties for the configuration data
         public static Language language { get; set; }
-        public string defaultSaveSource { get; set; }
-        public string defaultSaveTarget { get; set; }
-        public Dictionary<string, string> recentSaveSource { get; set; }
-        public Dictionary<string, string> recentSaveTarget { get; set; }
-        public int retentionTime { get; set; }
+        public static string defaultSaveSource { get; set; }
+        public static string defaultSaveTarget { get; set; }
+        public static List<string> recentSaveSource { get; set; }
+        public static List<string> recentSaveTarget { get; set; }
+        public static int retentionTime { get; set; }
 
         public static string TypeLogs = "xml"; // true json false xml
 
@@ -40,39 +40,21 @@ namespace CesiProgSys.ToolsBox
         }
         
         // Method to reset the recentSaveSource, recentSaveTarget, and retentionTime properties to default values
-        public void cleanConfig()
+        public static void cleanConfig()
         {
-            /*List<InfoConf> confList = new List<InfoConf>();
-            string json = JsonConvert.SerializeObject(confList);
-            StreamWriter file = new(@".\\CONF\conf.json", append: false);
-            file.WriteLine(json);
-            file.Close();*/
-            recentSaveSource = new Dictionary<string, string>();
-            recentSaveTarget = new Dictionary<string, string>();
-
+            recentSaveSource.Clear();
+            recentSaveTarget.Clear();
         }
-        // Method to reset the configuration data to default values
+        
 
-       /* public class InfoConf
+        public static void resetConfig()
         {
-           
-            public  string defaultSaveSource { get; set; }
-            public string defaultSaveTarget { get; set; }
-            
-        }*/
-
-        public void resetConfig()
-        {
-            
-            
             language = Language.English;
             defaultSaveSource = @"\\BACKUP\test";
             defaultSaveTarget = @"\\BACKUP\bck";
-            //recentSaveSource = new Dictionary<string, string>();
-            //recentSaveTarget = new Dictionary<string, string>();
+            recentSaveSource = new List<string>();
+            recentSaveTarget = new List<string>();
             retentionTime = 0;
-
-       
         }
     }
 }

@@ -41,9 +41,9 @@ namespace CesiProgSys.ViewCli
 
         public void cleanDST();
         
-        public void cleanRecentSaveSource();
-
-        public void cleanRecentSaveTarget();
+        public void cleanRecentSaveSourceTarget();
+        
+        public void resetConfig();
     }  
 }
 
