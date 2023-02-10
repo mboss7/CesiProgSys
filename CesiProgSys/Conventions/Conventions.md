@@ -40,9 +40,7 @@ public class ClasseTest
 {
 public bool BoolTest;
 public int IntTest;
-```
 
-````csharp
 public void MethodTest()
 {
 ....
