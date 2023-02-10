@@ -57,7 +57,7 @@ namespace CesiProgSys.ViewModel.TcpIp
                             
                             // write return in doc
                             //Open the File
-                            StreamWriter sw = new StreamWriter(@".\\Test1.txt", true, Encoding.ASCII);
+                            StreamWriter sw = new StreamWriter(@".\\ServerReception.txt", true, Encoding.ASCII);
                             //Write out the numbers 1 to 10 on the same line.
                             sw.Write(data);
                             //close the file
