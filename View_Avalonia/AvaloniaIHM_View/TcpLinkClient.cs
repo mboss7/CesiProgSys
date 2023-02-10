@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Net.Sockets;
 using System.Net;
+using Avalonia.Rendering;
 
 namespace AvaloniaIHM_View
 {
@@ -18,7 +19,7 @@ namespace AvaloniaIHM_View
         private string FilePath;
         private NetworkStream stream;
         public byte[] buffer;
-        
+        bool LoopTcpClient;
 
         //constructor
         public TcpLinkClient()
@@ -28,7 +29,7 @@ namespace AvaloniaIHM_View
             FilePath = @".\\ClientReception.txt";
             stream = null;
             buffer = null;
-            
+            LoopTcpClient = true;
 
 
         }
@@ -39,43 +40,67 @@ namespace AvaloniaIHM_View
 
             try
             {
-                while (true)
+                while (LoopTcpClient)
                 {
 
                     // Connect to the server.
                     TcpClient client = new TcpClient(SrvHostname, Port);
                     Console.WriteLine("Connected to the server.");
-                   
-                    
+
                     // Get a client stream for reading and writing.
                     NetworkStream stream = client.GetStream();
+
+                    // Send a Json to the server :
+
+                    string text = System.IO.File.ReadAllText(@".\\Test1.txt");
+
+                    byte[] bufferJson = Encoding.ASCII.GetBytes(text);
+                    stream.Write(bufferJson, 0, bufferJson.Length);
+
+
+
                     // Send a request to the server. For connection
                     byte[] buffer = Encoding.ASCII.GetBytes($"\n Hello, server!");
                     stream.Write(buffer, 0, buffer.Length);
 
 
+                    try
+                    {
+                        while (true)
+                        {
+                            //Read the response from the server.
+                            buffer = new byte[1024];
+                            int bytesRead = 0;
+                            var data = string.Empty;
 
-                    //Read the response from the server.
-                    buffer = new byte[1024];
-                    int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                    var data = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine("Received: {0}", data);
-            
-                    // write return in doc
-                    //Open the File
-                    StreamWriter sw = new StreamWriter(@".\\ClientReception.txt", true, Encoding.ASCII);
-                    //Write out the numbers 1 to 10 on the same line.
-                    sw.Write("\nReceived: {0}", data);
-                    //close the file
-                    sw.Close();
-                    
-                    
-                    // Send a Json to the server :
-                
-                    string text = System.IO.File.ReadAllText(@".\\ClientReception.txt");
-                
-                    byte[] bufferJson = Encoding.ASCII.GetBytes(text);
-                    stream.Write(bufferJson, 0, bufferJson.Length);
+
+                            bytesRead = stream.Read(buffer, 0, buffer.Length);
+                            data = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                            Console.WriteLine("Received: {0}", data);
+
+                            // write return in doc
+                            //Open the File
+                            StreamWriter sw = new StreamWriter(@".\\ClientReception.txt", true, Encoding.ASCII);
+                            //Write out the numbers 1 to 10 on the same line.
+                            sw.Write("\nReceived: {0}", data);
+                            // close the file
+                            sw.Close();
+                        }
+                       
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+                   
+
+
+                    // Send a request to the server. For connection
+                    byte[] bufferEnd = Encoding.ASCII.GetBytes($"\n Bye, server!");
+                    stream.Write(bufferEnd, 0, bufferEnd.Length);
+
+
                 }
 
             }

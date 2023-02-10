@@ -11,6 +11,8 @@ using System.Reflection.PortableExecutable;
 
 namespace CesiProgSys.ViewModel.TcpIp
 {
+    
+    // Not forget to crypt : https://learn.microsoft.com/fr-fr/dotnet/api/system.net.security.sslstream?view=net-7.0 
 
     class TcpLink
     {
@@ -37,7 +39,7 @@ namespace CesiProgSys.ViewModel.TcpIp
 
                 // Start listening for client requests.
                 server.Start();
-                Console.WriteLine("Server START \n____________________________________\n");
+                Console.WriteLine($"\n_____________________________________\n *| Server START on port : {port} |* \n_____________________________________\n");
 
                 // Buffer for reading data.
                 byte[] buffer = new byte[1024];
@@ -54,7 +56,7 @@ namespace CesiProgSys.ViewModel.TcpIp
                     NbConnection = ++NbConnection;
                     NbConnectionstring = Convert.ToString(NbConnection);
                     
-                    Console.WriteLine($"Connected! number {NbConnectionstring}");
+                    Console.WriteLine($" *** Connection number : {NbConnectionstring}***");
 
                     // Get a stream object for reading and writing.
                     NetworkStream stream = client.GetStream();
@@ -66,7 +68,6 @@ namespace CesiProgSys.ViewModel.TcpIp
                     {
                         while ((length = stream.Read(buffer, 0, buffer.Length)) != 0)
                         {
-                            Console.WriteLine("Data Reception ...");
                             var data = Encoding.ASCII.GetString(buffer, 0, length);
                             Console.WriteLine("Received: {0}", data);
                             
@@ -79,10 +80,16 @@ namespace CesiProgSys.ViewModel.TcpIp
                             sw.Close();
 
                             // Send back a response.
-                           // byte[] sendBuffer = Encoding.ASCII.GetBytes("ACK");
-                          //  stream.Write(sendBuffer, 0, sendBuffer.Length);
-                          //  Console.WriteLine("Sent: ACK");
-                            
+                           byte[] sendBuffer = Encoding.ASCII.GetBytes("ACK");
+                           stream.Write(sendBuffer, 0, sendBuffer.Length);
+                           Console.WriteLine("Sent: ACK");
+
+                           
+                            //send txt
+                            string text = System.IO.File.ReadAllText(@".\\Test1.txt");
+                            byte[] bufferJson = Encoding.ASCII.GetBytes(text);
+                            stream.Write(bufferJson, 0, bufferJson.Length);
+                            Console.WriteLine("Sent:{0}", bufferJson);
                         }
                     }
                     catch (Exception ex)

@@ -16,9 +16,9 @@ using CesiProgSys.ViewModel.TcpIp;
 
                 tcpSRV.ServerTCP();
                 
-                NetworkStream returnServerTCP = tcpSRV.ServerTCP();
+                //NetworkStream returnServerTCP = tcpSRV.ServerTCP();
 
-                tcpSRV.SendJsonToClient(returnServerTCP);
+                //tcpSRV.SendJsonToClient(returnServerTCP);
 
                 Console.WriteLine("It's Works ! ");
                 Console.ReadLine();
