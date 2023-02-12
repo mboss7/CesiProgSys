@@ -428,9 +428,19 @@ namespace CesiProgSys.ViewCli
         {
             //code
             Console.Clear();
-            Console.WriteLine("Lancement définitif de l'affichage des configurations");
-            Config.writeConfig("config.json", @"\\BACKUP\bck");
-            Config.readConfig("config.json");
+
+            // Read the config from the JSON file
+            Config config = Config.readConfig("config.json");
+
+            // Print the current configurations
+            Console.WriteLine("Language: " + Config.language);
+            Console.WriteLine("Default Save Source: " + Config.defaultSaveSource);
+            Console.WriteLine("Default Save Target: " + Config.defaultSaveTarget);
+            Console.WriteLine("Recent Save Source: " + string.Join(", ", Config.recentSaveSource));
+            Console.WriteLine("Recent Save Target: " + string.Join(", ", Config.recentSaveTarget));
+            Console.WriteLine("Retention Time: " + Config.retentionTime + " days");
+
+            Console.ReadLine();
             menu();
         }
         
