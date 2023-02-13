@@ -59,15 +59,15 @@ namespace XOREncryption
             {
                 //ask the origine path
                 Console.WriteLine("Please enter file to decrypt path");
-                string fileBrutName = Console.ReadLine();
-                string fileName = "./"+fileBrutName+"";
-                Console.WriteLine(fileName);
-           
-                //ask destination path 
-                Console.WriteLine("Please enter decrypted file destination path");
                 string encryptedBrutFileName = Console.ReadLine();
                 string encryptedFileName = "./"+encryptedBrutFileName+"";
                 Console.WriteLine(encryptedBrutFileName);
+                
+                //ask destination path 
+                Console.WriteLine("Please enter decrypted file destination path");
+                string fileBrutName = Console.ReadLine();
+                string fileName = "./"+fileBrutName+"";
+                Console.WriteLine(fileName);
             
                 //ask crypt key 
                 Console.WriteLine("Please enter your key for decrypt");
