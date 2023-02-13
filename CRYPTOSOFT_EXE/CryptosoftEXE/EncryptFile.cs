@@ -58,19 +58,19 @@ namespace XOREncryption
             try
             {
                 //ask the origine path
-                Console.WriteLine("Please enter file to encrypt path");
+                Console.WriteLine("Please enter file to decrypt path");
                 string fileBrutName = Console.ReadLine();
                 string fileName = "./"+fileBrutName+"";
                 Console.WriteLine(fileName);
            
                 //ask destination path 
-                Console.WriteLine("Please enter encrypted file destination path");
+                Console.WriteLine("Please enter decrypted file destination path");
                 string encryptedBrutFileName = Console.ReadLine();
                 string encryptedFileName = "./"+encryptedBrutFileName+"";
                 Console.WriteLine(encryptedBrutFileName);
             
                 //ask crypt key 
-                Console.WriteLine("Please enter your key for encrypt");
+                Console.WriteLine("Please enter your key for decrypt");
                 string key = Console.ReadLine();
 
           
@@ -82,9 +82,9 @@ namespace XOREncryption
                 decryptedFile = XOREncrypt(decryptedFile, key);
 
                 // Write the decrypted file
-                File.WriteAllBytes("decrypted.txt", decryptedFile);
+                File.WriteAllBytes(encryptedFileName, decryptedFile);
 
-                Console.WriteLine("File encrypted and decrypted successfully.");
+                Console.WriteLine("File decrypted successfully.");
             }
             catch (Exception e)
             {
