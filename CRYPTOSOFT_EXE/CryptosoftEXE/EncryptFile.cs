@@ -21,29 +21,79 @@ namespace XOREncryption
             string fileBrutName = Console.ReadLine();
             string fileName = "./"+fileBrutName+"";
             Console.WriteLine(fileName);
-           
-            //ask destination path 
-            Console.WriteLine("Please enter encrypted file destination path");
-            string encryptedBrutFileName = Console.ReadLine();
-            string encryptedFileName = "./"+encryptedBrutFileName+"";
-            Console.WriteLine(encryptedBrutFileName);
+
+            try
+            {
+                //ask destination path 
+                Console.WriteLine("Please enter encrypted file destination path");
+                string encryptedBrutFileName = Console.ReadLine();
+                string encryptedFileName = "./"+encryptedBrutFileName+"";
+                Console.WriteLine(encryptedBrutFileName);
             
-            //ask crypt key 
-            Console.WriteLine("Please enter your key for encrypt");
-            string key = Console.ReadLine();
+                //ask crypt key 
+                Console.WriteLine("Please enter your key for encrypt");
+                string key = Console.ReadLine();
 
-            // Read the original file into a byte array
-            byte[] originalFile = File.ReadAllBytes(fileName);
+                // Read the original file into a byte array
+                byte[] originalFile = File.ReadAllBytes(fileName);
 
-            // Encrypt the file
-            byte[] encryptedFile = XOREncrypt(originalFile, key);
+                // Encrypt the file
+                byte[] encryptedFile = XOREncrypt(originalFile, key);
 
-            // Write the encrypted file
-            File.WriteAllBytes(encryptedFileName, encryptedFile);
+                // Write the encrypted file
+                File.WriteAllBytes(encryptedFileName, encryptedFile);
             
-            Console.WriteLine("File encrypted successfully.");
- 
+                Console.WriteLine("File encrypted successfully.");
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
+        public void DecryptXOR()
+        {
+            try
+            {
+                //ask the origine path
+                Console.WriteLine("Please enter file to encrypt path");
+                string fileBrutName = Console.ReadLine();
+                string fileName = "./"+fileBrutName+"";
+                Console.WriteLine(fileName);
+           
+                //ask destination path 
+                Console.WriteLine("Please enter encrypted file destination path");
+                string encryptedBrutFileName = Console.ReadLine();
+                string encryptedFileName = "./"+encryptedBrutFileName+"";
+                Console.WriteLine(encryptedBrutFileName);
+            
+                //ask crypt key 
+                Console.WriteLine("Please enter your key for encrypt");
+                string key = Console.ReadLine();
+
+          
+
+                // Read the encrypted file into a byte array
+                byte[] decryptedFile = File.ReadAllBytes(encryptedFileName);
+
+                // Decrypt the file
+                decryptedFile = XOREncrypt(decryptedFile, key);
+
+                // Write the decrypted file
+                File.WriteAllBytes("decrypted.txt", decryptedFile);
+
+                Console.WriteLine("File encrypted and decrypted successfully.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
+        }
+
         static byte[] XOREncrypt(byte[] data, string key)
         {
             byte[] encryptedData = new byte[data.Length];
