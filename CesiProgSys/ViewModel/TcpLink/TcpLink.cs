@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Net;
 using System.Reflection.PortableExecutable;
+using System.Security.Cryptography;
 
 namespace CesiProgSys.ViewModel.TcpIp
 {
@@ -18,7 +19,7 @@ namespace CesiProgSys.ViewModel.TcpIp
         int NbConnection;
         string NbConnectionstring;
         public int port;
-        private NetworkStream stream; 
+        private NetworkStream stream;
 
         public TcpLink()
         {
@@ -30,101 +31,44 @@ namespace CesiProgSys.ViewModel.TcpIp
 
         public NetworkStream ServerTCP()
         {
-            TcpListener server = null;
-            try
-            {
-                // Set the TcpListener on the specified port.
-                server = new TcpListener(IPAddress.Any, port);
-
-                // Start listening for client requests.
-                server.Start();
-                Console.WriteLine($"\n_____________________________________\n *| Server START on port : {port} |* \n_____________________________________\n");
+          
+               
+             
+                    $"\n_____________________________________\n *| Server START on port : {port} |* \n_____________________________________\n");
 
                 // Buffer for reading data.
                 byte[] buffer = new byte[1024];
-                
-              
-                // Enter the listening loop.
+
+                TcpListener server = new TcpListener(8080);
+                server.Start();
+
                 while (true)
                 {
-                    Console.WriteLine("Waiting for a connection... ");
-
-                    // Perform a blocking call to accept requests.
-                    // You could also use server.AcceptSocket() here.
                     TcpClient client = server.AcceptTcpClient();
-                    NbConnection = ++NbConnection;
-                    NbConnectionstring = Convert.ToString(NbConnection);
-                    
-                    Console.WriteLine($" *** Connection number : {NbConnectionstring}***");
 
-                    // Get a stream object for reading and writing.
-                    NetworkStream stream = client.GetStream();
-
-                    
-                    int length;
-                    // Read incoming stream into buffer.
-                    try
+                    using (NetworkStream stream = client.GetStream())
                     {
-                        while ((length = stream.Read(buffer, 0, buffer.Length)) != 0)
-                        {
-                            var data = Encoding.ASCII.GetString(buffer, 0, length);
-                            Console.WriteLine("Received: {0}", data);
-                            
-                            // write return in doc
-                            //Open the File
-                            StreamWriter sw = new StreamWriter(@".\\ServerReception.txt", true, Encoding.ASCII);
-                            //Write out the numbers 1 to 10 on the same line.
-                            sw.Write(data);
-                            //close the file
-                            sw.Close();
+                        // Réception de la clé de cryptage
+                        Aes aes = Aes.Create();
+                        byte[] key = new byte[aes.KeySize / 8];
+                        int bytesRead = stream.Read(key, 0, key.Length);
 
-                            // Send back a response.
-                           byte[] sendBuffer = Encoding.ASCII.GetBytes("ACK");
-                           stream.Write(sendBuffer, 0, sendBuffer.Length);
-                           Console.WriteLine("Sent: ACK");
+                        // Décryptage du message
+                        byte[] encryptedMessage = new byte[1024];
+                        bytesRead = stream.Read(encryptedMessage, 0, encryptedMessage.Length);
+                        byte[] decryptedMessage = Decrypt(encryptedMessage, key, aes.IV);
 
-                           
-                            //send txt
-                            string text = System.IO.File.ReadAllText(@".\\Test1.txt");
-                            byte[] bufferJson = Encoding.ASCII.GetBytes(text);
-                            stream.Write(bufferJson, 0, bufferJson.Length);
-                            Console.WriteLine("Sent:{0}", bufferJson);
-                        }
+                        Console.WriteLine("Message reçu : " + System.Text
+
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("An error occurred: " + ex.Message);
-                    }
+
+
+
                 }
             }
-            catch (SocketException e)
-            {
-                Console.WriteLine("SocketException: {0}", e);
-            }
-            finally
-            {
-                // Stop listening for new clients.
-                server.Stop();
-            }
-
-            Console.WriteLine("\nHit enter to continue...");
-            Console.Read();
-            return stream; 
         }
-        
-        
-        // Send a Json to the server :
-        public void SendJsonToClient(NetworkStream stream)
-        {
-            string text = System.IO.File.ReadAllText(@".\\ServerReception.txt");
-                        
-            byte[] bufferJson = Encoding.ASCII.GetBytes(text);
-            stream.Write(bufferJson, 0, bufferJson.Length);
-            Console.WriteLine("Sent:{0}", bufferJson);
-        }                
-                                    
     }
-}
+
 
 
 
