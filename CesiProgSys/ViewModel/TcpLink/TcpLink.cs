@@ -11,7 +11,6 @@ using System.Reflection.PortableExecutable;
 
 namespace CesiProgSys.ViewModel.TcpIp
 {
-    
     // Not forget to crypt : https://learn.microsoft.com/fr-fr/dotnet/api/system.net.security.sslstream?view=net-7.0 
 
     class TcpLink
