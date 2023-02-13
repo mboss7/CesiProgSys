@@ -19,18 +19,17 @@ namespace XOREncryption
         
         public void EncryptXOR()
         {
-            ViewCryptosoft vueRtn = new ViewCryptosoft();
+               ViewCryptosoft vueRtn = new ViewCryptosoft();
             
            
             
-            //ask the origine path
-            Console.WriteLine("Please enter file to encrypt path");
-            string fileBrutName = Console.ReadLine();
-            string fileName = "./"+fileBrutName+"";
-            Console.WriteLine(fileName);
+               //ask the origine path
+               Console.WriteLine("Please enter file to encrypt path");
+               string fileBrutName = Console.ReadLine();
+               string fileName = "./"+fileBrutName+"";
+               Console.WriteLine(fileName);
 
-            try
-            {
+            
                 //ask destination path 
                 Console.WriteLine("Please enter encrypted file destination path");
                 string encryptedBrutFileName = Console.ReadLine();
@@ -41,6 +40,8 @@ namespace XOREncryption
                 Console.WriteLine("Please enter your key for encrypt");
                 string key = Console.ReadLine();
                 
+            try
+            {   
                 var stopwatch = Stopwatch.StartNew();
 
                 // Read the original file into a byte array
@@ -69,6 +70,9 @@ namespace XOREncryption
             }
             
         }
+        
+        
+        
         
         
         // For decrypt file in original path
@@ -134,7 +138,7 @@ namespace XOREncryption
 
             return encryptedData;
         }
-        
+
     }
     
 }
