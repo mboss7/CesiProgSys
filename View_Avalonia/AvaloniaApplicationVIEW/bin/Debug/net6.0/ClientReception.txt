@@ -1,0 +1,14 @@
+
+Received: ACK
+Received: J'envoie un fichier test depuis le serveur
+Received: ACK
+Received: J'envoie un fichier test depuis le serveur
+Received: ACK
+Received: J'envoie un fichier test depuis le serveur
+Received: ACK
+Received: J'envoie un fichier test depuis le serveurACK
+Received: J'envoie un fichier test depuis le serveur
+Received: ACK
+Received: J'envoie un fichier test depuis le serveur
+Received: ACK
+Received: J'envoie un fichier test depuis le serveur

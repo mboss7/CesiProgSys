@@ -1,0 +1,17 @@
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\bin\Debug\net7.0\CesiProgSys.exe
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\bin\Debug\net7.0\CesiProgSys.deps.json
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\bin\Debug\net7.0\CesiProgSys.runtimeconfig.json
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\bin\Debug\net7.0\CesiProgSys.dll
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\bin\Debug\net7.0\CesiProgSys.pdb
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.csproj.AssemblyReference.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.AssemblyInfoInputs.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.AssemblyInfo.cs
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.csproj.CopyComplete
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.dll
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\obj\Debug\net7.0\refint\CesiProgSys.dll
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.pdb
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\obj\Debug\net7.0\CesiProgSys.genruntimeconfig.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\obj\Debug\net7.0\ref\CesiProgSys.dll

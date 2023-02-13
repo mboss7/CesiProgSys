@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Jk/pWqWrqv09cO1sOsg37i9Fqoz1NNz667l3TmL522NRfeiYnQOey02f1UG9+GeOY126Wa9WZyjpOIHavaqDww==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Administrator\\Source\\Repos\\mboss7\\CesiProgSys\\CesiProgSys\\CesiProgSys.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

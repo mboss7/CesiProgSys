@@ -1,0 +1,15 @@
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\bin\Debug\net7.0\CryptosoftEXE.exe
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\bin\Debug\net7.0\CryptosoftEXE.deps.json
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\bin\Debug\net7.0\CryptosoftEXE.runtimeconfig.json
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\bin\Debug\net7.0\CryptosoftEXE.dll
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\bin\Debug\net7.0\CryptosoftEXE.pdb
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\obj\Debug\net7.0\CryptosoftEXE.csproj.AssemblyReference.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\obj\Debug\net7.0\CryptosoftEXE.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\obj\Debug\net7.0\CryptosoftEXE.AssemblyInfoInputs.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\obj\Debug\net7.0\CryptosoftEXE.AssemblyInfo.cs
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\obj\Debug\net7.0\CryptosoftEXE.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\obj\Debug\net7.0\CryptosoftEXE.dll
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\obj\Debug\net7.0\refint\CryptosoftEXE.dll
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\obj\Debug\net7.0\CryptosoftEXE.pdb
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\obj\Debug\net7.0\CryptosoftEXE.genruntimeconfig.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CRYPTOSOFT_EXE\CryptosoftEXE\obj\Debug\net7.0\ref\CryptosoftEXE.dll
