@@ -85,6 +85,7 @@ namespace AvaloniaIHM_View
                             sw.Write("\nReceived: {0}", data);
                             // close the file
                             sw.Close();
+                            
                         }
                        
                     }
