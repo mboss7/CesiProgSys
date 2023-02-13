@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
 
 namespace XOREncryption
 {
@@ -33,6 +34,8 @@ namespace XOREncryption
                 //ask crypt key 
                 Console.WriteLine("Please enter your key for encrypt");
                 string key = Console.ReadLine();
+                
+                var stopwatch = Stopwatch.StartNew();
 
                 // Read the original file into a byte array
                 byte[] originalFile = File.ReadAllBytes(fileName);
@@ -42,13 +45,16 @@ namespace XOREncryption
 
                 // Write the encrypted file
                 File.WriteAllBytes(encryptedFileName, encryptedFile);
+                
+                stopwatch.Stop();
             
                 Console.WriteLine("File encrypted successfully.");
-
+                Console.WriteLine("Encryption time: " + stopwatch.Elapsed);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                Console.WriteLine("échec");
                 throw;
             }
             
@@ -61,7 +67,6 @@ namespace XOREncryption
                 Console.WriteLine("Please enter file to decrypt path");
                 string encryptedBrutFileName = Console.ReadLine();
                 string encryptedFileName = "./"+encryptedBrutFileName+"";
-                Console.WriteLine(encryptedBrutFileName);
                 
                 //ask destination path 
                 Console.WriteLine("Please enter decrypted file destination path");
@@ -74,6 +79,7 @@ namespace XOREncryption
                 string key = Console.ReadLine();
 
           
+                var stopwatch = Stopwatch.StartNew();
 
                 // Read the encrypted file into a byte array
                 byte[] decryptedFile = File.ReadAllBytes(encryptedFileName);
@@ -83,8 +89,11 @@ namespace XOREncryption
 
                 // Write the decrypted file
                 File.WriteAllBytes(encryptedFileName, decryptedFile);
+                
+                stopwatch.Stop();
 
                 Console.WriteLine("File decrypted successfully.");
+                Console.WriteLine("Encryption time: " + stopwatch.Elapsed);
             }
             catch (Exception e)
             {
