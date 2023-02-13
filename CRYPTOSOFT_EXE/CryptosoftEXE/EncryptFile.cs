@@ -59,6 +59,10 @@ namespace XOREncryption
             }
             
         }
+        
+        
+        // For decrypt file in original path
+        
         public void DecryptXOR()
         {
             try
@@ -69,10 +73,10 @@ namespace XOREncryption
                 string encryptedFileName = "./"+encryptedBrutFileName+"";
                 
                 //ask destination path 
-                Console.WriteLine("Please enter decrypted file destination path");
-                string fileBrutName = Console.ReadLine();
-                string fileName = "./"+fileBrutName+"";
-                Console.WriteLine(fileName);
+                //Console.WriteLine("Please enter decrypted file destination path");
+               // string fileBrutName = Console.ReadLine();
+               // string fileName = "./"+fileBrutName+"";
+                //Console.WriteLine(fileName);
             
                 //ask crypt key 
                 Console.WriteLine("Please enter your key for decrypt");
