@@ -15,8 +15,14 @@ namespace XOREncryption
             fileName = "";
         }
         
+        
+        
         public void EncryptXOR()
         {
+            ViewCryptosoft vueRtn = new ViewCryptosoft();
+            
+           
+            
             //ask the origine path
             Console.WriteLine("Please enter file to encrypt path");
             string fileBrutName = Console.ReadLine();
@@ -50,6 +56,10 @@ namespace XOREncryption
             
                 Console.WriteLine("File encrypted successfully.");
                 Console.WriteLine("Encryption time: " + stopwatch.Elapsed);
+                Console.ReadLine();
+                
+                vueRtn.ViewLogiciel();
+
             }
             catch (Exception e)
             {
@@ -65,6 +75,9 @@ namespace XOREncryption
         
         public void DecryptXOR()
         {
+            
+            ViewCryptosoft vueRtn = new ViewCryptosoft();
+           
             try
             {
                 //ask the origine path
@@ -98,6 +111,9 @@ namespace XOREncryption
 
                 Console.WriteLine("File decrypted successfully.");
                 Console.WriteLine("Encryption time: " + stopwatch.Elapsed);
+                Console.ReadLine();
+                
+                vueRtn.ViewLogiciel();
             }
             catch (Exception e)
             {
