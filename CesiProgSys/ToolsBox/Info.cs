@@ -2,7 +2,7 @@
 namespace CesiProgSys.ToolsBox;
 public class Info
 {
-    public bool LogType { get; set; }
+    // public bool LogType { get; set; }
     
     public DateTime Date { get; set; }
     public TimeSpan TimeLaps { get; set; }

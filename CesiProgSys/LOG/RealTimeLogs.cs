@@ -1,3 +1,6 @@
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using CesiProgSys.Backups;
 using CesiProgSys.ToolsBox;
 
 namespace CesiProgSys.LOG
@@ -5,23 +8,21 @@ namespace CesiProgSys.LOG
 
     public class RealTimeLogs : Logs
     {
-        public static List<Info>? listInfo;
-
-        //Mutex for manage 
-        public static Mutex mut = new Mutex();
+        public static HashSet<Backup>? SetBackup;
 
         public static event EventHandler? writeLog;
 
         // builder for RealTimeLogs
         private RealTimeLogs()
         {
-            listInfo = new List<Info>();
+            SetBackup = new HashSet<Backup>();
         }
         
         // start new thread when listInfo is not null  
         public static void startThread()
         {
             RealTimeLogs rtl = new RealTimeLogs();
+            Thread.CurrentThread.
             rtl.startLog();
         }
 
@@ -36,34 +37,33 @@ namespace CesiProgSys.LOG
         }
 
         protected override void writeLogs(object? sender, EventArgs e)
-        { 
+        {
+            SetBackup.Add((Backup)sender);
             List<string> Info = new List<string>(); 
             List<string> Error = new List<string>(); 
-            mut.WaitOne(); 
-            foreach (Info inf in listInfo) 
+            foreach (Backup b in SetBackup) 
             {
-                if (inf.state == State.SUCCESS) 
+                if (b.State == State.SUCCESS) 
                 { 
-                    inf.state = State.END; 
-                    DailyLogs.listInfo.Add(inf);
+                    b.State = State.END; 
+                    DailyLogs.listInfo.Add(b);
                     DailyLogs.OnWriteLog();
                 }
-                if (Config.TypeLogs.Equals("json"))
-                {
-                    if (inf.LogType)
-                        Info.Add(JsonLog.stringToJson(inf));
-                    else
-                        Error.Add(JsonLog.stringToJson(inf));
-                }
-                else
-                {
-                    if (inf.LogType)
-                        Info.Add(Xml.serialize(inf));
-                    else
-                        Error.Add(Xml.serialize(inf));
-                }
+                // if (Config.TypeLogs.Equals("json"))
+                // {
+                //     if (b.LogType)
+                //         Info.Add(JsonLog.stringToJson(b));
+                //     else
+                //         Error.Add(JsonLog.stringToJson(b));
+                // }
+                // else
+                // {
+                    // if (b.LogType)
+                        Info.Add(Xml.serialize(b));
+                    // else
+                        // Error.Add(Xml.serialize(b));
+                // }
             }
-            mut.ReleaseMutex();
                 
             if(Info.Any()) 
                 log(Info, "./LOGS/RealTimeLogsInfo."+Config.TypeLogs);
@@ -72,9 +72,9 @@ namespace CesiProgSys.LOG
             
         }
 
-        public static void OnWriteLog()
+        public static void OnWriteLog(Backup backup)
         {
-            writeLog?.Invoke(null, EventArgs.Empty);
+            writeLog?.Invoke(backup, EventArgs.Empty);
         }
     }
 }

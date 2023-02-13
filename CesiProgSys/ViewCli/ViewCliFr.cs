@@ -399,31 +399,31 @@ namespace CesiProgSys.ViewCli
         public void startBackupValid()
         {
             Console.Clear();
-            List<string> listNames = vmCLI.getThreadsNames();
-            for (int i = 0; i < listNames.Count; i++)
-            {
-                Console.WriteLine("{0} {1}", i+1, listNames[i]);
-            }
-
-            int input = 0;
-            try
-            {
-                input = Convert.ToInt32(Console.ReadLine()) - 1;
-            }
-            catch (FormatException)
-            {
-                input = -1;
-            }
-
-            if (input <= -1 || input >= listNames.Count)
-            {
-                Console.WriteLine("Mauvais input");
-                menu();
-            }
-            else
-            {
-                vmCLI.startBackup(listNames[input]);
-            }
+            // List<string> listNames = vmCLI.getThreadsNames();
+            // for (int i = 0; i < listNames.Count; i++)
+            // {
+            //     Console.WriteLine("{0} {1}", i+1, listNames[i]);
+            // }
+            //
+            // int input = 0;
+            // try
+            // {
+            //     input = Convert.ToInt32(Console.ReadLine()) - 1;
+            // }
+            // catch (FormatException)
+            // {
+            //     input = -1;
+            // }
+            //
+            // if (input <= -1 || input >= listNames.Count)
+            // {
+            //     Console.WriteLine("Mauvais input");
+            //     menu();
+            // }
+            // else
+            // {
+            //     vmCLI.startBackup(listNames[input]);
+            // }
             menu();
         }
 

@@ -1,8 +1,11 @@
+using CesiProgSys.ToolsBox;
+
 namespace CesiProgSys.LOG
 {
     //interface for Logs 
     public abstract class Logs
     { 
+        
         protected abstract void startLog();
 
         protected void log(List<string> toPrint, string path)

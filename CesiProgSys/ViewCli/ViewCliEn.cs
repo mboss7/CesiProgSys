@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using CesiProgSys.Backups;
 using CesiProgSys.ToolsBox;
 using CesiProgSys.ViewModel;
 
@@ -402,13 +403,14 @@ namespace CesiProgSys.ViewCli
         public void startBackupValid()
         {
             Console.Clear();
-            List<string> listNames = vmCLI.getThreadsNames();
-            for (int i = 0; i < listNames.Count; i++)
-            {
-                Console.WriteLine("{0} {1}", i+1, listNames[i]);
-            }
+            List<Backup> backups = vmCLI.getBackups();
 
+            for (int i = 0; i < backups.Count; i++)
+            {
+                Console.WriteLine("{0} {1}", i+1, backups[i]);
+            }
             int input = 0;
+            
             try
             {
                 input = Convert.ToInt32(Console.ReadLine()) - 1;
@@ -417,16 +419,41 @@ namespace CesiProgSys.ViewCli
             {
                 input = -1;
             }
-
-            if (input <= -1 || input >= listNames.Count)
+            
+            if (input <= -1 || input >= backups.Count)
             {
                 Console.WriteLine("Wrong input");
                 menu();
             }
             else
             {
-                vmCLI.startBackup(listNames[input]);
+                vmCLI.startBackup(backups[input]);
             }
+            
+            // List<string> listNames = vmCLI.getThreadsNames();
+            // for (int i = 0; i < listNames.Count; i++)
+            // {
+            // }
+            //
+            // int input = 0;
+            // try
+            // {
+            //     input = Convert.ToInt32(Console.ReadLine()) - 1;
+            // }
+            // catch (FormatException)
+            // {
+            //     input = -1;
+            // }
+            //
+            // if (input <= -1 || input >= listNames.Count)
+            // {
+            //     Console.WriteLine("Wrong input");
+            //     menu();
+            // }
+            // else
+            // {
+            //     vmCLI.startBackup(listNames[input]);
+            // }
             menu();
 
         }
