@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using Sodium;
+
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -24,11 +24,11 @@ namespace XOREncryption
             string theKey = BitConverter.ToString(key64generating);
             Console.WriteLine(theKey);
             
-           this.keyVault(theKey);
+           //this.keyVault(theKey);
            
            Console.WriteLine("Clef sauvegardé dans Vault");
         }
-
+        /*
         public void keyVault(string theKey)
         {
             string keyToEncrypt = theKey;
@@ -47,7 +47,7 @@ namespace XOREncryption
             string key = Encoding.UTF8.GetString(decryptedKey);
 
             Console.WriteLine(key);
-        }
+        }*/
     }
 }
 

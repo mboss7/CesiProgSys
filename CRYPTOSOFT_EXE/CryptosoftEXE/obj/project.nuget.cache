@@ -1,35 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DRDmqkDGXKcU/BaO9jdTtdEbmnwTuK4NVRTaIK7g8EowoQfRf5ImJHrFolFNnP43lSPldc/JhChRAUQK1BfpWA==",
+  "dgSpecHash": "n6ryNUmkJrcIXjAU+nxUjNyRvXltKawxV+vi8FdGx+HCdegmcURLgX8bo4Q+1MKp02H4lDd2LVNZUX3zSD2hVw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Administrator\\Source\\Repos\\mboss7\\CesiProgSys\\CRYPTOSOFT_EXE\\CryptosoftEXE\\CryptosoftEXE.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Administrator\\.nuget\\packages\\baseclass.contrib.nuget.output\\2.1.0\\baseclass.contrib.nuget.output.2.1.0.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\libsodium\\1.0.18.4\\libsodium.1.0.18.4.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\libsodium-net\\0.10.0\\libsodium-net.0.10.0.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\sodium.core\\1.3.3\\sodium.core.1.3.3.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\system.security.cryptography.protecteddata\\7.0.0\\system.security.cryptography.protecteddata.7.0.0.nupkg.sha512"
-  ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Baseclass.Contrib.Nuget.Output 2.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Baseclass.Contrib.Nuget.Output",
-      "targetGraphs": [
-        "net7.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'libsodium-net 0.10.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "libsodium-net",
-      "targetGraphs": [
-        "net7.0"
-      ]
-    }
-  ]
+  "expectedPackageFiles": [],
+  "logs": []
 }

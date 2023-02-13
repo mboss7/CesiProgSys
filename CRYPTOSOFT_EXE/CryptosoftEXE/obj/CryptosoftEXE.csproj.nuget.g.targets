@@ -1,6 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)baseclass.contrib.nuget.output\2.1.0\build\net40\Baseclass.Contrib.Nuget.Output.targets" Condition="Exists('$(NuGetPackageRoot)baseclass.contrib.nuget.output\2.1.0\build\net40\Baseclass.Contrib.Nuget.Output.targets')" />
-  </ImportGroup>
-</Project>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />

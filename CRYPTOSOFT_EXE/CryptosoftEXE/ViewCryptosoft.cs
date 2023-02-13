@@ -26,9 +26,9 @@
                 case "3":
                     key64.key64Generate();
                      break;
-                case "4":
-                    key64.keyVaultDecrypt();
-                    break;
+                /*case "4":
+                    key64.keyVaultDecrypt();  // add features for save key in vault
+                    break;*/
                default:
                     Console.WriteLine("Please only enter 1 or 2 ");
                     break;
