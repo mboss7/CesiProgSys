@@ -18,8 +18,7 @@ namespace Tcp_Ssl
             
             Console.WriteLine("\n ***Start Server*** \n");
             tcpServer.RunServer();
-            
-
+          
         }
     }
 }

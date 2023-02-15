@@ -23,28 +23,50 @@ namespace Tcp_Ssl
       
                     // Liste de clients qui voudront se connecter au serveur
                     listener.Listen(10); 
-                    while (true) { 
-                        Console.WriteLine("En attente connexion...");  
-                        // accepter la connexion du client
-                        Socket client = listener.Accept(); 
-      
+                    Console.WriteLine("En attente connexion...");  
+                    // accepter la connexion du client
+                    Socket client = listener.Accept(); 
+                    
+                    while (true) 
+                    {
                         // Data buffer 
                         byte[] bytes = new Byte[1024]; 
                         string data = null; 
       
                         while (true) { 
+                            
                             int b = client.Receive(bytes);   
                             data += Encoding.ASCII.GetString(bytes, 0, b); 
                             
                             
                             Console.WriteLine("Texte reçu -> {0} ", data); 
-                            byte[] message = Encoding.ASCII.GetBytes("Welcome to WayToLearnX"); 
+                            
+                            switch (data)
+                            {
+                                case "Exit":
+                                    byte[] message = Encoding.ASCII.GetBytes("Server OFF");
+                                    // Envoyer un message au client 
+                                    client.Send(message);
+                                    client.Close(); 
+                                    break;
+
+                                case "":
+                                  
+                                    break;
+                            
+
+                                default:
+                                   
+                                    break;
+                            }
+                            
+                            byte[] message1 = Encoding.ASCII.GetBytes("Welcome to the easy save app"); 
       
                             // Envoyer un message au client 
-                            client.Send(message); 
-                           
-                            if (data.IndexOf("<eof>") > -1) 
-                               break; 
+                           //  client.Send(message);
+
+                            //if (data.IndexOf("<eof>") > -1) 
+                             //break; 
                         }
       
                        

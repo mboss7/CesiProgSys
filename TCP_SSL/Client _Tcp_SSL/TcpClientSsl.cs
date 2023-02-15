@@ -17,28 +17,35 @@ namespace Tcp_Ssl
                 IPEndPoint endPoint = new IPEndPoint(ip, 9999);
 
                 // Créer une socket TCP/IP 
-                Socket client = new Socket(ip.AddressFamily, SocketType.Stream,
-                    ProtocolType.Tcp);
+                Socket client = new Socket(ip.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
                 try
                 {
-                     // Connect Socket 
+                    
+                        // Connect Socket 
                         client.Connect(endPoint);
-
+                        
+                        while (true)
+                        {
                         // le message à envoyer au serveur
-                        byte[] msg = Encoding.ASCII.GetBytes("Hello<EOF>");
+                        Console.WriteLine("Please enter text for the server :");
+                        string messageForServer = Console.ReadLine();
+
+                        byte[] msg = Encoding.ASCII.GetBytes(messageForServer);
                         int byteSent = client.Send(msg);
+
+
 
                         // Data buffer 
                         byte[] messageReceived = new byte[1024];
 
                         // Recevoir le message 
                         int byteRecv = client.Receive(messageReceived);
-                        Console.WriteLine("Message du serveur -> {0}", 
-                        Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
+                        Console.WriteLine("Message du serveur -> {0}",
+                            Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
                         //client.Shutdown(SocketShutdown.Both); 
                         //client.Close(); 
-
+                    }
                 }
                 catch (SocketException e1)
                 {
