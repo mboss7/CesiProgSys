@@ -24,8 +24,8 @@ namespace Tcp_Ssl
                     
                         // Connect Socket 
                         client.Connect(endPoint);
-                        
-                        while (true)
+
+                       while (true)
                         {
                             // le message à envoyer au serveur
                             Console.WriteLine("Please enter text for the server :");

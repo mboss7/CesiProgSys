@@ -27,6 +27,8 @@ namespace Tcp_Ssl
                     // accepter la connexion du client
                     Socket client = listener.Accept(); 
                     
+                    
+                    
                     while (true) 
                     {
                         // Data buffer 
