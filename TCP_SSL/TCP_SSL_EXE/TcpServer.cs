@@ -36,10 +36,8 @@ namespace Tcp_Ssl
                         while (true) { 
                             
                             int b = client.Receive(bytes);   
-                            data += Encoding.ASCII.GetString(bytes, 0, b); 
-                            
-                            
-                            Console.WriteLine("Texte reçu -> {0} ", data); 
+                            data = Encoding.ASCII.GetString(bytes, 0, b); 
+                            Console.WriteLine("Texte reçu -> {0} ", data);
                             
                             switch (data)
                             {
@@ -50,20 +48,15 @@ namespace Tcp_Ssl
                                     client.Close(); 
                                     break;
 
-                                case "":
-                                  
-                                    break;
-                            
-
-                                default:
-                                   
+                               default:
+                                    
                                     break;
                             }
                             
                             byte[] message1 = Encoding.ASCII.GetBytes("Welcome to the easy save app"); 
       
-                            // Envoyer un message au client 
-                           //  client.Send(message);
+                            //Envoyer un message au client 
+                             client.Send(message1);
 
                             //if (data.IndexOf("<eof>") > -1) 
                              //break; 
