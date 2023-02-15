@@ -27,25 +27,39 @@ namespace Tcp_Ssl
                         
                         while (true)
                         {
-                        // le message à envoyer au serveur
-                        Console.WriteLine("Please enter text for the server :");
-                        string messageForServer = Console.ReadLine();
+                            // le message à envoyer au serveur
+                            Console.WriteLine("Please enter text for the server :");
+                            string messageForServer = Console.ReadLine();
+                            
+                            switch (messageForServer)
+                            {
+                                case "Exit":
+                                    byte[] message = Encoding.ASCII.GetBytes("Server OFF");
+                                    // Envoyer un message au client 
+                                    client.Close(); 
+                                    break;
 
-                        byte[] msg = Encoding.ASCII.GetBytes(messageForServer);
-                        int byteSent = client.Send(msg);
+                                default:
+                                    
+                                    break;
+                            }
+                            
+
+                            byte[] msg = Encoding.ASCII.GetBytes(messageForServer);
+                            int byteSent = client.Send(msg);
 
 
 
-                        // Data buffer 
-                        byte[] messageReceived = new byte[1024];
+                            // Data buffer 
+                            byte[] messageReceived = new byte[1024];
 
-                        // Recevoir le message 
-                        int byteRecv = client.Receive(messageReceived);
-                        Console.WriteLine("Message du serveur -> {0}",
-                            Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
-                        //client.Shutdown(SocketShutdown.Both); 
-                        //client.Close(); 
-                    }
+                            // Recevoir le message 
+                            int byteRecv = client.Receive(messageReceived);
+                            Console.WriteLine("Message du serveur -> {0}",
+                                Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
+                            //client.Shutdown(SocketShutdown.Both); 
+                            //client.Close(); 
+                        }
                 }
                 catch (SocketException e1)
                 {
