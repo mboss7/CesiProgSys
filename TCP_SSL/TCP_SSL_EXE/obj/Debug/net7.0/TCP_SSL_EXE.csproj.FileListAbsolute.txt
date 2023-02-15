@@ -1,0 +1,15 @@
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\bin\Debug\net7.0\TCP_SSL_EXE.exe
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\bin\Debug\net7.0\TCP_SSL_EXE.deps.json
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\bin\Debug\net7.0\TCP_SSL_EXE.runtimeconfig.json
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\bin\Debug\net7.0\TCP_SSL_EXE.dll
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\bin\Debug\net7.0\TCP_SSL_EXE.pdb
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\obj\Debug\net7.0\TCP_SSL_EXE.csproj.AssemblyReference.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\obj\Debug\net7.0\TCP_SSL_EXE.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\obj\Debug\net7.0\TCP_SSL_EXE.AssemblyInfoInputs.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\obj\Debug\net7.0\TCP_SSL_EXE.AssemblyInfo.cs
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\obj\Debug\net7.0\TCP_SSL_EXE.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\obj\Debug\net7.0\TCP_SSL_EXE.dll
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\obj\Debug\net7.0\refint\TCP_SSL_EXE.dll
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\obj\Debug\net7.0\TCP_SSL_EXE.pdb
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\obj\Debug\net7.0\TCP_SSL_EXE.genruntimeconfig.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TCP_SSL\TCP_SSL_EXE\obj\Debug\net7.0\ref\TCP_SSL_EXE.dll
