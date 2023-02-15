@@ -1,50 +1,58 @@
-﻿using System; 
-using System.Net; 
-using System.Net.Sockets; 
-using System.Text; 
-  
-namespace Tcp_Ssl { 
-    public class TcpClient { 
-        public void TcpClientRun()
-        { 
-            try {
-                // Établir une connexion sur le Port 9999 
-                IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName()); 
-                IPAddress ip = host.AddressList[0]; 
-                IPEndPoint endPoint = new IPEndPoint(ip, 9999); 
-      
-                // Créer une socket TCP/IP 
-                Socket client = new Socket(ip.AddressFamily, SocketType.Stream, 
-                    ProtocolType.Tcp); 
-      
-                try { 
-                    // Connect Socket 
-                    client.Connect(endPoint); 
-      
-                    // le message à envoyer au serveur
-                    byte[] msg = Encoding.ASCII.GetBytes("Hello<EOF>"); 
-                    int byteSent = client.Send(msg); 
-      
-                    // Data buffer 
-                    byte[] messageReceived = new byte[1024]; 
-      
-                    // Recevoir le message 
-                    int byteRecv = client.Receive(messageReceived); 
-                    Console.WriteLine("Message du serveur -> {0}",  
-                        Encoding.ASCII.GetString(messageReceived, 0, byteRecv)); 
-      
-                    client.Shutdown(SocketShutdown.Both); 
-                    client.Close(); 
-                }catch (SocketException e1) {
-                    Console.WriteLine("SocketException : {0}", e1.ToString()); 
-                }catch (ArgumentNullException e2) {
-                    Console.WriteLine("ArgumentNullException : {0}", e2.ToString());
-                }catch (Exception e3) {
-                    Console.WriteLine("Unexpected exception : {0}", e3.ToString()); 
-                }
-            }catch (Exception e) {      
-                Console.WriteLine(e.ToString()); 
-            } 
-        } 
-    } 
+﻿using System;
+using System.Net.Security;
+using System.Net.Sockets;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+
+public class Client
+{
+    private string serverIpAddress;
+    private int serverPort;
+    private X509Certificate2 clientCertificate;
+
+    public Client(string ipAddress, int port, string certificatePath, string certificatePassword)
+    {
+        serverIpAddress = ipAddress;
+        serverPort = port;
+        clientCertificate = new X509Certificate2(certificatePath, certificatePassword);
+    }
+
+    public void Connect()
+    {
+        TcpClient client = new TcpClient(serverIpAddress, serverPort);
+        SslStream sslStream = new SslStream(client.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
+
+        try
+        {
+            sslStream.AuthenticateAsClient("localhost", new X509Certificate2Collection(clientCertificate), SslProtocols.Tls, false);
+
+            byte[] message = Encoding.UTF8.GetBytes("Hello from client");
+            sslStream.Write(message);
+            sslStream.Flush();
+
+            byte[] buffer = new byte[2048];
+            int bytes = sslStream.Read(buffer, 0, buffer.Length);
+            string data = Encoding.UTF8.GetString(buffer, 0, bytes);
+            Console.WriteLine("Received: " + data);
+
+            client.Close();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            client.Close();
+        }
+    }
+
+    private static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+    {
+        if (sslPolicyErrors == SslPolicyErrors.None)
+        {
+            return true;
+        }
+
+        Console.WriteLine("Certificate error: " + sslPolicyErrors);
+        return false;
+    }
 }

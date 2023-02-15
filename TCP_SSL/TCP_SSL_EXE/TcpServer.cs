@@ -1,79 +1,53 @@
-﻿using System; 
-using System.Net; 
-using System.Net.Sockets; 
-using System.Text; 
+﻿using System;
+using System.Net;
+using System.Net.Security;
+using System.Net.Sockets;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
-
-namespace Tcp_Ssl
+public class TcpServer
 {
-    public class TcpServer {
-        
-            public  void  RunServer()
+    private TcpListener listener;
+    private X509Certificate2 serverCertificate;
+
+    public TcpServer(string ipAddress, int port, string certificatePath, string certificatePassword)
+    {
+        IPAddress address = IPAddress.Parse(ipAddress);
+        listener = new TcpListener(address, port);
+        serverCertificate = new X509Certificate2(certificatePath, certificatePassword);
+    }
+
+    public void Start()
+    {
+        listener.Start();
+        Console.WriteLine("Server started");
+
+        while (true)
+        {
+            TcpClient client = listener.AcceptTcpClient();
+            SslStream sslStream = new SslStream(client.GetStream(), false);
+
+            try
             {
-                // Récupérer le nom de l'hôte
-                IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName()); 
-                IPAddress ip = host.AddressList[0]; 
-                IPEndPoint endPoint = new IPEndPoint(ip, 9999); 
-                // Création du socket TCP/IP
-                Socket listener = new Socket(ip.AddressFamily, 
-                    SocketType.Stream, ProtocolType.Tcp); 
-                try { 
-                    // Associer une adresse réseau au socket serveur
-                    listener.Bind(endPoint); 
-      
-                    // Liste de clients qui voudront se connecter au serveur
-                    listener.Listen(10); 
-                    Console.WriteLine("En attente connexion...");  
-                    // accepter la connexion du client
-                    Socket client = listener.Accept(); 
-                    
-                    
-                    
-                    while (true) 
-                    {
-                        // Data buffer 
-                        byte[] bytes = new Byte[1024]; 
-                        string data = null; 
-      
-                        while (true) { 
-                            
-                            int b = client.Receive(bytes);   
-                            data = Encoding.ASCII.GetString(bytes, 0, b); 
-                            Console.WriteLine("Texte reçu -> {0} ", data);
-                            
-                            switch (data)
-                            {
-                                case "Exit":
-                                    byte[] message = Encoding.ASCII.GetBytes("Server OFF");
-                                    // Envoyer un message au client 
-                                    client.Send(message);
-                                    client.Close(); 
-                                    break;
+                sslStream.AuthenticateAsServer(serverCertificate, false, SslProtocols.Tls, true);
 
-                               default:
-                                    
-                                    break;
-                            }
-                            
-                            byte[] message1 = Encoding.ASCII.GetBytes("Welcome to the easy save app"); 
-      
-                            //Envoyer un message au client 
-                             client.Send(message1);
+                byte[] buffer = new byte[2048];
+                int bytes = sslStream.Read(buffer, 0, buffer.Length);
+                string data = Encoding.UTF8.GetString(buffer, 0, bytes);
+                Console.WriteLine("Received: " + data);
 
-                            //if (data.IndexOf("<eof>") > -1) 
-                             //break; 
-                        }
-      
-                       
-      
-                        //client.Shutdown(SocketShutdown.Both); 
-                        //client.Close(); 
-                    }
-                    
-                    
-                }catch (Exception e) { 
-                    Console.WriteLine(e.ToString()); 
-                } 
-            } 
+                byte[] message = Encoding.UTF8.GetBytes("Hello from server");
+                sslStream.Write(message);
+                sslStream.Flush();
+
+                client.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                client.Close();
+            }
         }
     }
+}
