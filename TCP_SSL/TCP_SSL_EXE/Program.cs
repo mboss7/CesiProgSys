@@ -13,12 +13,12 @@ namespace Tcp_Ssl
         
         {
             TcpServer tcpServer = new TcpServer();
-            TcpClient tcpClient = new TcpClient();
+           
         
             
-            Console.WriteLine("Start \n");
+            Console.WriteLine("\n ***Start Server*** \n");
             tcpServer.RunServer();
-            tcpClient.TcpClientRun();
+            
 
         }
     }

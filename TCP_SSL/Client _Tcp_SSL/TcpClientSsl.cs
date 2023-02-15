@@ -22,23 +22,23 @@ namespace Tcp_Ssl
 
                 try
                 {
-                    // Connect Socket 
-                    client.Connect(endPoint);
+                     // Connect Socket 
+                        client.Connect(endPoint);
 
-                    // le message à envoyer au serveur
-                    byte[] msg = Encoding.ASCII.GetBytes("Hello<EOF>");
-                    int byteSent = client.Send(msg);
+                        // le message à envoyer au serveur
+                        byte[] msg = Encoding.ASCII.GetBytes("Hello<EOF>");
+                        int byteSent = client.Send(msg);
 
-                    // Data buffer 
-                    byte[] messageReceived = new byte[1024];
+                        // Data buffer 
+                        byte[] messageReceived = new byte[1024];
 
-                    // Recevoir le message 
-                    int byteRecv = client.Receive(messageReceived);
-                    Console.WriteLine("Message du serveur -> {0}",
+                        // Recevoir le message 
+                        int byteRecv = client.Receive(messageReceived);
+                        Console.WriteLine("Message du serveur -> {0}", 
                         Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
+                        //client.Shutdown(SocketShutdown.Both); 
+                        //client.Close(); 
 
-                    client.Shutdown(SocketShutdown.Both);
-                    client.Close();
                 }
                 catch (SocketException e1)
                 {

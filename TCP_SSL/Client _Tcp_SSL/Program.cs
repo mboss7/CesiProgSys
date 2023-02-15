@@ -16,7 +16,7 @@ namespace Tcp_Ssl
             TcpClientSsl tcpClient = new TcpClientSsl();
 
 
-            Console.WriteLine("Start \n");
+            Console.WriteLine("\n ***Start Client*** \n");
            
             tcpClient.TcpClientRun();
 

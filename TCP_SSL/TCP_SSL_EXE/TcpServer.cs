@@ -35,20 +35,25 @@ namespace Tcp_Ssl
                         while (true) { 
                             int b = client.Receive(bytes);   
                             data += Encoding.ASCII.GetString(bytes, 0, b); 
+                            
+                            
+                            Console.WriteLine("Texte reçu -> {0} ", data); 
+                            byte[] message = Encoding.ASCII.GetBytes("Welcome to WayToLearnX"); 
+      
+                            // Envoyer un message au client 
+                            client.Send(message); 
                            
                             if (data.IndexOf("<eof>") > -1) 
-                                break; 
+                               break; 
                         }
       
-                        Console.WriteLine("Texte reçu -> {0} ", data); 
-                        byte[] message = Encoding.ASCII.GetBytes("Welcome to WayToLearnX"); 
+                       
       
-                        // Envoyer un message au client 
-                        client.Send(message); 
-      
-                        client.Shutdown(SocketShutdown.Both); 
-                        client.Close(); 
+                        //client.Shutdown(SocketShutdown.Both); 
+                        //client.Close(); 
                     }
+                    
+                    
                 }catch (Exception e) { 
                     Console.WriteLine(e.ToString()); 
                 } 
