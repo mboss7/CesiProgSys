@@ -12,6 +12,10 @@ namespace Tcp_Ssl
         static void Main(string[] args)
 
         {
+            TcpSslCom tcpSslCom = new TcpSslCom();
+            
+            tcpSslCom.RunClient("localhost","localhost");
+            
             
             TcpClientSsl tcpClient = new TcpClientSsl();
 

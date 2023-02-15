@@ -9,6 +9,9 @@ namespace Tcp_Ssl
     {
         public void TcpClientRun()
         {
+         
+            
+            
             try
             {
                 // Établir une connexion sur le Port 9999 
