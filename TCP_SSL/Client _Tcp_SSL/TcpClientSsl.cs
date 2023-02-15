@@ -52,6 +52,7 @@ namespace Tcp_Ssl
                 {
                     Console.WriteLine("Unexpected exception : {0}", e3.ToString());
                 }
+                
             }
             catch (Exception e)
             {
