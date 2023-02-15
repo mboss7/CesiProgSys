@@ -20,10 +20,10 @@ namespace SslSrv
         public static void RunServer(string certificate)
         {
 
-            certificate = @"\\CERT\cert.cer";
+            
             serverCertificate = X509Certificate.CreateFromCertFile(certificate);
             // Create a TCP/IP (IPv4) socket and listen for incoming connections.
-            TcpListener listener = new TcpListener(IPAddress.Any, 8080);
+            TcpListener listener = new TcpListener(IPAddress.Any, 9999);
             listener.Start();
             while (true)
             {
@@ -168,11 +168,16 @@ namespace SslSrv
         public static int Main(string[] args)
         {
             string certificate = null;
+            
+           
             if (args == null ||args.Length < 1 )
             {
                 DisplayUsage();
             }
             certificate = args[0];
+            
+           
+            
             SslTcpServer.RunServer (certificate);
             return 0;
         }
