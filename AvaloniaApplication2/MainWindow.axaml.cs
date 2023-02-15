@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 
 namespace AvaloniaApplication2
 {
@@ -8,9 +9,9 @@ namespace AvaloniaApplication2
         {
             InitializeComponent();
         }
-        public void OnClickCommand()
+        private void Clickexit(object sender, RoutedEventArgs e)
         {
-            // do something
+            Close();
         }
     }
 }
