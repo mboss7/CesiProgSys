@@ -13,15 +13,7 @@ namespace Tcp_Ssl
     {
         static void Main(string[] args)
         
-        {
-
-            TcpServer tcpServer = new TcpServer();
-           
-        
-            
-            Console.WriteLine("\n ***Start Server*** \n");
-            tcpServer.Start();
-            
+        {                   
           
         }
     }
