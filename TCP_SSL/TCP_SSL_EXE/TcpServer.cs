@@ -9,6 +9,9 @@ namespace Tcp_Ssl
 {
     public class TcpServer
     {
+        /// <summary>
+        /// Connect the server in listen mode
+        /// </summary>
         public async Task SslTcpServerConnection()
         {
 
@@ -55,6 +58,7 @@ namespace Tcp_Ssl
                     {
                         sslStream.Write(message);
                     }
+                    // If problem of connection End the Listener and Dispose the SslTcp fct for free the RAM Memory
                     catch (IOException e)
                     {
                         Console.WriteLine("Connection aborted : " + e);
