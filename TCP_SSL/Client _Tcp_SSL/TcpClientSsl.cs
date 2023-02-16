@@ -8,7 +8,7 @@ namespace Tcp_Ssl
 {
     public class TcpClientSsl
     {
-        public void SslTcpClientConnection()
+        public async Task SslTcpClientConnection()
         {
 
             bool FlagA = true;
