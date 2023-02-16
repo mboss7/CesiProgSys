@@ -12,9 +12,11 @@ namespace Tcp_Ssl
     public class program
     {
         static void Main(string[] args)
-        
-        {                   
-          
+
+        {
+            TcpServer tcpServer = new TcpServer();
+            
+            tcpServer.SslTcpServerConnection();
         }
     }
 }
