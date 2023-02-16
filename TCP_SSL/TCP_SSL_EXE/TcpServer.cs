@@ -12,36 +12,42 @@ namespace Tcp_Ssl
         public void SslTcpServerConnection()
         {
 
-            while (true)
+            try
             {
-                X509Certificate serverCertificate = new X509Certificate(@"cert.pfx", "P@ssw0rd");
-                TcpListener listener = new TcpListener(IPAddress.Any, 1234);
-                listener.Start();
                 while (true)
                 {
-                    Console.WriteLine("Waiting for a client to connect...");
-                    // Application blocks while waiting for an incoming connection.
-                    // Type CNTL-C to terminate the server.
-                    TcpClient client = listener.AcceptTcpClient();
-                    SslStream sslStream = new SslStream(client.GetStream(), false);
-                    sslStream.AuthenticateAsServer(serverCertificate, false, SslProtocols.Tls, true);
+                    X509Certificate serverCertificate = new X509Certificate(@"cert.pfx", "P@ssw0rd");
+                    TcpListener listener = new TcpListener(IPAddress.Any, 1234);
+                    listener.Start();
+                    while (true)
+                    {
+                        Console.WriteLine("Waiting for a client to connect...");
+                        // Application blocks while waiting for an incoming connection.
+                        // Type CNTL-C to terminate the server.
+                        TcpClient client = listener.AcceptTcpClient();
+                        SslStream sslStream = new SslStream(client.GetStream(), false);
+                        sslStream.AuthenticateAsServer(serverCertificate, false, SslProtocols.Tls, true);
 
 
 
-                    Console.WriteLine("Waiting for client message...");
-                    string messageData = ReadMessage(sslStream);
-                    Console.WriteLine("Received: {0}", messageData);
+                        Console.WriteLine("Waiting for client message...");
+                        string messageData = ReadMessage(sslStream);
+                        Console.WriteLine("Received: {0}", messageData);
 
-                    // Write a message to the client.
-                    byte[] message = Encoding.UTF8.GetBytes("Hello from the server.<EOF>");
-                    Console.WriteLine("Sending hello message.");
-                    sslStream.Write(message);
+                        // Write a message to the client.
+                        byte[] message = Encoding.UTF8.GetBytes("Hello from the server.<EOF>");
+                        Console.WriteLine("Sending hello message.");
+                        sslStream.Write(message);
+                    }
                 }
-               
-                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
-
+        
         static string ReadMessage(SslStream sslStream)
         {
             // Read the  message sent by the client.
