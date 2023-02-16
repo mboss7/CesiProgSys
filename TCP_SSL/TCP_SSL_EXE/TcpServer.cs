@@ -34,6 +34,16 @@ namespace Tcp_Ssl
                         string messageData = ReadMessage(sslStream);
                         Console.WriteLine("Received: {0}", messageData);
 
+                        switch (messageData)
+                        {
+                            case  "1<EOF>" :
+                            {
+                                sslStream.Close();
+                                client.Close();
+                                break;
+                            }
+                        }
+
                         // Write a message to the client.
                         byte[] message = Encoding.UTF8.GetBytes("Hello from the server.<EOF>");
                         Console.WriteLine("Sending hello message.");
