@@ -49,7 +49,7 @@ namespace Tcp_Ssl
                     {
                         Console.WriteLine("Connection lost : " +e);
                         client.Close();
-
+                        SslTcpClientConnection().Dispose();
                         FlagB = false;
                     }
                 }         

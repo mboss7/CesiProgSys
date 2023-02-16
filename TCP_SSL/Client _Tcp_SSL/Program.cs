@@ -12,9 +12,13 @@ namespace Tcp_Ssl
         static void Main(string[] args)
 
         {
-            TcpClientSsl tcpClientSsl = new TcpClientSsl();
+            while (true)
+            {
+                TcpClientSsl tcpClientSsl = new TcpClientSsl();
             
-            tcpClientSsl.SslTcpClientConnection();
+                tcpClientSsl.SslTcpClientConnection();
+            }
+            
         }
     }
 }
