@@ -14,9 +14,12 @@ namespace Tcp_Ssl
         static void Main(string[] args)
 
         {
-            TcpServer tcpServer = new TcpServer();
-            
-            tcpServer.SslTcpServerConnection();
+             TcpServer tcpServer = new TcpServer();
+
+             
+             tcpServer.SslTcpServerConnection();
+              
+             
         }
     }
 }

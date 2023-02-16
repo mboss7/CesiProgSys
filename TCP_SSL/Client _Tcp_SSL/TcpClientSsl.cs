@@ -11,50 +11,62 @@ namespace Tcp_Ssl
         public void SslTcpClientConnection()
         {
 
-            try
-            {
+            bool FlagA = true;
+            bool FlagB = true;
+
+            
                 X509Certificate2Collection clientCertificates = new X509Certificate2Collection();
                 clientCertificates.Add(new X509Certificate2(@"cert.pfx", "P@ssw0rd"));
-                TcpClient client = new TcpClient("localhost", 1234);
-                SslStream sslStream = new SslStream(client.GetStream(), false, (sender, certificate, chain, errors) => true);
-                sslStream.AuthenticateAsClient("localhost", clientCertificates, SslProtocols.Tls, true);
-
-                while (true)
+            
+            while (FlagA)
+            {
+                try
                 {
+                    TcpClient testco = new TcpClient("localhost", 1234);
+                }
+                catch (SocketException e)
+                {
+                    Console.WriteLine("Server Connection Refused : " + e);
+                    SslTcpClientConnection();
+                }
+                
+                
+                
+                
+               TcpClient client = new TcpClient("localhost", 1234);
+               SslStream sslStream = new SslStream(client.GetStream(), false, (sender, certificate, chain, errors) => true);
+               sslStream.AuthenticateAsClient("localhost", clientCertificates, SslProtocols.Tls, true);
+                   
+                   
+                
+                
+                while (FlagB)
+                {
+
+                    // Encode a test message into a byte array.
+                    // Signal the end of the message using the "<EOF>".
+                    Console.WriteLine("Please Enter Message for the Server :");
+                    string msg = Console.ReadLine();
+                    byte[] messsage = Encoding.UTF8.GetBytes(msg + "<EOF>");
+                    // Send message to the server.
                     try
                     {
-                        // Encode a test message into a byte array.
-                        // Signal the end of the message using the "<EOF>".
-                        Console.WriteLine("Please Enter Message for the Server :");
-                        string msg = Console.ReadLine();
-                        byte[] messsage = Encoding.UTF8.GetBytes(msg + "<EOF>");
-                        // Send message to the server.
                         sslStream.Write(messsage);
                         sslStream.Flush();
-
                         // Read message from the server.
                         string serverMessage = ReadMessage(sslStream);
                         Console.WriteLine("Server says: {0}", serverMessage);
-
-                        // Close the client connection.
-                        //Console.WriteLine("Client closed.");
-                        //client.Close();
                     }
-                    catch (Exception e)
+                    catch (IOException e)
                     {
-                        Console.WriteLine(e);
-                        throw;
+                        Console.WriteLine("Connection lost : " +e);
+                        client.Close();
+
+                        FlagB = false;
                     }
-                   
-                   
-                }  
+                }         
             }
                 
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
         }
 
         static string ReadMessage(SslStream sslStream)
