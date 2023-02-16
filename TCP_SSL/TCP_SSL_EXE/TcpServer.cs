@@ -9,18 +9,17 @@ namespace Tcp_Ssl
 {
     public class TcpServer
     {
-        public void SslTcpServerConnection()
+        public async Task SslTcpServerConnection()
         {
-            
-            bool FlagA = true ;
-            bool FlagB = true ;
+
+            bool FlagA = true;
+            bool FlagB = true;
 
             while (FlagA)
             {
 
                 X509Certificate serverCertificate = new X509Certificate(@"cert.pfx", "P@ssw0rd");
                 TcpListener listener = new TcpListener(IPAddress.Any, 1234);
-                listener.Stop();
                 listener.Start();
                 Console.WriteLine("Waiting for a client to connect...");
                 // Application blocks while waiting for an incoming connection.
@@ -34,7 +33,7 @@ namespace Tcp_Ssl
                 {
 
                     string messageData = null;
-                    
+
                     Console.WriteLine("Waiting for client message...");
                     try
                     {
@@ -42,11 +41,11 @@ namespace Tcp_Ssl
                     }
                     catch (IOException e)
                     {
-                        Console.WriteLine("Connection Aborted :"+e);
+                        Console.WriteLine("Connection Aborted :" + e);
                         listener.Stop();
                         FlagB = false;
                     }
-                   
+
                     Console.WriteLine("Received: {0}", messageData);
 
                     // Write a message to the client.
@@ -70,39 +69,40 @@ namespace Tcp_Ssl
 
 
             static string ReadMessage(SslStream sslStream)
+            {
+                // Read the  message sent by the client.
+                // The client signals the end of the message using the
+                // "<EOF>" marker.
+                byte[] buffer = new byte[2048];
+                StringBuilder messageData = new StringBuilder();
+                int bytes = -1;
+                do
                 {
-                    // Read the  message sent by the client.
-                    // The client signals the end of the message using the
-                    // "<EOF>" marker.
-                    byte[] buffer = new byte[2048];
-                    StringBuilder messageData = new StringBuilder();
-                    int bytes = -1;
-                    do
+
+                    // Read the client's test message.
+                    bytes = sslStream.Read(buffer, 0, buffer.Length);
+
+
+
+                    // Use Decoder class to convert from bytes to UTF8
+                    // in case a character spans two buffers.
+                    Decoder decoder = Encoding.UTF8.GetDecoder();
+                    char[] chars = new char[decoder.GetCharCount(buffer, 0, bytes)];
+                    decoder.GetChars(buffer, 0, bytes, chars, 0);
+                    messageData.Append(chars);
+                    // Check for EOF or an empty message.
+                    if (messageData.ToString().IndexOf("<EOF>") != -1)
                     {
-                       
-                            // Read the client's test message.
-                        bytes = sslStream.Read(buffer, 0, buffer.Length);
+                        break;
+                    }
+                } while (bytes != 0);
 
-                       
-                       
-                        // Use Decoder class to convert from bytes to UTF8
-                        // in case a character spans two buffers.
-                        Decoder decoder = Encoding.UTF8.GetDecoder();
-                        char[] chars = new char[decoder.GetCharCount(buffer, 0, bytes)];
-                        decoder.GetChars(buffer, 0, bytes, chars, 0);
-                        messageData.Append(chars);
-                        // Check for EOF or an empty message.
-                        if (messageData.ToString().IndexOf("<EOF>") != -1)
-                        {
-                            break;
-                        }
-                    } while (bytes != 0);
-
-                    return messageData.ToString();
-                }
+                return messageData.ToString();
             }
         }
     }
+}
+    
 
        
 
