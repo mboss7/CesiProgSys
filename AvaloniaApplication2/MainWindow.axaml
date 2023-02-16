@@ -72,7 +72,6 @@
 
 		<Grid Grid.Row="2">
 			<Button Width="50" Margin="10" Background="#886435" Click="Clickexit">Exit</Button>
-
 			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
 
 				<Label>Easy Save 2023</Label>
