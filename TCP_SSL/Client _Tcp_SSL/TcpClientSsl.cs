@@ -8,6 +8,9 @@ namespace Tcp_Ssl
 {
     public class TcpClientSsl
     {
+        /// <summary>
+        /// Connect Client to the Server in SSl 
+        /// </summary>
         public async Task SslTcpClientConnection()
         {
 

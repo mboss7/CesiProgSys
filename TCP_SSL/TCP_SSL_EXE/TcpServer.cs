@@ -10,7 +10,7 @@ namespace Tcp_Ssl
     public class TcpServer
     {
         /// <summary>
-        /// Connect the server in listen mode
+        /// Connect the server in listen mode in SSL 
         /// </summary>
         public async Task SslTcpServerConnection()
         {
