@@ -59,8 +59,10 @@ namespace Tcp_Ssl
                     {
                         Console.WriteLine("Connection aborted : " + e);
                         listener.Stop();
+                        SslTcpServerConnection().Dispose();
                         FlagB = false;
                     }
+                    
                 }
             }
 
