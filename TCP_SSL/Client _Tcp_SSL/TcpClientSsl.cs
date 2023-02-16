@@ -19,10 +19,13 @@ namespace Tcp_Ssl
             
             // Encode a test message into a byte array.
             // Signal the end of the message using the "<EOF>".
-            byte[] messsage = Encoding.UTF8.GetBytes("Hello from the client.<EOF>");
-            // Send hello message to the server.
+            Console.WriteLine("Please Enter Message for the Server :");
+            string msg = Console.ReadLine();
+            byte[] messsage = Encoding.UTF8.GetBytes(msg + "<EOF>");
+            // Send message to the server.
             sslStream.Write(messsage);
             sslStream.Flush();
+            
             // Read message from the server.
             string serverMessage = ReadMessage(sslStream);
             Console.WriteLine("Server says: {0}", serverMessage);
