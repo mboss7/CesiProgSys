@@ -1,6 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCP_SSL_EXE", "TCP_SSL_EXE.csproj", "{A480C72E-C340-4A50-856C-98BED09EBD93}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCP_SSL_EXE", "TCP_SSL_EXE.csproj", "{A480C72E-C340-4A50-856C-98BED09EBD93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTcpSslEXEsrv", "..\TestTcpSslEXEsrv\TestTcpSslEXEsrv.csproj", "{E5934605-A3BC-46B4-AA00-FA7E049A0AC3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client _Tcp_SSL", "..\Client _Tcp_SSL\Client _Tcp_SSL.csproj", "{C46E72F4-EFA0-42C9-AD2F-11966EFD70A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +19,19 @@ Global
 		{A480C72E-C340-4A50-856C-98BED09EBD93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A480C72E-C340-4A50-856C-98BED09EBD93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A480C72E-C340-4A50-856C-98BED09EBD93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5934605-A3BC-46B4-AA00-FA7E049A0AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5934605-A3BC-46B4-AA00-FA7E049A0AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5934605-A3BC-46B4-AA00-FA7E049A0AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5934605-A3BC-46B4-AA00-FA7E049A0AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C46E72F4-EFA0-42C9-AD2F-11966EFD70A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C46E72F4-EFA0-42C9-AD2F-11966EFD70A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C46E72F4-EFA0-42C9-AD2F-11966EFD70A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C46E72F4-EFA0-42C9-AD2F-11966EFD70A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1BC6F1A7-94E6-4016-8CD8-C9241DC56979}
 	EndGlobalSection
 EndGlobal
