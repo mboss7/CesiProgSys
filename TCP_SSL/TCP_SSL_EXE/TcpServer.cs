@@ -11,27 +11,42 @@ namespace Tcp_Ssl
     {
         public void SslTcpServerConnection()
         {
+            
+            bool FlagA = true ;
+            bool FlagB = true ;
 
-            while (true)
+            while (FlagA)
             {
 
                 X509Certificate serverCertificate = new X509Certificate(@"cert.pfx", "P@ssw0rd");
                 TcpListener listener = new TcpListener(IPAddress.Any, 1234);
+                listener.Stop();
                 listener.Start();
                 Console.WriteLine("Waiting for a client to connect...");
                 // Application blocks while waiting for an incoming connection.
                 // Type CNTL-C to terminate the server.
-                TcpClient client = listener.AcceptTcpClient();
+                using TcpClient client = listener.AcceptTcpClient();
                 SslStream sslStream = new SslStream(client.GetStream(), false);
                 sslStream.AuthenticateAsServer(serverCertificate, false, SslProtocols.Tls, true);
 
 
-                while (true)
+                while (FlagB)
                 {
 
-
+                    string messageData = null;
+                    
                     Console.WriteLine("Waiting for client message...");
-                    string messageData = ReadMessage(sslStream);
+                    try
+                    {
+                        messageData = ReadMessage(sslStream);
+                    }
+                    catch (IOException e)
+                    {
+                        Console.WriteLine("Connection Aborted :"+e);
+                        listener.Stop();
+                        FlagB = false;
+                    }
+                   
                     Console.WriteLine("Received: {0}", messageData);
 
                     // Write a message to the client.
@@ -45,7 +60,7 @@ namespace Tcp_Ssl
                     {
                         Console.WriteLine("Connection aborted : " + e);
                         listener.Stop();
-                        break;
+                        FlagB = false;
                     }
                 }
             }
@@ -64,9 +79,12 @@ namespace Tcp_Ssl
                     int bytes = -1;
                     do
                     {
-                        // Read the client's test message.
+                       
+                            // Read the client's test message.
                         bytes = sslStream.Read(buffer, 0, buffer.Length);
 
+                       
+                       
                         // Use Decoder class to convert from bytes to UTF8
                         // in case a character spans two buffers.
                         Decoder decoder = Encoding.UTF8.GetDecoder();

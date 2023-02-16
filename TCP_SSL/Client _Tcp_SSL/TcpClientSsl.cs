@@ -20,19 +20,7 @@ namespace Tcp_Ssl
             
             while (FlagA)
             {
-                try
-                {
-                    TcpClient testco = new TcpClient("localhost", 1234);
-                }
-                catch (SocketException e)
-                {
-                    Console.WriteLine("Server Connection Refused : " + e);
-                    SslTcpClientConnection();
-                }
-                
-                
-                
-                
+              
                TcpClient client = new TcpClient("localhost", 1234);
                SslStream sslStream = new SslStream(client.GetStream(), false, (sender, certificate, chain, errors) => true);
                sslStream.AuthenticateAsClient("localhost", clientCertificates, SslProtocols.Tls, true);
