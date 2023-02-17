@@ -8,6 +8,19 @@ namespace Tcp_Ssl
 {
     public class TcpClientSsl
     {
+
+        /// <summary>
+        /// FOR Run the client ssl main Method
+        /// </summary>
+        public void RunClient()
+        {
+            while (true)
+            {
+                TcpClientSsl tcpClientSsl = new TcpClientSsl();
+            
+                tcpClientSsl.SslTcpClientConnection();
+            }
+        }
         /// <summary>
         /// Connect Client to the Server in SSl 
         /// </summary>
@@ -50,7 +63,7 @@ namespace Tcp_Ssl
                     }
                     catch (IOException e)
                     {
-                        Console.WriteLine("Connection lost : " +e);
+                        Console.WriteLine("-- Connection server lost --");
                         client.Close();
                         SslTcpClientConnection().Dispose();
                         FlagB = false;

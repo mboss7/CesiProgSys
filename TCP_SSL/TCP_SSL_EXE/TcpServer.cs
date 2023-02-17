@@ -10,6 +10,19 @@ namespace Tcp_Ssl
     public class TcpServer
     {
         /// <summary>
+        /// For Run SRV SSL main Method
+        /// </summary>
+        public void RunSrv()
+        {
+            while (true)
+            {
+                TcpServer SslSrv = new TcpServer();
+            
+                SslSrv.SslTcpServerConnection(); 
+            }
+                
+        }
+        /// <summary>
         /// Connect the server in listen mode in SSL 
         /// </summary>
         public async Task SslTcpServerConnection()
@@ -30,22 +43,22 @@ namespace Tcp_Ssl
                 using TcpClient client = listener.AcceptTcpClient();
                 SslStream sslStream = new SslStream(client.GetStream(), false);
                 sslStream.AuthenticateAsServer(serverCertificate, false, SslProtocols.Tls, true);
-
+                Console.WriteLine("*** Client Connected ***");
 
                 while (FlagB)
                 {
 
                     string messageData = null;
 
-                    Console.WriteLine("Waiting for client message...");
-                    try
+                   try
                     {
                         messageData = ReadMessage(sslStream);
                     }
                     catch (IOException e)
                     {
-                        Console.WriteLine("Connection Aborted :" + e);
+                        Console.WriteLine("-- Connection Aborted --");
                         listener.Stop();
+                        SslTcpServerConnection().Dispose();
                         FlagB = false;
                     }
 
@@ -61,7 +74,7 @@ namespace Tcp_Ssl
                     // If problem of connection End the Listener and Dispose the SslTcp fct for free the RAM Memory
                     catch (IOException e)
                     {
-                        Console.WriteLine("Connection aborted : " + e);
+                        Console.WriteLine("-- Connection aborted --");
                         listener.Stop();
                         SslTcpServerConnection().Dispose();
                         FlagB = false;

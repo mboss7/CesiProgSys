@@ -10,6 +10,8 @@ public class ConditionIHM
                 break;
             case "2":
                 break;
+            case "3":
+                break;
             default:
                 Console.WriteLine("Command unknow !");
                 break;
