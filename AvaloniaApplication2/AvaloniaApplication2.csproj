@@ -16,10 +16,18 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.18" />
+    <PackageReference Include="Avalonia.Angle.Windows.Natives" Version="2.1.0.2023020321" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.10.18" />
     <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
+    <PackageReference Include="Avalonia.FreeDesktop" Version="0.10.18" />
+    <PackageReference Include="Avalonia.Native" Version="0.10.18" />
+    <PackageReference Include="Avalonia.Remote.Protocol" Version="0.10.18" />
+    <PackageReference Include="Avalonia.Skia" Version="0.10.18" />
+    <PackageReference Include="Avalonia.Svg.Skia" Version="0.10.18" />
+    <PackageReference Include="Avalonia.Win32" Version="0.10.18" />
+    <PackageReference Include="Avalonia.X11" Version="0.10.18" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />
   </ItemGroup>
 </Project>

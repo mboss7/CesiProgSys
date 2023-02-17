@@ -9,6 +9,11 @@ namespace AvaloniaApplication2
         {
             InitializeComponent();
         }
+        public class Person
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+        }
         private void Clickexit(object sender, RoutedEventArgs e)
         {
             Close();

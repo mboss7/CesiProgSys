@@ -55,15 +55,40 @@
 				<TabItem>
 					<TabItem.Header>
 						<TextBlock VerticalAlignment="Center">Launch Job</TextBlock>
+						
 					</TabItem.Header>
 					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Square : " HorizontalAlignment="Left" VerticalAlignment="Center"/>
-						<Rectangle Fill="Blue" Width="63" Height="41"/>
+						
+						<Grid>
+							<DataGrid Margin="2 5" AutoGenerateColumns="False">
+								<DataGrid.Columns>
+									<DataGridTextColumn Header="saveJobName" Width="100"/>
+									<DataGridTextColumn Header="saveJobDestinationDirectory" Width="200"/>
+									<DataGridTextColumn Header="saveJobSourceDirectory" Width="200"/>
+									<DataGridTextColumn Header="saveJobType" Width="100"/>
+									<DataGridTemplateColumn>
+										<DataGridTemplateColumn.CellTemplate>
+											<DataTemplate>
+												<Button Content="EXECUTE" Name="Execute"/>
+											</DataTemplate>
+										</DataGridTemplateColumn.CellTemplate>
+									</DataGridTemplateColumn>
+									<DataGridTemplateColumn>
+										<DataGridTemplateColumn.CellTemplate>
+											<DataTemplate>
+												<Button Content="DELETE" Name="Delete"/>
+											</DataTemplate>
+										</DataGridTemplateColumn.CellTemplate>
+									</DataGridTemplateColumn>
+								</DataGrid.Columns>
+							</DataGrid>
+						</Grid>
 					</StackPanel>
 				</TabItem>
 				<TabItem>
 				<TabItem.Header>
 					<TextBlock VerticalAlignment="Center"> Configuration</TextBlock>
+					
 				</TabItem.Header>
 				</TabItem>
 			</TabControl>
