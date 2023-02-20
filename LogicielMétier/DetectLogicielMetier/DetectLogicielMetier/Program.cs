@@ -8,19 +8,10 @@ namespace DetectLogicielMetier
         public static void Main(string[] args)
         {
 
-            ExplorerExecute explorerExecute = new ExplorerExecute();
+            ExtensionPrioritaire extensionPrioritaire = new ExtensionPrioritaire();
             
-            explorerExecute.ExplorerLaunch();
-            
-            
-            
-           /* string processName = "notepad";
+            extensionPrioritaire.ListeMaker();
 
-            DetectProcess detectProcess = new DetectProcess();
-            
-            detectProcess.ProcessDetector(processName);*/
-            
-          
         }
     }
 }
