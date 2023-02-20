@@ -10,11 +10,12 @@ namespace TestDetectLogicielMetier
         [Test]
         public void TestProcessDetectorNotRun()
         {
+            string processName = "notepad";
 
             DetectProcess detectProcess = new DetectProcess();
 
             bool LogicielMetierRunning;
-            LogicielMetierRunning = detectProcess.ProcessDetector();
+            LogicielMetierRunning = detectProcess.ProcessDetector(processName);
 
 
 
@@ -25,11 +26,13 @@ namespace TestDetectLogicielMetier
         [Test]
         public void TestProcessDetectorRun()
         {
+            string processName = "notepad";
+
             Process notePad = Process.Start("notepad");
             DetectProcess detectProcess = new DetectProcess();
 
             bool LogicielMetierRunning;
-            LogicielMetierRunning = detectProcess.ProcessDetector();                    
+            LogicielMetierRunning = detectProcess.ProcessDetector(processName);                    
 
 
             Assert.That(LogicielMetierRunning.Equals(true));
@@ -37,8 +40,7 @@ namespace TestDetectLogicielMetier
             // clean Close notepad: 
 
             // Nom du processus à rechercher
-            string processName = "notepad";
-
+           
             // Recherche du processus
             Process[] processes = Process.GetProcessesByName(processName);
 

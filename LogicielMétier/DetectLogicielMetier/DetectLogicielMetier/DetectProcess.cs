@@ -6,13 +6,16 @@ public class DetectProcess
 {
 
     public static bool LogicielMetierRunning;
+    public static string processName;
 
     public DetectProcess()
     {
         LogicielMetierRunning = false;
+        processName = "notepad";
+
     }
     
-    public bool ProcessDetector()
+    public bool ProcessDetector(string processName)
     {
         // Récupérer tous les processus actifs
         Process[] processes = Process.GetProcesses();
@@ -20,7 +23,7 @@ public class DetectProcess
         // Afficher le nom de chaque processus actif
         foreach (Process p in processes) {
             Console.WriteLine(p.ProcessName);
-            if (p.ProcessName == "notepad")
+            if (p.ProcessName == processName)
             {
                 LogicielMetierRunning = true;
                 
