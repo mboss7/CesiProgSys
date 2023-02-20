@@ -10,7 +10,7 @@ namespace CesiProgSys.Backups
         private List<Tuple<string, List<FileInfo>>> unauthorizedDirAndFiles;
         
         protected List<Tuple<string, List<FileInfo>>> authorizedDirAndFiles;
-        protected Info info;
+        public Info info;
         protected Logs rltInstance;
         
         public ManualResetEventSlim wait;

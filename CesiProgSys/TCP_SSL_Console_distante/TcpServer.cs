@@ -13,20 +13,40 @@ namespace Tcp_Ssl
     public class TcpServer
     {
 
+        private TcpServer()
+        {
+            
+        }
+
+        private static TcpServer instance;
+
+        public static TcpServer Instance()
+        {
+            if (instance == null)
+            {
+                instance = new TcpServer();
+            }
+
+            return instance;
+        }
+        
+        
         public static bool isRunning = false;
         public SslStream sslStream;
         
         /// <summary>
         /// For Run SRV SSL main Method
         /// </summary>
-        public void RunSrv()
+        public static void RunSrv(object obj)
         {
+            TcpServer tcpServer = (TcpServer)obj;
             isRunning = true;
             while (isRunning)
             {
-                TcpServer SslSrv = new TcpServer();
+                // TcpServer SslSrv = new TcpServer();
 
-                SslSrv.SslTcpServerConnection();
+                
+                // _ = tcpServer.SslTcpServerConnection();
             }
 
         }
@@ -50,7 +70,7 @@ namespace Tcp_Ssl
                 // Application blocks while waiting for an incoming connection.
                 // Type CNTL-C to terminate the server.
                 using TcpClient client = listener.AcceptTcpClient();
-                SslStream sslStream = new SslStream(client.GetStream(), false);
+                sslStream = new SslStream(client.GetStream(), false);
                 sslStream.AuthenticateAsServer(serverCertificate, false, SslProtocols.Tls, true);
                 Console.WriteLine("*** Client Connected ***");
                 // Write a message to the client.
@@ -151,30 +171,30 @@ namespace Tcp_Ssl
         /// </summary>
         /// <param name="sslStream"></param>
         /// <param name="messageOnpropertyChange"></param>
-            public void SendMessage(SslStream sslStream, object sender, EventArgs e)
+            public void OnSendMessage(object? sender, PropertyChangedEventArgs propertyChangedEventArgs)
             {
             // Récupération de l'objet qui a déclenché l'événement
                 Info info = (Info)sender;
 
 
             // Récupération des données de l'événement
-            string messageOnpropertyChange = info.Name + info.CurrentSource + info.SourceDir + info.Progression;
+                string messageOnpropertyChange = info.Name + info.CurrentSource + info.SourceDir + info.Progression;
                 // Autres cas pour récupérer les données de l'événement...
                    
-
+                Console.WriteLine(messageOnpropertyChange);
 
                 // Write a message to the client.
-                byte[] message = Encoding.UTF8.GetBytes(messageOnpropertyChange);
-                Console.WriteLine("Sending :"+ messageOnpropertyChange);
-                try
-                {
-                    sslStream.Write(message);
-                }
-                catch (Exception e1)
-                {
-                    Console.WriteLine(e1);
-                    throw;
-                }
+                // byte[] message = Encoding.UTF8.GetBytes(messageOnpropertyChange);
+                // Console.WriteLine("Sending :"+ messageOnpropertyChange);
+                // try
+                // {
+                //     sslStream.Write(message);
+                // }
+                // catch (Exception e1)
+                // {
+                //     Console.WriteLine(e1);
+                //     throw;
+                // }
             }
         
     }

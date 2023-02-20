@@ -8,16 +8,23 @@ namespace CesiProgSys.ViewModel
         private BackupManager bManager;
         private List<Backup> backups;
         private Config config;
+        private ViewModelWpf vmWPF;
+        
         public ViewModelCli()
         {
             bManager = BackupManager.Instance();
             backups = bManager.listBackupInstantiated;
             config = Config.Instance();
+            
+            vmWPF = new ViewModelWpf();
+            vmWPF.ViewModelWpf_RunSslSrv();
+            
         }
         
         public void instantiateBackup(string name, string sourceDir, string targetDir, bool type)
         {
-            bManager.instantiate(name, sourceDir, targetDir, type);
+            Backup b = bManager.instantiate(name, sourceDir, targetDir, type);
+            vmWPF.setEventInfo(b.info);
             config.recentSaveSource.Add(sourceDir);
             config.recentSaveTarget.Add(targetDir);
         }

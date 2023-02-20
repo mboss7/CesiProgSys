@@ -316,15 +316,13 @@ namespace CesiProgSys.ViewCli
                 name = Console.ReadLine();
             }
             
-            string sourceDir = null;
             Console.WriteLine(dico["textSource"]);
-            int input = askNumber();
-
-            if (input == 1)
+            string sourceDir = Console.ReadLine();
+            if (sourceDir == "1")
             {
                 sourceDir = vmCLI.getDefaultSource();
             }
-            else if (input == 2)
+            else if (sourceDir == "2")
             {
                 // sourceDir = getRecentSource();
             }
@@ -337,14 +335,13 @@ namespace CesiProgSys.ViewCli
                 }
             }
 
-            string targetDir = null;
             Console.WriteLine(dico["textTarget"]);
-            input = askNumber();
-            if (input == 1)
+            string targetDir = Console.ReadLine();
+            if (targetDir == "1")
             {
                 targetDir = vmCLI.getDefaultTarget();
             }
-            else if (input == 2)
+            else if (targetDir == "2")
             {
                 // sourceDir = getRecentTarget();
             }
