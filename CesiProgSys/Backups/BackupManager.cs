@@ -4,7 +4,9 @@
     {
         private BackupManager()
         {
-            listBackup = new List<Backup>();
+            listBackupInstantiated = new List<Backup>();
+            listBackupStarted = new List<Backup>();
+            listBackupStoped = new List<Backup>();
         }
 
         private static BackupManager instance;
@@ -18,35 +20,41 @@
             return instance;
         }
 
-        public List<Backup> listBackup;
+        public List<Backup> listBackupInstantiated;
+        public List<Backup> listBackupStarted;
+        public List<Backup> listBackupStoped;
         
-        public void instantiate(Backup backup)
+        public void instantiate(string name, string source, string target, bool type)
         {
-            listBackup.Add(backup);
-            backup.initiateBackup();
-            // Thread b = new Thread(startThread);
-            // b.Start(backup);
-        }
-
-        public void check(Backup b)
-        {
-            b.OnCheckAuth();
-        }
-
-        public void start(Backup b)
-        {
-            b.OnStartBackup();
-        }
-        
-        private void finish(Thread t)
-        {
-            // t.Interrupt();
-        }
-
-        // private static void startThread(object o)
-        // {
+            Backup backup;
+            if (type)
+                backup = new FullBackup(name, source, target);
+            else
+                backup = new DifferentialBackup(name, source, target);
             
-        // }
+            listBackupInstantiated.Add(backup);
+            Thread b = new Thread(startThread);
+            b.Start(backup);
+        }
+
+        public void startBackup(Backup b)
+        {
+            listBackupInstantiated.Remove(b);
+            b.wait.Set();
+            listBackupStarted.Add(b);
+        }
+
+        private void finish()
+        {
+        }
+
+        private static void startThread(object obj)
+        {
+            Backup backup = (Backup)obj;
+            backup.startCheckAuthorizations();
+            backup.wait.Wait();
+            backup.backup();
+        }
         
     }
 }

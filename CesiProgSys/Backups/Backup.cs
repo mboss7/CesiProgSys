@@ -1,223 +1,118 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.Security.AccessControl;
+using System.Security.Principal;
 using CesiProgSys.LOG;
 using CesiProgSys.ToolsBox;
 
 namespace CesiProgSys.Backups
 {
-    public abstract class Backup : INotifyPropertyChanged
+    public abstract class Backup
     {
-        public event EventHandler? checkAuth;
-        public event EventHandler? start;
+        private List<Tuple<string, List<FileInfo>>> unauthorizedDirAndFiles;
         
-        public void initiateBackup()
-        {
-            checkAuth += startCheck;
-            start += startBackup;
-        }
-
-        private void startCheck(object? sender, EventArgs eventArgs)
-        {
-            State = State.CHECKINGAUTH;
-            checkAuthorizations(SourceDir);
-        }
-        protected abstract void checkAuthorizations(string directory);
-        public void OnCheckAuth()
-        {
-            checkAuth.Invoke(null, EventArgs.Empty);
-        }
+        protected List<Tuple<string, List<FileInfo>>> authorizedDirAndFiles;
+        protected Info info;
+        protected Logs rltInstance;
         
-        private void startBackup(object? sender, EventArgs eventArgs)
-        {
-            State = State.ACTIVE;
-            backup();
-        }
+        public ManualResetEventSlim wait;
+        public string name;
+        public string source;
+        public string target;
 
-        protected abstract void backup();
+        public abstract void backup();
 
-        public void OnStartBackup()
+        public void startCheckAuthorizations()
         {
-            start.Invoke(null, EventArgs.Empty);
+            checkAuthorizations(info.SourceDir);
         }
+        private void checkAuthorizations(string directory)
+        {
+            info.State = State.CHECKINGAUTH;
+            rltInstance.wait.Set();
 
-        private TimeSpan _timeLaps;
+            IEnumerable<string> directories = Directory.EnumerateDirectories(directory);
+            List<FileInfo> f = new List<FileInfo>();
+            Tuple<string, List<FileInfo>> tuple = new Tuple<string, List<FileInfo>>(directory, f);
 
-        public TimeSpan TimeLaps
-        {
-            get => _timeLaps;
-            set
+            foreach (string currentDirectory in directories)
             {
-                if (_timeLaps != value)
+                DirectoryInfo dirInfo = new DirectoryInfo(currentDirectory);
+                if (!checkTypes(dirInfo.Attributes))
                 {
-                    _timeLaps = value;
-                    OnPropertyChanged("_timeLaps");
-                    RealTimeLogs.OnWriteLog(this);
+                    try
+                    {
+                        AuthorizationRuleCollection acl = dirInfo.GetAccessControl().GetAccessRules(true, true, typeof(SecurityIdentifier));
+                        FileSystemAccessRule rule = (FileSystemAccessRule)acl[0];
+                        
+                        if (AccessControlType.Allow.Equals(rule.AccessControlType))
+                        {
+                            if (checkRights(rule))
+                            {
+                                checkAuthorizations(currentDirectory);
+                            }
+                        }
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                    }
                 }
             }
-        }
-        
-        private string _sourceDir;
-        public string SourceDir
-        {
-            get => _sourceDir;
-            set
+            
+            IEnumerable<string> files = Directory.EnumerateFiles(directory);
+            foreach (string currentFile in files)
             {
-                if (_sourceDir != value)
+                FileInfo fileInfo = new FileInfo(currentFile);
+
+                if (!checkTypes(fileInfo.Attributes))
                 {
-                    _sourceDir = value;
-                    OnPropertyChanged("_sourceDir");
-                    RealTimeLogs.OnWriteLog(this);
+                    try
+                    {
+                        AuthorizationRuleCollection acl = fileInfo.GetAccessControl().GetAccessRules(true, true, typeof(SecurityIdentifier));
+                        FileSystemAccessRule rule = (FileSystemAccessRule)acl[0];
+
+                        if (AccessControlType.Allow.Equals(rule.AccessControlType))
+                        {
+                            if (checkRights(rule))
+                            {
+                                f.Add(fileInfo); 
+                                info.TotalFilesSize += fileInfo.Length/1000;
+                                rltInstance.wait.Set();
+                            }
+                        }
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                    }
                 }
             }
-        }
-        
-        private string _destDir;
-        public string DestDir
-        {
-            get => _destDir;
-            set
-            {
-                if (_destDir != value)
-                {
-                    _destDir = value;
-                    OnPropertyChanged("_destDir");
-                    RealTimeLogs.OnWriteLog(this);
-                }
-            }
-        }
-        private string _currentSource;
-        public string CurrentSource
-        {
-            get => _currentSource;
-            set
-            {
-                if (_currentSource != value)
-                {
-                    _currentSource = value;
-                    OnPropertyChanged("_currentSource");
-                    RealTimeLogs.OnWriteLog(this);
-                }
-            }
-        }
-        private string _currentDest;
-        public string CurrentDest
-        {
-            get => _currentDest;
-            set
-            {
-                if (_currentDest != value)
-                {
-                    _currentDest = value;
-                    OnPropertyChanged("_currentDest");
-                    RealTimeLogs.OnWriteLog(this);
-                }
-            }
-        }
-        private DateTime _date;
-        public DateTime Date
-        {
-            get => _date;
-            set
-            {
-                if (_date != value)
-                {
-                    _date = value;
-                    OnPropertyChanged("_date");
-                    RealTimeLogs.OnWriteLog(this);
-                }
-            }
-        }
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged("_name");
-                    RealTimeLogs.OnWriteLog(this);
-                }
-            }
-        }
-        private int _totalFilesToCopy;
-        public int TotalFilesToCopy
-        {
-            get => _totalFilesToCopy;
-            set
-            {
-                if (_totalFilesToCopy != value)
-                {
-                    _totalFilesToCopy = value;
-                    OnPropertyChanged("_totalFilesToCopy");
-                    RealTimeLogs.OnWriteLog(this);
-                }
-            }
-        }
-        private long _totalFilesSize;
-        public long TotalFilesSize
-        {
-            get => _totalFilesSize;
-            set
-            {
-                if (_totalFilesSize != value)
-                {
-                    _totalFilesSize = value;
-                    OnPropertyChanged("_totalFilesSize");
-                    RealTimeLogs.OnWriteLog(this);
-                }
-            }
-        }
-        private int _nbFilesLeftToDo;
-        public int NbFilesLeftToDo
-        {
-            get => _nbFilesLeftToDo;
-            set
-            {
-                if (_nbFilesLeftToDo != value)
-                {
-                    _nbFilesLeftToDo = value;
-                    OnPropertyChanged("_nbFilesLeftToDo");
-                    RealTimeLogs.OnWriteLog(this);
-                }
-            }
-        }
-        private State _state;
-        public State State
-        {
-            get => _state;
-            set
-            {
-                if (_state != value)
-                {
-                    _state = value;
-                    OnPropertyChanged("_state");
-                    RealTimeLogs.OnWriteLog(this);
-                }
-            }
-        }
-        private float _progression;
-        public float Progression
-        {
-            get => _progression;
-            set
-            {
-                if (_progression != value)
-                {
-                    _progression = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(_progression)));
-                    RealTimeLogs.OnWriteLog(this);
-                }
-            }
+            authorizedDirAndFiles.Add(tuple);
+
+            info.TotalFilesToCopy += f.Count;
+            info.NbFilesLeftToDo = info.TotalFilesToCopy;
+            rltInstance.wait.Set();
         }
         
-        public event PropertyChangedEventHandler? PropertyChanged;
-        
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        private bool checkRights(FileSystemAccessRule rule)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+            bool toReturn = (rule.FileSystemRights & (FileSystemRights.FullControl | FileSystemRights.Modify | FileSystemRights.Read | FileSystemRights.ReadAndExecute)) != 0;
+            if (toReturn)
+                return toReturn;
 
+            int[] array = new int[32];
+            int number = (int)rule.FileSystemRights;
+            for (int i = 0; i < 32; i++)
+            {
+                array[i] = number % 2;
+                number /= 2;
+            }
+
+            if (array[31] == 1 || array[28] == 1)
+                return true;
+
+            return false;
+        }
+        private bool checkTypes(FileAttributes toCheck)
+        {
+            return (toCheck & (FileAttributes.System | FileAttributes.Offline | FileAttributes.Temporary)) != 0;
+        }
     }
 }

@@ -5,9 +5,15 @@ namespace CesiProgSys.LOG
     //interface for Logs 
     public abstract class Logs
     { 
+        public ManualResetEventSlim wait;
+        public HashSet<Info> SetInfo;
         
-        protected abstract void startLog();
-
+        public void startLog()
+        {
+            DirectoryInfo target = new DirectoryInfo("./LOGS/");
+            if(!target.Exists)
+                target.Create();
+        }
         protected void log(List<string> toPrint, string path)
         {
             using StreamWriter file = new(path, append: false);
@@ -17,7 +23,10 @@ namespace CesiProgSys.LOG
             }
         }
 
-        protected abstract void writeLogs(object sender, EventArgs e);
+        public abstract void writeLogs();
+
+
+
     }
     
 }

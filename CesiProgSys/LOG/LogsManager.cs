@@ -3,26 +3,45 @@
 	//mother class for Logs 
 	public class LogsManager //: IManager
 	{
-		public void startLogManager()
+		private LogsManager(){}
+		private static LogsManager instance;
+
+		public static LogsManager Instance()
 		{
-			// run new LogsManager Thread
-			LogsManager l = new LogsManager();
-			l.instantiate();
+			if (instance == null)
+			{
+				instance = new LogsManager();
+			}
+
+			return instance;
 		}
-		
+
 		// methode for create new thread 
 		public void instantiate()
 		{
-            Thread instanceRtl = new Thread(RealTimeLogs.startThread);
-            instanceRtl.Start();
+            Thread threadRtl = new Thread(startThread);
+            threadRtl.Start(RealTimeLogs.Instance());
             
-            Thread instanceDl = new Thread(DailyLogs.startThread);
-            instanceDl.Start();
+            Thread threadDl = new Thread(startThread);
+            threadDl.Start(DailyLogs.Instance());
 		}
 
 		// methode for end current thread
 		public void finish()
 		{
+			
+		}
+
+		private static void startThread(object obj)
+		{
+			Logs logs = (Logs)obj;
+			logs.startLog();
+			while(true)
+			{
+				logs.wait.Wait();
+				logs.writeLogs();
+				logs.wait.Reset();
+			}
 		}
 	}
 }
