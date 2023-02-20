@@ -68,7 +68,7 @@ namespace Tcp_Ssl
 
 
 
-                // boucle d'écoute du serveur
+                // boucle d'ï¿½coute du serveur
                 while (FlagB)
                 {
 
@@ -146,20 +146,21 @@ namespace Tcp_Ssl
             
 
 
-        /// <summary>
-        /// Send to the client the infos when change is notify with property change
-        /// </summary>
-        /// <param name="sslStream"></param>
-        /// <param name="messageOnpropertyChange"></param>
+            /// <summary>
+            /// Send to the client the infos when change is notify with property change
+            /// </summary>
+            /// <param name="sslStream"></param>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             public void SendMessage(SslStream sslStream, object sender, EventArgs e)
             {
-            // Récupération de l'objet qui a déclenché l'événement
+            // Rï¿½cupï¿½ration de l'objet qui a dï¿½clenchï¿½ l'ï¿½vï¿½nement
                 Info info = (Info)sender;
 
 
-            // Récupération des données de l'événement
+            // Rï¿½cupï¿½ration des donnï¿½es de l'ï¿½vï¿½nement
             string messageOnpropertyChange = info.Name + info.CurrentSource + info.SourceDir + info.Progression;
-                // Autres cas pour récupérer les données de l'événement...
+                // Autres cas pour rï¿½cupï¿½rer les donnï¿½es de l'ï¿½vï¿½nement...
                    
 
 

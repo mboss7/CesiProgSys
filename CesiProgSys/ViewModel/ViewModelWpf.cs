@@ -1,4 +1,3 @@
-using System.Net.Security;
 using Tcp_Ssl;
 
 namespace CesiProgSys.ViewModel
@@ -7,14 +6,11 @@ namespace CesiProgSys.ViewModel
     { 
       
 
-        public async void ViewModelWpf_RunSslSrv()
+        public void ViewModelWpf_RunSslSrv()
         {
             TcpServer tcpServer = new TcpServer();
             
             tcpServer.RunSrv();
-
-           
-            
         }
     }
 }
