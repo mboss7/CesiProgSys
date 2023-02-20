@@ -4,7 +4,7 @@
 
 ## Project description : 
 
-The team is to develop a backup software called EasySave for the software publisher ProSoft. The software will be sold at 200 € HT with an annual maintenance contract at 12% of the purchase price. The team must respect constraints concerning the development tools and methods, the language used, the readability of the code and the user documentation. The project must also be managed in such a way as to reduce the development costs of future versions and to guarantee rapid reactivity in the event of a malfunction.
+The team has to develop a backup software called EasySave for the software publisher ProSoft. The software will be sold at 200 € HT with an annual maintenance contract at 12% of the purchase price. The team must respect constraints concerning the development tools and methods, the language used, the readability of the code and the user documentation. The project must also be managed in such a way as to reduce the development costs of future versions and to guarantee rapid reactivity in the event of a malfunction.
 
 ## Authors
 
@@ -31,42 +31,14 @@ System analysis
 
 [Use case diagram](.\Diagrams\DiagUseCase.md)
 
+System presentation
+
+- [Class diagram](.\Diagrams\DiagClasse.md)
+- [Sequence diagram](.\Diagrams\DiagSequences)
+- [Activity diagram](.\Diagrams\DiagActivity.md)
 
 
-
-
-
-
-# Structures and Uses:
-
-To detect file modifications: hash comparison (md5 for speed)
-
-Creation of a console application followed by the implementation of a remote interface via tcp.
-
-Demonstrate progress.
-
-Think about a version that works on Windows and Linux.
-
-![image](https://user-images.githubusercontent.com/102410364/214019216-da5dd7c5-df74-4353-9773-92c86f4ed934.png)
-
-
-
-[![](https://mermaid.ink/img/pako:eNpNUctKxEAQ_JVmvC5-QG6yCyq4IAT0kks700ka5uU8VmXZf_G635Efs-PqJs0cBqqqq2rmqHQwpBrl2BuHsfOdB5m7GKHFeqABkyHY3oAJxVMBHRJdKPO8UMocPJj6jyOY6dyz57SwXLWFy5gIzUo6nRP3rLH8LqAMD5hHiKEmOFwwSuCCuZLyIn4OOfMbWy7TWbSgR_SD0C3K8UNdRdyK7Z8F2DCslkhHy0AetvsdaMt6gfZzYogWC_UhOWjgiX39BCn4Kg8VPvItLOyW_JJm-p5TaMyZVpR7ytee2s7gKsijL5R61ARDwjjye6U5ViIXCkHRURapjXKUHLKRzzrO2k6VkRx1qpGroR4lc6c6fxIq1hLaL69VU1KljarRSJUdoxg41fRoM51-AL1ZqN0?type=png)](https://mermaid.live/edit#pako:eNpNUctKxEAQ_JVmvC5-QG6yCyq4IAT0kks700ka5uU8VmXZf_G635Efs-PqJs0cBqqqq2rmqHQwpBrl2BuHsfOdB5m7GKHFeqABkyHY3oAJxVMBHRJdKPO8UMocPJj6jyOY6dyz57SwXLWFy5gIzUo6nRP3rLH8LqAMD5hHiKEmOFwwSuCCuZLyIn4OOfMbWy7TWbSgR_SD0C3K8UNdRdyK7Z8F2DCslkhHy0AetvsdaMt6gfZzYogWC_UhOWjgiX39BCn4Kg8VPvItLOyW_JJm-p5TaMyZVpR7ytee2s7gKsijL5R61ARDwjjye6U5ViIXCkHRURapjXKUHLKRzzrO2k6VkRx1qpGroR4lc6c6fxIq1hLaL69VU1KljarRSJUdoxg41fRoM51-AL1ZqN0)
-
-
-C# .NET Core Backup App
-.NET version to be defined
-Multithreaded
-Hash verification to check modifications
-Ability to change language
-Log creation
-Command line application 
-Multi-platform: Linux and Windows
-Case sensitivity
-Class management
-Remote TCP graphical interface
-
-Example of how the project works:
+## Branch organization :
 ```mermaid
 gitGraph
     commit
