@@ -1,3 +1,4 @@
+using CesiProgSys.ToolsBox;
 using CesiProgSys.ViewModel;
 
 namespace CesiProgSys.ViewCli
@@ -6,31 +7,28 @@ namespace CesiProgSys.ViewCli
     {
         protected ViewModelCli vmCLI;
 
-        protected string textMenu;
-        protected string textConfigBackup;
-        protected string textStartBackup;
-        protected string textShowConfig;
-        protected string textChangeConfig;
-        protected string askChoice;
-        protected string exit;
-        protected string invalid;
+        protected Dictionary<string, string> dico;
+
+        private int askNumber()
+        {
+            Console.Write(dico["askChoice"]);
+            try
+            {
+                return Convert.ToInt32(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                return -1;
+            }
+        }
         
         public void menu()
         {
             Console.Clear();
-            Console.WriteLine(textMenu);
+            Console.WriteLine(dico["textMenu"]);
 
-            Console.Write(askChoice);
-            int choice = 0;
-            try
-            {
-                choice = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (FormatException)
-            {
-            }
-
-
+            int choice = askNumber();
+            
             switch (choice)
             {
                 case 1:
@@ -49,8 +47,7 @@ namespace CesiProgSys.ViewCli
                     help();
                     break;
                 case 6:
-                    Console.WriteLine(exit);
-                    Environment.Exit(0);
+                    leave();
                     break;
                 case 7:
                     Console.WriteLine(
@@ -104,10 +101,11 @@ namespace CesiProgSys.ViewCli
                         "0000000000000kdook000000000000000d;';lxO000000Oxllk00000000000000000000000000KKKKKKKKKKKKK\n" +
                         "KK0000000000OxdxO00000000OOOOOOOOOkxkkkkkkkkkkxdloxkkkkkkOOOOOOOOOO00000000000000000KKKKKK\n");
                     Console.ReadLine();
+                    vmCLI.writeConfig();
                     Environment.Exit(0);
                     break;
                 default:
-                    Console.WriteLine(invalid);
+                    Console.WriteLine(dico["invalid"]);
                     menu();
                     break;
             }
@@ -116,18 +114,10 @@ namespace CesiProgSys.ViewCli
         private void configBackup()
         {
             Console.Clear();
-            Console.WriteLine(textConfigBackup);
+            Console.WriteLine(dico["textConfigBackup"]);
 
-            Console.Write(askChoice);
-            int choiceBackup = 0;
-            try
-            {
-                choiceBackup = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (FormatException)
-            {
-            }
-            
+            int choiceBackup = askNumber();
+
             switch (choiceBackup)
             {
                 case 1:
@@ -140,11 +130,10 @@ namespace CesiProgSys.ViewCli
                     menu();
                     break;
                 case 4:
-                    Console.WriteLine(exit);
-                    Environment.Exit(0);
+                    leave();
                     break;
                 default:
-                    Console.WriteLine(invalid);
+                    Console.WriteLine(dico["invalid"]);
                     configBackup();
                     break;
             }
@@ -153,18 +142,9 @@ namespace CesiProgSys.ViewCli
         private void startBackup()
         {
             Console.Clear();
-            Console.WriteLine(textStartBackup);
+            Console.WriteLine(dico["textStartBackup"]);
 
-            Console.Write(askChoice);
-
-            int choiceBackup = 0;
-            try
-            {
-                choiceBackup = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (FormatException)
-            {
-            }
+            int choiceBackup = askNumber();
 
             switch (choiceBackup)
             {
@@ -175,11 +155,10 @@ namespace CesiProgSys.ViewCli
                     menu();
                     break;
                 case 3:
-                    Console.WriteLine(exit);
-                    Environment.Exit(0);
+                    leave();
                     break;
                 case 4:
-                    Console.WriteLine(invalid);
+                    Console.WriteLine(dico["invalid"]);
                     startBackup();
                     break;
             }
@@ -188,54 +167,19 @@ namespace CesiProgSys.ViewCli
         private void showConfig()
         {
             Console.Clear();
-            Console.WriteLine(textShowConfig);
-
-            Console.Write(askChoice);
-
-            int choiceBackup = 0;
-            try
-            {
-                choiceBackup = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (FormatException)
-            {
-            }
-            
-            switch (choiceBackup)
-            {
-                case 1:
-                    showConfigValid();
-                    break;
-                case 2:
-                    menu();
-                    break;
-                case 3:
-                    Console.WriteLine(exit);
-                    Environment.Exit(0);
-                    break;
-                case 4:
-                    Console.WriteLine(invalid);
-                    showConfig();
-                    break;
-            }
+            string[] s = vmCLI.getConfig();
+            Console.WriteLine(dico["textShowContentConfig"], s[0], s[1], s[2], s[3], s[4], s[5], s[6]);
+            Console.ReadLine();
+            menu();
         }
         
         private void changeConfig()
         {
             //code
             Console.Clear();
-            Console.WriteLine(textChangeConfig);
+            Console.WriteLine(dico["textChangeConfig"]);
 
-            Console.Write(askChoice);
-            int choiceConfig = 0;
-            try
-            {
-                choiceConfig = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (FormatException)
-            {
-            }
-
+            int choiceConfig = askNumber();
 
             switch (choiceConfig)
             {
@@ -249,74 +193,32 @@ namespace CesiProgSys.ViewCli
                     defaultSaveTarget();
                     break;
                 case 4:
-                    cleanRecentSaveSource();
+                    resetConfig();
                     break;
                 case 5:
-                    cleanRecentSaveTarget();
+                    retentionTime();
                     break;
                 case 6:
                     menu();
                     break;
                 case 7:
-                    menu();
-                    break;
-                case 8:
-                    menu();
-                    break;
-                case 9:
-                    Console.WriteLine(exit);
-                    Environment.Exit(0);
+                    leave();
                     break;
                 default:
-                    Console.WriteLine(invalid);
+                    Console.WriteLine(dico["invalid"]);
                     changeConfig();
                     break;
             }
         }
         
-        public void help()
+        private void help()
         {
             //code
             Console.Clear();
-            Console.WriteLine("Help : \n");
-            Console.WriteLine(" .----------------.\n" +
-                              "| .--------------. |\n" +
-                              "| |    ______    | |\n" +
-                              "| |   / _ __ `.  | |\n" +
-                              "| |  |_/____) |  | |\n" +
-                              "| |    /  ___.'  | |\n" +
-                              "| |    |_|       | |\n" +
-                              "| |    (_)       | |\n" +
-                              "| |              | |\n" +
-                              "| '--------------' |\n" +
-                              "'----------------' \n");
-            Console.WriteLine("To set up a full backup: Type 1. Then 1.");
-            Console.WriteLine("To set up a differential backup: Type 1. Then 2.");
-            Console.WriteLine("To start a backup: Type 2. Then press 1.");
-            Console.WriteLine("To display the settings: Type 3. Then 1.");
-            Console.WriteLine("To change the language: Type 4. Then 1.");
-            Console.WriteLine("To change the default backup source: Type 4. Then 2. Then 1.");
-            Console.WriteLine("To clean up the default backup source: Type 4. Then 2. Then 2.");
-            Console.WriteLine("To change the default backup target: Type 4. Then 3. Then 1.");
-            Console.WriteLine("To clean up the default backup target: Type 4. Then 3. Then 2.");
-            Console.WriteLine("To clean up the recent source of backups: Type 4. Then 4. Then 1.");
-            Console.WriteLine("To clean up the recent target of the backups: Type 4. Then 5. Then 1.");
-            Console.WriteLine("To change the retention time: Type 4. Then 6. Then 1.");
-            Console.WriteLine("To fully clean up the settings: Type 4. Then 7. Then 1. \n");
-
-            Console.WriteLine("1. Return");
-            Console.WriteLine("2. Exit");
-
-            Console.Write("Enter your choice : ");
-            int choiceBackup = 0;
-            try
-            {
-                choiceBackup = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (FormatException)
-            {
-            }
+            Console.WriteLine(dico["textHelp"]);
             
+            int choiceBackup = askNumber();
+
             if (choiceBackup == 1)
             {
                 menu();
@@ -324,155 +226,159 @@ namespace CesiProgSys.ViewCli
             }
             if (choiceBackup == 2)
             {
-                Console.WriteLine("Exiting the program...");
-                Environment.Exit(0);
+                leave();
             }
             else
             {
-                Console.WriteLine("Invalid choice. Try again.");
+                Console.WriteLine(dico["invalid"]);
                 help();
             }
         }
-        
-        public void showConfigValid()
+
+        private void chooseLanguage()
         {
             //code
             Console.Clear();
-            Console.WriteLine("Definitely starts the configuration display");
-            // Config.writeConfig(@".\\CONF\conf.json");
-            // Config.readConfig(@".\\CONF\conf.json");
+            Console.WriteLine(dico["textChooseLanguage"]);
+            
+            int choiceLanguage = askNumber();
+
+            switch (choiceLanguage)
+            {
+                case 1:
+                    vmCLI.changeLanguage(Language.French);
+                    break;
+                case 2:
+                    vmCLI.changeLanguage(Language.English);
+                    break;
+                case 3:
+                    menu();
+                    break;
+                case 4:
+                    leave();
+                    break;
+                default:
+                    Console.WriteLine(dico["invalid"]);
+                    changeConfig();
+                    break;
+            }
+            Console.WriteLine(dico["textChangeLanguage"]);
+            Console.ReadLine();
             menu();
         }
 
-        public void chooseLanguage()
+        private void defaultSaveSource()
         {
-            //code
             Console.Clear();
-            Console.WriteLine("1. Choose French");
-            Console.WriteLine("2. Choose English");
-            Console.WriteLine("3. Return");
-            Console.WriteLine("4. Exit");
+            Console.WriteLine(dico["textChangeDefaultSaveSource"]);
 
-            Console.Write("Enter your choice : ");
-            int choiceLanguage = Convert.ToInt32(Console.ReadLine());
+            string path = Console.ReadLine();
+            vmCLI.changeDefaultSaveSource(path);
 
-            if (choiceLanguage > 0 && choiceLanguage <= 3)
-            {
-                switch (choiceLanguage)
-                {
-                    case 1:
-                        // Config.language = Language.French;
-                        return;
-                    case 2:
-                        // Config.language = Language.English;
-                        return;
-                    case 3:
-                        menu();
-                        return;
-                }
-            }
-
-            if (choiceLanguage == 4)
-            {
-                Console.WriteLine("Exiting the program...");
-                Environment.Exit(0);
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice. Try again.");
-                changeConfig();
-            }
+            menu();
         }
 
-        public void defaultSaveSource()
+        private void defaultSaveTarget()
         {
-            //code
+            Console.Clear();
+            Console.WriteLine(dico["textChangeDefaultSaveTarget"]);
+
+            string path = Console.ReadLine();
+            vmCLI.changeDefaultSaveTarget(path);
+            
+            menu();
         }
 
-        public void changeDSS()
+        private void retentionTime()
         {
-            //code
-        }
+            Console.Clear();
+            Console.WriteLine(dico["textRetentionTime"]);
 
-        public void cleanDSS()
-        {
-            //code
-        }
-
-        public void defaultSaveTarget()
-        {
-            //code
-        }
-
-        public void changeDST()
-        {
-            //code
-        }
-
-        public void cleanDST()
-        {
-            //code
-        }
-
-        public void cleanRecentSaveSource()
-        {
-            //code
-        }
-
-        public void cleanRecentSaveTarget()
-        {
-            //Code
+            int i = askNumber();
+            vmCLI.changeRetentionTime(i);
+            
+            menu();
         }
         
-        public void fullBackup()
+        private void resetConfig()
+        {
+            vmCLI.resetConfig();
+            menu();
+        }
+
+        private void fullBackup()
         {
             Console.Clear();
             string name = null;
             while (string.IsNullOrEmpty(name))
             {
-                Console.WriteLine("Choose a name for your fullbackup :");
+                Console.WriteLine(dico["textChooseNameFullBackup"]);
                 name = Console.ReadLine();
             }
-
-            string sourceDir = null;
-            while (string.IsNullOrEmpty(sourceDir))
-            {
-                Console.WriteLine("Choose a source directory :");
-                sourceDir = Console.ReadLine();
-            }
             
-            string targetDir = null;
-            while (string.IsNullOrEmpty(targetDir))
+            Console.WriteLine(dico["textSource"]);
+            string sourceDir = Console.ReadLine();
+            if (sourceDir == "1")
             {
-                Console.WriteLine("Choose a target directory :");
-                targetDir = Console.ReadLine();
+                sourceDir = vmCLI.getDefaultSource();
+            }
+            else if (sourceDir == "2")
+            {
+                // sourceDir = getRecentSource();
+            }
+            else
+            {
+                while (string.IsNullOrEmpty(sourceDir))
+                {
+                    Console.WriteLine(dico["textChooseDir"]);
+                    sourceDir = Console.ReadLine();
+                }
+            }
+
+            Console.WriteLine(dico["textTarget"]);
+            string targetDir = Console.ReadLine();
+            if (targetDir == "1")
+            {
+                targetDir = vmCLI.getDefaultTarget();
+            }
+            else if (targetDir == "2")
+            {
+                // sourceDir = getRecentTarget();
+            }
+            else
+            {
+                while (string.IsNullOrEmpty(targetDir))
+                {
+                    Console.WriteLine(dico["textChooseTarget"]);
+                    targetDir = Console.ReadLine();
+                }
             }
 
             vmCLI.instantiateBackup(name, sourceDir, targetDir, true);
             menu();
         }
 
-        public void diffBackup()
+        private void diffBackup()
         {
             Console.Clear();
             string name = null;
             while (string.IsNullOrEmpty(name))
             {
-                Console.WriteLine("Choose a name for your differential backup :");
+                Console.WriteLine(dico["textChooseNameDiffBackup"]);
                 name = Console.ReadLine();
             }
 
             string sourceDir = null;
             while (string.IsNullOrEmpty(sourceDir))
             {
-                Console.WriteLine("Choose a source directory :");
+                Console.WriteLine(dico["textChooseDir"]);
                 sourceDir = Console.ReadLine();
             }
             
             string targetDir = null;
             while (string.IsNullOrEmpty(targetDir))
             {
-                Console.WriteLine("Choose a target directory :");
+                Console.WriteLine(dico["textChooseTarget"]);
                 targetDir = Console.ReadLine();
             }
 
@@ -480,7 +386,7 @@ namespace CesiProgSys.ViewCli
             menu();
         }
 
-        public void startBackupValid()
+        private void startBackupValid()
         {
             Console.Clear();
             List<string[]> backups = vmCLI.getBackups();
@@ -503,7 +409,7 @@ namespace CesiProgSys.ViewCli
 
             if (input <= -1 || input >= backups.Count)
             {
-                Console.WriteLine("Wrong input");
+                Console.WriteLine(dico["invalid"]);
                 menu();
             }
             else
@@ -512,6 +418,14 @@ namespace CesiProgSys.ViewCli
             }
             menu();
         }
+
+        private void leave()
+        {
+            Console.WriteLine(dico["exit"]);
+            vmCLI.writeConfig();
+            Environment.Exit(0);
+        }
+        
     }  
 }
 

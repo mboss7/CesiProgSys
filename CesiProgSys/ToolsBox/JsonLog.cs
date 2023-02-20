@@ -6,11 +6,14 @@ namespace CesiProgSys.ToolsBox
 // Tool convert string to Json
     public class JsonLog
     {
-
-        public static string stringToJson(object obj)
+        public static string objectToJson(object obj)
         {
-            string json = JsonConvert.SerializeObject(obj);
-            return json;
+            return JsonConvert.SerializeObject(obj);
+        }
+
+        public static Config? JsonToConfig(string json)
+        {
+            return JsonConvert.DeserializeObject<Config>(json);;
         }
     }
 }

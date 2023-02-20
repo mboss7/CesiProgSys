@@ -24,7 +24,7 @@
         public List<Backup> listBackupStarted;
         public List<Backup> listBackupStoped;
         
-        public void instantiate(string name, string source, string target, bool type)
+        public Backup instantiate(string name, string source, string target, bool type)
         {
             Backup backup;
             if (type)
@@ -35,6 +35,8 @@
             listBackupInstantiated.Add(backup);
             Thread b = new Thread(startThread);
             b.Start(backup);
+
+            return backup;
         }
 
         public void startBackup(Backup b)
@@ -52,6 +54,7 @@
         {
             Backup backup = (Backup)obj;
             backup.startCheckAuthorizations();
+            
             backup.wait.Wait();
             backup.backup();
         }
