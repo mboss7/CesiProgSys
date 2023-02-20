@@ -45,8 +45,6 @@ public class ViewCliFr : ViewCli
             { "textChooseLanguage", "1. Choisir Français\n2. Choisir Anglais\n3. Retour\n4. Quitter" },
             { "textChooseNameFullBackup", "Choisissez un nom pour votre backup complète:" },
             { "textChooseNameDiffBackup", "Choisissez un nom pour votre backup différentiel :" },
-            { "textChooseDir", "Choisissez une source:" },
-            { "textChooseTarget", "Choisissez une cible:" },
             {
                 "textShowContentConfig",
                 "Language: {0}\nDefault save source: {1}\nDefault save target: {2}\nRecent save source: {3}\nRecent save target: {4}\nRetention time: {5}\nType of logs: {6}"

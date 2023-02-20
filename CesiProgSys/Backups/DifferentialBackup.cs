@@ -31,6 +31,7 @@ namespace CesiProgSys.Backups
          public override void backup()
          {
              info.State = State.ACTIVE;
+             info.Date = DateTime.Now;
              rltInstance.wait.Set();
 
              DirectoryInfo targetDirectory = new DirectoryInfo(target);

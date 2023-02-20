@@ -43,8 +43,6 @@ public class ViewCliEn : ViewCli
             { "textChooseLanguage", "1. Choose French\n2. Choose English\n3. Return\n4. Exit" },
             { "textChooseNameFullBackup", "Choose a name for your fullbackup :" },
             { "textChooseNameDiffBackup", "Choose a name for your differential backup :" },
-            { "textChooseDir", "Choose a source directory :" },
-            { "textChooseTarget", "Choose a target directory :" },
             {
                 "textShowContentConfig",
                 "Language : {0}\nDefault save source : {1}\nDefault save target : {2}\nRecent save source : {3}\nRecent save target : {4}\nRetention time : {5}\nType logs : {6}"

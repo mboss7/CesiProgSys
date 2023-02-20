@@ -306,6 +306,55 @@ namespace CesiProgSys.ViewCli
             menu();
         }
 
+        private string getRecentSource()
+        {
+            string[] s = vmCLI.getRecentSource();
+            for (int i = 0; i < s.Length; i++)
+            {
+                Console.WriteLine("{0} : {1}", i, s[i]);
+            }
+
+            int input;
+            try
+            {
+                input = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
+
+            if (input > s.Length || input < 0)
+                return null;
+            
+            return s[input];
+
+        }
+
+        private string getRecentTarget()
+        {
+            string[] s = vmCLI.getRecentTarget(); 
+            for (int i = 0; i < s.Length; i++)
+            {
+                Console.WriteLine("{0} : {1}", i, s[i]);
+            }
+            
+            int input;
+            try
+            {
+                input = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
+            
+            if (input > s.Length || input < 0)
+                return null;
+                        
+            return s[input];
+        }
+
         private void fullBackup()
         {
             Console.Clear();
@@ -315,47 +364,40 @@ namespace CesiProgSys.ViewCli
                 Console.WriteLine(dico["textChooseNameFullBackup"]);
                 name = Console.ReadLine();
             }
-            
-            string sourceDir = null;
+            Console.Clear();
             Console.WriteLine(dico["textSource"]);
-            int input = askNumber();
+            string sourceDir = Console.ReadLine();
 
-            if (input == 1)
+            if (sourceDir == "1")
             {
                 sourceDir = vmCLI.getDefaultSource();
             }
-            else if (input == 2)
+            else if (sourceDir == "2")
             {
-                // sourceDir = getRecentSource();
-            }
-            else
-            {
-                while (string.IsNullOrEmpty(sourceDir))
-                {
-                    Console.WriteLine(dico["textChooseDir"]);
-                    sourceDir = Console.ReadLine();
-                }
+                sourceDir = getRecentSource();
             }
 
-            string targetDir = null;
+            while (string.IsNullOrEmpty(sourceDir))
+            {
+                sourceDir = Console.ReadLine();
+            }
+            
+            Console.Clear();
             Console.WriteLine(dico["textTarget"]);
-            input = askNumber();
-            if (input == 1)
+            string targetDir = Console.ReadLine();
+            if (targetDir == "1")
             {
                 targetDir = vmCLI.getDefaultTarget();
             }
-            else if (input == 2)
+            else if (targetDir == "2")
             {
-                // sourceDir = getRecentTarget();
+                sourceDir = getRecentTarget();
             }
-            else
+            while (string.IsNullOrEmpty(targetDir))
             {
-                while (string.IsNullOrEmpty(targetDir))
-                {
-                    Console.WriteLine(dico["textChooseTarget"]);
-                    targetDir = Console.ReadLine();
-                }
+                targetDir = Console.ReadLine();
             }
+            
 
             vmCLI.instantiateBackup(name, sourceDir, targetDir, true);
             menu();
@@ -367,23 +409,43 @@ namespace CesiProgSys.ViewCli
             string name = null;
             while (string.IsNullOrEmpty(name))
             {
-                Console.WriteLine(dico["textChooseNameDiffBackup"]);
+                Console.WriteLine(dico["textChooseNameFullBackup"]);
                 name = Console.ReadLine();
             }
+            Console.Clear();
+            Console.WriteLine(dico["textSource"]);
+            string sourceDir = Console.ReadLine();
 
-            string sourceDir = null;
+            if (sourceDir == "1")
+            {
+                sourceDir = vmCLI.getDefaultSource();
+            }
+            else if (sourceDir == "2")
+            {
+                sourceDir = getRecentSource();
+            }
+
             while (string.IsNullOrEmpty(sourceDir))
             {
-                Console.WriteLine(dico["textChooseDir"]);
                 sourceDir = Console.ReadLine();
             }
             
-            string targetDir = null;
+            Console.Clear();
+            Console.WriteLine(dico["textTarget"]);
+            string targetDir = Console.ReadLine();
+            if (targetDir == "1")
+            {
+                targetDir = vmCLI.getDefaultTarget();
+            }
+            else if (targetDir == "2")
+            {
+                sourceDir = getRecentTarget();
+            }
             while (string.IsNullOrEmpty(targetDir))
             {
-                Console.WriteLine(dico["textChooseTarget"]);
                 targetDir = Console.ReadLine();
             }
+            
 
             vmCLI.instantiateBackup(name, sourceDir, targetDir, false);
             menu();
