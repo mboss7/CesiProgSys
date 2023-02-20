@@ -156,3 +156,7 @@ The application should be single-source
 Option: Reduction of parallel works if network load 
 
     Si la charge réseau est supérieure à un seuil, l'application doit réduire les taches en parallèle pour ne pas saturer le réseau.
+
+### Table summarising the different versions in French
+
+![Version Project](.\Image\VersionProject.png)
