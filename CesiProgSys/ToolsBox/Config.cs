@@ -17,20 +17,16 @@ namespace CesiProgSys.ToolsBox
         public static string TypeLogs = "xml"; // true json false xml
 
         // Method to write the configuration data to a JSON file
-        public void writeConfig(string filePath)
+        
+        public static void writeConfig(string filePath, string data)
         {
             // Serialize the configuration object to a JSON string
-            string json = JsonConvert.SerializeObject(this);
-            
-            //StreamWriter file = new(filePath, append: true);
-           // file.WriteLine(json);
-            //file.Close();
-           // resetConf();
-
-
+            string json = JsonConvert.SerializeObject(data);
             //Write the JSON string to the specified file
-            File.WriteAllText(filePath,json);
+            File.WriteAllText(filePath, json);
         }
+        
+        
 
         // Method to read the configuration data from a JSON file
         public static Config readConfig(string filePath)
@@ -44,7 +40,7 @@ namespace CesiProgSys.ToolsBox
         }
         
         // Method to reset the recentSaveSource, recentSaveTarget, and retentionTime properties to default values
-        public void cleanConf()
+        public void cleanConfig()
         {
             /*List<InfoConf> confList = new List<InfoConf>();
             string json = JsonConvert.SerializeObject(confList);
@@ -53,8 +49,7 @@ namespace CesiProgSys.ToolsBox
             file.Close();*/
             recentSaveSource = new Dictionary<string, string>();
             recentSaveTarget = new Dictionary<string, string>();
-            retentionTime = 0;
-            
+
         }
         // Method to reset the configuration data to default values
 
@@ -66,14 +61,15 @@ namespace CesiProgSys.ToolsBox
             
         }*/
 
-        public void resetConf()
+        public void resetConfig()
         {
+            
             
             language = Language.English;
             defaultSaveSource = @"\\BACKUP\test";
             defaultSaveTarget = @"\\BACKUP\bck";
-            recentSaveSource = new Dictionary<string, string>();
-            recentSaveTarget = new Dictionary<string, string>();
+            //recentSaveSource = new Dictionary<string, string>();
+            //recentSaveTarget = new Dictionary<string, string>();
             retentionTime = 0;
 
        

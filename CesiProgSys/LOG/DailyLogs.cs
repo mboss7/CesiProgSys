@@ -1,77 +1,66 @@
-
-using System.Runtime.InteropServices.JavaScript;
 using CesiProgSys.ToolsBox;
 
  namespace CesiProgSys.LOG
  {
      public class DailyLogs : Logs
      {
-         // condition for loop while 
-         public static bool flagDl = true;
-
-         public static List<Info> listInfo;
-
          private string pathInfo;
          private string pathError;
-
-         public DailyLogs()
+         
+         private DailyLogs()
         {
-            listInfo = new List<Info>();
-            DateTime date = DateTime.Today;
-            string d = date.Year + "-" + date.Month + "-" + date.Day + "-" + date.Hour + "-" + date.Minute;
+            SetInfo = new HashSet<Info>();
+            wait = new ManualResetEventSlim(false);
+            setPath();
+        }
+         private static DailyLogs instance;
+
+         public static DailyLogs Instance()
+         {
+             if (instance == null)
+             {
+                 instance = new DailyLogs();
+             }
+
+             return instance;
+         }
+
+         private void setPath()
+         {
+             DateTime date = DateTime.Now;
+             string d = date.Year + "-" + date.Month + "-" + date.Day + "-" + date.Hour;
             
-            pathInfo = "./LOGS/DailyLogsInfo-" + d + ".";
-            pathError = "./LOGS/DailyLogsError-" + d + ".";
-        }
+             pathInfo = "./LOGS/DailyLogsInfo-" + d + ".";
+             pathError = "./LOGS/DailyLogsError-" + d + ".";
+         }
 
-        // start new thread when listInfo is not null  
-        public static void startThread()
+         public override void writeLogs()
         {
-            DailyLogs dl = new DailyLogs();
-            dl.startLog();
-        }
-
-        //Start log management        
-        public async override void startLog()
-        {
-            while (flagDl)
+            setPath();
+            List<string> Info = new List<string>();
+            List<string> Error = new List<string>();
+            foreach (Info inf in SetInfo)
             {
-                List<string> Info = new List<string>();
-                List<string> Error = new List<string>();
-                
-                RealTimeLogs.mut.WaitOne();
-                foreach (Info inf in listInfo)
-                {
-                    if (Config.TypeLogs.Equals("json"))
-                    {
-                        if (inf.LogType)
-                        {
-                            Info.Add(JsonLog.stringToJson(inf));
-                        }
-                        else
-                        {
-                            Error.Add(JsonLog.stringToJson(inf));
-                        }
-                    }
-                    else
-                    {
-                        if (inf.LogType)
-                        {
-                            Info.Add(Xml.serialize(inf));
-                        }
-                        else
-                        {
-                            Error.Add(Xml.serialize(inf));
-                        }
-                    }
-                }
-                RealTimeLogs.mut.ReleaseMutex();
-                
-                if(Info.Any())
-                    await log(Info,pathInfo + Config.TypeLogs);
-                if(Error.Any())
-                    await log(Error,pathError + Config.TypeLogs);
+            //     if (Config.TypeLogs.Equals("json"))
+            //     {
+            //         if (inf.LogType)
+            //             Info.Add(JsonLog.stringToJson(inf));
+            //         else
+            //             Error.Add(JsonLog.stringToJson(inf));
+            //     }
+            //     else
+            //     {
+            if (inf.State == State.ERROR)
+                Error.Add(Xml.serialize(inf));
+            else
+                Info.Add(Xml.serialize(inf));
+            //     }
             }
+                 
+            if(Info.Any())
+                log(Info,pathInfo + Config.TypeLogs);
+            if(Error.Any())
+                log(Error,pathError + Config.TypeLogs);
         }
      }
 }

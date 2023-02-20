@@ -1,4 +1,4 @@
-using CesiProgSys.Backup;
+using CesiProgSys.Backups;
 using CesiProgSys.LOG;
 using CesiProgSys.ToolsBox;
 using CesiProgSys.ViewCli;
@@ -11,9 +11,17 @@ namespace CesiProgSys
 
         static void Main(string[] args)
         {
+            bool result;
+            new Mutex(true, "ID", out result);
+
+            if (!result)
+            {
+                return;
+            }
+            
             BackupManager.Instance();
-            LogsManager l = new LogsManager();
-            l.startLogManager();
+            LogsManager l = LogsManager.Instance();
+            l.instantiate();
 
             Console.WriteLine("\n -----Welcome to the application !----- \n");
 
@@ -44,24 +52,22 @@ namespace CesiProgSys
             //     IViewCli objEn = new ViewCliEn();
             //     objEn.menu();
             // }
+
             Config.language = Language.English;
-            Console.WriteLine(Config.language);
-            Console.ReadKey();
-
-
+            
             if (Config.language == Language.English)
             {
-                IViewCli objEn = new ViewCliEn();
+                ViewCli.ViewCli objEn = new ViewCliEn();
                 objEn.menu();
             }
             else if (Config.language == Language.French)
             {
-                IViewCli objFr = new ViewCliFr();
-                objFr.menu();
+                // ViewCli.ViewCli objFr = new ViewCliFr();
+                // objFr.menu();
             }
             else
             {
-                IViewCli objEn = new ViewCliEn();
+                ViewCli.ViewCli objEn = new ViewCliEn();
                 objEn.menu();
             }
         }

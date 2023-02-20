@@ -1,80 +1,65 @@
 using CesiProgSys.ToolsBox;
 
-
 namespace CesiProgSys.LOG
 {
 
     public class RealTimeLogs : Logs
     {
-        // condition for loop while 
-        public static bool flagRtl = true;
+        private readonly Logs dlInstance;
         
-        public static List<Info> listInfo;
-
-        //Mutex for manage 
-        public static Mutex mut = new Mutex();
-
         // builder for RealTimeLogs
-        public RealTimeLogs()
-        
+        private RealTimeLogs()
         {
-            listInfo = new List<Info>();
-        }
-        
-        // start new thread when listInfo is not null  
-        public static void startThread()
-        {
-            RealTimeLogs rtl = new RealTimeLogs();
-            rtl.startLog();
+            SetInfo = new HashSet<Info>();
+            wait = new ManualResetEventSlim(false);
+            dlInstance = DailyLogs.Instance();
         }
 
-        // Start Log for log generate
-        public async override void startLog()
+        private static RealTimeLogs instance;
+
+        public static RealTimeLogs Instance()
         {
-            DirectoryInfo target = new DirectoryInfo("./LOGS/");
-            if(!target.Exists)
-                target.Create();
-            while (flagRtl)
+            if (instance == null)
             {
-                Thread.Sleep(500);
-                List<string> Info = new List<string>();
-                List<string> Error = new List<string>();
-                mut.WaitOne();
-                foreach (Info inf in listInfo)
-                {
-                    if (inf.state == State.SUCCESS)
-                    {
-                        inf.state = State.END;
-                        DailyLogs.listInfo.Add(inf);
-                    }
-
-                    if (Config.TypeLogs.Equals("json"))
-                    {
-                        if (inf.LogType)
-                            Info.Add(JsonLog.stringToJson(inf));
-                        else
-                            Error.Add(JsonLog.stringToJson(inf));
-                    }
-                    else
-                    {
-                        if (inf.LogType)
-                        {
-                            Info.Add(Xml.serialize(inf));
-                        }
-                        else
-                        {
-                            Error.Add(Xml.serialize(inf));
-                        }
-                    }
-                    
-                }
-                mut.ReleaseMutex();
-                
-                if(Info.Any()) 
-                    await log(Info, "./LOGS/RealTimeLogsInfo."+Config.TypeLogs);
-                if(Error.Any()) 
-                    await log(Error, "./LOGS/RealTimeLogsInfo."+Config.TypeLogs);
+                instance = new RealTimeLogs();
             }
+
+            return instance;
+        }
+        
+        public override void writeLogs()
+        {
+            List<string> Info = new List<string>(); 
+            List<string> Error = new List<string>(); 
+            foreach (Info inf in SetInfo) 
+            {
+                if (inf.State == State.SUCCESS) 
+                { 
+                    inf.State = State.END; 
+                    dlInstance.SetInfo.Add(inf);
+                    dlInstance.wait.Set();
+                }
+                // if (Config.TypeLogs.Equals("json"))
+                // {
+                //     if (b.LogType)
+                //         Info.Add(JsonLog.stringToJson(inf));
+                //     else
+                //         Error.Add(JsonLog.stringToJson(inf));
+                // }
+                // else
+                // {
+                    if (inf.State == State.ERROR)
+                        Error.Add(Xml.serialize(inf));
+                    else
+                        Info.Add(Xml.serialize(inf));
+                // }
+            }
+                
+            if(Info.Any()) 
+                log(Info, "./LOGS/RealTimeLogsInfo."+Config.TypeLogs);
+            if(Error.Any()) 
+                log(Error, "./LOGS/RealTimeLogsInfo."+Config.TypeLogs);
+            
         }
     }
 }

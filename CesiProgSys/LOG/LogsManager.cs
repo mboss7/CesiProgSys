@@ -1,40 +1,47 @@
-﻿
-
-namespace CesiProgSys.LOG
+﻿namespace CesiProgSys.LOG
 {
 	//mother class for Logs 
 	public class LogsManager //: IManager
 	{
-		public void startLogManager()
+		private LogsManager(){}
+		private static LogsManager instance;
+
+		public static LogsManager Instance()
 		{
-			// run new LogsManager Thread
-			LogsManager l = new LogsManager();
-			l.instantiate();
-			// l.finish();
+			if (instance == null)
+			{
+				instance = new LogsManager();
+			}
+
+			return instance;
 		}
-		
+
 		// methode for create new thread 
 		public void instantiate()
 		{
-			// create thread for RealTimeLogs Object
-            Thread instanceRtl = new Thread(RealTimeLogs.startThread);
-            //  Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
-            instanceRtl.Start();
+            Thread threadRtl = new Thread(startThread);
+            threadRtl.Start(RealTimeLogs.Instance());
             
-            // create thread for DailyLogs Object
-            Thread instanceDl = new Thread(DailyLogs.startThread);
-            //  Console.Write("{0}\n", Thread.CurrentThread.ManagedThreadId);
-            instanceDl.Start();
+            Thread threadDl = new Thread(startThread);
+            threadDl.Start(DailyLogs.Instance());
 		}
 
 		// methode for end current thread
 		public void finish()
 		{
-			RealTimeLogs.flagRtl = false;
 			
-			DailyLogs.flagDl = false;
+		}
+
+		private static void startThread(object obj)
+		{
+			Logs logs = (Logs)obj;
+			logs.startLog();
+			while(true)
+			{
+				logs.wait.Wait();
+				logs.writeLogs();
+				logs.wait.Reset();
+			}
 		}
 	}
 }
-
-
