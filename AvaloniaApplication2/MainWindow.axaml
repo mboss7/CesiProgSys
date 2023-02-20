@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AvaloniaApplication2.MainWindow"
         Title="AvaloniaApplication2">
 
@@ -86,13 +86,7 @@
 						
 						<Grid Grid.Row="2">
 							
-							<StackPanel Margin="50">
-								<TextBox />
-								<TextBox />
-								<TextBox />
-								<TextBox />
-							</StackPanel>
-							<Button Width="50" Margin="10" Background="#886435" Click="OpenDialogButton_Click">Exit</Button>
+							<Button Width="50" Margin="10" Background="#886435" Click="OpenDialogButton_Click">+</Button>
 							
 						</Grid>
 					</StackPanel>

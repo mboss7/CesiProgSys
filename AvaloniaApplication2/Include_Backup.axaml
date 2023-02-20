@@ -21,12 +21,21 @@
 			</StackPanel>
 			</Grid>
         <Grid Grid.Row="1" Background="#cdb780" ShowGridLines="True">
-			 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-     <TextBox Name="Name" Watermark="Nom" Margin="0,0,0,8" />
-    <TextBox Name="Sourcefile" Watermark="Dossier Source" Margin="0,0,0,8"/>
-    <TextBox Name="Destinationfile" Watermark="Dossier Destination" Margin="0,0,0,8"/>
-    <Button Name="Applybutton" Content="Appliquer" Margin="200,0,0,8"/>
-	<Button Name="Exitbutton" Content="Quitter" Margin="40,-35,0,8"/>
+ <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+      <TextBox Name="NameTextBox" Watermark="Nom" Margin="0,0,8,0" Width="300"/>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+      <TextBox Name="SourceTextBox" Watermark=" Fichier Source" Margin="0,0,8,0" Width="300"/>
+      <Button Name="SourceBrowseButton" Content="📁" Click="OpenFile_Click"/>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+      <TextBox Name="DestinationTextBox" Watermark="Fichier Destination"  Margin="0,0,8,0" Width="300"/>
+      <Button Name="DestinationBrowseButton" Content="📁"/>
+    </StackPanel>
+	 <Button Name="ExitButton" Content="Quitter ❌" Margin="0,2,0,0"/>
+    <Button Name="ApplyButton" Content="Appliquer 💾" Margin="250,-29,0,0"/>
+   
   </StackPanel>
 
 	
