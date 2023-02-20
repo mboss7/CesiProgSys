@@ -5,7 +5,7 @@ namespace DetectLogicielMetier
     {
         public static void Main(string[] args)
         {
-
+            
             string processName = "notepad";
 
             DetectProcess detectProcess = new DetectProcess();

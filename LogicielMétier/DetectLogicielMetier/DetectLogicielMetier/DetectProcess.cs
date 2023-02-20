@@ -15,6 +15,11 @@ public class DetectProcess
 
     }
     
+    /// <summary>
+    /// For detect if Logiciel Metier is running 
+    /// </summary>
+    /// <param name="processName"></param>
+    /// <returns></returns>
     public bool ProcessDetector(string processName)
     {
         // Récupérer tous les processus actifs
