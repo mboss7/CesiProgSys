@@ -39,8 +39,8 @@
 			while(true)
 			{
 				logs.wait.Wait();
-				logs.writeLogs();
 				logs.wait.Reset();
+				logs.writeLogs();
 			}
 		}
 	}

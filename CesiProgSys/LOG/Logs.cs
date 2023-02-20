@@ -26,8 +26,6 @@ namespace CesiProgSys.LOG
 
         public abstract void writeLogs();
 
-
-
     }
     
 }

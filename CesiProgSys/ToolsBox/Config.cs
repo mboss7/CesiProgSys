@@ -83,6 +83,19 @@ public class Config
         recentSaveTarget.Clear();
     }
 
+    public void addToSet(string toAdd, HashSet<string> hashSet)
+    {
+        bool flag = false;
+        foreach (string s in hashSet)
+        {
+            if (toAdd == s)
+                flag = true;
+        }
+
+        if (!flag)
+            hashSet.Add(toAdd);
+    }
+    
     public void checkTimeRecentSave()
     {
     }
