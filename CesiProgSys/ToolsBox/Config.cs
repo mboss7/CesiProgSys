@@ -1,78 +1,89 @@
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
+namespace CesiProgSys.ToolsBox;
 
-namespace CesiProgSys.ToolsBox
-
-{ public class Config
+public class Config
+{
+    private Config()
     {
-        // Properties for the configuration data
-        public static Language language { get; set; }
-        public string defaultSaveSource { get; set; }
-        public string defaultSaveTarget { get; set; }
-        public Dictionary<string, string> recentSaveSource { get; set; }
-        public Dictionary<string, string> recentSaveTarget { get; set; }
-        public int retentionTime { get; set; }
+        recentSaveSource = new HashSet<string>();
+        recentSaveTarget = new HashSet<string>();
+        retentionTime = 30;
+        language = Language.English;
+    }
 
-        public static string TypeLogs = "xml"; // true json false xml
+    private static Config instance;
 
-        // Method to write the configuration data to a JSON file
-        
-        public static void writeConfig(string filePath, string data)
+    public static Config Instance()
+    {
+        if (instance == null)
         {
-            // Serialize the configuration object to a JSON string
-            string json = JsonConvert.SerializeObject(data);
-            //Write the JSON string to the specified file
-            File.WriteAllText(filePath, json);
+            instance = new Config();
         }
-        
-        
 
-        // Method to read the configuration data from a JSON file
-        public static Config readConfig(string filePath)
+        return instance;
+    }
+
+    // Properties for the configuration data
+    public Language language;
+    public string defaultSaveSource;
+    public string defaultSaveTarget;
+    public HashSet<string> recentSaveSource;
+    public HashSet<string> recentSaveTarget;
+    public int retentionTime;   //en jours
+    public string typeLogs = "json";
+
+    // Method to write the configuration data to a JSON file
+    public void writeConfig()
+    {
+        // Serialize the configuration object to a JSON string
+        string json = JsonLog.objectToJson(this);
+        //Write the JSON string to the specified file
+        using StreamWriter file = new("./config.json", append: false);
+        file.WriteLine(json);
+    }
+
+
+    // Method to read the configuration data from a JSON file
+    public void setConfig()
+    {
+        if (!File.Exists("./config.json"))
         {
-            // Read the contents of the specified file as a string
-            string json = File.ReadAllText(filePath);
-            Console.WriteLine(json);
-            // Deserialize the JSON string into a Config object and return it
-           return JsonConvert.DeserializeObject<Config>(json);
-
+            File.Create("./config.json");
+            return;
         }
-        
-        // Method to reset the recentSaveSource, recentSaveTarget, and retentionTime properties to default values
-        public void cleanConfig()
-        {
-            /*List<InfoConf> confList = new List<InfoConf>();
-            string json = JsonConvert.SerializeObject(confList);
-            StreamWriter file = new(@".\\CONF\conf.json", append: false);
-            file.WriteLine(json);
-            file.Close();*/
-            recentSaveSource = new Dictionary<string, string>();
-            recentSaveTarget = new Dictionary<string, string>();
-
-        }
-        // Method to reset the configuration data to default values
-
-       /* public class InfoConf
-        {
-           
-            public  string defaultSaveSource { get; set; }
-            public string defaultSaveTarget { get; set; }
             
-        }*/
+        
+        // Read the contents of the specified file as a string
+        using StreamReader file = new("./config.json");
+        
+        string json = file.ReadToEnd();
+        // Deserialize the JSON string into a Config object and return it
+        Config conf = JsonLog.JsonToConfig(json);
 
-        public void resetConfig()
+        if (conf == null)
         {
-            
-            
-            language = Language.English;
-            defaultSaveSource = @"\\BACKUP\test";
-            defaultSaveTarget = @"\\BACKUP\bck";
-            //recentSaveSource = new Dictionary<string, string>();
-            //recentSaveTarget = new Dictionary<string, string>();
-            retentionTime = 0;
-
-       
+            return;
         }
+        
+        language = conf.language;
+        defaultSaveSource = conf.defaultSaveSource;
+        defaultSaveTarget = conf.defaultSaveTarget;
+        recentSaveSource = conf.recentSaveSource;
+        recentSaveTarget = conf.recentSaveTarget;
+        retentionTime = conf.retentionTime > 0 ? conf.retentionTime : 30;
+        typeLogs = conf.typeLogs is "xml" or "json" ? conf.typeLogs : "json";
+    }
+
+    // Method to reset the recentSaveSource, recentSaveTarget, and retentionTime properties to default values
+    public void resetConfig()
+    {
+        typeLogs = "json";
+        language = Language.English;
+        retentionTime = 30;
+        recentSaveSource.Clear();
+        recentSaveTarget.Clear();
+    }
+
+    public void checkTimeRecentSave()
+    {
     }
 }

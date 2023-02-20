@@ -13,6 +13,8 @@ namespace CesiProgSys.LOG
             SetInfo = new HashSet<Info>();
             wait = new ManualResetEventSlim(false);
             dlInstance = DailyLogs.Instance();
+            config = Config.Instance();
+
         }
 
         private static RealTimeLogs instance;
@@ -39,26 +41,26 @@ namespace CesiProgSys.LOG
                     dlInstance.SetInfo.Add(inf);
                     dlInstance.wait.Set();
                 }
-                // if (Config.TypeLogs.Equals("json"))
-                // {
-                //     if (b.LogType)
-                //         Info.Add(JsonLog.stringToJson(inf));
-                //     else
-                //         Error.Add(JsonLog.stringToJson(inf));
-                // }
-                // else
-                // {
+                if (config.typeLogs.Equals("json"))
+                {
+                    if (inf.State == State.ERROR)
+                        Error.Add(JsonLog.objectToJson(inf));
+                    else
+                        Info.Add(JsonLog.objectToJson(inf));
+                }
+                else
+                {
                     if (inf.State == State.ERROR)
                         Error.Add(Xml.serialize(inf));
                     else
                         Info.Add(Xml.serialize(inf));
-                // }
+                }
             }
                 
             if(Info.Any()) 
-                log(Info, "./LOGS/RealTimeLogsInfo."+Config.TypeLogs);
+                log(Info, "./LOGS/RealTimeLogsInfo."+config.typeLogs);
             if(Error.Any()) 
-                log(Error, "./LOGS/RealTimeLogsInfo."+Config.TypeLogs);
+                log(Error, "./LOGS/RealTimeLogsInfo."+config.typeLogs);
             
         }
     }

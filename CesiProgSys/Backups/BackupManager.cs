@@ -52,6 +52,7 @@
         {
             Backup backup = (Backup)obj;
             backup.startCheckAuthorizations();
+            
             backup.wait.Wait();
             backup.backup();
         }

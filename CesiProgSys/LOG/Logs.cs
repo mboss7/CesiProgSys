@@ -7,6 +7,7 @@ namespace CesiProgSys.LOG
     { 
         public ManualResetEventSlim wait;
         public HashSet<Info> SetInfo;
+        protected Config config;
         
         public void startLog()
         {

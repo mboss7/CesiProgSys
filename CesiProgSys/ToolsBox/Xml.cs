@@ -10,4 +10,9 @@ public class Xml
 
         return strWriter.ToString();
     }
+
+    // public static object deserialize(string xml)
+    // {
+    //     return;
+    // }
 }
