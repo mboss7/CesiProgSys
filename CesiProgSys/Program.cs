@@ -11,6 +11,14 @@ namespace CesiProgSys
 
         static void Main(string[] args)
         {
+            bool result;
+            new Mutex(true, "ID", out result);
+
+            if (!result)
+            {
+                return;
+            }
+            
             BackupManager.Instance();
             LogsManager l = LogsManager.Instance();
             l.instantiate();
