@@ -1,19 +1,30 @@
 using System.Net.Security;
+using CesiProgSys.ToolsBox;
 using Tcp_Ssl;
 
 namespace CesiProgSys.ViewModel
 {
     public class ViewModelWpf
-    { 
-      
-
-        public async void ViewModelWpf_RunSslSrv()
+    {
+        private TcpServer tcpServer;
+        public ViewModelWpf()
         {
-            TcpServer tcpServer = new TcpServer();
-            
-            tcpServer.RunSrv();
+               
+        }
 
-           
+        public void setEventInfo(Info inf)
+        {
+            inf.PropertyChanged += tcpServer.OnSendMessage;
+        }
+        
+        public void ViewModelWpf_RunSslSrv()
+        {
+            tcpServer = TcpServer.Instance();
+
+            // Thread t = new Thread(TcpServer.RunSrv);
+            // t.Start(tcpServer);
+
+            
             
         }
     }

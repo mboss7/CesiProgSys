@@ -11,6 +11,7 @@ using CesiProgSys.ToolsBox;
         {
             SetInfo = new HashSet<Info>();
             wait = new ManualResetEventSlim(false);
+            config = Config.Instance();
             setPath();
         }
          private static DailyLogs instance;
@@ -41,26 +42,26 @@ using CesiProgSys.ToolsBox;
             List<string> Error = new List<string>();
             foreach (Info inf in SetInfo)
             {
-            //     if (Config.TypeLogs.Equals("json"))
-            //     {
-            //         if (inf.LogType)
-            //             Info.Add(JsonLog.stringToJson(inf));
-            //         else
-            //             Error.Add(JsonLog.stringToJson(inf));
-            //     }
-            //     else
-            //     {
-            if (inf.State == State.ERROR)
-                Error.Add(Xml.serialize(inf));
-            else
-                Info.Add(Xml.serialize(inf));
-            //     }
+                if (config.typeLogs.Equals("json"))
+                {
+                    if (inf.State == State.ERROR)
+                        Info.Add(JsonLog.objectToJson(inf));
+                    else
+                        Error.Add(JsonLog.objectToJson(inf));
+                }
+                else
+                {
+                    if (inf.State == State.ERROR)
+                        Error.Add(Xml.serialize(inf));
+                    else
+                        Info.Add(Xml.serialize(inf));
+                }
             }
                  
             if(Info.Any())
-                log(Info,pathInfo + Config.TypeLogs);
+                log(Info,pathInfo + config.typeLogs);
             if(Error.Any())
-                log(Error,pathError + Config.TypeLogs);
+                log(Error,pathError + config.typeLogs);
         }
      }
 }
