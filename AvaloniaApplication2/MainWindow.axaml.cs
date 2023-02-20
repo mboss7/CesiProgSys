@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
 
 namespace AvaloniaApplication2
 {
@@ -18,5 +19,14 @@ namespace AvaloniaApplication2
         {
             Close();
         }
+        private void OpenDialogButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Include_Backup();
+            dialog.ShowDialog(this);
+        }
+
+
     }
+   
+
 }

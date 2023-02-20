@@ -2,11 +2,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
         x:Class="AvaloniaApplication2.MainWindow"
         Title="AvaloniaApplication2">
 
-	<Grid RowDefinitions="Auto, *, Auto">
+	<Grid RowDefinitions="Auto, *,Auto, Auto" ShowGridLines="True">
 		<Grid Grid.Row="0" Background="#055243" Height="60" ColumnDefinitions="100,100, 400, 250">
 			<Rectangle Grid.Column="0"></Rectangle>
 			<Rectangle Grid.Column="1"></Rectangle>
@@ -25,7 +25,7 @@
 			
 		</Grid>
 
-		<Grid Grid.Row="1"     Background="#cdb780">
+		<Grid Grid.Row="1"     Background="#cdb780" ShowGridLines="True">
 			<TabControl>
 				<TabItem Header="Welcome" VerticalContentAlignment="Center">
 					<Image Source="C:\Users\ASUS\Desktop\Logoeasysave.png" Height="300" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -60,7 +60,7 @@
 					<StackPanel Orientation="Horizontal">
 						
 						<Grid>
-							<DataGrid Margin="2 5" AutoGenerateColumns="False">
+							<DataGrid Name="Job" Margin="2 5" AutoGenerateColumns="True">
 								<DataGrid.Columns>
 									<DataGridTextColumn Header="saveJobName" Width="100"/>
 									<DataGridTextColumn Header="saveJobDestinationDirectory" Width="200"/>
@@ -83,6 +83,18 @@
 								</DataGrid.Columns>
 							</DataGrid>
 						</Grid>
+						
+						<Grid Grid.Row="2">
+							
+							<StackPanel Margin="50">
+								<TextBox />
+								<TextBox />
+								<TextBox />
+								<TextBox />
+							</StackPanel>
+							<Button Width="50" Margin="10" Background="#886435" Click="OpenDialogButton_Click">Exit</Button>
+							
+						</Grid>
 					</StackPanel>
 				</TabItem>
 				<TabItem>
@@ -95,7 +107,7 @@
 		</Grid>
 
 
-		<Grid Grid.Row="2">
+		<Grid Grid.Row="3">
 			<Button Width="50" Margin="10" Background="#886435" Click="Clickexit">Exit</Button>
 			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
 

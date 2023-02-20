@@ -20,5 +20,8 @@ namespace AvaloniaApplication2
 
             base.OnFrameworkInitializationCompleted();
         }
+
+
+
     }
 }

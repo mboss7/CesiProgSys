@@ -1,0 +1,43 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:Class="AvaloniaApplication2.Include_Backup"
+        Title="Window with Button"
+        Width="800" Height="450">
+	
+<Grid RowDefinitions="Auto, *,Auto, Auto" ShowGridLines="True">
+		<Grid Grid.Row="0" Background="#055243" Height="60" ColumnDefinitions="100,100, 400, 250">
+			<Rectangle Grid.Column="0"></Rectangle>
+			<Rectangle Grid.Column="1"></Rectangle>
+			<Rectangle Grid.Column="2"></Rectangle>
+			<Rectangle Grid.Column="3"></Rectangle>
+			<Rectangle Grid.Column="4"></Rectangle>
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" Grid.Column="2">
+				<Label FontWeight="Black">EASY SAVE</Label>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Grid.Column="4">
+			
+			</StackPanel>
+			</Grid>
+        <Grid Grid.Row="1" Background="#cdb780" ShowGridLines="True">
+			 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+     <TextBox Name="Name" Watermark="Nom" Margin="0,0,0,8" />
+    <TextBox Name="Sourcefile" Watermark="Dossier Source" Margin="0,0,0,8"/>
+    <TextBox Name="Destinationfile" Watermark="Dossier Destination" Margin="0,0,0,8"/>
+    <Button Name="Applybutton" Content="Appliquer" Margin="200,0,0,8"/>
+	<Button Name="Exitbutton" Content="Quitter" Margin="40,-35,0,8"/>
+  </StackPanel>
+
+	
+	</Grid>
+
+<Grid Grid.Row="2">
+			 
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+
+				<Label>Easy Save 2023</Label>
+			</StackPanel>
+</Grid>
+	</Grid>
+</Window>
