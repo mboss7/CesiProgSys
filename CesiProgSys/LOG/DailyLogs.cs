@@ -4,70 +4,63 @@ using CesiProgSys.ToolsBox;
  {
      public class DailyLogs : Logs
      {
-         public static List<Info>? listInfo;
-
-         private readonly string pathInfo;
-         private readonly string pathError;
-
-         public static event EventHandler? writeLog;
-
+         private string pathInfo;
+         private string pathError;
+         
          private DailyLogs()
         {
-            listInfo = new List<Info>();
-          
-            DateTime date = DateTime.Now;
-            string d = date.Year + "-" + date.Month + "-" + date.Day + "-" + date.Hour + "-" + date.Minute;
+            SetInfo = new HashSet<Info>();
+            wait = new ManualResetEventSlim(false);
+            setPath();
+        }
+         private static DailyLogs instance;
+
+         public static DailyLogs Instance()
+         {
+             if (instance == null)
+             {
+                 instance = new DailyLogs();
+             }
+
+             return instance;
+         }
+
+         private void setPath()
+         {
+             DateTime date = DateTime.Now;
+             string d = date.Year + "-" + date.Month + "-" + date.Day + "-" + date.Hour;
             
-            pathInfo = "./LOGS/DailyLogsInfo-" + d + ".";
-            pathError = "./LOGS/DailyLogsError-" + d + ".";
-        }
+             pathInfo = "./LOGS/DailyLogsInfo-" + d + ".";
+             pathError = "./LOGS/DailyLogsError-" + d + ".";
+         }
 
-        // start new thread when listInfo is not null  
-        public static void startThread()
+         public override void writeLogs()
         {
-            DailyLogs dl = new DailyLogs();
-            dl.startLog();
-        }
-
-        //Start log management        
-        protected override void startLog()
-        {
-            writeLog += writeLogs;
-        }
-
-        protected override void writeLogs(object? sender, EventArgs e)
-        {
+            setPath();
             List<string> Info = new List<string>();
             List<string> Error = new List<string>();
-            RealTimeLogs.mut.WaitOne();
-            foreach (Info inf in listInfo)
+            foreach (Info inf in SetInfo)
             {
-                if (Config.TypeLogs.Equals("json"))
-                {
-                    if (inf.LogType)
-                        Info.Add(JsonLog.stringToJson(inf));
-                    else
-                        Error.Add(JsonLog.stringToJson(inf));
-                }
-                else
-                {
-                    if (inf.LogType)
-                        Info.Add(Xml.serialize(inf));
-                    else
-                        Error.Add(Xml.serialize(inf));
-                }
+            //     if (Config.TypeLogs.Equals("json"))
+            //     {
+            //         if (inf.LogType)
+            //             Info.Add(JsonLog.stringToJson(inf));
+            //         else
+            //             Error.Add(JsonLog.stringToJson(inf));
+            //     }
+            //     else
+            //     {
+            if (inf.State == State.ERROR)
+                Error.Add(Xml.serialize(inf));
+            else
+                Info.Add(Xml.serialize(inf));
+            //     }
             }
-            RealTimeLogs.mut.ReleaseMutex();
-                
+                 
             if(Info.Any())
                 log(Info,pathInfo + Config.TypeLogs);
             if(Error.Any())
                 log(Error,pathError + Config.TypeLogs);
-        }
-
-        public static void OnWriteLog()
-        {
-            writeLog?.Invoke(null, EventArgs.Empty);
         }
      }
 }

@@ -1,93 +1,54 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using CesiProgSys.Backup;
-using CesiProgSys.ViewCli;
+﻿using CesiProgSys.Backups;
 
 namespace CesiProgSys.ViewModel
 {
-    public class ViewModelCli : INotifyPropertyChanged
+    public class ViewModelCli
     {
-
-        public static List<Tuple<Thread, string[]>> ouahMonCerveauEstPartiLoin;
-        public static List<Tuple<Thread, IBackup>> marre;
-        public static Mutex mutex = new Mutex();
-
-        public static List<string[]> targetAndSource;
-        
+        private BackupManager bManager;
+        private List<Backup> backups;
         public ViewModelCli()
         {
             bManager = BackupManager.Instance();
-            ouahMonCerveauEstPartiLoin = new List<Tuple<Thread, string[]>>();
-            marre = new List<Tuple<Thread, IBackup>>();
-            targetAndSource = new List<string[]>();
+            backups = bManager.listBackupInstantiated;
+        }
+        
+        public void instantiateBackup(string name, string sourceDir, string targetDir, bool type)
+        {
+            bManager.instantiate(name, sourceDir, targetDir, type);
+
         }
 
-        private BackupManager bManager;
-
-        public string? name;
-        public string? sourceDir;
-        public string? targetDir;
-        
-        public void instantiateFullBackup()
+        public List<string[]> getBackups()
         {
-            mutex.WaitOne(); 
-            Tuple<Thread, string[]> temp = new Tuple<Thread, string[]>(bManager.instantiate(false), new[] { name, sourceDir, targetDir });
-            ouahMonCerveauEstPartiLoin.Add(temp);
-            Thread.Sleep(50);
-            marre.Find(tuple => tuple.Item1 == temp.Item1).Item2.blockMutex();
-            mutex.ReleaseMutex();
+            List<string[]> toReturn = new List<string[]>();
+
+            foreach (Backup b in backups)
+            {
+                string[] s = {b.name, b.source, b.target};
+                toReturn.Add(s);
+            }
             
-            
-            name = null;
-            sourceDir = null;
-            targetDir = null;
+            return toReturn;
         }
 
         public void startBackup(string name)
         {
-            IBackup b = marre.Find(tuple => tuple.Item1.Name == name).Item2;
+            bManager.startBackup(backups.Find(backup => backup.name == name));
+        }
+
+        public void stopBackup(string name)
+        {
             
-            bManager.start(b);
-        }
-        
-        public void instantiateDiffBackup()
-        {
-            mutex.WaitOne(); 
-            Tuple<Thread, string[]> temp = new Tuple<Thread, string[]>(bManager.instantiate(true), new[] { name, sourceDir, targetDir });
-            ouahMonCerveauEstPartiLoin.Add(temp);
-            Thread.Sleep(50);
-            marre.Find(tuple => tuple.Item1 == temp.Item1).Item2.blockMutex();
-            mutex.ReleaseMutex();
-
-            name = null;
-            sourceDir = null;
-            targetDir = null;
         }
 
-        public List<string> getThreadsNames()
+        public void restartBackup(string name)
         {
-            List<string> toReturn = new List<string>();
-            foreach (Tuple<Thread, IBackup> t in marre)
-            {
-                toReturn.Add(t.Item1.Name);
-            }
-
-            return toReturn;
+            
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        public void killBackup(string name)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
+            
         }
     }  
 }
