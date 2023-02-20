@@ -80,103 +80,16 @@ gitGraph
     merge dev tag:"v1.1.1"
 ```
 
-## Subject with constraints :
+## 🚀 About Us
 
-```
-Version 1.0
+Nous sommes une équipe soudée et dynamique, travaillant en étroite collaboration pour développer des applications innovantes et efficaces.
 
-Deliverable 0 description: Work environment
-Your team must plan a work environment that meets the constraints imposed by ProSoft.
+Notre équipe est composé de programmeurs, d'ingénieurs logiciels et de chefs de projet, tous déterminés à fournir les meilleures solutions informatiques pour répondre aux besoins de nos clients.
 
-The proper use of the work environment and the constraints imposed by management will be evaluated throughout the project.
+## Logo
 
-Particular attention will be paid to:
+![Logo](.\Image\logo.png)
 
-GIT management (versioning)
+## Used By
 
-UML diagrams to be delivered 24 hours before each deliverable (Milestone)
-
-Code quality (absence of redundancy in code lines)
-
-Deliverable 1 description: EasySave version 1.0
-The specifications for the first version of the software are as follows:
-
-The software is a Console application using .Net Core.
-
-The software must allow up to 5 backup jobs to be created
-
-A backup job is defined by
-
-An appellation
-
-A source directory
-
-A target directory
-
-A type (full, differential)
-
-The software must be usable by English and French-speaking users at a minimum
-
-The user can request the execution of one of the backup jobs or the sequential execution of all the jobs.
-
-The directories (sources and targets) can be on:
-
-Local drives
-
-External drives
-
-Network drives
-
-All elements in the source directory are subject to backup
-
-Daily Log file:
-
-The software must write in real-time to a daily log file the history of the backup jobs' actions. The minimum information expected is:
-
-Timestamp
-
-Backup job name
-
-Complete source file address (UNC format)
-
-Complete destination file address (UNC format)
-
-File size
-
-File transfer time in ms (negative if error)
-
-Example content: Sample_log.pdf [pdf]
-
-The software must record in real-time, in a single file, the status of the backup jobs. The information to be recorded for each backup job is:
-
-Backup job name
-
-Timestamp
-
-Backup job status (e.g., Active, Non-active...)
-
-If the job is active:
-
-Total number of eligible files
-
-Size of files to transfer
-
-Progress
-
-Number of remaining files
-
-Size of remaining files
-
-Complete source file address being backed up
-
-Complete destination file address
-
-Example content: Sample_state.pdf [pdf]
-
-The locations of the two files (daily log and status) must be studied to work on the clients' servers. Therefore, locations of the type "c:\temp" must be avoided.
-
-The files (daily log and status) and any configuration files will be in JSON format. To allow quick reading via Notepad, it is necessary to put line breaks between JSON elements. Pagination would be a plus.
-
-Important note: if the software is satisfactory, management will ask you to develop a version 2.0 using a WPF graphical interface (based on the MVVM architecture).
- ```
-
+This project is used by ProSoft.
