@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Net;
@@ -9,6 +10,10 @@ namespace Tcp_Ssl
 {
     public class TcpServer
     {
+
+
+        public SslStream sslStream;
+        
         /// <summary>
         /// For Run SRV SSL main Method
         /// </summary>
@@ -17,15 +22,16 @@ namespace Tcp_Ssl
             while (true)
             {
                 TcpServer SslSrv = new TcpServer();
-            
-                SslSrv.SslTcpServerConnection(); 
+
+                SslSrv.SslTcpServerConnection();
             }
-                
+
         }
+
         /// <summary>
         /// Connect the server in listen mode in SSL 
         /// </summary>
-        public async Task SslTcpServerConnection()
+        public async Task<SslStream> SslTcpServerConnection()
         {
 
             bool FlagA = true;
@@ -50,7 +56,7 @@ namespace Tcp_Ssl
 
                     string messageData = null;
 
-                   try
+                    try
                     {
                         messageData = ReadMessage(sslStream);
                     }
@@ -79,15 +85,16 @@ namespace Tcp_Ssl
                         SslTcpServerConnection().Dispose();
                         FlagB = false;
                     }
-                    
+
+                 
+
                 }
             }
+            return sslStream;
+        }
 
 
-
-
-
-            static string ReadMessage(SslStream sslStream)
+        static string ReadMessage(SslStream sslStream)
             {
                 // Read the  message sent by the client.
                 // The client signals the end of the message using the
@@ -118,7 +125,30 @@ namespace Tcp_Ssl
 
                 return messageData.ToString();
             }
-        }
+            
+        /// <summary>
+        /// Send to the client the infos when change is notify with property change
+        /// </summary>
+        /// <param name="sslStream"></param>
+        /// <param name="messageOnpropertyChange"></param>
+            public void SendMessage(SslStream sslStream, string messageOnpropertyChange)
+            {
+                
+                
+                // Write a message to the client.
+                byte[] message = Encoding.UTF8.GetBytes(messageOnpropertyChange);
+                Console.WriteLine("Sending :"+ messageOnpropertyChange);
+                try
+                {
+                    sslStream.Write(message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
+        
     }
 }
     

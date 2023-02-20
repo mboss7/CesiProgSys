@@ -1,0 +1,6 @@
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TestProjectCesiProgSys\bin\Debug\net7.0\CoverletSourceRootsMapping
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TestProjectCesiProgSys\obj\Debug\net7.0\TestProjectCesiProgSys.csproj.AssemblyReference.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TestProjectCesiProgSys\obj\Debug\net7.0\TestProjectCesiProgSys.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TestProjectCesiProgSys\obj\Debug\net7.0\TestProjectCesiProgSys.AssemblyInfoInputs.cache
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TestProjectCesiProgSys\obj\Debug\net7.0\TestProjectCesiProgSys.AssemblyInfo.cs
+C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TestProjectCesiProgSys\obj\Debug\net7.0\TestProjectCesiProgSys.csproj.CoreCompileInputs.cache
