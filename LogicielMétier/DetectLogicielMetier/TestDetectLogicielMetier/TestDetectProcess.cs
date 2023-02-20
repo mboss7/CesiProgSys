@@ -5,25 +5,52 @@ using DetectLogicielMetier;
 
 namespace TestDetectLogicielMetier
 {
-    public class Tests
+    public class TestsDetectProcess
     {
-        
         [Test]
-        public void TestProcessDetector()
+        public void TestProcessDetectorNotRun()
         {
+
             DetectProcess detectProcess = new DetectProcess();
 
-            detectProcess.ProcessDetector();
+            bool LogicielMetierRunning;
+            LogicielMetierRunning = detectProcess.ProcessDetector();
 
 
-            Assert.That(detectProcess.Equals(true));
+
+
+            Assert.That(LogicielMetierRunning.Equals(false));
         }
 
         [Test]
-        public void Test2()
+        public void TestProcessDetectorRun()
         {
+            Process notePad = Process.Start("notepad");
+            DetectProcess detectProcess = new DetectProcess();
+
+            bool LogicielMetierRunning;
+            LogicielMetierRunning = detectProcess.ProcessDetector();                    
 
 
-        }
+            Assert.That(LogicielMetierRunning.Equals(true));
+
+            // clean Close notepad: 
+
+            // Nom du processus à rechercher
+            string processName = "notepad";
+
+            // Recherche du processus
+            Process[] processes = Process.GetProcessesByName(processName);
+
+            if (processes.Length > 0)
+            {
+                // Terminaison du processus
+                foreach (Process process in processes)
+                {
+                    process.Kill();
+                }
+            }
+            notePad.Dispose();
+        }       
     }
 }

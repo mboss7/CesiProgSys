@@ -32,13 +32,14 @@ public class DetectProcess
         if (LogicielMetierRunning)
         {
             Console.WriteLine("\n *** Logiciel Metier is running !!! STOP *** \n " + LogicielMetierRunning);
-            return true;
+            
         }
         else
         {
             Console.WriteLine("\n *** Logiciel Metier is not running *** \n " + LogicielMetierRunning);
-            return false;
+            
         }
-        
+
+        return LogicielMetierRunning;
     }
 }
