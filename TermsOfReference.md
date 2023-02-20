@@ -58,26 +58,101 @@ The software must record in real time, in a single file, the progress of the bac
 
 -         Status of the backup job (e.g. Active, Not Active ...)
 
-    Si le travail est actif :
 
--         Le nombre total de fichiers éligibles
+    If the job is active :
 
--         La taille des fichiers à transférer
+-         The total number of eligible files
 
--         La progression :
+-         The size of the files to be transferred
 
-        -             Nombre de fichiers restants
+-         The progress :
 
-        -             Taille des fichiers restants
+        -             Number of files remaining
 
-        -             Adresse complète du fichier Source en cours de sauvegarde
+        -             Size of remaining  files
 
-        -             Adresse complète du fichier de destination
+        -             Full address of the source file being backed up
 
-        -         exemple de contenu : Sample_state.pdf [pdf]
+        -             Full address of the destination file
 
-    Les emplacements des deux fichiers (log journalier et état) devront être étudiés pour fonctionner sur les serveurs des clients. De ce fait, les emplacements du type « c:\temp\ » sont à proscrire.
+The locations of the two files (daily log and status) will have to be studied to work on the clients' servers. Therefore, locations such as "c:\temp\" are to be avoided.
 
-    Les fichiers (log journalier et état) et les éventuels fichiers de configuration seront au format JSON. Pour permettre une lecture rapide via Notepad, il est nécessaire de mettre des retours à la ligne entre les éléments JSON. Une pagination serait un plus.
+The files (daily log and status) and any configuration files will be in JSON format. To allow a fast reading via Notepad, it is necessary to put line breaks between the JSON elements. A pagination would be a plus.
 
-Remarque importante : si le logiciel donne satisfaction, la direction vous demandera de développer une version 2.0 utilisant une interface graphique WPF (basée sur l'architecture MVVM)
+## EasySave Version 1.1 :
+
+Log format
+
+    Logs must be in JSON and XML format.
+
+    Allow the user to choose the format of the log file (XML or JSON).
+
+## EasySave Version 2 :
+
+Graphic Interface
+
+    The application must now be developed in WPF under .Net Core.
+
+Unlimited number of jobs
+
+    The number of backup jobs is now unlimited.
+
+Encryption via CryptoSoft software
+
+    The software should be able to encrypt files using CryptoSoft software. Only files with extensions defined by the user in the general settings shall be encrypted.
+
+Evolution of the Daily Log file
+
+    The daily log file must contain additional information :
+
+-     0 : pas de cryptage
+-     >0 : temps de cryptage (en ms)
+-     <0 : code erreur
+
+Business software
+
+    If the presence of business software is detected, the software must prevent a backup job from being started. In the case of sequential jobs, the software must finish the current job and stop before starting the next job. The user will be able to define the business software in the general settings of the software.
+
+## EasySave Version 3 :
+
+Priority file management
+
+    No backup of a non-priority file can be made as long as there are priority files pending on at least one job. Priority files are files whose extensions are declared by the user in a predefined list (present in the general settings).
+
+Interdiction de transférer en simultané des fichiers de plus n Ko
+
+    In order not to overload the bandwidth, it is forbidden to transfer two files larger than n KB at the same time. (n KB can be set)
+
+    Remark: during the transfer of a file larger than n KB, other jobs can transfer files of smaller sizes (subject to the priority file rule)
+
+Real-time interaction with each job or all jobs
+
+    For each backup job (or set of jobs), the user must be able to :
+
+-     Pause (effective pause after the current file transfer)
+-     Set to Play (start or resume a pause)
+-     Set to Stop (immediate stop of the work and the current task)
+
+
+    The user should be able to follow the progress of each job in real time (at least with a progress percentage).
+
+Temporary pause if business software operation is detected
+
+    Si le logiciel détecte le fonctionnement d'un logiciel métier, il doit obligatoirement mettre en pause le transfert des fichiers.
+
+Remote console
+
+    To enable the progress of backups to be monitored in real time on a remote workstation, a GUI must be developed that enables a user to monitor the progress of backup work on a remote workstation and also to act on it.
+
+    The minimum specifications for this console are :
+
+-     Design mode : WPF and FrameWork .NetCore
+-     Communication via Sockets.
+
+The application should be single-source
+
+    The application cannot be launched more than once on the same computer.
+
+Option: Reduction of parallel works if network load 
+
+    Si la charge réseau est supérieure à un seuil, l'application doit réduire les taches en parallèle pour ne pas saturer le réseau.
