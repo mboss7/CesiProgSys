@@ -5,13 +5,15 @@ using System.Net;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Reflection.Metadata;
+using CesiProgSys.ToolsBox;
 
 namespace Tcp_Ssl
 {
     public class TcpServer
     {
 
-
+        public static bool isRunning = false;
         public SslStream sslStream;
         
         /// <summary>
@@ -19,7 +21,8 @@ namespace Tcp_Ssl
         /// </summary>
         public void RunSrv()
         {
-            while (true)
+            isRunning = true;
+            while (isRunning)
             {
                 TcpServer SslSrv = new TcpServer();
 
@@ -50,7 +53,22 @@ namespace Tcp_Ssl
                 SslStream sslStream = new SslStream(client.GetStream(), false);
                 sslStream.AuthenticateAsServer(serverCertificate, false, SslProtocols.Tls, true);
                 Console.WriteLine("*** Client Connected ***");
+                // Write a message to the client.
+                byte[] message1 = Encoding.UTF8.GetBytes("*** Server Connected ***");
+                
+                try
+                {
+                    sslStream.Write(message1);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
 
+
+
+                // boucle d'écoute du serveur
                 while (FlagB)
                 {
 
@@ -70,6 +88,8 @@ namespace Tcp_Ssl
 
                     Console.WriteLine("Received: {0}", messageData);
 
+
+                    // condition for event to send message to client : EventHAndler : 
                     // Write a message to the client.
                     byte[] message = Encoding.UTF8.GetBytes("Hello from the server.<EOF>");
                     Console.WriteLine("Sending hello message.");
@@ -84,9 +104,7 @@ namespace Tcp_Ssl
                         listener.Stop();
                         SslTcpServerConnection().Dispose();
                         FlagB = false;
-                    }
-
-                 
+                    }               
 
                 }
             }
@@ -126,15 +144,25 @@ namespace Tcp_Ssl
                 return messageData.ToString();
             }
             
+
+
         /// <summary>
         /// Send to the client the infos when change is notify with property change
         /// </summary>
         /// <param name="sslStream"></param>
         /// <param name="messageOnpropertyChange"></param>
-            public void SendMessage(SslStream sslStream, string messageOnpropertyChange)
+            public void SendMessage(SslStream sslStream, object sender, EventArgs e)
             {
-                
-                
+            // Récupération de l'objet qui a déclenché l'événement
+                Info info = (Info)sender;
+
+
+            // Récupération des données de l'événement
+            string messageOnpropertyChange = info.Name + info.CurrentSource + info.SourceDir + info.Progression;
+                // Autres cas pour récupérer les données de l'événement...
+                   
+
+
                 // Write a message to the client.
                 byte[] message = Encoding.UTF8.GetBytes(messageOnpropertyChange);
                 Console.WriteLine("Sending :"+ messageOnpropertyChange);
@@ -142,9 +170,9 @@ namespace Tcp_Ssl
                 {
                     sslStream.Write(message);
                 }
-                catch (Exception e)
+                catch (Exception e1)
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e1);
                     throw;
                 }
             }

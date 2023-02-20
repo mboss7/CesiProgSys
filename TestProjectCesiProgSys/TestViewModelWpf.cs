@@ -27,7 +27,7 @@ namespace TestProjectCesiProgSys
 
             //assert
 
-            Assert.That(ViewModelTest, Is.EqualTo(null));
+            Assert.That(TcpServer.isRunning, Is.EqualTo(true));
 
 
             // clean 
