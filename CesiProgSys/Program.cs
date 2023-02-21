@@ -25,28 +25,30 @@ namespace CesiProgSys
             c.setConfig();
             c.checkTimeRecentSave();
 
+            
+            if (args[0] == "cli")
+            {
+                Console.WriteLine("\n -----Welcome to the application !----- \n");
+
+                Console.ReadKey();
+
+                if (c.language == Language.English)
+                {
+                   ViewCli.ViewCli objEn = new ViewCliEn();
+                    objEn.menu();
+                }
+                else if (c.language == Language.French)
+                {
+                    ViewCli.ViewCli objFr = new ViewCliFr();
+                    objFr.menu();
+                }
+                else
+                {
+                    ViewCli.ViewCli objEn = new ViewCliEn();
+                    objEn.menu();
+                }
+            }
             BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-
-
-            // Console.WriteLine("\n -----Welcome to the application !----- \n");
-
-            // Console.ReadKey();
-
-            // if (c.language == Language.English)
-            // {
-            // ViewCli.ViewCli objEn = new ViewCliEn();
-            // objEn.menu();
-            // }
-            // else if (c.language == Language.French)
-            // {
-            // ViewCli.ViewCli objFr = new ViewCliFr();
-            // objFr.menu();
-            // }
-            // else
-            // {
-            // ViewCli.ViewCli objEn = new ViewCliEn();
-            // objEn.menu();
-            // }
         }
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
