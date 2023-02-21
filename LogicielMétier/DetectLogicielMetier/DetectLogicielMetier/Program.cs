@@ -8,9 +8,9 @@ namespace DetectLogicielMetier
         public static void Main(string[] args)
         {
 
-            DetectOsPrePross detectOs = new DetectOsPrePross();
-            detectOs.testMacro();
-            
+            DroitFichierLinux droitFichierLinux = new DroitFichierLinux();
+            droitFichierLinux.TestDroitFile();
+
 
         }
     }
