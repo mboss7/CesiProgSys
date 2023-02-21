@@ -7,16 +7,16 @@
         Title="AvaloniaApplication2">
 
 	<Grid RowDefinitions="Auto, *,Auto, Auto" ShowGridLines="True">
-		<Grid Grid.Row="0" Background="#055243" Height="60" ColumnDefinitions="100,100, 400, 250">
+		<Grid Grid.Row="0" Background="#055243" Height="60" ColumnDefinitions="Auto,Auto, *,Auto">
 			<Rectangle Grid.Column="0"></Rectangle>
 			<Rectangle Grid.Column="1"></Rectangle>
 			<Rectangle Grid.Column="2"></Rectangle>
 			<Rectangle Grid.Column="3"></Rectangle>
 			<Rectangle Grid.Column="4"></Rectangle>
-			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" Grid.Column="2">
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="100,0,-80,0" Grid.Column="2">
 				<Label FontWeight="Black">EASY SAVE</Label>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Grid.Column="4">
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,80,0" Grid.Column="4">
 				<ComboBox SelectedIndex="0">
 					<ComboBoxItem>English</ComboBoxItem>
 					<ComboBoxItem>French</ComboBoxItem>
