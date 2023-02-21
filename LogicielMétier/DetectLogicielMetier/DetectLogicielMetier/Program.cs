@@ -8,8 +8,13 @@ namespace DetectLogicielMetier
         public static void Main(string[] args)
         {
 
-            DroitFichierLinux droitFichierLinux = new DroitFichierLinux();
-            droitFichierLinux.TestDroitFile();
+            Hash hash = new Hash();
+
+            string hash1= hash.HashTextGenerator("Hello");
+
+            string hash2 = hash.HashTextGenerator("Hello2");
+            
+            hash.HashComparator(hash1, hash2);
 
 
         }
