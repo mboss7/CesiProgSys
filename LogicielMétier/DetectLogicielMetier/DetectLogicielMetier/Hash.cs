@@ -47,9 +47,21 @@ namespace DetectLogicielMetier
 
         
         
-        public void HashComparator(string hash1, string hash2)
+        public bool HashComparator(string hash1, string hash2)
         {
-            
+
+            bool hashCompareOK;
+            if (hash1 == hash2)
+            {
+                Console.WriteLine("The backup is ok");
+                return hashCompareOK = true;
+            }
+            else
+            {
+                Console.WriteLine("The backup is corrupt");
+                return hashCompareOK = false;
+
+            }
         }
     }
 }
