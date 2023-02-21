@@ -10,6 +10,7 @@ namespace DetectLogicielMetier
         string sSourceData;
         byte[] tmpSource;
         byte[] tmpHash;
+        
 
         public Hash()
         {
@@ -17,7 +18,21 @@ namespace DetectLogicielMetier
             this.tmpSource = tmpSource;
             this.tmpHash = tmpHash;
         }
-        
+
+        public string HashFileGenarator(string pathFileToHash)
+        {
+            string hashFile;
+            hashFile = null;
+
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(pathFileToHash))
+                {
+                    var hashBytes = md5.ComputeHash(stream);
+                    return BitConverter.ToString(hashBytes).Replace("-", String.Empty);
+                }
+            }
+        }
         
         public string HashTextGenerator(string SourceHash)
         {
