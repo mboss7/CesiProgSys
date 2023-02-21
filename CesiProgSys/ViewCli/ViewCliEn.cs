@@ -20,7 +20,7 @@ public class ViewCliEn : ViewCli
             { "textShowConfig", "1. Validation of the display of configurations\n2. Return\n3. Exit" },
             {
                 "textChangeConfig",
-                "1. Change language\n2. Default save source\n3. Default save target\n4.Reset config\n5.Change retention time\n6. Return\n7. Exit"
+                "1. Change language\n2. Default save source\n3. Default save target\n4.Reset config\n5.Change retention time\n6. Change type logs\n7. Return\n8. Exit"
             },
             {
                 "textHelp", " .----------------.\n" +
@@ -43,12 +43,11 @@ public class ViewCliEn : ViewCli
             { "textChooseLanguage", "1. Choose French\n2. Choose English\n3. Return\n4. Exit" },
             { "textChooseNameFullBackup", "Choose a name for your fullbackup :" },
             { "textChooseNameDiffBackup", "Choose a name for your differential backup :" },
-            { "textChooseDir", "Choose a source directory :" },
-            { "textChooseTarget", "Choose a target directory :" },
             {
                 "textShowContentConfig",
                 "Language : {0}\nDefault save source : {1}\nDefault save target : {2}\nRecent save source : {3}\nRecent save target : {4}\nRetention time : {5}\nType logs : {6}"
             },
+            {"textChangeTypeLogs", "Choose between json and xml"},
             { "textChangeLanguage", "You should restart to see the changes" },
             { "textChangeDefaultSaveSource", "Give a path to a new default save source" },
             { "textChangeDefaultSaveTarget", "Give a path to a new default save target" },

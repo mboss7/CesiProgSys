@@ -152,8 +152,8 @@ public sealed class Info : INotifyPropertyChanged
                 }
             }
         }
-        private float _progression;
-        public float Progression
+        private int _progression;
+        public int Progression
         {
             get => _progression;
             set

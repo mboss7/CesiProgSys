@@ -31,6 +31,7 @@ namespace CesiProgSys.Backups
          public override void backup()
          {
              info.State = State.ACTIVE;
+             info.Date = DateTime.Now;
              rltInstance.wait.Set();
 
              DirectoryInfo targetDirectory = new DirectoryInfo(target);
@@ -59,7 +60,7 @@ namespace CesiProgSys.Backups
                              File.GetAttributes(sourceFile.FullName) & ~FileAttributes.Archive);
                      }
                      info.NbFilesLeftToDo--;
-
+                     info.Progression = 100-info.NbFilesLeftToDo * 100 / info.TotalFilesToCopy;
                  }
              }
              info.State = State.SUCCESS;

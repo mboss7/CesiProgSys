@@ -44,6 +44,22 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[11.0.0-preview5, )"
+            },
+            "Avalonia.Controls.DataGrid": {
+              "target": "Package",
+              "version": "[11.0.0-preview5, )"
+            },
+            "Avalonia.Desktop": {
+              "target": "Package",
+              "version": "[11.0.0-preview5, )"
+            },
+            "Avalonia.Themes.Fluent": {
+              "target": "Package",
+              "version": "[11.0.0-preview5, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.2, )"

@@ -21,7 +21,7 @@ public class ViewCliFr : ViewCli
             { "textShowConfig", "1. Validation de l'affichage des configurations\n2. Retour\n3. Quitter" },
             {
                 "textChangeConfig",
-                "1. Changer la langue\n2. Changer la source par défaut de sauvegarde\n3. Changer la cible par défaut de sauvegarde\n4. Reset la config\n5. Changer le temps de rétention\n6. Retour\n7. Quitter"
+                "1. Changer la langue\n2. Changer la source par défaut de sauvegarde\n3. Changer la cible par défaut de sauvegarde\n4. Reset la config\n5. Changer le temps de rétention\n6. Changer le type de logs\n7. Retour\n8. Quitter"
             },
             {
                 "textHelp",
@@ -45,12 +45,11 @@ public class ViewCliFr : ViewCli
             { "textChooseLanguage", "1. Choisir Français\n2. Choisir Anglais\n3. Retour\n4. Quitter" },
             { "textChooseNameFullBackup", "Choisissez un nom pour votre backup complète:" },
             { "textChooseNameDiffBackup", "Choisissez un nom pour votre backup différentiel :" },
-            { "textChooseDir", "Choisissez une source:" },
-            { "textChooseTarget", "Choisissez une cible:" },
             {
                 "textShowContentConfig",
                 "Language: {0}\nDefault save source: {1}\nDefault save target: {2}\nRecent save source: {3}\nRecent save target: {4}\nRetention time: {5}\nType of logs: {6}"
             },
+            {"textChangeTypeLogs", "Choisis entre json et xml"},
             { "textChangeLanguage", "Vous devez redemmarer pour voir les changements" },
             { "textChangeDefaultSaveSource", "Donnez un chemin pour la source de la nouvelle sauvegarde par défaut" },
             { "textChangeDefaultSaveTarget", "Donnez un chemin pour la cible de la nouvelle sauvegarde par défaut" },

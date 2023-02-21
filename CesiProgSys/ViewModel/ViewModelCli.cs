@@ -8,25 +8,18 @@ namespace CesiProgSys.ViewModel
         private BackupManager bManager;
         private List<Backup> backups;
         private Config config;
-        private ViewModelWpf vmWPF;
-        
         public ViewModelCli()
         {
             bManager = BackupManager.Instance();
-            backups = bManager.listBackupInstantiated;
+            backups = bManager.listBackupReady;
             config = Config.Instance();
-            
-            vmWPF = new ViewModelWpf();
-            vmWPF.ViewModelWpf_RunSslSrv();
-            
         }
         
         public void instantiateBackup(string name, string sourceDir, string targetDir, bool type)
         {
-            Backup b = bManager.instantiate(name, sourceDir, targetDir, type);
-            vmWPF.setEventInfo(b.info);
-            config.recentSaveSource.Add(sourceDir);
-            config.recentSaveTarget.Add(targetDir);
+            bManager.instantiate(name, sourceDir, targetDir, type);
+            config.addToSet(sourceDir, config.recentSaveSource);
+            config.addToSet(targetDir, config.recentSaveTarget);
         }
 
         public List<string[]> getBackups()
@@ -72,8 +65,8 @@ namespace CesiProgSys.ViewModel
             return new []{config.language.ToString(), 
                 config.defaultSaveSource, 
                 config.defaultSaveTarget, 
-                string.Join("\n",config.recentSaveSource), 
-                string.Join("\n",config.recentSaveTarget), 
+                string.Join("\n-",config.recentSaveSource), 
+                string.Join("\n-",config.recentSaveTarget), 
                 config.retentionTime.ToString(), 
                 config.typeLogs};
         }
@@ -111,6 +104,21 @@ namespace CesiProgSys.ViewModel
         public string getDefaultTarget()
         {
             return config.defaultSaveTarget;
+        }
+
+        public string[] getRecentSource()
+        {
+            return config.recentSaveSource.ToArray();
+        }
+
+        public string[] getRecentTarget()
+        {
+            return config.recentSaveTarget.ToArray();
+        }
+
+        public void changeTypeLogs(string s)
+        {
+            config.typeLogs = s;
         }
     }  
 }
