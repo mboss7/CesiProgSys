@@ -22,7 +22,8 @@ namespace CesiProgSys.Backups
 
         public void startCheckAuthorizations()
         {
-            checkAuthorizations(info.SourceDir);
+            checkAuthorizations(source);
+            info.State = State.INACTIVE;
         }
         private void checkAuthorizations(string directory)
         {

@@ -60,7 +60,7 @@ namespace CesiProgSys.Backups
                              File.GetAttributes(sourceFile.FullName) & ~FileAttributes.Archive);
                      }
                      info.NbFilesLeftToDo--;
-
+                     info.Progression = 100-info.NbFilesLeftToDo * 100 / info.TotalFilesToCopy;
                  }
              }
              info.State = State.SUCCESS;

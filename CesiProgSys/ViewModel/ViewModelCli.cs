@@ -11,7 +11,7 @@ namespace CesiProgSys.ViewModel
         public ViewModelCli()
         {
             bManager = BackupManager.Instance();
-            backups = bManager.listBackupInstantiated;
+            backups = bManager.listBackupReady;
             config = Config.Instance();
         }
         
@@ -114,6 +114,11 @@ namespace CesiProgSys.ViewModel
         public string[] getRecentTarget()
         {
             return config.recentSaveTarget.ToArray();
+        }
+
+        public void changeTypeLogs(string s)
+        {
+            config.typeLogs = s;
         }
     }  
 }

@@ -4,7 +4,8 @@
     {
         private BackupManager()
         {
-            listBackupInstantiated = new List<Backup>();
+            listBackupCheckingAuth = new List<Backup>();
+            listBackupReady = new List<Backup>();
             listBackupStarted = new List<Backup>();
             listBackupStoped = new List<Backup>();
         }
@@ -20,7 +21,8 @@
             return instance;
         }
 
-        public List<Backup> listBackupInstantiated;
+        public List<Backup> listBackupCheckingAuth;
+        public List<Backup> listBackupReady;
         public List<Backup> listBackupStarted;
         public List<Backup> listBackupStoped;
         
@@ -32,14 +34,14 @@
             else
                 backup = new DifferentialBackup(name, source, target);
             
-            listBackupInstantiated.Add(backup);
+            listBackupReady.Add(backup);
             Thread b = new Thread(startThread);
             b.Start(backup);
         }
 
         public void startBackup(Backup b)
         {
-            listBackupInstantiated.Remove(b);
+            listBackupReady.Remove(b);
             b.wait.Set();
             listBackupStarted.Add(b);
         }
