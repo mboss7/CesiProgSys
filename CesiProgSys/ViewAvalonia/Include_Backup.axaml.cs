@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 
-namespace test2;
+namespace CesiProgSys.ViewAvalonia;
 
 public class Include_Backup : Window
 {

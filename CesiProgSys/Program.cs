@@ -3,7 +3,7 @@ using CesiProgSys.Backups;
 using CesiProgSys.LOG;
 using CesiProgSys.ToolsBox;
 using CesiProgSys.ViewCli;
-using test2;
+using CesiProgSys.ViewAvalonia;
 
 namespace CesiProgSys
 {
@@ -25,29 +25,29 @@ namespace CesiProgSys
             c.setConfig();
             c.checkTimeRecentSave();
 
-            
-            if (args[0] == "cli")
-            {
-                Console.WriteLine("\n -----Welcome to the application !----- \n");
+            if(args.Any())
+                if (args[0] == "cli")
+                {
+                    Console.WriteLine("\n -----Welcome to the application !----- \n");
 
-                Console.ReadKey();
+                    Console.ReadKey();
 
-                if (c.language == Language.English)
-                {
-                   ViewCli.ViewCli objEn = new ViewCliEn();
-                    objEn.menu();
+                    if (c.language == Language.English)
+                    {
+                        ViewCli.ViewCli objEn = new ViewCliEn();
+                        objEn.menu();
+                    }
+                    else if (c.language == Language.French)
+                    {
+                        ViewCli.ViewCli objFr = new ViewCliFr();
+                        objFr.menu();
+                    }
+                    else
+                    {
+                        ViewCli.ViewCli objEn = new ViewCliEn();
+                        objEn.menu();
+                    }
                 }
-                else if (c.language == Language.French)
-                {
-                    ViewCli.ViewCli objFr = new ViewCliFr();
-                    objFr.menu();
-                }
-                else
-                {
-                    ViewCli.ViewCli objEn = new ViewCliEn();
-                    objEn.menu();
-                }
-            }
             BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         }
         public static AppBuilder BuildAvaloniaApp()

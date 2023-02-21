@@ -3,8 +3,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="test2.MainWindow"
-        Title="AvaloniaApplication2">
+        x:Class="CesiProgSys.ViewAvalonia.MainWindow"
+        Title="EasySave"
+        Icon="C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\ViewAvalonia\Logoeasysave.png">
 
 	<Grid RowDefinitions="Auto, *,Auto, Auto" ShowGridLines="True">
 		<Grid Grid.Row="0" Background="#055243" Height="60" ColumnDefinitions="Auto,Auto, *,Auto">
@@ -28,7 +29,7 @@
 		<Grid Grid.Row="1"     Background="#cdb780" ShowGridLines="True">
 			<TabControl>
 				<TabItem Header="Welcome" VerticalContentAlignment="Center">
-					<Image Source="C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\CesiProgSys\ViewAvalonia\Logoeasysave.png" Height="300" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<Image Source="C:\Users\Tanguy\Downloads\CesiProgSys\CesiProgSys\ViewAvalonia\Logoeasysave.png" Height="300" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				</TabItem>
 				<TabItem>
 					<TabItem.Header>
