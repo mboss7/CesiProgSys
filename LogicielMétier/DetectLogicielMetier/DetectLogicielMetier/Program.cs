@@ -1,4 +1,6 @@
 ﻿
+using System.Diagnostics;
+
 namespace DetectLogicielMetier
 {
     public class Program
@@ -6,11 +8,14 @@ namespace DetectLogicielMetier
         public static void Main(string[] args)
         {
 
-            string processName = "notepad";
-
-            DetectProcess detectProcess = new DetectProcess();
+            ExtensionPrioritaire extensionPrioritaire = new ExtensionPrioritaire();
             
-            detectProcess.ProcessDetector(processName);
+            extensionPrioritaire.ListeMaker();
+            
+            extensionPrioritaire.ListeTri();
+            
+            extensionPrioritaire.ListReader();
+
         }
     }
 }
