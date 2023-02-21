@@ -11,6 +11,10 @@ namespace DetectLogicielMetier
             ExtensionPrioritaire extensionPrioritaire = new ExtensionPrioritaire();
             
             extensionPrioritaire.ListeMaker();
+            
+            extensionPrioritaire.ListeTri();
+            
+            extensionPrioritaire.ListReader();
 
         }
     }
