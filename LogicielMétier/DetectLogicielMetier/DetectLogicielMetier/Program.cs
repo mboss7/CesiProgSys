@@ -8,13 +8,9 @@ namespace DetectLogicielMetier
         public static void Main(string[] args)
         {
 
-            ExtensionPrioritaire extensionPrioritaire = new ExtensionPrioritaire();
+            DetectOS detectOs = new DetectOS();
+            detectOs.TestOs();
             
-            extensionPrioritaire.ListeMaker();
-            
-            extensionPrioritaire.ListeTri();
-            
-            extensionPrioritaire.ListReader();
 
         }
     }
