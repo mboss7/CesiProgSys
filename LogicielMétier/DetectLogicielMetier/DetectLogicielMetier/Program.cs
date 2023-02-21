@@ -8,8 +8,8 @@ namespace DetectLogicielMetier
         public static void Main(string[] args)
         {
 
-            DetectOS detectOs = new DetectOS();
-            detectOs.TestOs();
+            DetectOsPrePross detectOs = new DetectOsPrePross();
+            detectOs.testMacro();
             
 
         }
