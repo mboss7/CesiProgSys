@@ -39,7 +39,7 @@ namespace TestDetectLogicielMetier
 
             // clean Close notepad: 
 
-            // Nom du processus à rechercher
+            // Nom du processus Ã  rechercher
            
             // Recherche du processus
             Process[] processes = Process.GetProcessesByName(processName);
