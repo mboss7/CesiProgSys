@@ -19,10 +19,10 @@ namespace CesiProgSys.ViewModel
         
         public void ViewModelWpf_RunSslSrv()
         {
-            tcpServer = TcpServer.Instance();
+           
 
-            // Thread t = new Thread(TcpServer.RunSrv);
-            // t.Start(tcpServer);
+            // t = new Thread(TcpServer.RunSrv);
+            //t.Start(tcpServer);
 
             
             

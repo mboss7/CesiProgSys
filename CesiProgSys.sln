@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CesiProgSys", "CesiProgSys\CesiProgSys.csproj", "{F29E5C62-9174-4CFB-AFE9-205885849D76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectCesiProgSys", "TestProjectCesiProgSys\TestProjectCesiProgSys.csproj", "{27123D3C-BE6D-4B01-8239-B79664B60D73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewAvalonia", "ViewAvalonia\ViewAvalonia.csproj", "{0AEB7731-5391-49B2-88D2-267ACD0D4EC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{F29E5C62-9174-4CFB-AFE9-205885849D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F29E5C62-9174-4CFB-AFE9-205885849D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F29E5C62-9174-4CFB-AFE9-205885849D76}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27123D3C-BE6D-4B01-8239-B79664B60D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27123D3C-BE6D-4B01-8239-B79664B60D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27123D3C-BE6D-4B01-8239-B79664B60D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27123D3C-BE6D-4B01-8239-B79664B60D73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AEB7731-5391-49B2-88D2-267ACD0D4EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AEB7731-5391-49B2-88D2-267ACD0D4EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AEB7731-5391-49B2-88D2-267ACD0D4EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AEB7731-5391-49B2-88D2-267ACD0D4EC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,49 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ViewAvalonia.Include_Backup"
+        Title="Window with Button"
+        Width="800" Height="450">
+	
+<Grid RowDefinitions="Auto, *,Auto, Auto" ShowGridLines="True">
+		<Grid Grid.Row="0" Background="#055243" Height="60" ColumnDefinitions="100,100, 400, 250">
+			<Rectangle Grid.Column="0"></Rectangle>
+			<Rectangle Grid.Column="1"></Rectangle>
+			<Rectangle Grid.Column="2"></Rectangle>
+			<Rectangle Grid.Column="3"></Rectangle>
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" Grid.Column="2">
+				<Label FontWeight="Black">EASY SAVE</Label>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Grid.Column="3">
+			
+			</StackPanel>
+			</Grid>
+        <Grid Grid.Row="1" Background="#cdb780" ShowGridLines="True">
+ <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+      <TextBox Name="NameTextBox" Watermark="Nom" Margin="0,0,8,0" Width="300"/>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+      <TextBox Name="SourceTextBox" Watermark=" Fichier Source" Margin="0,0,8,0" Width="300"/>
+      <Button Name="SourceBrowseButton" Content="📁" Click="OpenFile_Click"/>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+      <TextBox Name="DestinationTextBox" Watermark="Fichier Destination"  Margin="0,0,8,0" Width="300"/>
+      <Button Name="DestinationBrowseButton" Content="📁" Click="OpenFile_Click" />
+    </StackPanel>
+	 <Button Name="ExitButton" Content="Quitter ❌" Click="CloseDialogButton_Click" Margin="0,2,0,0"/>
+    <Button Name="ApplyButton" Content="Appliquer 💾" Margin="250,-29,0,0"/>
+   
+  </StackPanel>
+
+	
+	</Grid>
+
+<Grid Grid.Row="2">
+			 
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+
+				<Label>Easy Save 2023</Label>
+			</StackPanel>
+</Grid>
+	</Grid>
+</Window>

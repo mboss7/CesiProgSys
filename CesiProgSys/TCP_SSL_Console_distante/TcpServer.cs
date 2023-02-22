@@ -12,24 +12,6 @@ namespace Tcp_Ssl
 {
     public class TcpServer
     {
-
-        private TcpServer()
-        {
-            
-        }
-
-        private static TcpServer instance;
-
-        public static TcpServer Instance()
-        {
-            if (instance == null)
-            {
-                instance = new TcpServer();
-            }
-
-            return instance;
-        }
-        
         
         public static bool isRunning = false;
         public SslStream sslStream;
@@ -39,22 +21,21 @@ namespace Tcp_Ssl
         /// </summary>
         public static void RunSrv(object obj)
         {
-            TcpServer tcpServer = (TcpServer)obj;
-            isRunning = true;
-            while (isRunning)
-            {
-                // TcpServer SslSrv = new TcpServer();
+            int port = (int)obj; // cast 
+            TcpServer tcpServer = new TcpServer();
+            //isRunning = true;
 
-                
-                // _ = tcpServer.SslTcpServerConnection();
-            }
+            tcpServer.SslTcpServerConnection(port);
+
+
+
 
         }
 
         /// <summary>
         /// Connect the server in listen mode in SSL 
         /// </summary>
-        public async Task<SslStream> SslTcpServerConnection()
+        public SslStream SslTcpServerConnection(int port)
         {
 
             bool FlagA = true;
@@ -64,7 +45,7 @@ namespace Tcp_Ssl
             {
 
                 X509Certificate serverCertificate = new X509Certificate(@"cert.pfx", "P@ssw0rd");
-                TcpListener listener = new TcpListener(IPAddress.Any, 1234);
+                TcpListener listener = new TcpListener(IPAddress.Any, port);
                 listener.Start();
                 Console.WriteLine("Waiting for a client to connect...");
                 // Application blocks while waiting for an incoming connection.
@@ -102,7 +83,7 @@ namespace Tcp_Ssl
                     {
                         Console.WriteLine("-- Connection Aborted --");
                         listener.Stop();
-                        SslTcpServerConnection().Dispose();
+                        SslTcpServerConnection(port).Dispose();
                         FlagB = false;
                     }
 
@@ -122,7 +103,7 @@ namespace Tcp_Ssl
                     {
                         Console.WriteLine("-- Connection aborted --");
                         listener.Stop();
-                        SslTcpServerConnection().Dispose();
+                        SslTcpServerConnection(port).Dispose();
                         FlagB = false;
                     }               
 
