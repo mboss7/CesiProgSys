@@ -29,13 +29,13 @@ Project organisation
 
 System analysis
 
-[Use case diagram](.\Diagrams\DiagUseCase.md)
+[Use case diagram](/Diagrams/DiagUseCase.md)
 
 System presentation
 
-- [Class diagram](.\Diagrams\DiagClasse.md)
-- [Sequence diagram](.\Diagrams\DiagSequences)
-- [Activity diagram](.\Diagrams\DiagActivity.md)
+- [Class diagram](/Diagrams/DiagClasse.md)
+- [Sequence diagram](/Diagrams/DiagSequences)
+- [Activity diagram](/Diagrams/DiagActivity.md)
 
 
 ## Branch organization :
@@ -88,7 +88,7 @@ Notre équipe est composé de programmeurs, d'ingénieurs logiciels et de chefs 
 
 ## Logo
 
-![Logo](.\Image\logo.png)
+![Logo](/Image/logo.png)
 
 ## Used By
 
