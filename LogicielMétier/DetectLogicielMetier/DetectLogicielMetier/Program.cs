@@ -1,4 +1,6 @@
 ﻿
+using System.Diagnostics;
+
 namespace DetectLogicielMetier
 {
     public class Program
@@ -6,11 +8,11 @@ namespace DetectLogicielMetier
         public static void Main(string[] args)
         {
 
-            string processName = "notepad";
+            Hash hash = new Hash();
 
-            DetectProcess detectProcess = new DetectProcess();
-            
-            detectProcess.ProcessDetector(processName);
+            string hash1 = hash.HashFileGenerator(@"fichier.txt");
+            Console.WriteLine(hash1);
+
         }
     }
 }
