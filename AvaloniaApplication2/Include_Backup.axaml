@@ -33,6 +33,13 @@
       <TextBox Name="DestinationTextBox" Watermark="Fichier Destination"  Margin="0,0,8,0" Width="300"/>
       <Button Name="DestinationBrowseButton" Content="📁" Click="OpenFile_Click" />
     </StackPanel>
+	  <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+		  <ComboBox Name="Typeofbackup" Margin="0,0,0,8" Width="300">
+			<ComboBoxItem Content="Option 1"/>
+			<ComboBoxItem Content="Option 2"/>
+			<ComboBoxItem Content="Option 3"/>
+			  </ComboBox>
+		  </StackPanel>
 	 <Button Name="ExitButton" Content="Quitter ❌" Click="CloseDialogButton_Click" Margin="0,2,0,0"/>
     <Button Name="ApplyButton" Content="Appliquer 💾" Margin="250,-29,0,0"/>
    
