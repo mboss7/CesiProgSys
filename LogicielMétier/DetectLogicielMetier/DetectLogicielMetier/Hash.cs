@@ -19,7 +19,7 @@ namespace DetectLogicielMetier
             this.tmpHash = tmpHash;
         }
 
-        public string HashFileGenarator(string pathFileToHash)
+        public string HashFileGenerator(string pathFileToHash)
         {
             string hashFile;
             hashFile = null;
