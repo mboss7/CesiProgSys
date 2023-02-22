@@ -273,9 +273,11 @@ namespace CesiProgSys.ViewCli
             }
         }
 
+        /// <summary>
+        /// Prompts the user to choose a language.
+        /// </summary>
         private void chooseLanguage()
         {
-            //code
             Console.Clear();
             Console.WriteLine(dico["textChooseLanguage"]);
             
@@ -303,12 +305,16 @@ namespace CesiProgSys.ViewCli
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// This method is used to change the type of logs
+        /// </summary>
         private void changeTypeLogs()
         {
             Console.Clear();
             Console.WriteLine(dico["textChangeTypeLogs"]);
 
             string type = Console.ReadLine();
+            // Check if the user input is "xml" or "json".
             if (type != "xml" && type != "json")
             {
                 Console.WriteLine(dico["invalid"]);
