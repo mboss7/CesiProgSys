@@ -25,7 +25,7 @@ The team has to develop a backup software called EasySave for the software publi
 
 Project organisation
 
-[Gantt](.\Diagrams\Gantt.md)
+[Gantt](/Diagrams/Gantt.md)
 
 System analysis
 
