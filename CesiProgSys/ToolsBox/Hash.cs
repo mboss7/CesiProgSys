@@ -18,7 +18,12 @@ namespace DetectLogicielMetier
             this.tmpSource = tmpSource;
             this.tmpHash = tmpHash;
         }
-
+        
+        /// <summary>
+        /// Generate Hash from File 
+        /// </summary>
+        /// <param name="pathFileToHash"></param>
+        /// <returns></returns>
         public string HashFileGenerator(string pathFileToHash)
         {
             string hashFile;
@@ -34,6 +39,11 @@ namespace DetectLogicielMetier
             }
         }
         
+        /// <summary>
+        /// Generate Hash From Text
+        /// </summary>
+        /// <param name="SourceHash"></param>
+        /// <returns></returns>
         public string HashTextGenerator(string SourceHash)
         {
             sSourceData = SourceHash; 
@@ -61,7 +71,12 @@ namespace DetectLogicielMetier
         }
 
         
-        
+        /// <summary>
+        /// Comparator de Hash
+        /// </summary>
+        /// <param name="hash1"></param>
+        /// <param name="hash2"></param>
+        /// <returns></returns>
         public bool HashComparator(string hash1, string hash2)
         {
 
