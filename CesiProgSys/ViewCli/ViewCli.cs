@@ -306,7 +306,7 @@ namespace CesiProgSys.ViewCli
         }
 
         /// <summary>
-        /// This method is used to change the type of logs
+        /// This method is used to change the type of logs.
         /// </summary>
         private void changeTypeLogs()
         {
@@ -325,6 +325,9 @@ namespace CesiProgSys.ViewCli
             vmCLI.changeTypeLogs(type);
         }
         
+        /// <summary>
+        /// This method is used to change the default save source.
+        /// </summary>
         private void defaultSaveSource()
         {
             Console.Clear();
@@ -334,6 +337,9 @@ namespace CesiProgSys.ViewCli
             vmCLI.changeDefaultSaveSource(path);
         }
 
+        /// <summary>
+        /// This method is used to change the default save target.
+        /// </summary>
         private void defaultSaveTarget()
         {
             Console.Clear();
@@ -352,11 +358,17 @@ namespace CesiProgSys.ViewCli
             vmCLI.changeRetentionTime(i);
         }
         
+        /// <summary>
+        /// Reset the configuration settings.
+        /// </summary>
         private void resetConfig()
         {
             vmCLI.resetConfig();
         }
 
+        /// <summary>
+        /// Retrieves recent save source paths.
+        /// </summary>
         private string getRecentSource()
         {
             string[] s = vmCLI.getRecentSource();
@@ -382,6 +394,9 @@ namespace CesiProgSys.ViewCli
 
         }
 
+        /// <summary>
+        /// Retrieves recent save target paths.
+        /// </summary>
         private string getRecentTarget()
         {
             string[] s = vmCLI.getRecentTarget(); 
