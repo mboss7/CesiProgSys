@@ -14,36 +14,31 @@ namespace CesiProgSys
     {
         static void Main(string[] args)
         {
-            ThreadForTcp threadForTcp = new ThreadForTcp();
-            
-            threadForTcp.ThreadForTcpSTART();
-
-            /*
             [STAThread]
             static void Main(string[] args)
             {
                 bool result;
                 new Mutex(true, "ID", out result);
                 if (!result) return;
-    
+
                 BackupManager.Instance();
                 LogsManager l = LogsManager.Instance();
                 l.instantiate();
-    
+
                 Config c = Config.Instance();
                 c.setConfig();
                 c.checkTimeRecentSave();
-    
-                
+
+
                 if (args[0] == "cli")
                 {
                     Console.WriteLine("\n -----Welcome to the application !----- \n");
-    
+
                     Console.ReadKey();
-    
+
                     if (c.language == Language.English)
                     {
-                       ViewCli.ViewCli objEn = new ViewCliEn();
+                        ViewCli.ViewCli objEn = new ViewCliEn();
                         objEn.menu();
                     }
                     else if (c.language == Language.French)
@@ -57,14 +52,16 @@ namespace CesiProgSys
                         objEn.menu();
                     }
                 }
+
                 BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
             }
-            public static AppBuilder BuildAvaloniaApp()
+        }
+
+        public static AppBuilder BuildAvaloniaApp()
                 => AppBuilder.Configure<App>()
                     .UsePlatformDetect()
                     .LogToTrace();
                     
-                    */
+                 
         }
     }
-}
