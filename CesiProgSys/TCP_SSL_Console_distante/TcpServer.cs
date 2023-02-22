@@ -19,12 +19,16 @@ namespace Tcp_Ssl
         /// <summary>
         /// For Run SRV SSL main Method
         /// </summary>
-        public void RunSrv(int port)
+        public static void RunSrv(object obj)
         {
+            int port = (int)obj; // cast 
             TcpServer tcpServer = new TcpServer();
-            isRunning = true;
+            //isRunning = true;
+
             tcpServer.SslTcpServerConnection(port);
-            
+
+
+
 
         }
 

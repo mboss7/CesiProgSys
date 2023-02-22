@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Authentication;
@@ -9,12 +10,16 @@ namespace Tcp_Ssl
     public class TcpClientSsl
     {
         private int port;
-        string ipAddress = "localhost";
+        string ipAddress;
         /// <summary>
         /// FOR Run the client ssl main Method
         /// </summary>
-        public void RunClient(string ipAddress, int port)
+        public static void RunClient(object objIpPort)
         {
+            string [] ipPort = (string[]) objIpPort;
+            string ipAddress = ipPort[0];
+            int port = int.Parse(ipPort[1]);
+            
             while (true)
             {
                 TcpClientSsl tcpClientSsl = new TcpClientSsl();
