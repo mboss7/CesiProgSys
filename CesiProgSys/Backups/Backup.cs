@@ -7,7 +7,15 @@ namespace CesiProgSys.Backups
 {
     public abstract class Backup
     {
-        private List<Tuple<string, List<FileInfo>>> unauthorizedDirAndFiles;
+        protected List<Tuple<string, List<FileInfo>>> unauthorizedDirAndFiles;
+        
+        protected Tuple<string, List<FileInfo>> fileListInfo; // add for file catch
+
+        protected Tuple<string, List<FileInfo>> dirListInfo; // add for directory catch
+
+        
+        
+       
         
         protected List<Tuple<string, List<FileInfo>>> authorizedDirAndFiles;
         public Info info;
@@ -37,7 +45,10 @@ namespace CesiProgSys.Backups
 
             foreach (string currentDirectory in directories)
             {
-                DirectoryInfo dirInfo = new DirectoryInfo(currentDirectory);
+                DirectoryInfo dirInfo = new DirectoryInfo(currentDirectory); 
+                
+                
+                
                 if (!checkTypes(dirInfo.Attributes))
                 {
                     try
@@ -55,6 +66,10 @@ namespace CesiProgSys.Backups
                     }
                     catch (UnauthorizedAccessException)
                     {
+                        
+                        // add dans tuple error
+                        unauthorizedDirAndFiles.Add(dirListInfo);
+                        info.State = State.ERROR;
                     }
                 }
             }
@@ -81,8 +96,15 @@ namespace CesiProgSys.Backups
                             }
                         }
                     }
-                    catch (UnauthorizedAccessException)
+                    catch (UnauthorizedAccessException e)
                     {
+
+                        
+                        // Add file to the list unauthorize and state de inf en error
+                      
+                        
+                        unauthorizedDirAndFiles.Add(fileListInfo);
+                        info.State = State.ERROR;
                     }
                 }
             }

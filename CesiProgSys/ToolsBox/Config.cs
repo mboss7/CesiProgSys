@@ -4,8 +4,8 @@ public class Config
 {
     private Config()
     {
-        recentSaveSource = new HashSet<string>();
-        recentSaveTarget = new HashSet<string>();
+        recentSaveSource = new HashSet<string>();    
+        recentSaveTarget = new HashSet<string>();   
         retentionTime = 30;
         language = Language.English;
     }
