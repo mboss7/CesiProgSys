@@ -421,6 +421,9 @@ namespace CesiProgSys.ViewCli
             return s[input];
         }
 
+        /// <summary>
+        /// This method is used to make a full backup.
+        /// </summary>
         private void fullBackup()
         {
             Console.Clear();
@@ -468,6 +471,9 @@ namespace CesiProgSys.ViewCli
             vmCLI.instantiateBackup(name, sourceDir, targetDir, true);
         }
 
+        /// <summary>
+        /// This method is used to make a differential backup.
+        /// </summary>
         private void diffBackup()
         {
             Console.Clear();
@@ -515,6 +521,9 @@ namespace CesiProgSys.ViewCli
             vmCLI.instantiateBackup(name, sourceDir, targetDir, false);
         }
 
+        /// <summary>
+        /// Launch the backup definitively.
+        /// </summary>
         private void startBackupValid()
         {
             Console.Clear();
@@ -547,6 +556,9 @@ namespace CesiProgSys.ViewCli
             }
         }
 
+        /// <summary>
+        /// Exit the application.
+        /// </summary>
         private void leave()
         {
             Console.WriteLine(dico["exit"]);
