@@ -111,7 +111,7 @@
 							</ComboBox>
 
 							<StackPanel Orientation="Horizontal">
-								<TextBox Width="200"/>
+								<TextBox Width="200" Watermark="Extension à chiffrer"/>
 								<Button Content="+" Width="50" Margin="10,0,0,0" Background="#085343"/>
 								<Button Content="🗑️" Width="50" Margin="10,0,0,0" Background="#800020"/>
 							</StackPanel>
@@ -127,7 +127,7 @@
 							</ComboBox>
 
 							<StackPanel Orientation="Horizontal">
-								<TextBox Width="200"/>
+								<TextBox Width="200" Watermark="Logiciel métier"/>
 								<Button Content="+" Width="50" Margin="10,0,0,0" Background="#085343"/>
 								<Button Content="🗑️" Width="50" Margin="10,0,0,0" Background="#800020"/>
 							</StackPanel>
