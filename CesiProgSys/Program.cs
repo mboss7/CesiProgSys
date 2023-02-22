@@ -14,37 +14,37 @@ namespace CesiProgSys
             new Mutex(true, "ID", out result);
             if (!result) return;
 
-            // BackupManager.Instance();
-            // LogsManager l = LogsManager.Instance();
-            // l.instantiate();
+            BackupManager.Instance();
+            LogsManager l = LogsManager.Instance();
+            l.instantiate();
 
-            // Config c = Config.Instance();
-            // c.setConfig();
-            // c.checkTimeRecentSave();
+            Config c = Config.Instance();
+            c.setConfig();
+            c.checkTimeRecentSave();
 
-            // if(args.Any())
-            //     if (args[0] == "cli")
-            //     {
-            //         Console.WriteLine("\n -----Welcome to the application !----- \n");
-            //
-            //         Console.ReadKey();
-            //
-            //         if (c.language == Language.English)
-            //         {
-            //             ViewCli.ViewCli objEn = new ViewCliEn();
-            //             objEn.menu();
-            //         }
-            //         else if (c.language == Language.French)
-            //         {
-            //             ViewCli.ViewCli objFr = new ViewCliFr();
-            //             objFr.menu();
-            //         }
-            //         else
-            //         {
-            //             ViewCli.ViewCli objEn = new ViewCliEn();
-            //             objEn.menu();
-                    // }
-                // }
+            if(args.Any())
+                if (args[0] == "cli")
+                {
+                    Console.WriteLine("\n -----Welcome to the application !----- \n");
+            
+                    Console.ReadKey();
+            
+                    if (c.language == Language.English)
+                    {
+                        ViewCli.ViewCli objEn = new ViewCliEn();
+                        objEn.menu();
+                    }
+                    else if (c.language == Language.French)
+                    {
+                        ViewCli.ViewCli objFr = new ViewCliFr();
+                        objFr.menu();
+                    }
+                    else
+                    {
+                        ViewCli.ViewCli objEn = new ViewCliEn();
+                        objEn.menu();
+                    }
+                }
         }
     }
 }
