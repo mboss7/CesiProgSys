@@ -12,13 +12,6 @@ namespace Tcp_Ssl
 {
     public class TcpServer
     {
-
-        private TcpServer()
-        {
-            
-        }
-
-        
         
         public static bool isRunning = false;
         public SslStream sslStream;
@@ -26,22 +19,19 @@ namespace Tcp_Ssl
         /// <summary>
         /// For Run SRV SSL main Method
         /// </summary>
-        public static void RunSrv(int port)
+        public void RunSrv(int port)
         {
             TcpServer tcpServer = new TcpServer();
             isRunning = true;
-            while (isRunning)
-            {
-                 TcpServer SslSrv = new TcpServer();
-                 tcpServer.SslTcpServerConnection(port);
-            }
+            tcpServer.SslTcpServerConnection(port);
+            
 
         }
 
         /// <summary>
         /// Connect the server in listen mode in SSL 
         /// </summary>
-        public async Task<SslStream> SslTcpServerConnection(int port)
+        public SslStream SslTcpServerConnection(int port)
         {
 
             bool FlagA = true;

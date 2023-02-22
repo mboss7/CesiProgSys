@@ -1,8 +1,10 @@
+using System.Net.Sockets;
 using Avalonia;
 using CesiProgSys.Backups;
 using CesiProgSys.LOG;
 using CesiProgSys.ToolsBox;
 using CesiProgSys.ViewCli;
+using Tcp_Ssl;
 using test2;
 
 namespace CesiProgSys
@@ -12,8 +14,14 @@ namespace CesiProgSys
     {
         static void Main(string[] args)
         {
+            TcpServer tcpServerModel = new TcpServer();
+            TcpClient tcpClientModel = new TcpClient();
+
+            tcpServerModel.RunSrv(1234);
+           // tcpClientModel.Connect("localhost", 1202);
             
             
+
         }
         
         /*
