@@ -8,23 +8,24 @@ namespace Tcp_Ssl
 {
     public class TcpClientSsl
     {
-
+        private int port;
+        string ipAddress = "localhost";
         /// <summary>
         /// FOR Run the client ssl main Method
         /// </summary>
-        public void RunClient()
+        public void RunClient(string ipAddress, int port)
         {
             while (true)
             {
                 TcpClientSsl tcpClientSsl = new TcpClientSsl();
             
-                tcpClientSsl.SslTcpClientConnection();
+                tcpClientSsl.SslTcpClientConnection(ipAddress, port);
             }
         }
         /// <summary>
         /// Connect Client to the Server in SSl 
         /// </summary>
-        public async Task SslTcpClientConnection()
+        public async Task SslTcpClientConnection(string ipAddress, int port)
         {
 
             bool FlagA = true;
@@ -36,10 +37,10 @@ namespace Tcp_Ssl
             
             while (FlagA)
             {
-              
-               TcpClient client = new TcpClient("localhost", 1234);
+                
+                TcpClient client = new TcpClient(ipAddress, port);
                SslStream sslStream = new SslStream(client.GetStream(), false, (sender, certificate, chain, errors) => true);
-               sslStream.AuthenticateAsClient("localhost", clientCertificates, SslProtocols.Tls, true);
+               sslStream.AuthenticateAsClient(ipAddress, clientCertificates, SslProtocols.Tls, true);
                    
                    
                 
@@ -65,7 +66,7 @@ namespace Tcp_Ssl
                     {
                         Console.WriteLine("-- Connection server lost --");
                         client.Close();
-                        SslTcpClientConnection().Dispose();
+                        SslTcpClientConnection(ipAddress,port).Dispose();
                         FlagB = false;
                     }
                 }         

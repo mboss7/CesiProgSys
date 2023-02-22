@@ -10,6 +10,13 @@ namespace CesiProgSys
 
     public class Program
     {
+        static void Main(string[] args)
+        {
+            
+            
+        }
+        
+        /*
         [STAThread]
         static void Main(string[] args)
         {
@@ -54,5 +61,7 @@ namespace CesiProgSys
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .LogToTrace();
+                
+                */
     }
 }
