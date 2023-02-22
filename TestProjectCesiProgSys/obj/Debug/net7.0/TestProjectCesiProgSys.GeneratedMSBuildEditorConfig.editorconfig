@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TestProjectCesiProgSys
-build_property.ProjectDir = C:\Users\Administrator\Source\Repos\mboss7\CesiProgSys\TestProjectCesiProgSys\
+build_property.ProjectDir = C:\Users\adler\RiderProjects\CesiProgSys\TestProjectCesiProgSys\

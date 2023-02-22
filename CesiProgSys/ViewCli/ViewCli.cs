@@ -3,34 +3,55 @@ using CesiProgSys.ViewModel;
 
 namespace CesiProgSys.ViewCli
 {
+    /// <summary>
+    /// Provides a base implementation of the CLI 
+    /// </summary>
     public abstract class ViewCli
     {
+        /// <summary>
+        /// Holds a reference to the ViewModelCli object used to manage the view-model interaction.
+        /// </summary>
         protected ViewModelCli vmCLI;
 
+        /// <summary>
+        /// A Dictionary object that is used to store strings.
+        /// </summary>
         protected Dictionary<string, string> dico;
 
+        /// <summary>
+        /// Prompts the user to input a number and returns an integer value. If the user input is not a valid integer, it catches the FormatException and returns -1 instead.
+        /// </summary>
         private int askNumber()
         {
+            // Prompt the user to input a number.
             Console.Write(dico["askChoice"]);
             try
             {
+                // Convert the user input to an integer and return it.
                 return Convert.ToInt32(Console.ReadLine());
             }
             catch (FormatException)
             {
+                // Return -1 if the user input is not a valid integer.
                 return -1;
             }
         }
         
+        /// <summary>
+        /// Shows the main menu of the application and prompts the user to select an option. Then it calls the appropriate method based on the user's selection.
+        /// </summary>
         public void menu()
         {
             while (true)
             {
+                // Clear the console and display the main menu.
                 Console.Clear();
                 Console.WriteLine(dico["textMenu"]);
 
+                // Prompt the user to enter a number and store the result.
                 int choice = askNumber();
 
+                // Call the appropriate method based on the user's selection.
                 switch (choice)
                 {
                     case 1:
@@ -107,6 +128,7 @@ namespace CesiProgSys.ViewCli
                         Environment.Exit(0);
                         break;
                     default:
+                        // If the user enters an invalid number, display an error message and wait for the user to press enter.
                         Console.WriteLine(dico["invalid"]);
                         Console.ReadLine();
                         break;
@@ -114,6 +136,9 @@ namespace CesiProgSys.ViewCli
             }
         }
         
+        /// <summary>
+        /// Displays the backup configuration menu.
+        /// </summary>
         private void configBackup()
         {
             Console.Clear();
@@ -141,6 +166,9 @@ namespace CesiProgSys.ViewCli
             }
         }
         
+        /// <summary>
+        /// Displays the backup start menu.
+        /// </summary>
         private void startBackup()
         {
             Console.Clear();
@@ -165,17 +193,25 @@ namespace CesiProgSys.ViewCli
             }
         }
         
+        /// <summary>
+        /// Shows the current backup configuration to the user.
+        /// </summary>
         private void showConfig()
         {
             Console.Clear();
+            // Declare and initialize a string array.
+            // The value assigned to "s" is the result of "getConfig()" method call on an object named "vmCLI".
             string[] s = vmCLI.getConfig();
+            // Display the current backup configuration to the user.
             Console.WriteLine(dico["textShowContentConfig"], s[0], s[1], s[2], s[3], s[4], s[5], s[6]);
             Console.ReadLine();
         }
         
+        /// <summary>
+        /// Prompts the user to modify the backup configuration and then executes the corresponding action.
+        /// </summary>
         private void changeConfig()
         {
-            //code
             Console.Clear();
             Console.WriteLine(dico["textChangeConfig"]);
 
@@ -213,9 +249,11 @@ namespace CesiProgSys.ViewCli
             }
         }
         
+        /// <summary>
+        /// Displays help information.
+        /// </summary>
         private void help()
         {
-            //code
             Console.Clear();
             Console.WriteLine(dico["textHelp"]);
             
