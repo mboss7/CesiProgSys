@@ -14,16 +14,10 @@ namespace CesiProgSys
     {
         static void Main(string[] args)
         {
-            //tableau de string Ip et Port 
-            string[] IpPort = { "localhost", "1234" };
-
-
-            Thread tcpServerModel = new Thread(TcpServer.RunSrv);
-            tcpServerModel.Start(1234);
-
-            Thread tcpClientModel = new Thread(TcpClientSsl.RunClient);
-            tcpClientModel.Start(IpPort);
+            ThreadForTcp threadForTcp = new ThreadForTcp();
             
+            threadForTcp.ThreadForTcpSTART();
+
             /*
             [STAThread]
             static void Main(string[] args)
