@@ -159,4 +159,4 @@ Option: Reduction of parallel works if network load
 
 ### Table summarising the different versions in French
 
-![Version Project](.\Image\VersionProject.png)
+![Version Project](/Image/VersionProject.png)
