@@ -121,6 +121,15 @@ public sealed class MainWindowViewModel : ViewModel
         {
             _selectedBackup = value;
             OnPropertyChanged();
+            if (_selectedBackup != null)
+            {
+                StartAuth = true;
+            }
+            else
+            {
+                StartAuth = false;
+            }
+            
         }
     }
     
@@ -140,9 +149,21 @@ public sealed class MainWindowViewModel : ViewModel
     public void startBackup()
     {
         Console.WriteLine("On est la ?");
-        string s = "1&start&";
+        string s = "1&start&" + SelectedBackup.Name;
         Client.packets.Enqueue(s);
         Client.wait.Set();
+    }
+
+    private bool _startAuth = false;
+
+    public bool StartAuth
+    {
+        get => _startAuth;
+        set
+        {
+            _startAuth = value;
+            OnPropertyChanged();
+        }
     }
     
     public string WelcomeText { get; set; }

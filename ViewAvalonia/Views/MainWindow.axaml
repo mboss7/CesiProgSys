@@ -46,7 +46,7 @@
 						<Grid Row="0" ColumnDefinitions="Auto, Auto ">
 							<!-- <Button Command="{Binding modifyVisible}">+</Button> -->
 							<Button Grid.Column="0" Command="{Binding modifyVisible}">+</Button>
-							<Button Grid.Column="1" Content="START" Name="Start" Command="{Binding startBackup}"/>
+							<Button Grid.Column="1" IsEnabled="{Binding StartAuth}" Content="START" Name="Start" Command="{Binding startBackup}"/>
 
 						</Grid>
 						<Grid Row="1">

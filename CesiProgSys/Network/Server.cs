@@ -56,7 +56,7 @@ public static class Server
 
             if (response.IndexOf(eom, StringComparison.Ordinal) > -1)
             {
-                packets.Enqueue(response);
+                packets.Enqueue(response.Replace(eom, ""));
                 NetworkHandler.Instance().wait.Set();
                 // Console.WriteLine("Server received from Client: "  + response.Replace(eom, ""));
                 client.Send(ack, 0);
