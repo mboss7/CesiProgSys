@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:ViewAvalonia.Views"
+        xmlns:vm="using:ViewAvalonia.Views"
+        x:Class="ViewAvalonia.Views.NewBackup">
+    
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>	
+    
+        <Grid IsVisible="{Binding !Visible}">
+            <StackPanel >
+                <StackPanel >
+                    <TextBox Name="NameTextBox" Watermark="Nom" />
+                </StackPanel>
+                <StackPanel>
+                    <TextBox Name="SourceTextBox" Watermark=" Fichier Source"/>
+                    <Button Name="SourceBrowseButton" Content="📁" />
+                </StackPanel>
+                <StackPanel>
+                    <TextBox Name="DestinationTextBox" Watermark="Fichier Destination"/>
+                    <Button Name="DestinationBrowseButton" Content="📁" />
+                </StackPanel>
+                <StackPanel>
+                    <ComboBox Name="Typeofbackup" Margin="0,0,0,8" Width="300">
+                        <ComboBoxItem Content="Option 1" />
+                        <ComboBoxItem Content="Option 2" />
+                        <ComboBoxItem Content="Option 3" />
+                    </ComboBox>
+                </StackPanel>
+                <Button Name="ExitButton" Content="Quitter ❌" Margin="0,2,0,0" />
+                <Button Name="ApplyButton" Content="Appliquer 💾" Margin="250,-29,0,0" />
+            </StackPanel>
+        </Grid>
+</UserControl>

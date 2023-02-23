@@ -1,6 +1,9 @@
-﻿using System.Security.AccessControl;
+﻿using System.Net.Sockets;
+using System.Security.AccessControl;
 using System.Security.Principal;
 using CesiProgSys.LOG;
+using CesiProgSys.Network;
+using CesiProgSys.Network.Packets;
 using CesiProgSys.ToolsBox;
 
 namespace CesiProgSys.Backups
@@ -9,13 +12,10 @@ namespace CesiProgSys.Backups
     {
         protected List<Tuple<string, List<FileInfo>>> unauthorizedDirAndFiles;
         
-        protected Tuple<string, List<FileInfo>> fileListInfo; // add for file catch
+        // protected Tuple<string, List<FileInfo>> fileListInfo; // add for file catch
 
-        protected Tuple<string, List<FileInfo>> dirListInfo; // add for directory catch
+        // protected Tuple<string, List<FileInfo>> dirListInfo; // add for directory catch
 
-        
-        
-       
         
         protected List<Tuple<string, List<FileInfo>>> authorizedDirAndFiles;
         public Info info;
@@ -25,19 +25,40 @@ namespace CesiProgSys.Backups
         public string name;
         public string source;
         public string target;
+        public string typeBackup;
 
+        protected void SendPacket( string ty, int pr, State st)
+        {
+            PacketStateBackup p = new PacketStateBackup()
+            {
+                name = this.name,
+                progression = pr,
+                state = st,
+                source = this.source,
+                target = this.target,
+                type = ty
+            };
+            
+            Client.packets.Enqueue(Json.objectToJson(p));
+            Client.wait.Set();
+        }
+        
         public abstract void backup();
 
         public void startCheckAuthorizations()
         {
             checkAuthorizations(source);
             info.State = State.INACTIVE;
+            if (!Program.cli)
+                SendPacket(typeBackup, 0, State.INACTIVE);
         }
 
         private void checkAuthorizations(string directory)
         {
             info.State = State.CHECKINGAUTH;
             rltInstance.wait.Set();
+            if (!Program.cli)
+                SendPacket(typeBackup, 0, State.CHECKINGAUTH);
 
             IEnumerable<string> directories = Directory.EnumerateDirectories(directory);
             List<FileInfo> f = new List<FileInfo>();
@@ -68,8 +89,10 @@ namespace CesiProgSys.Backups
                     {
                         
                         // add dans tuple error
-                        unauthorizedDirAndFiles.Add(dirListInfo);
+                        // unauthorizedDirAndFiles.Add(dirListInfo);
                         info.State = State.ERROR;
+                        if (!Program.cli)
+                            SendPacket(typeBackup, 0, State.ERROR);
                     }
                 }
             }
@@ -103,8 +126,10 @@ namespace CesiProgSys.Backups
                         // Add file to the list unauthorize and state de inf en error
                       
                         
-                        unauthorizedDirAndFiles.Add(fileListInfo);
+                        // unauthorizedDirAndFiles.Add(fileListInfo);
                         info.State = State.ERROR;
+                        if (!Program.cli)
+                            SendPacket(typeBackup, 0, State.ERROR);
                     }
                 }
             }

@@ -10,6 +10,7 @@ namespace CesiProgSys.Backups
             this.name = name;
             this.source = source;
             this.target = target;
+            this.typeBackup = "FullBackup";
             
             wait = new ManualResetEventSlim(false);
             
@@ -26,6 +27,10 @@ namespace CesiProgSys.Backups
             info.typeBackup = "FullBackup";
             rltInstance.SetInfo.Add(info);
             rltInstance.wait.Set();
+
+            if (!Program.cli)
+                SendPacket(typeBackup, 0, State.INACTIVE);
+
         }
         
         public override void backup()
@@ -33,6 +38,8 @@ namespace CesiProgSys.Backups
             info.State = State.ACTIVE;
             info.Date = DateTime.Now;
             rltInstance.wait.Set();
+            if (!Program.cli)
+                SendPacket(typeBackup, 0, State.ACTIVE);
 
             DirectoryInfo targetDirectory = new DirectoryInfo(target);
 
@@ -58,10 +65,14 @@ namespace CesiProgSys.Backups
                     
                     info.NbFilesLeftToDo--;
                     info.Progression = 100-info.NbFilesLeftToDo * 100 / info.TotalFilesToCopy;
+                    if (!Program.cli)
+                        SendPacket(typeBackup, info.Progression, State.ACTIVE);
                 }
             }
             info.State = State.SUCCESS;
             rltInstance.wait.Set();
+            if (!Program.cli)
+                SendPacket(typeBackup, info.Progression, State.SUCCESS);
         }
     }
 }

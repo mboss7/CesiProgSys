@@ -8,7 +8,7 @@ using System.Text;
 using System.Reflection.Metadata;
 using CesiProgSys.ToolsBox;
 
-namespace Tcp_Ssl
+namespace CesiProgSys.Network
 {
     public class TcpServer
     {

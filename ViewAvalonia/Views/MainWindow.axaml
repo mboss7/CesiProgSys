@@ -1,0 +1,136 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:ViewAvalonia.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:ViewAvalonia.Views"
+        mc:Ignorable="d"
+        x:Class="ViewAvalonia.Views.MainWindow"
+        Title="EasySave"
+        Icon="../Assets/smaller_version.png">
+	
+		<Design.DataContext>
+			<vm:MainWindowViewModel/>
+		</Design.DataContext>	
+	
+	<Grid RowDefinitions="Auto, *,Auto">
+		<views:Header Grid.Row="0"/>
+		
+		<views:NewBackup Grid.Row="1"/>
+		
+		
+		
+		
+		<Grid Grid.Row="1" Background="#AAAAAA" IsVisible="{Binding Visible}">
+			<TabControl>
+				<TabItem Header="{Binding WelcomeText}">
+					<!-- <Image Source="../Assets/Logoeasysave.png" Height="300" Width="300"/> -->
+				</TabItem>
+				<TabItem Header="Config Backup">
+					<Grid ColumnDefinitions="Auto">
+						<!-- <DataGrid Name="" -->
+						<!-- <StackPanel Margin="10"> -->
+						<!-- 	<ProgressBar Height="15" -->
+						<!-- 			 Width="5" -->
+						<!-- 			 Value="50" -->
+						<!-- 			 Orientation="Horizontal" -->
+						<!-- 			 VerticalAlignment="Bottom" -->
+						<!-- 			 HorizontalAlignment="Stretch"> -->
+						<!-- 	</ProgressBar> -->
+						<!-- </StackPanel> -->
+					</Grid>
+				</TabItem>
+				
+				<TabItem Header="{Binding StartText}">
+					<Grid RowDefinitions="Auto, *">
+						<Grid Row="0">
+							
+						<Button Command="{Binding modifyVisible}">+</Button>
+							
+						</Grid>
+						<Grid Row="1">
+							<DataGrid Name="Backup" Margin=" " Items="{Binding Backups}" AutoGenerateColumns="False">
+								<DataGrid.Columns>
+									<DataGridTextColumn Header="Backup Name" Binding="{Binding Name}"/>
+									<DataGridTextColumn Header="Backup Source" Binding="{Binding Source}"/>
+									<DataGridTextColumn Header="Backup Target" Binding="{Binding Target}"/>
+									<DataGridTextColumn Header="Backup Type" Binding="{Binding Type}"/>
+									<DataGridTemplateColumn Header="Start">
+										<DataGridTemplateColumn.CellTemplate>
+											<DataTemplate>
+												<Button Content="START" Name="Start"/>
+											</DataTemplate>
+										</DataGridTemplateColumn.CellTemplate>
+									</DataGridTemplateColumn>
+									<DataGridTemplateColumn>
+										<DataGridTemplateColumn.CellTemplate>
+											<DataTemplate>
+												<Button Content="DELETE" Name="Delete"/>
+											</DataTemplate>
+										</DataGridTemplateColumn.CellTemplate>
+									</DataGridTemplateColumn>
+									<DataGridTemplateColumn Header="Progression">
+										<DataGridTemplateColumn.CellTemplate>
+											<DataTemplate>
+												<ProgressBar Height="15" Width="5" Value="{Binding Progression}" 
+												             Orientation="Horizontal" VerticalAlignment="Bottom" 
+												             HorizontalAlignment="Stretch"/>
+											</DataTemplate>
+										</DataGridTemplateColumn.CellTemplate>
+									</DataGridTemplateColumn>
+								</DataGrid.Columns>
+							</DataGrid>
+						</Grid>
+					</Grid>
+					
+				</TabItem>
+				<TabItem>
+				<TabItem.Header>
+					<TextBlock>Configuration</TextBlock>
+				</TabItem.Header>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+
+						<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+							<TextBlock Text="Extension à chiffrer" FontSize="20" Margin="0,0,0,10"/>
+
+							<ComboBox Width="200" Margin="0,0,0,10">
+								<ComboBoxItem Content="Option 1"/>
+								<ComboBoxItem Content="Option 2"/>
+								<ComboBoxItem Content="Option 3"/>
+							</ComboBox>
+
+							<StackPanel Orientation="Horizontal">
+								<TextBox Width="200" Watermark="Extension à chiffrer"/>
+								<Button Content="+" Width="50" Margin="10,0,0,0" Background="#085343"/>
+								<Button Content="??" Width="50" Margin="10,0,0,0" Background="#800020"/>
+							</StackPanel>
+						</StackPanel>
+
+						<StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+							<TextBlock Text="Logiciel métier" FontSize="20" Margin="0,0,0,10"/>
+
+							<ComboBox Width="200" Margin="0,0,0,10">
+								<ComboBoxItem Content="Option 1"/>
+								<ComboBoxItem Content="Option 2"/>
+								<ComboBoxItem Content="Option 3"/>
+							</ComboBox>
+
+							<StackPanel Orientation="Horizontal">
+								<TextBox Width="200" Watermark="Logiciel métier"/>
+								<Button Content="+" Width="50" Margin="10,0,0,0" Background="#085343"/>
+								<Button Content="??" Width="50" Margin="10,0,0,0" Background="#800020"/>
+							</StackPanel>
+						</StackPanel>
+					</Grid>
+				</TabItem>
+			</TabControl>
+		</Grid>
+	
+		<views:Footer Grid.Row="2" />
+
+	</Grid>
+</Window>

@@ -5,7 +5,7 @@ using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace Tcp_Ssl
+namespace CesiProgSys.Network
 {
     public class TcpClientSsl
     {

@@ -1,3 +1,6 @@
+using CesiProgSys.Network;
+using CesiProgSys.Network.Packets;
+
 namespace CesiProgSys.ToolsBox;
 
 public class Config
@@ -35,7 +38,7 @@ public class Config
     public void writeConfig()
     {
         // Serialize the configuration object to a JSON string
-        string json = JsonLog.objectToJson(this);
+        string json = Json.objectToJson(this);
         //Write the JSON string to the specified file
         using StreamWriter file = new("./config.json", append: false);
         file.WriteLine(json);
@@ -57,7 +60,7 @@ public class Config
         
         string json = file.ReadToEnd();
         // Deserialize the JSON string into a Config object and return it
-        Config conf = JsonLog.JsonToConfig(json);
+        Config conf = Json.JsonToConfig(json);
 
         if (conf == null)
         {
@@ -98,5 +101,21 @@ public class Config
     
     public void checkTimeRecentSave()
     {
+    }
+
+    public void SendConfig()
+    {
+        PacketConfigs p = new PacketConfigs()
+        {
+            language = language,
+            defaultSource = defaultSaveSource,
+            defautlTarget = defaultSaveTarget,
+            recentSource = recentSaveSource,
+            recentTarget = recentSaveTarget,
+            typeLogs = typeLogs
+        };
+        
+        Client.packets.Enqueue(Json.objectToJson(p));
+        Client.wait.Set();
     }
 }

@@ -1,6 +1,6 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="ViewAvalonia.App">
+             x:Class="ViewAvalonia.Views.App">
     <Application.Styles>
         <FluentTheme/>
         <!-- <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Simple.xaml"/> -->        <!--Same than Default, but default is for Avalonia 0.10.0v, Simple is for 0.11.0v -->

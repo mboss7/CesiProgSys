@@ -12,12 +12,55 @@
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.0-preview5" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview5" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-preview5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="App.axaml" />
     <None Include="Include_Backup.axaml" />
     <None Include="MainWindow.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin" />
+    <Folder Include="obj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="obj\Debug\net7.0\Avalonia\resources" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\net7.0\ViewAvalonia.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net7.0\ViewAvalonia.GlobalUsings.g.cs" />
+    <Compile Update="Views\Header.axaml.cs">
+      <DependentUpon>Header.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\App.axaml.cs">
+      <DependentUpon>App.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Footer.axaml.cs">
+      <DependentUpon>Footer.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MainWindow.axaml.cs">
+      <DependentUpon>MainWindow.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewBackup.axaml.cs">
+      <DependentUpon>Include_Backup.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\*" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EditorConfigFiles Include="obj\Debug\net7.0\ViewAvalonia.GeneratedMSBuildEditorConfig.editorconfig" />
   </ItemGroup>
 
 </Project>

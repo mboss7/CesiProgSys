@@ -1,4 +1,4 @@
-namespace Tcp_Ssl
+namespace CesiProgSys.Network
 {
     public class ThreadForTcp
     {

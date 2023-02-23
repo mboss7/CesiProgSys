@@ -45,9 +45,9 @@ using CesiProgSys.ToolsBox;
                 if (config.typeLogs.Equals("json"))
                 {
                     if (inf.State == State.ERROR)
-                        Info.Add(JsonLog.objectToJson(inf));
+                        Info.Add(Json.objectToJson(inf));
                     else
-                        Error.Add(JsonLog.objectToJson(inf));
+                        Error.Add(Json.objectToJson(inf));
                 }
                 else
                 {

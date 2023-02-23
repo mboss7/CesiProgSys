@@ -44,9 +44,9 @@ namespace CesiProgSys.LOG
                 if (config.typeLogs.Equals("json"))
                 {
                     if (inf.State == State.ERROR)
-                        Error.Add(JsonLog.objectToJson(inf));
+                        Error.Add(Json.objectToJson(inf));
                     else
-                        Info.Add(JsonLog.objectToJson(inf));
+                        Info.Add(Json.objectToJson(inf));
                 }
                 else
                 {
