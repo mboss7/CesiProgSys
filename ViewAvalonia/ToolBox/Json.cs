@@ -1,6 +1,6 @@
 ﻿
 using Newtonsoft.Json;
-using ViewAvalonia.Network.Packets;
+using ViewAvalonia.Network;
 
 namespace ViewAvalonia.ToolBox
 {

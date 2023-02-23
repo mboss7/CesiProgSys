@@ -2,14 +2,14 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using CesiProgSys.Network.Packets;
+using CesiProgSys.Network;
 using CesiProgSys.ToolsBox;
 
 namespace CesiProgSys.Network;
 
 public static class Server
 {
-    public static ConcurrentQueue<Packet> packets = new();
+    public static ConcurrentQueue<string> packets = new();
 
     public static void startServer()
     {
@@ -46,6 +46,7 @@ public static class Server
         string eom = "<|EOM|>";
         string aoe = "<|AOE|>";
         byte[] ack = "<|ACK|>"u8.ToArray();
+        NetworkHandler n = NetworkHandler.Instance();
 
         while (true)
         {
@@ -55,9 +56,9 @@ public static class Server
 
             if (response.IndexOf(eom, StringComparison.Ordinal) > -1)
             {
-                packets.Enqueue(Json.JsonToPacket(response));
+                packets.Enqueue(response);
                 NetworkHandler.Instance().wait.Set();
-                Console.WriteLine("Server received from Client: "  + response.Replace(eom, ""));
+                // Console.WriteLine("Server received from Client: "  + response.Replace(eom, ""));
                 client.Send(ack, 0);
             }
 

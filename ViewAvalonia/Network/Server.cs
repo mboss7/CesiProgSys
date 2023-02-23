@@ -2,15 +2,14 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using ViewAvalonia.ToolBox;
-using ViewAvalonia.Network.Packets;
+
 
 namespace ViewAvalonia.Network;
 
 public static class Server
 {
 
-    public static ConcurrentQueue<Packet> packets = new();
+    public static ConcurrentQueue<string> packets = new();
     public static void startServer()
     {
         Socket server = Connect();
@@ -45,8 +44,8 @@ public static class Server
 
             if (response.IndexOf(eom, StringComparison.Ordinal) > -1)
             {
-                packets.Enqueue(Json.JsonToPacket(response));
-                Console.WriteLine("Server received from Client: "  + response.Replace(eom, ""));
+                packets.Enqueue(response);
+                NetworkHandler.Instance().wait.Set();
                 client.Send(ack, 0);
             }
         }

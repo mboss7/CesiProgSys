@@ -13,25 +13,21 @@
         <Grid IsVisible="{Binding !Visible}">
             <StackPanel >
                 <StackPanel >
-                    <TextBox Name="NameTextBox" Watermark="Nom" />
+                    <TextBox Name="NameTextBox" Watermark="Nom" Text="{Binding Name}" />
                 </StackPanel>
                 <StackPanel>
-                    <TextBox Name="SourceTextBox" Watermark=" Fichier Source"/>
+                    <TextBox Name="SourceTextBox" Watermark=" Fichier Source" Text="{Binding Source}"/>
                     <Button Name="SourceBrowseButton" Content="📁" />
                 </StackPanel>
                 <StackPanel>
-                    <TextBox Name="DestinationTextBox" Watermark="Fichier Destination"/>
+                    <TextBox Name="DestinationTextBox" Watermark="Fichier Destination" Text="{Binding Target}"/>
                     <Button Name="DestinationBrowseButton" Content="📁" />
                 </StackPanel>
                 <StackPanel>
-                    <ComboBox Name="Typeofbackup" Margin="0,0,0,8" Width="300">
-                        <ComboBoxItem Content="Option 1" />
-                        <ComboBoxItem Content="Option 2" />
-                        <ComboBoxItem Content="Option 3" />
-                    </ComboBox>
+                    <ComboBox Name="Typeofbackup" Margin="0,0,0,8" Width="300" Items="{Binding ListTypeBackup}" SelectedItem="{Binding TypeBackup}"/>
                 </StackPanel>
-                <Button Name="ExitButton" Content="Quitter ❌" Margin="0,2,0,0" />
-                <Button Name="ApplyButton" Content="Appliquer 💾" Margin="250,-29,0,0" />
+                <Button Name="ExitButton" Content="Quitter ❌" Command="{Binding leaveNewBackup}"/>
+                <Button Name="ApplyButton" Content="Appliquer 💾" Command="{Binding addNewBackup}"/>
             </StackPanel>
         </Grid>
 </UserControl>

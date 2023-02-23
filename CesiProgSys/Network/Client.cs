@@ -36,6 +36,8 @@ public static class Client
             {
                 byte[] messageBytes = Encoding.UTF8.GetBytes(string.Concat(temp, "<|EOM|>"));
 
+                Console.WriteLine("Client Backup : " + temp);
+                
                 client.Send(messageBytes, SocketFlags.None);
                 while (true)
                 {

@@ -11,7 +11,6 @@ namespace CesiProgSys.Backups
             this.source = source;
             this.target = target;
             this.typeBackup = "FullBackup";
-            
             wait = new ManualResetEventSlim(false);
             
             authorizedDirAndFiles = new List<Tuple<string, List<FileInfo>>>();

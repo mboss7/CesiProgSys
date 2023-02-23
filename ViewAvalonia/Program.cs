@@ -7,10 +7,7 @@ namespace ViewAvalonia;
 public class Program
 {
 
-    // static void Main(string[] args)
-    // {
 
-    // }
     
     [STAThread]
     static void Main(string[] args)

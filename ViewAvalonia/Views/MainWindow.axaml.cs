@@ -1,8 +1,10 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using ViewAvalonia.Network;
+using ViewAvalonia.ToolBox;
 
 namespace ViewAvalonia.Views;
 
@@ -54,6 +56,39 @@ public class MainWindow : Window
 public sealed class MainWindowViewModel : ViewModel
 {
     
+    public MainWindowViewModel()
+    {
+        Visible = true;
+        
+        WelcomeText = "Welcome";
+        StartText = "Launch Backup";
+        ConfigText = "Config Backup";
+        ConfigurationText = "Configuration";
+
+        NetworkHandler n = NetworkHandler.Instance();
+
+        n.stateBackup += updateBackup;
+
+        Backups = new ObservableCollection<Backup>();
+        
+        ListTypeBackup = new List<string>()
+        {
+            "FullBackup", "DiffBackup"
+        };
+    }
+
+    private ObservableCollection<Backup> _backups;
+
+    public ObservableCollection<Backup> Backups
+    {
+        get => _backups;
+        set
+        {
+            _backups = value;
+            OnPropertyChanged();
+        }
+    }
+
     private bool _visible;
     public bool Visible
     {
@@ -64,56 +99,109 @@ public sealed class MainWindowViewModel : ViewModel
             OnPropertyChanged();
         }
     }
-    
 
-    private string _welcomeText;
-    public string WelcomeText 
-    {
-        get => _welcomeText;
-        set
-        {
-            _welcomeText = value;
-            OnPropertyChanged();
-        } 
-    }
-    
     public void modifyVisible() => Visible = !Visible;
 
-    public MainWindowViewModel()
+    public void updateBackup(object sender, EventArgs eventArgs)
     {
-        Visible = true;
-        
-        WelcomeText = "Welcome";
-        StartText = "Launch Backup";
-        ConfigText = "Config Backup";
-        ConfigurationText = "Configuration";
+        Backup b = (Backup)sender;
 
-        Backups = new()
-        {
-            new()
-            {
-                Name = "Backup1",
-                Source = "PathSource",
-                Target = "PathTarget",
-                Progression = 30,
-                Type = "FullBackup",
-                Etat = false
-            },
-            new()
-            {
-                Name = "Backup2",
-                Source = "PathSource2",
-                Target = "PathTarget2",
-                Progression = 90,
-                Type = "DiffBackup",
-                Etat = true
-            },
-        };
+        Backup temp = Backups.Where(backup => backup.Name == b.Name).ElementAt(0);
 
+        temp.Progression = b.Progression;
+        temp.Etat = b.Etat;
     }
 
-    public List<Backup> Backups { get; set; }
+    private Backup _selectedBackup;
+
+    public Backup SelectedBackup
+    {
+        get => _selectedBackup;
+        set
+        {
+            _selectedBackup = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    public void addNewBackup()
+    {
+        Backup b = new(Name, Source, Target, TypeBackup);
+        Backups.Add(b);
+
+        string s = "0&"+ TypeBackup+"&" + Name+"&" + Source+"&" +Target;
+        
+        Client.packets.Enqueue(s);
+        Client.wait.Set();
+        
+        modifyVisible();
+    }
+
+    public void startBackup()
+    {
+        Console.WriteLine("On est la ?");
+        string s = "1&start&";
+        Client.packets.Enqueue(s);
+        Client.wait.Set();
+    }
+    
+    public string WelcomeText { get; set; }
     public string ConfigText { get; set; }
     public string StartText { get; set; }
     public string ConfigurationText { get; set; }
+    
+    private string _name;
+    public string Name
+    {
+        get => _name;
+        set
+        {
+            _name = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    private string _source;
+    public string Source
+    {
+        get => _source;
+        set
+        {
+            _source = value;
+            OnPropertyChanged();
+        }
+    }
+    private string _target;
+    public string Target
+    {
+        get => _target;
+        set
+        {
+            _target = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    public List<string> ListTypeBackup { get; set; }
+
+    private string _typeBackup;
+
+    public string TypeBackup
+    {
+        get => _typeBackup;
+        set
+        {
+            _typeBackup = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public void leaveNewBackup()
+    {
+        Name = "";
+        Source = "";
+        Target = "";
+        TypeBackup = "";
+        modifyVisible();
+    }
 }

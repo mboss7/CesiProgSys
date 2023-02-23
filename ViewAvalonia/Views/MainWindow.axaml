@@ -42,26 +42,21 @@
 				</TabItem>
 				
 				<TabItem Header="{Binding StartText}">
-					<Grid RowDefinitions="Auto, *">
-						<Grid Row="0">
-							
-						<Button Command="{Binding modifyVisible}">+</Button>
-							
+					<Grid RowDefinitions="Auto, *" >
+						<Grid Row="0" ColumnDefinitions="Auto, Auto ">
+							<!-- <Button Command="{Binding modifyVisible}">+</Button> -->
+							<Button Grid.Column="0" Command="{Binding modifyVisible}">+</Button>
+							<Button Grid.Column="1" Content="START" Name="Start" Command="{Binding startBackup}"/>
+
 						</Grid>
 						<Grid Row="1">
-							<DataGrid Name="Backup" Margin=" " Items="{Binding Backups}" AutoGenerateColumns="False">
+							<DataGrid Name="Backup" Margin=" " Items="{Binding Backups}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedBackup}">
 								<DataGrid.Columns>
 									<DataGridTextColumn Header="Backup Name" Binding="{Binding Name}"/>
-									<DataGridTextColumn Header="Backup Source" Binding="{Binding Source}"/>
-									<DataGridTextColumn Header="Backup Target" Binding="{Binding Target}"/>
+									<DataGridTextColumn Header="Backup Source" Binding="{Binding Source}" FontSize="8"/>
+									<DataGridTextColumn Header="Backup Target" Binding="{Binding Target}" FontSize="8"/>
 									<DataGridTextColumn Header="Backup Type" Binding="{Binding Type}"/>
-									<DataGridTemplateColumn Header="Start">
-										<DataGridTemplateColumn.CellTemplate>
-											<DataTemplate>
-												<Button Content="START" Name="Start"/>
-											</DataTemplate>
-										</DataGridTemplateColumn.CellTemplate>
-									</DataGridTemplateColumn>
+									<DataGridTextColumn Header="Backup State" Binding="{Binding Etat}"/>
 									<DataGridTemplateColumn>
 										<DataGridTemplateColumn.CellTemplate>
 											<DataTemplate>

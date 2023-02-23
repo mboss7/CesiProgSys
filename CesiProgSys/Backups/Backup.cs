@@ -1,9 +1,10 @@
 ﻿using System.Net.Sockets;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.Xml.Serialization;
 using CesiProgSys.LOG;
 using CesiProgSys.Network;
-using CesiProgSys.Network.Packets;
+using CesiProgSys.Network;
 using CesiProgSys.ToolsBox;
 
 namespace CesiProgSys.Backups
@@ -27,19 +28,12 @@ namespace CesiProgSys.Backups
         public string target;
         public string typeBackup;
 
-        protected void SendPacket( string ty, int pr, State st)
+        protected void SendPacket(string ty, int pr, State st)
         {
-            PacketStateBackup p = new PacketStateBackup()
-            {
-                name = this.name,
-                progression = pr,
-                state = st,
-                source = this.source,
-                target = this.target,
-                type = ty
-            };
+            // Packet p = new Packet(this.name, pr, st, this.source, this.target, ty);
+            string s = "4&" + this.name+"&" + this.source+"&" + this.target+"&" + pr+"&" + st+"&" + ty;
             
-            Client.packets.Enqueue(Json.objectToJson(p));
+            Client.packets.Enqueue(s);
             Client.wait.Set();
         }
         

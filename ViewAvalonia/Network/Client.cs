@@ -41,6 +41,8 @@ public static class Client
         {
             wait.Wait();
             string temp;
+            // Console.WriteLine("YEAHHH");
+
             bool dequeue = packets.TryDequeue(out temp);
             if (dequeue)
             {

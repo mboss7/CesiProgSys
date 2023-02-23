@@ -1,5 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 
 namespace ViewAvalonia.Views;
 
@@ -7,7 +9,7 @@ public class NewBackup : UserControl
 {
     public NewBackup()
     {
-        // InitializeComponent();
+        AvaloniaXamlLoader.Load(this);
     }
 
     private void CloseDialogButton_Click(object sender, RoutedEventArgs e)
@@ -43,8 +45,4 @@ public class NewBackup : UserControl
             // Do something with the folder path...
         // }
     // }
-}
-
-public class NewBackupViewModel : ViewModel
-{
 }

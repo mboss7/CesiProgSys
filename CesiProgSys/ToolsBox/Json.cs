@@ -1,5 +1,5 @@
 ﻿
-using CesiProgSys.Network.Packets;
+using CesiProgSys.Network;
 using Newtonsoft.Json;
 
 namespace CesiProgSys.ToolsBox
@@ -14,7 +14,7 @@ namespace CesiProgSys.ToolsBox
 
         public static Config? JsonToConfig(string json)
         {
-            return JsonConvert.DeserializeObject<Config>(json);;
+            return JsonConvert.DeserializeObject<Config>(json);
         }
 
         public static Packet JsonToPacket(string json)

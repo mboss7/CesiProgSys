@@ -1,5 +1,5 @@
 using CesiProgSys.Network;
-using CesiProgSys.Network.Packets;
+using CesiProgSys.Network;
 
 namespace CesiProgSys.ToolsBox;
 
@@ -105,17 +105,12 @@ public class Config
 
     public void SendConfig()
     {
-        PacketConfigs p = new PacketConfigs()
-        {
-            language = language,
-            defaultSource = defaultSaveSource,
-            defautlTarget = defaultSaveTarget,
-            recentSource = recentSaveSource,
-            recentTarget = recentSaveTarget,
-            typeLogs = typeLogs
-        };
+        // Packet p = new Packet(language, defaultSaveSource, defaultSaveTarget, typeLogs, recentSaveSource, recentSaveTarget);
+
+        string s = "3&" + this.language + "&" + this.defaultSaveSource + "&" + this.defaultSaveTarget + "&" +
+                   this.typeLogs + "&" + this.recentSaveSource + "&" + this.recentSaveTarget;
         
-        Client.packets.Enqueue(Json.objectToJson(p));
+        Client.packets.Enqueue(s);
         Client.wait.Set();
     }
 }

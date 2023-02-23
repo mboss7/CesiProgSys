@@ -1,7 +1,6 @@
-﻿using System.Data;
-using CesiProgSys.Network;
+﻿using ViewAvalonia.Network;
 
-namespace CesiProgSys.ToolsBox;
+namespace ViewAvalonia.ToolBox;
 
 public class Xml
 {
@@ -14,10 +13,9 @@ public class Xml
         return strWriter.ToString();
     }
 
-    // public static Packet deserialize(string xml)
-    // {        
-    //     Packet temp = new Packet(); //oui je sais c'est moche raf
-    //     System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(temp.GetType());
+    // public static object deserialize(string xml)
+    // {
+    //     System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer();
     //     StringReader strReader = new StringReader(xml);
     //     strReader.ReadToEnd();
     //     return (Packet)x.Deserialize(strReader);

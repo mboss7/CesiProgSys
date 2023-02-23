@@ -1,5 +1,5 @@
 ﻿using CesiProgSys.Backups;
-using CesiProgSys.Network.Packets;
+using CesiProgSys.Network;
 using CesiProgSys.ToolsBox;
 
 namespace CesiProgSys.Network;
@@ -33,56 +33,58 @@ public class NetworkHandler
     public static void threadNetworkHandler()
     {
         NetworkHandler n = Instance();
-        Packet p;
+        string s;
 
         while (true)
         {
             n.wait.Wait();
-            bool dequeue = Server.packets.TryDequeue(out p);
+            bool dequeue = Server.packets.TryDequeue(out s);
 
             if (dequeue)
             {
-                if (p.id == 0)
+                string[] packet = s.Split("&");
+
+                if (packet[0] == "0")
                 {
-                    PacketConfigBackup p1 = (PacketConfigBackup)p;
-                    n.instantiateBackup(p1.name, p1.source, p1.target, p1.typeBackup);
+                    if(packet[1] == "FullBackup")
+                        n.instantiateBackup(packet[2], packet[3], packet[4], true);
+                    else
+                        n.instantiateBackup(packet[2], packet[3], packet[4], false);
                 }
-                if (p.id == 1)
+                if ( packet[0] == "1")
                 {
-                    PacketControlBackup p1 = (PacketControlBackup)p;
-                    if(p1.control == "start")
-                        n.startBackup(p1.name);
-                    if(p1.control == "stop")
-                        n.stopBackup(p1.name);
-                    if(p1.control == "restart")
-                        n.restartBackup(p1.name);
-                    if(p1.control == "kill")
-                        n.killBackup(p1.name);
+                    if(packet[1] == "start")
+                        n.startBackup(packet[2]);
+                    if(packet[1] == "stop")
+                        n.stopBackup(packet[2]);
+                    if(packet[1] == "restart")
+                        n.restartBackup(packet[2]);
+                    if(packet[1] == "kill")
+                        n.killBackup(packet[2]);
                 }
-                if (p.id == 2)
-                {
-                    PacketChangeConfigs p1 = (PacketChangeConfigs)p;
-                    if (p1.language != null)
-                    {
-                        n.changeLanguage(p1.language);
-                    }
-                    if (p1.source != null)
-                    {
-                        n.changeDefaultSaveSource(p1.source);
-                    }
-                    if (p1.target != null)
-                    {
-                        n.changeDefaultSaveTarget(p1.target);
-                    }
-                    if (p1.logs != null)
-                    {
-                        n.changeTypeLogs(p1.logs);
-                    }
-                    if (p1.reset)
-                    {
-                        n.resetConfig();
-                    }
-                }
+                // if (packet[0] == "2")
+                // {
+                //     if (p.language != null)
+                //     {
+                //         n.changeLanguage(p.language);
+                //     }
+                //     if (p.source != null)
+                //     {
+                //         n.changeDefaultSaveSource(p.source);
+                //     }
+                //     if (p.target != null)
+                //     {
+                //         n.changeDefaultSaveTarget(p.target);
+                //     }
+                //     if (p.logs != null)
+                //     {
+                //         n.changeTypeLogs(p.logs);
+                //     }
+                //     if (p.reset)
+                //     {
+                //         n.resetConfig();
+                //     }
+                // }
             }
             else
             {
