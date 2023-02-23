@@ -39,53 +39,11 @@ System presentation
 - [Activity diagram](/Diagrams/DiagActivity.md)
 
 
-## Branch organization :
-```mermaid
-gitGraph
-    commit
-    branch dev
-    checkout dev
-    branch features1
-    checkout features1
-    branch features2
-    checkout features2
-    commit
-    commit
-    checkout features1
-    commit
-    commit
-    checkout dev
-    merge features1 tag:"Beta v0.1.0"
-    checkout features1
-    commit
-    commit
-    checkout features2
-    commit
-    commit
-    checkout dev
-    merge features2 tag:"Beta v0.2.0"
-    checkout main
-    merge dev tag:"v1.0.0"
-    checkout dev
-    merge features1 tag:"Beta v1.1.0"
-    checkout main
-    merge dev tag:"v1.1.0"
-    commit type: REVERSE
-    branch debug
-    checkout debug
-    commit type: HIGHLIGHT
-    commit type: HIGHLIGHT
-    checkout dev
-    merge debug tag:"Beta 1.1.1"
-    checkout main
-    merge dev tag:"v1.1.1"
-```
-
 ## 🚀 About Us
 
-Nous sommes une équipe soudée et dynamique, travaillant en étroite collaboration pour développer des applications innovantes et efficaces.
+We are a close-knit and dynamic team, working closely together to develop innovative and effective applications.
 
-Notre équipe est composé de programmeurs, d'ingénieurs logiciels et de chefs de projet, tous déterminés à fournir les meilleures solutions informatiques pour répondre aux besoins de nos clients.
+Our team is made up of programmers, software engineers and project managers, all of whom are committed to providing the best IT solutions to meet our clients' needs.
 
 ## Logo
 
