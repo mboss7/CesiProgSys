@@ -1,10 +1,82 @@
-<Styles xmlns="https://github.com/avaloniaui"
+﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Border Padding="20">
             <!-- Add Controls for Previewer Here -->
         </Border>
     </Design.PreviewWith>
-
-    <!-- Add Styles Here -->
+    
+    <Style Selector="Grid">
+        <Setter Property="ShowGridLines" Value="False"/>
+    </Style>
+    <Style Selector="TabItem">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Label">
+        <Setter Property="FontWeight" Value="Black" />
+    </Style>
+    <Style Selector="StackPanel">
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Image">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Button">
+        <Setter Property="Width" Value="70"/>
+    </Style>
+    
+    <Style Selector="Grid.Footer,  Grid.Header">
+        <Setter Property="Background" Value="#055243"/>
+        <Setter Property="Height" Value="60"/>
+    </Style>
+    <Style Selector="Grid.MainWindow">
+        <Setter Property="Background" Value="#cdb780"/>
+    </Style>
+    <Style Selector="StackPanel.Footer">
+        <Setter Property="Margin" Value="20"/>
+    </Style>
+    <Style Selector="TabControl WrapPanel">
+        <Setter Property="Background" Value="#c9aa64"/>
+    </Style>
+    <Style Selector="Button.Exit">
+        <Setter Property="Background" Value="{DynamicResource ComboBoxBackground}"/>
+    </Style>
+    <Style Selector="Button.AddBackup">
+        <Setter Property="Background" Value="#886435"/>
+    </Style>
+    <Style Selector="Button.StartBackup">
+        <Setter Property="Background" Value="#055243"/>
+    </Style>
+    <Style Selector="Button.StopBackup">
+        <Setter Property="Background" Value="#c9aa64"/>
+    </Style>
+    <Style Selector="Button.RestartBackup">
+        <Setter Property="Background" Value="#c9aa64"/>
+    </Style>
+    <Style Selector="Button.KillBackup">
+        <Setter Property="Background" Value="#800020"/>
+    </Style>
+    
+    <Style Selector="StackPanel.NewBackup.First">
+        <Setter Property="Orientation" Value="Vertical"/>
+    </Style>
+    <Style Selector="StackPanel.NewBackup.Second">
+        <Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+    <Style Selector="TextBlock.NewBackup">
+        <Setter Property="Margin" Value="0,0,8,0"/>
+        <Setter Property="Width" Value="300"/>
+    </Style>
+    <Style Selector="Button.Quitter">
+        <Setter Property="Margin" Value="0,2,0,0"/>
+    </Style>
+    <Style Selector="Button.Appliquer">
+        <Setter Property="Margin" Value="250,-29,0,0"/>
+    </Style>
 </Styles>

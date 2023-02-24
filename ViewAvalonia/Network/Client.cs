@@ -26,6 +26,7 @@ public static class Client
         IPEndPoint ipEndPoint = new(IPAddress.Parse(ip), 9999);
         Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         s.Connect(ipEndPoint);
+        
         return s;
     }
 
@@ -41,7 +42,6 @@ public static class Client
         {
             wait.Wait();
             string temp;
-            // Console.WriteLine("YEAHHH");
 
             bool dequeue = packets.TryDequeue(out temp);
             if (dequeue)

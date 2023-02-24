@@ -12,6 +12,7 @@ namespace CesiProgSys.Backups
             this.target = target;
             this.typeBackup = "FullBackup";
             wait = new ManualResetEventSlim(false);
+            stop = new ManualResetEventSlim(true);
             
             authorizedDirAndFiles = new List<Tuple<string, List<FileInfo>>>();
             
@@ -48,10 +49,12 @@ namespace CesiProgSys.Backups
             }
             for (int i = authorizedDirAndFiles.Count-1; i >= 0; i--)
             {
+                stop.Wait();
                 string dir = authorizedDirAndFiles[i].Item1.Substring(info.SourceDir.Length-1);
                 DirectoryInfo subDirectory = targetDirectory.CreateSubdirectory(dir);
                 foreach (FileInfo sourceFile in authorizedDirAndFiles[i].Item2)
                 {
+                    stop.Wait();
                     string s = Path.Combine(subDirectory.FullName, sourceFile.Name);
 
                     info.CurrentSource = sourceFile.Name;
@@ -61,7 +64,7 @@ namespace CesiProgSys.Backups
                     
                     sourceFile.CopyTo(s, true);
                     File.SetAttributes(sourceFile.FullName, File.GetAttributes(sourceFile.FullName) & ~FileAttributes.Archive);
-                    
+                    stop.Wait();
                     info.NbFilesLeftToDo--;
                     info.Progression = 100-info.NbFilesLeftToDo * 100 / info.TotalFilesToCopy;
                     if (!Program.cli)

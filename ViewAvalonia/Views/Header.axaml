@@ -10,12 +10,12 @@
                 <vm:HeaderViewModel/>
         </Design.DataContext>
         
-        <Grid ColumnDefinitions="*, Auto">
-                <StackPanel Margin="100 0 -80 0 " Grid.Column="0">
+        <Grid Classes="Header" ColumnDefinitions="Auto, *, Auto">
+                <StackPanel Margin="100 0 -80 0 " Grid.Column="1">
                         <Label>EASY SAVE</Label>
                 </StackPanel>
-                <StackPanel Margin="0 0 80 0" Grid.Column="1">
-                        <ComboBox SelectedIndex="0" Items="{Binding Languages}"/>
+                <StackPanel Margin="0 0 80 0" Grid.Column="2">
+                        <ComboBox Items="{Binding Languages}" SelectedItem="{Binding Language}"/>
                 </StackPanel>
         </Grid>
 </UserControl>

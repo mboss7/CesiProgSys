@@ -1,4 +1,7 @@
-﻿namespace CesiProgSys.Backups
+﻿using CesiProgSys.LOG;
+using CesiProgSys.ToolsBox;
+
+namespace CesiProgSys.Backups
 {
     public sealed class BackupManager
     {
@@ -48,8 +51,25 @@
             listBackupStarted.Add(b);
         }
 
-        private void finish()
+        public void stopBackup(Backup b)
         {
+            listBackupStarted.Remove(b);
+            b.stop.Reset();
+            listBackupStoped.Add(b);
+            b.info.State = State.PAUSED;
+        }
+
+        public void restartBackup(Backup b)
+        {
+            listBackupStoped.Remove(b);
+            b.stop.Set();
+            listBackupStarted.Add(b);
+            b.info.State = State.ACTIVE;
+        }
+        
+        public void killBackup(Backup b)
+        {
+            
         }
 
         private static void startThread(object obj)

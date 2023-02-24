@@ -10,24 +10,24 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>	
     
-        <Grid IsVisible="{Binding !Visible}">
-            <StackPanel >
-                <StackPanel >
-                    <TextBox Name="NameTextBox" Watermark="Nom" Text="{Binding Name}" />
+        <Grid Classes="MainWindow" IsVisible="{Binding !Visible}">
+            <StackPanel Classes="NewBackup First">
+                <StackPanel Classes="NewBackup Second">
+                    <TextBox Classes="NewBackup" Name="NameTextBox" Watermark="Name" Text="{Binding Name}" />
                 </StackPanel>
-                <StackPanel>
-                    <TextBox Name="SourceTextBox" Watermark=" Fichier Source" Text="{Binding Source}"/>
+                <StackPanel Classes="NewBackup Second">
+                    <TextBox Classes="NewBackup" Name="SourceTextBox" Watermark="Source" Text="{Binding Source}"/>
                     <Button Name="SourceBrowseButton" Content="📁" />
                 </StackPanel>
-                <StackPanel>
-                    <TextBox Name="DestinationTextBox" Watermark="Fichier Destination" Text="{Binding Target}"/>
+                <StackPanel Classes="NewBackup Second">
+                    <TextBox Classes="NewBackup" Name="DestinationTextBox" Watermark="Target" Text="{Binding Target}"/>
                     <Button Name="DestinationBrowseButton" Content="📁" />
                 </StackPanel>
-                <StackPanel>
+                <StackPanel Classes="NewBackup Second">
                     <ComboBox Name="Typeofbackup" Margin="0,0,0,8" Width="300" Items="{Binding ListTypeBackup}" SelectedItem="{Binding TypeBackup}"/>
                 </StackPanel>
-                <Button Name="ExitButton" Content="Quitter ❌" Command="{Binding leaveNewBackup}"/>
-                <Button Name="ApplyButton" Content="Appliquer 💾" Command="{Binding addNewBackup}"/>
+                <Button Classes="Quitter" Name="ExitButton" Content="Quit ❌" Command="{Binding leaveNewBackup}"/>
+                <Button Classes="Appliquer" Name="ApplyButton" Content="Apply 💾" Command="{Binding addNewBackup}"/>
             </StackPanel>
         </Grid>
 </UserControl>

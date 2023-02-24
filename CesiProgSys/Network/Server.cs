@@ -1,6 +1,8 @@
 ﻿using System.Collections.Concurrent;
 using System.Net;
+using System.Net.Security;
 using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using CesiProgSys.Network;
 using CesiProgSys.ToolsBox;
@@ -13,6 +15,7 @@ public static class Server
 
     public static void startServer()
     {
+
         Socket server = Connect();
         Socket client = Accept(server);
         ListenNetwork(client);
@@ -46,7 +49,6 @@ public static class Server
         string eom = "<|EOM|>";
         string aoe = "<|AOE|>";
         byte[] ack = "<|ACK|>"u8.ToArray();
-        NetworkHandler n = NetworkHandler.Instance();
 
         while (true)
         {
@@ -58,7 +60,6 @@ public static class Server
             {
                 packets.Enqueue(response.Replace(eom, ""));
                 NetworkHandler.Instance().wait.Set();
-                // Console.WriteLine("Server received from Client: "  + response.Replace(eom, ""));
                 client.Send(ack, 0);
             }
 

@@ -10,9 +10,9 @@
             <vm:FooterViewModel/>
         </Design.DataContext>
     
-        <Grid>
-            <Button Command="{Binding ClickExit}">Exit</Button>
-            <StackPanel>
+        <Grid Classes="Footer">
+            <Button Classes="Exit" Command="{Binding ClickExit}" Content="{Binding TextExit}"/>
+            <StackPanel Classes="Footer">
                 <Label>Easy Save 2023</Label>
             </StackPanel>
         </Grid>

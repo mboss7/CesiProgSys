@@ -1,9 +1,6 @@
-﻿using System.Net.Sockets;
-using System.Security.AccessControl;
+﻿using System.Security.AccessControl;
 using System.Security.Principal;
-using System.Xml.Serialization;
 using CesiProgSys.LOG;
-using CesiProgSys.Network;
 using CesiProgSys.Network;
 using CesiProgSys.ToolsBox;
 
@@ -23,6 +20,7 @@ namespace CesiProgSys.Backups
         protected Logs rltInstance;
         
         public ManualResetEventSlim wait;
+        public ManualResetEventSlim stop;
         public string name;
         public string source;
         public string target;

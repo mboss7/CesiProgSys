@@ -7,5 +7,6 @@ public enum State
     CHECKINGAUTH,
     END,
     ERROR,
-    SUCCESS
+    SUCCESS,
+    PAUSED
 }

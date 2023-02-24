@@ -7,6 +7,8 @@ namespace CesiProgSys.Network;
 public class NetworkHandler
 {
     private BackupManager bManager;
+    private List<Backup> stopedBackups;
+    private List<Backup> startedBackups;
     private List<Backup> backups;
     private Config config;
 
@@ -16,6 +18,9 @@ public class NetworkHandler
     {
         bManager = BackupManager.Instance();
         backups = bManager.listBackupReady;
+        startedBackups = bManager.listBackupStarted;
+        stopedBackups = bManager.listBackupStoped;
+
         config = Config.Instance();
     }
     private static NetworkHandler instance;
@@ -93,17 +98,13 @@ public class NetworkHandler
         }
     }
     
-    
-    
     public void instantiateBackup(string name, string sourceDir, string targetDir, bool type)
     {
         bManager.instantiate(name, sourceDir, targetDir, type);
         config.addToSet(sourceDir, config.recentSaveSource);
         config.addToSet(targetDir, config.recentSaveTarget);
     }
-
-
-
+    
     public void startBackup(string name)
     {
         bManager.startBackup(backups.Find(backup => backup.name == name));
@@ -111,14 +112,17 @@ public class NetworkHandler
 
     public void stopBackup(string name)
     {
+        bManager.stopBackup(startedBackups.Find(backup => backup.name == name));
     }
 
     public void restartBackup(string name)
     {
+        bManager.restartBackup(stopedBackups.Find(backup => backup.name == name));
     }
 
     public void killBackup(string name)
     {
+        bManager.killBackup(backups.Find(backup => backup.name == name));
     }
 
 
