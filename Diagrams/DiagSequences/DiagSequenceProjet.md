@@ -36,8 +36,8 @@ Deleting a Backup
 sequenceDiagram
 Actor User
 
-View -->>User: Show delete Menu
-User ->>View: Enter the name of the Backup to delete
+View -->>User: Show Backup list
+User ->>View: Select the Backup to delete
 View ->>ViewModel: Send Variable values
 ViewModel -->>View: Send reply 
 ViewModel ->>Model: Delete the selected Backup
@@ -50,7 +50,7 @@ Launch a Backup
 sequenceDiagram
 Actor User
 
-View -->>User: Show Backup list to launch
+View -->>User: Show Backup list
 User ->>View: Select the number of Backup to Backup
 View ->>ViewModel: Send Variable values
 ViewModel -->>View: Send reply 
@@ -60,13 +60,13 @@ Model -->>ViewModel: Send reply
 View -->>User: Send reply
 View -->>User: Show Main Menu
 ```
-Change configuration
+Change Settings
 ```mermaid
 sequenceDiagram
 Actor User
 
-View -->>User: Choose the setting to modified
-User ->>View: Show Settings
+View -->>User: Show Settings
+User ->>View: Select,add or delete Settings
 View ->>ViewModel: Send Variable values
 ViewModel -->>View: Send reply 
 ViewModel ->>Model: Change the setting with the chosen setting
