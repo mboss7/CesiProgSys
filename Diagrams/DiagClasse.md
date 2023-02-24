@@ -1,148 +1,262 @@
 ﻿ ```mermaid
 classDiagram
-class Program{
-+main()
+
+class Backup{
+
+    #SendPacket( string ty, int pr, State st)
+    +backup()
+    +startCheckAuthorizations()
+    +checkAuthorizations(string directory)
+    -bool checkRights(FileSystemAccessRule rule)
+    -bool checkTypes(FileAttributes toCheck)
 }
-class IViewCli{
-+startProgram()
-+menu()
-+help()
-+showConfig()
-}
-class ViewCliFr{
-+startProgram()
-+menu()
-+help()
-+showConfig()
-}
-class ViewCliEn{
-+startProgram()
-+menu()
-+help()
-+showConfig()
-}
-class ViewModelCli{
--inputUser : String
--commands: List<Tuple<string, delegate>>
-+redirect()
-}
-class IManager{
--threadList : List<Thread>
-+instantiate()
-+finish() : Bool ?
-}
-class BackupManager{
--threadList : List<Thread>
-+instantiate()
-+finish() : Bool ?
-}
-class LogsManager{
--threadList : List<Thread>
-+instantiate()
-+finish() : Bool ?
-}
-class IBackup{
--name : String
--SaveSource : String
--SaveTarget : String
-+startThread()
-}
-class FullBackup{
-+startThread()
-}
-class DifferentialBackup{
-+startThread()
-}
-class SevenZip{
-+zip$()
-+unzip$()
-}
-class Config{
--language : Enum
--defaultSaveSource : String
--defaultSaveTarget : String
--recentSaveSource : HashMap<String>
--recentSaveTarget : HashMap<String>
--retentionTime : Int
-+writeConfig()
-+readConfig()
-+cleanConfig()
-}
-class Languages{
-<<enumeration>>
--FR : 0
--EN : 1
-}
-class ILogs{
-+startThread()
-+startLog()
-+logInfo()
-+logError()
-}
+ 
+ class BackupManager{
+
+     BackupManager()
+     BackupManager Instance()
+     +List<Backup> listBackupCheckingAuth;
+     +List<Backup> listBackupReady;
+     +List<Backup> listBackupStarted;
+     +List<Backup> listBackupStoped;
+     +Backup instantiate(string name, string source, string target, bool type)
+     startBackup(Backup b)
+     startThread(object obj)
+ }
+ 
+ class DifferentialBackup{
+
+     DifferentialBackup(string name, string source, string target)
+     backup()
+ }
+ class FullBackup{
+     public FullBackup(string name, string source, string target)
+     public override void backup()
+ }
 class DailyLogs{
-+startThread()
-+startLog()
-+logInfo()
-+logError()
+    private DailyLogs()
+    private void setPath()
+    public override void writeLogs()
+    
+}
+class Logs{
+    public void startLog()
+    protected void log(List<string> toPrint, string path)
+    public abstract void writeLogs();
+    
+} 
+class LogsManager{
+    private LogsManager()
+    public static LogsManager Instance()
+    public void instantiate()
+    public void finish()
+    private static void startThread(object obj)
 }
 class RealTimeLogs{
-+startThread()
-+startLog()
-+logInfo()
-+logError()
+
+    private readonly Logs dlInstance;
+    private RealTimeLogs()
+    public static RealTimeLogs Instance()
+    public override void writeLogs()
+    
+}
+
+class Packet{
+    public int id;
+}
+class PacketChangeConfigs{
+    public PacketChangeConfigs()
+}
+class PacketConfigBackup{
+    public PacketConfigBackup()
+}
+class PacketConfigs{
+    public PacketConfigs()
+}
+class PacketControlBackup{
+    public PacketControlBackup()
+}
+class PacketStateBackup{
+    public PacketStateBackup()
+}
+class Client{
+    public static void startClient(object obj)
+    private static Socket Connect(string ip)
+    private static void SendNetwork(Socket client)
+}
+class NetworkHandler{
+    private BackupManager bManager;
+    private List<Backup> backups;
+    private Config config;
+    public ManualResetEventSlim wait = new(true);
+    private NetworkHandler()
+    private static NetworkHandler instance;
+    public static NetworkHandler Instance()
+    public static void threadNetworkHandler()
+    public void instantiateBackup(string name, string sourceDir, string targetDir, bool type)
+    public void startBackup(string name)
+    public void stopBackup(string name)
+    public void restartBackup(string name)
+    public void killBackup(string name)
+    public void changeLanguage(Language l)
+    public void changeDefaultSaveSource(string s)
+    public void changeDefaultSaveTarget(string s)
+    public void resetConfig()
+    public void changeTypeLogs(string s)
+}
+class Server{
+    public static ConcurrentQueue<Packet> packets = new();
+    public static void startServer()
+    private static Socket Connect()
+    private static Socket Accept(Socket socket)
+    private static void createClient(Socket client)
+    private static void ListenNetwork(Socket client)
+}
+class TcpClientSsl{
+    public static void RunClient(object objIpPort)
+    public async Task SslTcpClientConnection(string ipAddress, int port)
+    static string ReadMessage(SslStream sslStream)
+}
+class TcpServer{
+    public static bool isRunning = false;
+    public SslStream sslStream;
+    public static void RunSrv(object obj)
+    public SslStream SslTcpServerConnection(int port)
+    static string ReadMessage(SslStream sslStream)
+}
+class ThreadForTcp{
+    public void ClientTcpThreadRun(string[] IpPort)
+    public void ServerTcpThreadRun(string[] IpPort)
+}
+class Config{
+    private Config()
+    private static Config instance;
+    public static Config Instance()
+    public void writeConfig()
+    public void setConfig()
+    public void resetConfig()
+    public void addToSet(string toAdd, HashSet<string> hashSet)
+    public void checkTimeRecentSave()
+    public void SendConfig()
+    
 }
 class Hash{
-+generate(string uri)$ : String
-+compare(string hashSource, string hashDestination)$ : Bool
+    public Hash()
+    public string HashFileGenerator(string pathFileToHash)
+    public string HashTextGenerator(string SourceHash)
+    public bool HashComparator(string hash1, string hash2)
+}
+ class Info{
+     public string typeBackup;
+     private TimeSpan _timeLaps;
+     public TimeSpan TimeLaps
+     private string _sourceDir;
+     public string SourceDir
+     private string _destDir;
+     public string DestDir
+     private string _currentSource;
+     public string CurrentSource
+     private string _currentDest;
+     public string CurrentDest
+     private DateTime _date;
+     public DateTime Date
+     private string _name;
+     public string Name
+     private int _totalFilesToCopy;
+     public int TotalFilesToCopy
+     private long _totalFilesSize;
+     public long TotalFilesSize
+     private int _nbFilesLeftToDo;
+     public int NbFilesLeftToDo
+     private State _state;
+     public int Progression
+     private State _state;
+     public State State
+     public event PropertyChangedEventHandler? PropertyChanged
+     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+     
 }
 class Json{
-+serialize(object obj)$ : String
-+deserialize(String json)$ : Object
+    public static string objectToJson(object obj)
+    public static Config? JsonToConfig(string json)
+    public static Packet JsonToPacket(string json)
 }
-
-IViewCli <|.. ViewCliFr
-IViewCli <|.. ViewCliEn
-IManager <|.. BackupManager
-IManager <|.. LogsManager
-IBackup <|.. FullBackup
-IBackup <|.. DifferentialBackup
-ILogs <|.. DailyLogs
-ILogs <|.. RealTimeLogs
-Program *-- IManager
-Program *-- IViewCli
-Program *-- ViewModelCli
-BackupManager *-- IBackup
-LogsManager *-- ILogs
-IViewCli <--> ViewModelCli
-IBackup <--> ViewModelCli
-Config <--> ViewModelCli
-Config <-- IBackup
-DailyLogs .. Languages
-RealTimeLogs .. Languages
-Config .. Languages
-Config  --> Json
-DailyLogs --> Json
-RealTimeLogs --> Json
-FullBackup --> Hash
-DifferentialBackup --> Hash
-FullBackup --> SevenZip
-DifferentialBackup --> SevenZip
-
-
-class info{
-    -DateStart : Date
-    -Timelaps : Nanoseconde
-    -Name : String
-    -DirSource : String 
-    -DirDest : String
-    -CurrentSource : String
-    -CurrentDest : String
-    -State : String (checkingAuth, end, active, error)
-    -TotalFilesToCopy : int
-    -TotalFilesSize : int
-    -NbFilesLeftToDo : int
-    -Progression : int (%)
+class Language{
+    public enum Language
 }
+class State{
+    public enum State
+}
+class Xml{
+    public static string serialize(object obj)
+}
+class Zip{
+public Zip()
+public void compressed(string location, string file)
+}
+class ViewCliEn{
+    public ViewCliEn()
+}
+class ViewCliFr {
+    public ViewCliFr()
+}
+class ViewCli{
+
+    protected ViewModelCli vmCLI;
+    protected Dictionary<string, string> dico;
+    private int askNumber()
+    public void menu()
+    private void configBackup()
+    private void startBackup()
+    private void showConfig()
+    private void changeConfig()
+    private void help()
+    private void chooseLanguage()
+    private void changeTypeLogs()
+    private void defaultSaveSource()
+    private void defaultSaveTarget()
+    private void retentionTime()
+    private void resetConfig()
+    private string getRecentSource()
+    private string getRecentTarget()
+    private void fullBackup()
+    private void diffBackup()
+    private void startBackupValid()
+    private void leave()
+}
+class ViewModelCli{
+    private BackupManager bManager;
+    private List<Backup> backups;
+    private Config config;
+    public ViewModelCli()
+    public void instantiateBackup(strinag name, string sourceDir, string targetDir, bool type)
+    public List<string[]> getBackups()
+    public void startBackup(string name)
+    public void stopBackup(string name)
+    public void restartBackup(string name)
+    public void killBackup(string name)
+    public void writeConfig()
+    public string[] getConfig()
+    public void changeLanguage(Language l)
+    public void changeDefaultSaveSource(string s)
+    public void changeDefaultSaveTarget(string s)
+    public void resetConfig()
+    public void changeRetentionTime(int i)
+    public string getDefaultSource()
+    public string getDefaultTarget()
+    public string[] getRecentSource()
+    public string[] getRecentTarget()
+    public void changeTypeLogs(string s)
+}
+class Program{
+    public static bool cli = true;
+     static void Main(string[] args)
+}
+        
+
+
+
+
 ```
 //TODO update le diag classe pour inclure le fait que la ckasse realtimelogs doit recupérer les infos depuis les classes de backup, puis une fois la backup fini transmettre les infos à la classe dailylogs
 //TODO Le backup manager doit aussi recup des infos depuis le viewmodelCli, pour savoir cb de threads il doit créer notamment
