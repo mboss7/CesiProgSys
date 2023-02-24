@@ -73,7 +73,7 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="Extension à chiffrer" FontSize="20" Margin="0,0,0,10" />
+                            <TextBlock Text="Extension Ã  chiffrer" FontSize="20" Margin="0,0,0,10" />
 
                             <ComboBox Width="200" Margin="0,0,0,10">
                                 <ComboBoxItem Content="Option 1" />
@@ -82,14 +82,14 @@
                             </ComboBox>
 
                             <StackPanel Orientation="Horizontal">
-                                <TextBox Width="200" Watermark="Extension à chiffrer" />
+                                <TextBox Width="200" Watermark="Extension Ã  chiffrer" />
                                 <Button Content="+" Width="50" Margin="10,0,0,0" Background="#085343" />
                                 <Button Content="??" Width="50" Margin="10,0,0,0" Background="#800020" />
                             </StackPanel>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="Logiciel métier" FontSize="20" Margin="0,0,0,10" />
+                            <TextBlock Text="Logiciel mÃ©tier" FontSize="20" Margin="0,0,0,10" />
 
                             <ComboBox Width="200" Margin="0,0,0,10">
                                 <ComboBoxItem Content="Option 1" />
@@ -98,7 +98,7 @@
                             </ComboBox>
 
                             <StackPanel Orientation="Horizontal">
-                                <TextBox Width="200" Watermark="Logiciel métier" />
+                                <TextBox Width="200" Watermark="Logiciel mÃ©tier" />
                                 <Button Content="+" Width="50" Margin="10,0,0,0" Background="#085343" />
                                 <Button Content="??" Width="50" Margin="10,0,0,0" Background="#800020" />
                             </StackPanel>

@@ -1,3 +1,4 @@
+using System.Collections;
 using CesiProgSys.Backups;
 using CesiProgSys.LOG;
 using CesiProgSys.Network;
@@ -13,6 +14,14 @@ namespace CesiProgSys
         
         static void Main(string[] args)
         {
+
+            string[] ipport = new string[2]{"localhost","1234"};
+
+            ThreadForTcp threadForTcp = new ThreadForTcp();
+            threadForTcp.ServerTcpThreadRun(ipport);
+            threadForTcp.ClientTcpThreadRun(ipport);
+
+            /*
             bool result;
             new Mutex(true, "ID", out result);
             if (!result) return;
@@ -55,7 +64,7 @@ namespace CesiProgSys
             c.SendConfig();
             Thread networkHandler = new Thread(NetworkHandler.threadNetworkHandler);
             networkHandler.Start();
-            
+            */
 
         }
     }
